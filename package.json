@@ -1,0 +1,57 @@
+{
+	"name": "slidev-theme-obsidian",
+	"version": "0.0.0",
+	"type": "module",
+	"description": "An Obsidian-oriented Slidev theme shell with lightweight presets.",
+	"license": "MIT",
+	"keywords": [
+		"obsidian",
+		"obsidian-slidev",
+		"slidev-theme",
+		"slidev"
+	],
+	"files": [
+		"components",
+		"layouts",
+		"setup",
+		"styles",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=20.12.0"
+	},
+	"scripts": {
+		"build": "slidev build example.md",
+		"dev": "slidev example.md --open",
+		"export": "slidev export example.md",
+		"screenshot": "slidev export example.md --format png"
+	},
+	"dependencies": {
+		"@slidev/client": "^52.15.2",
+		"@slidev/types": "^52.15.2",
+		"slidev-pane": "latest"
+	},
+	"devDependencies": {
+		"@slidev/cli": "^52.15.2"
+	},
+	"//": "Learn more: https://sli.dev/guide/write-theme.html",
+	"slidev": {
+		"colorSchema": "both",
+		"defaults": {
+			"aspectRatio": "16:9",
+			"fonts": {
+				"sans": "Aptos",
+				"serif": "Source Serif 4",
+				"mono": "JetBrains Mono"
+			}
+		},
+		"themeConfig": {
+			"obsidian": {
+				"preset": "clean",
+				"density": "normal",
+				"chrome": "auto",
+				"pageNumber": true
+			}
+		}
+	}
+}

@@ -1,0 +1,6 @@
+import '@slidev/client/styles/layouts-base.css'
+import './tokens.css'
+import './base.css'
+import './layouts.css'
+import './obsidian.css'
+import './presets.css'

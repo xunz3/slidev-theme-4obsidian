@@ -1,0 +1,62 @@
+:root[data-obsidian-preset="scholarly"],
+.obsidian-frame[data-obsidian-preset="scholarly"] {
+  --slidev-theme-primary: #294f7a;
+  --obsidian-accent: var(--slidev-theme-primary);
+  --obsidian-bg: #f6f7fb;
+  --obsidian-bg-elevated: #ffffff;
+  --obsidian-bg-muted: #e8edf5;
+  --obsidian-text: #172033;
+  --obsidian-text-muted: #5f6d82;
+  --obsidian-border: rgba(23, 32, 51, 0.17);
+  --obsidian-heading-scale: 0.96;
+  --obsidian-font-serif: "Source Serif 4", "Noto Serif SC", Georgia, serif;
+}
+
+html.dark[data-obsidian-preset="scholarly"],
+html.dark .obsidian-frame[data-obsidian-preset="scholarly"] {
+  --obsidian-bg: #101827;
+  --obsidian-bg-elevated: #172033;
+  --obsidian-bg-muted: #202b40;
+  --obsidian-text: #edf3ff;
+  --obsidian-text-muted: #b9c5d8;
+  --obsidian-border: rgba(237, 243, 255, 0.16);
+}
+
+:root[data-obsidian-preset="scholarly"] .slidev-layout {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--obsidian-accent) 9%, transparent), transparent 36%),
+    linear-gradient(180deg, var(--obsidian-bg-elevated), var(--obsidian-bg));
+}
+
+:root[data-obsidian-preset="scholarly"] .obsidian-frame__header,
+.obsidian-frame[data-obsidian-preset="scholarly"] .obsidian-frame__header {
+  padding: 0.52rem 0.75rem;
+  border-bottom: 0;
+  color: color-mix(in srgb, white 82%, var(--obsidian-accent));
+  background: var(--obsidian-accent);
+}
+
+:root[data-obsidian-preset="scholarly"] .obsidian-frame__title,
+:root[data-obsidian-preset="scholarly"] .obsidian-frame__header-mark,
+.obsidian-frame[data-obsidian-preset="scholarly"] .obsidian-frame__title,
+.obsidian-frame[data-obsidian-preset="scholarly"] .obsidian-frame__header-mark {
+  color: #fff;
+}
+
+:root[data-obsidian-preset="scholarly"] .obsidian-frame__footer,
+.obsidian-frame[data-obsidian-preset="scholarly"] .obsidian-frame__footer {
+  padding: 0.48rem 0.75rem;
+  border-top: 0;
+  color: color-mix(in srgb, white 84%, var(--obsidian-accent));
+  background: var(--obsidian-accent);
+}
+
+:root[data-obsidian-preset="scholarly"] .obsidian-frame__page,
+.obsidian-frame[data-obsidian-preset="scholarly"] .obsidian-frame__page {
+  color: #fff;
+}
+
+:root[data-obsidian-preset="scholarly"] .obsidian-layout-section::before,
+.obsidian-frame[data-obsidian-preset="scholarly"] .obsidian-layout-section::before {
+  width: 8rem;
+}

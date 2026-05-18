@@ -1,0 +1,102 @@
+.slidev-layout {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  color: var(--obsidian-text);
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--obsidian-accent) 16%, transparent), transparent 30%),
+    linear-gradient(135deg, var(--obsidian-bg), var(--obsidian-bg-elevated));
+  font-family: var(--obsidian-font-sans);
+  font-size: var(--obsidian-body-size);
+  line-height: 1.55;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  margin: 0 0 0.55em;
+  color: var(--obsidian-text);
+  font-family: var(--obsidian-font-serif);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.slidev-layout h1 {
+  font-size: calc(3.1rem * var(--obsidian-heading-scale));
+}
+
+.slidev-layout h2 {
+  font-size: calc(2rem * var(--obsidian-heading-scale));
+}
+
+.slidev-layout h3 {
+  font-size: calc(1.38rem * var(--obsidian-heading-scale));
+}
+
+.slidev-layout p,
+.slidev-layout ul,
+.slidev-layout ol,
+.slidev-layout table,
+.slidev-layout pre,
+.slidev-layout blockquote {
+  margin-top: 0;
+  margin-bottom: var(--obsidian-content-gap);
+}
+
+.slidev-layout ul,
+.slidev-layout ol {
+  padding-left: 1.35em;
+}
+
+.slidev-layout li + li {
+  margin-top: 0.28em;
+}
+
+.slidev-layout a {
+  color: var(--obsidian-accent);
+  text-decoration-color: color-mix(in srgb, var(--obsidian-accent) 46%, transparent);
+  text-underline-offset: 0.18em;
+}
+
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+}
+
+.slidev-layout th,
+.slidev-layout td {
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--obsidian-border);
+}
+
+.slidev-layout th {
+  color: var(--obsidian-text);
+  background: color-mix(in srgb, var(--obsidian-accent) 11%, transparent);
+  font-weight: 700;
+}
+
+.slidev-layout pre {
+  padding: 1rem;
+  border: 1px solid var(--obsidian-border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--obsidian-bg-muted) 74%, transparent);
+  box-shadow: var(--obsidian-shadow);
+}
+
+.slidev-layout :not(pre) > code {
+  padding: 0.12em 0.36em;
+  border: 1px solid var(--obsidian-border);
+  border-radius: 0.38em;
+  color: color-mix(in srgb, var(--obsidian-accent) 76%, var(--obsidian-text));
+  background: color-mix(in srgb, var(--obsidian-accent) 10%, transparent);
+  font-family: var(--obsidian-font-mono);
+  font-size: 0.9em;
+}
+
+.slidev-layout blockquote {
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  border-left: 3px solid var(--obsidian-border);
+  color: var(--obsidian-text-muted);
+}
