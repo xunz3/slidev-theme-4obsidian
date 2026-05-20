@@ -13,11 +13,11 @@ themeConfig:
     pageNumber: true
 ---
 
-# Obsidian Slidev
+# Slidev Theme Obsidian
 
 A theme shell for turning Obsidian notes into Slidev presentations.
 
-It focuses on Obsidian semantics, generated media, callouts, and clean presentation defaults.
+It focuses on Obsidian-slidev semantics, generated media, callouts, and clean presentation defaults.
 
 `slidev-pane` is enabled in this test deck. Press `p` or use the Pane control to open the pane presenter.
 

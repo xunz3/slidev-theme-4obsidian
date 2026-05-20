@@ -8,18 +8,19 @@
     linear-gradient(135deg, var(--obsidian-bg), var(--obsidian-bg-elevated));
   font-family: var(--obsidian-font-sans);
   font-size: var(--obsidian-body-size);
-  line-height: 1.55;
+  line-height: var(--obsidian-body-line-height);
 }
 
 .slidev-layout h1,
 .slidev-layout h2,
-.slidev-layout h3 {
+.slidev-layout h3,
+.slidev-layout h4 {
   margin: 0 0 0.55em;
   color: var(--obsidian-text);
   font-family: var(--obsidian-font-serif);
-  font-weight: 720;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  font-weight: var(--obsidian-heading-weight);
+  letter-spacing: var(--obsidian-heading-letter-spacing);
+  line-height: var(--obsidian-heading-line-height);
 }
 
 .slidev-layout h1 {
@@ -32,6 +33,10 @@
 
 .slidev-layout h3 {
   font-size: calc(1.38rem * var(--obsidian-heading-scale));
+}
+
+.slidev-layout h4 {
+  font-size: calc(1.05rem * var(--obsidian-heading-scale));
 }
 
 .slidev-layout p,
@@ -50,7 +55,7 @@
 }
 
 .slidev-layout li + li {
-  margin-top: 0.28em;
+  margin-top: var(--obsidian-list-spacing);
 }
 
 .slidev-layout a {
@@ -69,34 +74,74 @@
 .slidev-layout td {
   padding: 0.55rem 0.7rem;
   border-bottom: 1px solid var(--obsidian-border);
+  vertical-align: top;
 }
 
 .slidev-layout th {
   color: var(--obsidian-text);
-  background: color-mix(in srgb, var(--obsidian-accent) 11%, transparent);
+  background: var(--obsidian-table-header-bg);
   font-weight: 700;
 }
 
+.slidev-layout tbody tr:nth-child(even) {
+  background: var(--obsidian-table-row-alt-bg);
+}
+
 .slidev-layout pre {
+  overflow-x: auto;
   padding: 1rem;
-  border: 1px solid var(--obsidian-border);
+  border: 1px solid var(--obsidian-code-border);
   border-radius: 14px;
-  background: color-mix(in srgb, var(--obsidian-bg-muted) 74%, transparent);
+  background: var(--obsidian-code-bg);
   box-shadow: var(--obsidian-shadow);
+}
+
+.slidev-layout pre code {
+  font-family: var(--obsidian-font-mono);
+  font-size: 0.88em;
+  line-height: 1.6;
 }
 
 .slidev-layout :not(pre) > code {
   padding: 0.12em 0.36em;
-  border: 1px solid var(--obsidian-border);
+  border: 1px solid var(--obsidian-code-border);
   border-radius: 0.38em;
   color: color-mix(in srgb, var(--obsidian-accent) 76%, var(--obsidian-text));
-  background: color-mix(in srgb, var(--obsidian-accent) 10%, transparent);
+  background: var(--obsidian-inline-code-bg);
   font-family: var(--obsidian-font-mono);
   font-size: 0.9em;
 }
 
 .slidev-layout blockquote {
-  padding: 0.2rem 0 0.2rem 1.1rem;
-  border-left: 3px solid var(--obsidian-border);
+  padding: 0.45rem 0 0.45rem 1.1rem;
+  border-left: 3px solid var(--obsidian-blockquote-border);
   color: var(--obsidian-text-muted);
+  background: var(--obsidian-blockquote-bg);
+  font-style: var(--obsidian-blockquote-font-style);
+}
+
+.slidev-layout blockquote p {
+  margin-bottom: 0.55em;
+}
+
+.slidev-layout blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.slidev-layout hr {
+  margin: calc(var(--obsidian-content-gap) * 1.35) 0;
+  border: 0;
+  border-top: 1px solid var(--obsidian-border);
+}
+
+.slidev-layout strong {
+  color: var(--obsidian-text);
+  font-weight: 760;
+}
+
+.slidev-layout mark {
+  padding: 0.05em 0.25em;
+  border-radius: 0.28em;
+  color: var(--obsidian-text);
+  background: color-mix(in srgb, var(--obsidian-accent) 24%, transparent);
 }

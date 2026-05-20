@@ -22,7 +22,9 @@
 	},
 	"scripts": {
 		"build": "slidev build example.md",
+		"build:fixture": "slidev build fixtures/obsidian-protocol.md --out dist-fixture",
 		"dev": "slidev example.md --open",
+		"dev:fixture": "slidev fixtures/obsidian-protocol.md --open",
 		"export": "slidev export example.md",
 		"screenshot": "slidev export example.md --format png"
 	},

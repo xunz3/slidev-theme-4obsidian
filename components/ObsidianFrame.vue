@@ -5,6 +5,7 @@ import { computed } from 'vue'
 type ChromeSetting = 'auto' | 'on' | 'off'
 type Preset = 'clean' | 'scholarly'
 type Density = 'compact' | 'normal' | 'relaxed'
+type FrameStyle = Record<string, string>
 
 const props = withDefaults(defineProps<{
   variant?: string
@@ -37,12 +38,26 @@ const normalizeDensity = (value: unknown): Density => {
   return 'normal'
 }
 
+const normalizeAccent = (value: unknown): string => {
+  return typeof value === 'string' ? value.trim() : ''
+}
+
 const resolvedPreset = computed(() => {
   return normalizePreset(frontmatter.value.obsidianPreset ?? obsidianConfig.value.preset)
 })
 
 const resolvedDensity = computed(() => {
   return normalizeDensity(frontmatter.value.obsidianDensity ?? obsidianConfig.value.density)
+})
+
+const frameStyle = computed<FrameStyle | undefined>(() => {
+  const accent = normalizeAccent(obsidianConfig.value.accent)
+  if (!accent) return undefined
+
+  return {
+    '--slidev-theme-primary': accent,
+    '--obsidian-accent': accent,
+  }
 })
 
 const showChrome = computed(() => {
@@ -85,7 +100,7 @@ const footerLeft = computed(() => {
 })
 
 const footerMiddle = computed(() => {
-  return frontmatter.value.footerMiddle ?? configs.value.footerMiddle ?? configs.value.info ?? ''
+  return frontmatter.value.footerMiddle ?? configs.value.footerMiddle ?? configs.value.title ?? frontmatter.value.title ?? configs.value.info ?? ''
 })
 </script>
 
@@ -98,6 +113,7 @@ const footerMiddle = computed(() => {
     ]"
     :data-obsidian-preset="resolvedPreset"
     :data-obsidian-density="resolvedDensity"
+    :style="frameStyle"
   >
     <header v-if="showChrome" class="obsidian-frame__header">
       <div class="obsidian-frame__header-main">
