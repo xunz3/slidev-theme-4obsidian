@@ -4,12 +4,12 @@ addons:
   - slidev-pane
 title: Obsidian Protocol Fixture
 author: Obsidian Slidev
-footerMiddle: Protocol fixture
 themeConfig:
   obsidian:
     preset: scholarly
     density: normal
     chrome: auto
+    header: false
     pageNumber: true
 ---
 
@@ -170,7 +170,7 @@ Clean is the default note-to-presentation mode. It should feel light, readable, 
 
 | Area | Clean expectation |
 | --- | --- |
-| Headings | Warm, expressive, not overly formal |
+| Headings | Cool-neutral, expressive, not overly formal |
 | Tables | Soft structure with subtle row guidance |
 | Code | Card-like block with gentle elevation |
 | Callouts | Note-like surfaces with rounded edges |
@@ -197,6 +197,16 @@ Scholarly uses the same generated markup, but shifts toward formal reporting: fi
 | Tables | Three-line academic table style |
 | Code | Flat, low-shadow technical block |
 | Callouts | More formal annotation blocks |
+
+---
+title: Optional Header
+subtitle: Explicit opt-in
+obsidianHeader: true
+---
+
+# Optional Header
+
+The default chrome is footer-only. A slide can opt into the header when per-slide metadata is intentionally useful.
 
 ---
 layout: statement

@@ -4,7 +4,6 @@ addons:
   - slidev-pane
 title: Obsidian Slidev Theme
 author: Obsidian Slidev
-footerMiddle: Theme preview
 themeConfig:
   obsidian:
     preset: clean

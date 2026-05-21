@@ -52,6 +52,7 @@
 				"preset": "clean",
 				"density": "normal",
 				"chrome": "auto",
+				"header": false,
 				"pageNumber": true
 			}
 		}

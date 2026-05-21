@@ -10,6 +10,11 @@
 }
 
 .obsidian-frame--chrome {
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 0.85rem;
+}
+
+.obsidian-frame--header {
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 1.1rem;
 }
@@ -61,7 +66,7 @@
 }
 
 .obsidian-frame__footer {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr);
   padding-top: 0.65rem;
   border-top: 1px solid var(--obsidian-border);
 }
@@ -74,6 +79,8 @@
 }
 
 .obsidian-frame__footer-middle {
+  max-width: min(42rem, 52vw);
+  justify-self: center;
   text-align: center;
 }
 
@@ -81,6 +88,7 @@
   min-width: 4.5ch;
   color: var(--obsidian-text);
   font-variant-numeric: tabular-nums;
+  justify-self: end;
   text-align: right;
 }
 
@@ -248,12 +256,8 @@
     font-size: 0.62rem;
   }
 
-  .obsidian-frame__footer {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-
   .obsidian-frame__footer-middle {
-    display: none;
+    max-width: 38vw;
   }
 
   .slidev-layout.cover h1 {

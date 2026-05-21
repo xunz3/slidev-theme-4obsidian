@@ -17,6 +17,7 @@ themeConfig:
     preset: clean
     density: normal
     chrome: auto
+    header: false
     pageNumber: true
 ---</code></pre>
 
@@ -45,9 +46,10 @@ The stable public configuration surface is `themeConfig.obsidian`.
 themeConfig:
   obsidian:
     preset: clean
-    accent: "#4f6f64"
+    accent: "#345f8f"
     density: normal
     chrome: auto
+    header: false
     pageNumber: true
 ```
 
@@ -58,7 +60,8 @@ Supported keys:
 | `preset` | `clean`, `scholarly` | `clean` | Selects the visual system without changing generated markup |
 | `accent` | Any CSS color | theme default | Overrides the primary accent color |
 | `density` | `compact`, `normal`, `relaxed` | `normal` | Adjusts slide padding, spacing, and body scale |
-| `chrome` | `auto`, `on`, `off` | `auto` | Controls header/footer chrome |
+| `chrome` | `auto`, `on`, `off` | `auto` | Controls footer metadata chrome |
+| `header` | `true`, `false` | `false` | Shows the optional per-slide title/subtitle header |
 | `pageNumber` | `true`, `false` | `true` | Shows or hides page numbers in theme chrome |
 
 Per-slide overrides:
@@ -68,8 +71,9 @@ Per-slide overrides:
 | `obsidianPreset` | `clean`, `scholarly` | Override the preset for one slide |
 | `obsidianDensity` | `compact`, `normal`, `relaxed` | Override density for one slide |
 | `chrome` | `on`, `off` | Force slide chrome on or off |
+| `obsidianHeader` | `true`, `false` | Force the optional header on or off for one slide |
 
-Theme chrome reads common Slidev frontmatter directly: `author` is used on the left footer, `title` is used as the default middle footer, and page numbers are controlled by `themeConfig.obsidian.pageNumber`.
+Theme chrome means the non-content frame around each slide. By default it is footer-only: `author` is used on the left footer, deck `title` is used as the default centered footer, and page numbers are controlled by `themeConfig.obsidian.pageNumber`. The header is intentionally opt-in because per-slide `title` and `subtitle` usually duplicate the visible Markdown heading.
 
 ## CSS Variables
 
@@ -128,7 +132,7 @@ Use `themeConfig.obsidian.preset` to switch visual systems without changing the 
 | `clean` | Default note-like presentation style |
 | `scholarly` | Formal report styling inspired by academic Slidev themes |
 
-`clean` is intentionally warmer and more card-like for everyday vault notes. `scholarly` borrows academic conventions such as serif headings, stronger chrome, booktabs-like tables, flatter code blocks, and italic figure captions.
+`clean` is intentionally neutral, airy, and card-like for everyday vault notes. `scholarly` borrows academic conventions such as serif headings, stronger chrome, booktabs-like tables, flatter code blocks, tighter spacing, and italic figure captions.
 
 ## Layouts
 
@@ -136,7 +140,7 @@ This theme provides the following layouts:
 
 | Layout | Purpose |
 | --- | --- |
-| `default` | Main content slides with optional header/footer chrome |
+| `default` | Main content slides with optional footer chrome |
 | `cover` | Opening slide, chrome hidden by default |
 | `intro` | Introductory slide with normal chrome behavior |
 | `section` | Section divider, chrome hidden by default |

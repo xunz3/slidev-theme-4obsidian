@@ -1,15 +1,15 @@
 :root {
-  --slidev-theme-primary: #4f6f64;
+  --slidev-theme-primary: #345f8f;
   --obsidian-accent: var(--slidev-theme-primary);
-  --obsidian-bg: #f7f2e8;
-  --obsidian-bg-elevated: #fffaf0;
-  --obsidian-bg-muted: #eee5d6;
+  --obsidian-bg: #f6f8fb;
+  --obsidian-bg-elevated: #ffffff;
+  --obsidian-bg-muted: #e9eef5;
   --obsidian-frame-bg: transparent;
-  --obsidian-text: #201d19;
-  --obsidian-text-muted: #70685d;
-  --obsidian-border: rgba(57, 48, 36, 0.18);
-  --obsidian-border-strong: rgba(57, 48, 36, 0.48);
-  --obsidian-shadow: 0 18px 60px rgba(42, 34, 22, 0.12);
+  --obsidian-text: #18212f;
+  --obsidian-text-muted: #647084;
+  --obsidian-border: rgba(24, 33, 47, 0.16);
+  --obsidian-border-strong: rgba(24, 33, 47, 0.44);
+  --obsidian-shadow: 0 18px 60px rgba(25, 39, 63, 0.11);
   --obsidian-font-sans: Aptos, "Source Sans 3", "Noto Sans SC", sans-serif;
   --obsidian-font-serif: "Source Serif 4", Georgia, "Noto Serif SC", serif;
   --obsidian-font-mono: "JetBrains Mono", "Fira Code", monospace;
@@ -30,7 +30,7 @@
   --obsidian-blockquote-bg: transparent;
   --obsidian-blockquote-border: var(--obsidian-border);
   --obsidian-blockquote-font-style: normal;
-  --obsidian-callout-bg: rgba(79, 111, 100, 0.1);
+  --obsidian-callout-bg: rgba(52, 95, 143, 0.09);
   --obsidian-callout-border: color-mix(in srgb, var(--obsidian-accent) 62%, transparent);
   --obsidian-callout-radius: 14px;
   --obsidian-callout-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
@@ -46,19 +46,19 @@
 }
 
 html.dark {
-  --obsidian-bg: #151816;
-  --obsidian-bg-elevated: #1f2420;
-  --obsidian-bg-muted: #293028;
+  --obsidian-bg: #111722;
+  --obsidian-bg-elevated: #1a2230;
+  --obsidian-bg-muted: #242e3d;
   --obsidian-frame-bg: transparent;
   --obsidian-text: #f1efe8;
-  --obsidian-text-muted: #b9b1a3;
-  --obsidian-border: rgba(235, 226, 210, 0.18);
-  --obsidian-border-strong: rgba(235, 226, 210, 0.42);
+  --obsidian-text-muted: #aeb8c8;
+  --obsidian-border: rgba(235, 241, 250, 0.17);
+  --obsidian-border-strong: rgba(235, 241, 250, 0.4);
   --obsidian-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
   --obsidian-table-row-alt-bg: rgba(255, 255, 255, 0.035);
   --obsidian-code-bg: rgba(255, 255, 255, 0.06);
-  --obsidian-inline-code-bg: rgba(114, 153, 139, 0.16);
-  --obsidian-callout-bg: rgba(114, 153, 139, 0.16);
+  --obsidian-inline-code-bg: rgba(96, 139, 190, 0.16);
+  --obsidian-callout-bg: rgba(96, 139, 190, 0.16);
   --obsidian-warning-bg: rgba(245, 158, 11, 0.16);
   --obsidian-warning-text: #f8d093;
 }

@@ -11,6 +11,7 @@ type ObsidianThemeConfig = {
   accent?: string
   density?: ObsidianDensity
   chrome?: ObsidianChrome
+  header?: boolean
   pageNumber?: boolean
 }
 

@@ -42,6 +42,10 @@ const normalizeAccent = (value: unknown): string => {
   return typeof value === 'string' ? value.trim() : ''
 }
 
+const normalizeBoolean = (value: unknown): boolean => {
+  return value === true || value === 'true' || value === 'on'
+}
+
 const resolvedPreset = computed(() => {
   return normalizePreset(frontmatter.value.obsidianPreset ?? obsidianConfig.value.preset)
 })
@@ -60,7 +64,7 @@ const frameStyle = computed<FrameStyle | undefined>(() => {
   }
 })
 
-const showChrome = computed(() => {
+const showFooter = computed(() => {
   const local = normalizeChrome(props.chrome ?? frontmatter.value.obsidianChrome ?? frontmatter.value.chrome)
   if (local === 'on') return true
   if (local === 'off') return false
@@ -70,6 +74,11 @@ const showChrome = computed(() => {
   if (global === 'off') return false
 
   return props.variant !== 'cover' && props.variant !== 'section'
+})
+
+const showHeader = computed(() => {
+  if (!showFooter.value) return false
+  return normalizeBoolean(frontmatter.value.obsidianHeader ?? frontmatter.value.header ?? obsidianConfig.value.header)
 })
 
 const showPageNumber = computed(() => {
@@ -109,13 +118,16 @@ const footerMiddle = computed(() => {
     class="obsidian-frame"
     :class="[
       `obsidian-frame--${variant}`,
-      { 'obsidian-frame--chrome': showChrome },
+      {
+        'obsidian-frame--chrome': showFooter,
+        'obsidian-frame--header': showHeader,
+      },
     ]"
     :data-obsidian-preset="resolvedPreset"
     :data-obsidian-density="resolvedDensity"
     :style="frameStyle"
   >
-    <header v-if="showChrome" class="obsidian-frame__header">
+    <header v-if="showHeader" class="obsidian-frame__header">
       <div class="obsidian-frame__header-main">
         <div v-if="headerTitle" class="obsidian-frame__title">{{ headerTitle }}</div>
         <div v-if="headerSubtitle" class="obsidian-frame__subtitle">{{ headerSubtitle }}</div>
@@ -127,7 +139,7 @@ const footerMiddle = computed(() => {
       <slot />
     </main>
 
-    <footer v-if="showChrome" class="obsidian-frame__footer">
+    <footer v-if="showFooter" class="obsidian-frame__footer">
       <div class="obsidian-frame__footer-left">{{ footerLeft }}</div>
       <div class="obsidian-frame__footer-middle">{{ footerMiddle }}</div>
       <div v-if="showPageNumber" class="obsidian-frame__page">
