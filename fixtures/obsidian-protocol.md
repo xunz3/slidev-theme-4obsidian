@@ -2,22 +2,66 @@
 theme: ../
 addons:
   - slidev-pane
-title: Obsidian Protocol Fixture
-author: Obsidian Slidev
+title: Protocol Fixture
+subtitle: Theme-side contract for markup emitted by obsidian-slidev.
+footer: Obsidian Slidev Theme Protocol
+authors:
+  - name: Obsidian Slidev
+    institution: Protocol fixture
+    email: fixture@example.com
+  - name: Theme Contract
+    institution: Slidev fixture
+    email: contract@example.com
+  - name: A Contract
+    institution: Slidev fixture
+    email: contract@example.com
+  - name: B Contract
+    institution: Slidev fixture
+    email: contract@example.com
 themeConfig:
   obsidian:
     preset: scholarly
     density: normal
     chrome: auto
     header: false
+    footerAuthors: true
     pageNumber: true
 ---
 
-# Obsidian Protocol Fixture
+# Protocol Fixture
 
-This deck is the theme-side fixture for markup emitted by `obsidian-slidev`.
+---
+layout: intro
+title: Fixture Structure
+subtitle: Section-driven validation
+---
 
-It verifies that generated HTML, Slidev built-in components, and semantic `obsidian-slidev-*` classes remain styleable without plugin-owned presentation classes.
+# Fixture Structure
+
+This deck is intentionally organized as `section -> slides`, matching how a real report or lab-meeting deck should read.
+
+1. Generated protocol
+2. Preset contrast
+3. Layout gallery
+4. Completion checks
+
+---
+layout: toc
+title: Outline
+subtitle: Sections extracted from `layout: section`
+---
+
+The TOC layout is generated from section divider slides, so the fixture follows the same structure expected from real decks.
+
+---
+layout: section
+title: Generated Protocol
+subtitle: Obsidian semantics emitted by the plugin
+---
+
+# Generated Protocol
+
+Callouts, media, links, diagnostics, tables, and code.
 
 ---
 title: Generated Callouts
@@ -118,7 +162,7 @@ Open a source note with <a class="obsidian-slidev-link" href="obsidian://open?va
 
 ---
 title: Long Content
-subtitle: Lists, tables, code
+subtitle: Lists, tables, inline code, code blocks
 ---
 
 # Long Content
@@ -126,7 +170,7 @@ subtitle: Lists, tables, code
 - The clean preset should handle ordinary note-like bullet density.
 - The theme owns spacing, typography, and slide chrome.
 - The plugin only emits markdown, semantic HTML, and Slidev-native components.
-- Long lists need readable rhythm without requiring utility classes.
+- Inline code such as `obsidian-slidev`, `themeConfig.obsidian`, and `frontmatter.footer` should remain readable.
 - Tables and code should stay legible at normal presentation scale.
 
 ```ts
@@ -136,9 +180,31 @@ export function isObsidianSlidevDeck(frontmatter: Record<string, unknown>) {
 ```
 
 ---
+title: Footnotes
+subtitle: Markdown footnote support
+---
+
+# Footnotes
+
+Footnote references should remain readable inside ordinary slides.[^protocol-footnote] They should be visible without dominating the page.
+
+[^protocol-footnote]: Footnotes are rendered by Markdown and styled by the theme through standard `footnote-ref` and `footnotes` classes.
+
+---
+layout: section
+title: Preset Contrast
+subtitle: Same protocol, different visual systems
+---
+
+# Preset Contrast
+
+Clean and scholarly presets should share markup and diverge only in presentation.
+
+---
 title: Scholarly Mode
 obsidianPreset: scholarly
 obsidianDensity: compact
+footer: Scholarly compact preset
 ---
 
 # Scholarly Mode Uses The Same Protocol
@@ -155,6 +221,7 @@ The scholarly preset changes visual tokens and layout mood, but keeps the genera
 ---
 title: Clean Preset Contrast
 obsidianPreset: clean
+footerAuthors: false
 ---
 
 # Clean Preset Contrast
@@ -209,6 +276,16 @@ obsidianHeader: true
 The default chrome is footer-only. A slide can opt into the header when per-slide metadata is intentionally useful.
 
 ---
+layout: section
+title: Layout Gallery
+subtitle: Theme-owned presentation primitives
+---
+
+# Layout Gallery
+
+Statement, quote, figure, references, center, and default content layouts.
+
+---
 layout: statement
 title: Statement Layout
 obsidianPreset: clean
@@ -221,11 +298,12 @@ The plugin should emit stable semantics; the theme should turn those semantics i
 ---
 layout: quote
 title: Quote Layout
-cite: Obsidian Slidev protocol
+author: Obsidian Slidev protocol
+source: Theme contract fixture
 obsidianPreset: scholarly
 ---
 
-Generated Obsidian semantics should remain simple enough to inspect, but expressive enough for a theme to elevate.
+Generated Obsidian semantics should remain simple enough to inspect, but expressive enough for a theme to elevate across multiple lines without collapsing the quote rhythm.
 
 ---
 layout: figure
@@ -251,7 +329,26 @@ obsidianPreset: scholarly
 3. Theme-owned visual presets for clean and scholarly decks.
 
 ---
+layout: section
+title: Completion Checks
+subtitle: Final validation slides
+---
+
+# Completion Checks
+
+The fixture ends with centered confirmation and ordinary default content.
+
+---
 layout: center
+title: Center Layout
+footer: Center layout validation
+---
+
+# Center Layout
+
+The centered layout should keep one message visually stable.
+
+---
 title: Fixture Complete
 ---
 

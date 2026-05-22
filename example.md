@@ -3,22 +3,25 @@ theme: ./
 addons:
   - slidev-pane
 title: Obsidian Slidev Theme
-author: Obsidian Slidev
+subtitle: A theme shell for turning Obsidian notes into Slidev presentations
+authors:
+  - name: Obsidian Slidev
+    institution: Local-first presentations
+    email: deck@example.com
+  - name: Slidev Theme
+    institution: Frontend-native rendering
+    email: theme@example.com
 themeConfig:
   obsidian:
     preset: clean
     density: normal
     chrome: auto
+    header: false
+    footerAuthors: true
     pageNumber: true
 ---
 
 # Slidev Theme Obsidian
-
-A theme shell for turning Obsidian notes into Slidev presentations.
-
-It focuses on Obsidian-slidev semantics, generated media, callouts, and clean presentation defaults.
-
-`slidev-pane` is enabled in this test deck. Press `p` or use the Pane control to open the pane presenter.
 
 ---
 title: Notes as Slides

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
+import { formatAuthorNames, normalizeAuthors } from '../setup/authors'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
 type Preset = 'clean' | 'scholarly'
@@ -95,21 +96,16 @@ const headerSubtitle = computed(() => {
 })
 
 const footerLeft = computed(() => {
-  if (frontmatter.value.footerLeft) return frontmatter.value.footerLeft
-  if (configs.value.footerLeft) return configs.value.footerLeft
-  if (configs.value.author) return configs.value.author
+  if (frontmatter.value.footerAuthors === false || obsidianConfig.value.footerAuthors === false) return ''
 
-  const authors = configs.value.authors
-  if (Array.isArray(authors) && authors.length > 0) {
-    const first = authors[0]
-    return typeof first === 'string' ? first : first?.name ?? ''
-  }
+  const authors = normalizeAuthors(configs.value.authors)
+  if (authors.length > 0) return formatAuthorNames(authors)
 
-  return ''
+  return formatAuthorNames(normalizeAuthors(configs.value.author))
 })
 
 const footerMiddle = computed(() => {
-  return frontmatter.value.footerMiddle ?? configs.value.footerMiddle ?? configs.value.title ?? frontmatter.value.title ?? configs.value.info ?? ''
+  return frontmatter.value.footer ?? configs.value.footer ?? configs.value.title ?? configs.value.info ?? ''
 })
 </script>
 

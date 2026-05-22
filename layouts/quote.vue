@@ -6,6 +6,8 @@ type ChromeSetting = 'auto' | 'on' | 'off'
 defineProps<{
   title?: string
   subtitle?: string
+  author?: string
+  source?: string
   cite?: string
   chrome?: ChromeSetting
 }>()
@@ -18,7 +20,10 @@ defineProps<{
         <blockquote>
           <slot />
         </blockquote>
-        <figcaption v-if="cite">{{ cite }}</figcaption>
+        <div v-if="author || source || cite" class="obsidian-layout-quote__meta">
+          <div v-if="author || cite" class="obsidian-layout-quote__author">{{ author ?? cite }}</div>
+          <div v-if="source" class="obsidian-layout-quote__source">{{ source }}</div>
+        </div>
       </figure>
     </ObsidianFrame>
   </div>

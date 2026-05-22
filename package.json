@@ -54,6 +54,7 @@
 				"density": "normal",
 				"chrome": "auto",
 				"header": false,
+				"footerAuthors": true,
 				"pageNumber": true
 			}
 		}

@@ -24,11 +24,11 @@
 }
 
 .slidev-layout h1 {
-  font-size: calc(3.1rem * var(--obsidian-heading-scale));
+  font-size: calc(2.35rem * var(--obsidian-heading-scale));
 }
 
 .slidev-layout h2 {
-  font-size: calc(2rem * var(--obsidian-heading-scale));
+  font-size: calc(1.72rem * var(--obsidian-heading-scale));
 }
 
 .slidev-layout h3 {
@@ -103,13 +103,27 @@
 }
 
 .slidev-layout :not(pre) > code {
-  padding: 0.12em 0.36em;
-  border: 1px solid var(--obsidian-code-border);
-  border-radius: 0.38em;
+  padding: 0.04em 0.36em 0.07em;
+  border: 1px solid var(--obsidian-inline-code-border);
+  border-radius: 0.44em;
   color: color-mix(in srgb, var(--obsidian-accent) 76%, var(--obsidian-text));
-  background: var(--obsidian-inline-code-bg);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--obsidian-bg-elevated) 38%, transparent), transparent),
+    var(--obsidian-inline-code-bg);
+  box-decoration-break: clone;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+    var(--obsidian-inline-code-shadow);
+  -webkit-box-decoration-break: clone;
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  backdrop-filter: blur(10px) saturate(1.2);
   font-family: var(--obsidian-font-mono);
   font-size: 0.9em;
+  font-weight: 560;
+  line-height: 1.28;
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--obsidian-bg-elevated) 64%, transparent);
 }
 
 .slidev-layout blockquote {
@@ -126,6 +140,75 @@
 
 .slidev-layout blockquote p:last-child {
   margin-bottom: 0;
+}
+
+.slidev-layout sup.footnote-ref {
+  margin-left: 0.08em;
+  font-size: 0.7em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.slidev-layout .footnote-ref a {
+  color: color-mix(in srgb, var(--obsidian-accent) 78%, var(--obsidian-text));
+  font-weight: 680;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--obsidian-accent) 48%, transparent);
+  text-underline-offset: 0.12em;
+}
+
+.slidev-layout .footnote-ref a::before {
+  content: "[";
+}
+
+.slidev-layout .footnote-ref a::after {
+  content: "]";
+}
+
+.slidev-layout .footnote-ref a:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 0.16em;
+}
+
+.slidev-layout .footnote-ref a:hover {
+  color: color-mix(in srgb, var(--obsidian-accent) 78%, var(--obsidian-text));
+}
+
+.slidev-layout .footnotes-sep {
+  margin: 0.4rem 0 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--obsidian-border) 72%, transparent);
+}
+
+.slidev-layout.default .footnotes-sep {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.slidev-layout .footnotes {
+  flex-shrink: 0;
+  color: var(--obsidian-text-muted);
+  font-size: 0.70rem;
+  line-height: 1.30;
+}
+
+.slidev-layout .footnotes ol {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.slidev-layout .footnotes li + li {
+  margin-top: 0.36em;
+}
+
+.slidev-layout .footnotes p {
+  display: inline;
+  margin: 0;
+}
+
+.slidev-layout .footnote-backref {
+  color: var(--obsidian-accent);
+  text-decoration: none;
 }
 
 .slidev-layout hr {

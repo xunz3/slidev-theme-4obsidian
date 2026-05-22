@@ -12,12 +12,22 @@ Add the following frontmatter to your `slides.md`. Start Slidev then it will pro
 
 <pre><code>---
 theme: <b>obsidian</b>
+title: My Deck
+subtitle: Optional deck subtitle
+authors:
+  - name: xunz
+    institution: UCAS
+    email: xun.zhang0506@gmail.com
+  - name: jane
+    institution: UCAS
+    email: jane@example.com
 themeConfig:
   obsidian:
     preset: clean
     density: normal
     chrome: auto
     header: false
+    footerAuthors: true
     pageNumber: true
 ---</code></pre>
 
@@ -43,6 +53,16 @@ The theme does not parse Obsidian Markdown by itself. Keep conversion logic in `
 The stable public configuration surface is `themeConfig.obsidian`.
 
 ```yaml
+title: My Deck
+subtitle: Optional deck subtitle
+footer: Custom center footer
+authors:
+  - name: xunz
+    institution: UCAS
+    email: xun.zhang0506@gmail.com
+  - name: jane
+    institution: UCAS
+    email: jane@example.com
 themeConfig:
   obsidian:
     preset: clean
@@ -50,6 +70,7 @@ themeConfig:
     density: normal
     chrome: auto
     header: false
+    footerAuthors: true
     pageNumber: true
 ```
 
@@ -62,7 +83,8 @@ Supported keys:
 | `density` | `compact`, `normal`, `relaxed` | `normal` | Adjusts slide padding, spacing, and body scale |
 | `chrome` | `auto`, `on`, `off` | `auto` | Controls footer metadata chrome |
 | `header` | `true`, `false` | `false` | Shows the optional per-slide title/subtitle header |
-| `pageNumber` | `true`, `false` | `true` | Shows or hides page numbers in theme chrome |
+| `footerAuthors` | `true`, `false` | `true` | Shows or hides author names in the left footer |
+| `pageNumber` | `true`, `false` | `true` | Shows or hides the right footer page number |
 
 Per-slide overrides:
 
@@ -72,8 +94,14 @@ Per-slide overrides:
 | `obsidianDensity` | `compact`, `normal`, `relaxed` | Override density for one slide |
 | `chrome` | `on`, `off` | Force slide chrome on or off |
 | `obsidianHeader` | `true`, `false` | Force the optional header on or off for one slide |
+| `footerAuthors` | `true`, `false` | Override left footer author visibility for one slide |
+| `footer` | Text | Override the centered footer content for one slide |
 
-Theme chrome means the non-content frame around each slide. By default it is footer-only: `author` is used on the left footer, deck `title` is used as the default centered footer, and page numbers are controlled by `themeConfig.obsidian.pageNumber`. The header is intentionally opt-in because per-slide `title` and `subtitle` usually duplicate the visible Markdown heading.
+`themeConfig` is Slidev's standard theme/addon configuration object. This theme keeps its own options under `themeConfig.obsidian` so they do not collide with Slidev core fields or other addons. `density` selects the spacing scale: `compact` uses tighter padding and lists for information-dense slides, `normal` is the default, and `relaxed` gives content more breathing room.
+
+Deck metadata such as `title`, `subtitle`, `footer`, and `authors` stays at the Slidev frontmatter root because it describes content, not theme behavior. The cover layout renders explicit `subtitle` metadata under the title; it does not infer a subtitle from the first paragraph. `authors` can be a list of strings or objects with `name`, `institution`, and `email`; the cover layout renders each author's full details side by side under the title, and the footer uses only author names on the left when `themeConfig.obsidian.footerAuthors` is enabled. The centered footer uses per-slide `footer` first, then top-level `footer`, then top-level `title`.
+
+Theme chrome means the non-content frame around each slide. By default it is footer-only: author names are used on the left footer, deck metadata is used in the centered footer, and `themeConfig.obsidian.pageNumber` only controls the right footer page number. The header is intentionally opt-in because per-slide `title` and `subtitle` usually duplicate the visible Markdown heading.
 
 ## CSS Variables
 
@@ -94,6 +122,7 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--obsidian-shadow` | Shared elevation shadow |
 | `--obsidian-font-sans` | Body and chrome font stack |
 | `--obsidian-font-serif` | Heading font stack |
+| `--obsidian-font-quote` | Quote layout italic font stack |
 | `--obsidian-font-mono` | Code font stack |
 | `--obsidian-slide-padding` | Frame padding |
 | `--obsidian-content-gap` | Vertical rhythm between common markdown blocks |
@@ -107,8 +136,10 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--obsidian-table-header-bg` | Table header background |
 | `--obsidian-table-row-alt-bg` | Alternating table row background |
 | `--obsidian-code-bg` | Code block background |
-| `--obsidian-code-border` | Code block and inline code border |
+| `--obsidian-code-border` | Code block border |
 | `--obsidian-inline-code-bg` | Inline code background |
+| `--obsidian-inline-code-border` | Inline code glass border |
+| `--obsidian-inline-code-shadow` | Inline code glass shadow |
 | `--obsidian-blockquote-bg` | Blockquote background |
 | `--obsidian-blockquote-border` | Blockquote left border |
 | `--obsidian-blockquote-font-style` | Blockquote font style |
@@ -122,6 +153,8 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--obsidian-caption-font-style` | Generated media caption font style |
 | `--obsidian-caption-letter-spacing` | Generated media caption tracking |
 | `--obsidian-media-max-height` | Maximum generated image/video height |
+| `--obsidian-quote-size` | Quote layout text size |
+| `--obsidian-quote-line-height` | Quote layout line height |
 
 ## Presets
 
@@ -144,10 +177,11 @@ This theme provides the following layouts:
 | `cover` | Opening slide, chrome hidden by default |
 | `intro` | Introductory slide with normal chrome behavior |
 | `section` | Section divider, chrome hidden by default |
+| `toc` | Table of contents generated from `section` slides |
 | `center` | Centered single-message slide |
 | `two-cols` | Two-column content layout using `::right::` |
 | `statement` | Large centered claim or takeaway |
-| `quote` | Pull quote with optional `cite` frontmatter |
+| `quote` | Pull quote with optional `author`, `source`, or `cite` frontmatter |
 | `figure` | Centered media-first slide |
 | `references` | Smaller reference/bibliography slide |
 
@@ -160,10 +194,11 @@ It covers:
 - Obsidian callout classes
 - Generated image, video, audio, and YouTube media figures
 - Obsidian links and warning blocks
-- Long lists, tables, and code blocks
+- Long lists, tables, inline code, code blocks, and footnotes
 - Clean and scholarly presets on the same generated protocol
 - Clean/scholarly contrast slides with identical content structure
-- Preset-specific statement, quote, figure, and references layouts
+- Section-driven deck structure with TOC
+- Preset-specific statement, quote, figure, references, and center layouts
 
 Run it with:
 

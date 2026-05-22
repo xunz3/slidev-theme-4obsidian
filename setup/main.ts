@@ -12,6 +12,7 @@ type ObsidianThemeConfig = {
   density?: ObsidianDensity
   chrome?: ObsidianChrome
   header?: boolean
+  footerAuthors?: boolean
   pageNumber?: boolean
 }
 
