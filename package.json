@@ -1,6 +1,6 @@
 {
 	"name": "slidev-theme-4obsidian",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "An Obsidian-oriented Slidev theme shell with lightweight presets.",
 	"license": "MIT",
