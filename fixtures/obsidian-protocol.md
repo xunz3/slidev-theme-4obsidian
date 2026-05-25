@@ -275,6 +275,8 @@ obsidianHeader: true
 
 The default chrome is footer-only. A slide can opt into the header when per-slide metadata is intentionally useful.
 
+The visible slide title remains the Markdown `# Optional Header`; metadata `title` and `subtitle` belong to navigation and optional chrome.
+
 ---
 layout: section
 title: Layout Gallery

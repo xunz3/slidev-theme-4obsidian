@@ -11,6 +11,8 @@
   --obsidian-border: rgba(24, 33, 47, 0.16);
   --obsidian-border-strong: rgba(24, 33, 47, 0.44);
   --obsidian-shadow: 0 18px 60px rgba(25, 39, 63, 0.11);
+  --obsidian-scrollbar-thumb: color-mix(in srgb, var(--obsidian-accent) 34%, transparent);
+  --obsidian-scrollbar-track: transparent;
   --obsidian-font-sans: Aptos, "Source Sans 3", "Noto Sans SC", sans-serif;
   --obsidian-font-serif: "Source Serif 4", Georgia, "Noto Serif SC", serif;
   --obsidian-font-quote: var(--obsidian-font-serif);
@@ -130,6 +132,8 @@ html.dark .obsidian-frame[data-obsidian-preset="clean"] {
   --obsidian-border: rgba(23, 32, 51, 0.18);
   --obsidian-border-strong: rgba(23, 32, 51, 0.72);
   --obsidian-shadow: none;
+  --obsidian-scrollbar-thumb: color-mix(in srgb, var(--obsidian-accent) 42%, transparent);
+  --obsidian-scrollbar-track: transparent;
   --obsidian-font-sans: "Aptos", "Source Sans 3", "Noto Sans SC", sans-serif;
   --obsidian-font-serif: "Source Serif 4", "Palatino Linotype", "Noto Serif SC", Georgia, serif;
   --obsidian-font-quote: var(--obsidian-font-serif);

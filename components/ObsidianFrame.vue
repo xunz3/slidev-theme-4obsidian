@@ -88,7 +88,7 @@ const showPageNumber = computed(() => {
 })
 
 const headerTitle = computed(() => {
-  return props.title ?? frontmatter.value.title ?? configs.value.title ?? ''
+  return props.title ?? frontmatter.value.title ?? ''
 })
 
 const headerSubtitle = computed(() => {

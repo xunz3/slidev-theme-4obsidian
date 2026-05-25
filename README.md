@@ -101,6 +101,15 @@ Per-slide overrides:
 
 Deck metadata such as `title`, `subtitle`, `footer`, and `authors` stays at the Slidev frontmatter root because it describes content, not theme behavior. The cover layout renders explicit `subtitle` metadata under the title; it does not infer a subtitle from the first paragraph. `authors` can be a list of strings or objects with `name`, `institution`, and `email`; the cover layout renders each author's full details side by side under the title, and the footer uses only author names on the left when `themeConfig.obsidian.footerAuthors` is enabled. The centered footer uses per-slide `footer` first, then top-level `footer`, then top-level `title`.
 
+Title rendering follows a fixed rule:
+
+| Location | Visible title source | Metadata role |
+| --- | --- | --- |
+| `cover` layout | Root or cover-slide `title` / `subtitle` metadata | The first Markdown `#` is hidden when metadata title exists, preventing duplicate cover titles |
+| Normal content layouts | Markdown content such as `# Slide Title` | Per-slide `title` / `subtitle` is metadata for navigation, TOC extraction, and the optional header |
+| Optional header | Per-slide `title` / `subtitle` metadata only | It never falls back to the deck title, so global deck metadata is not repeated on every slide |
+| Footer center | Per-slide `footer`, then root `footer`, then root `title` | Footer content is deck chrome, not the slide's visible content title |
+
 Theme chrome means the non-content frame around each slide. By default it is footer-only: author names are used on the left footer, deck metadata is used in the centered footer, and `themeConfig.obsidian.pageNumber` only controls the right footer page number. The header is intentionally opt-in because per-slide `title` and `subtitle` usually duplicate the visible Markdown heading.
 
 ## CSS Variables
@@ -120,6 +129,8 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--obsidian-border` | Borders for tables, chrome, callouts, and inline code |
 | `--obsidian-border-strong` | Strong table and scholarly divider borders |
 | `--obsidian-shadow` | Shared elevation shadow |
+| `--obsidian-scrollbar-thumb` | Scrollbar thumb color for overflowing slide content |
+| `--obsidian-scrollbar-track` | Scrollbar track color for overflowing slide content |
 | `--obsidian-font-sans` | Body and chrome font stack |
 | `--obsidian-font-serif` | Heading font stack |
 | `--obsidian-font-quote` | Quote layout italic font stack |

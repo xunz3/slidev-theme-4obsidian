@@ -63,6 +63,30 @@
 .obsidian-frame__content {
   min-height: 0;
   overflow: auto;
+  scrollbar-color: var(--obsidian-scrollbar-thumb) var(--obsidian-scrollbar-track);
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.obsidian-frame__content::-webkit-scrollbar {
+  width: 0.42rem;
+  height: 0.42rem;
+}
+
+.obsidian-frame__content::-webkit-scrollbar-track {
+  background: var(--obsidian-scrollbar-track);
+}
+
+.obsidian-frame__content::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--obsidian-scrollbar-thumb);
+  background-clip: padding-box;
+}
+
+.obsidian-frame__content::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--obsidian-accent) 52%, transparent);
+  background-clip: padding-box;
 }
 
 .slidev-layout.default .obsidian-frame__content {
