@@ -3,12 +3,12 @@
   height: 100%;
   padding: 0;
   color: var(--obsidian-text);
-  background:
-    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--obsidian-accent) 16%, transparent), transparent 30%),
-    linear-gradient(135deg, var(--obsidian-bg), var(--obsidian-bg-elevated));
+  background: var(--obsidian-bg);
   font-family: var(--obsidian-font-sans);
   font-size: var(--obsidian-body-size);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   line-height: var(--obsidian-body-line-height);
+  text-rendering: optimizeLegibility;
 }
 
 .slidev-layout h1,
@@ -21,14 +21,15 @@
   font-weight: var(--obsidian-heading-weight);
   letter-spacing: var(--obsidian-heading-letter-spacing);
   line-height: var(--obsidian-heading-line-height);
+  text-wrap: balance;
 }
 
 .slidev-layout h1 {
-  font-size: calc(2.35rem * var(--obsidian-heading-scale));
+  font-size: calc(2.42rem * var(--obsidian-heading-scale));
 }
 
 .slidev-layout h2 {
-  font-size: calc(1.72rem * var(--obsidian-heading-scale));
+  font-size: calc(1.68rem * var(--obsidian-heading-scale));
 }
 
 .slidev-layout h3 {
@@ -62,11 +63,15 @@
   color: var(--obsidian-accent);
   text-decoration-color: color-mix(in srgb, var(--obsidian-accent) 46%, transparent);
   text-underline-offset: 0.18em;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
 }
 
 .slidev-layout table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.92em;
 }
 
@@ -89,11 +94,11 @@
 
 .slidev-layout pre {
   overflow-x: auto;
-  padding: 1rem;
+  padding: 0.95rem 1rem;
   border: 1px solid var(--obsidian-code-border);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--obsidian-code-bg);
-  box-shadow: var(--obsidian-shadow);
+  box-shadow: 0 10px 30px rgba(30, 36, 40, 0.06);
 }
 
 .slidev-layout pre code {
@@ -107,28 +112,19 @@
   border: 1px solid var(--obsidian-inline-code-border);
   border-radius: 0.44em;
   color: color-mix(in srgb, var(--obsidian-accent) 76%, var(--obsidian-text));
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 42%),
-    linear-gradient(180deg, color-mix(in srgb, var(--obsidian-bg-elevated) 38%, transparent), transparent),
-    var(--obsidian-inline-code-bg);
+  background: var(--obsidian-inline-code-bg);
   box-decoration-break: clone;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.42),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
-    var(--obsidian-inline-code-shadow);
+  box-shadow: var(--obsidian-inline-code-shadow);
   -webkit-box-decoration-break: clone;
-  -webkit-backdrop-filter: blur(10px) saturate(1.2);
-  backdrop-filter: blur(10px) saturate(1.2);
   font-family: var(--obsidian-font-mono);
-  font-size: 0.9em;
+  font-size: 0.88em;
   font-weight: 560;
   line-height: 1.28;
-  text-shadow: 0 1px 0 color-mix(in srgb, var(--obsidian-bg-elevated) 64%, transparent);
 }
 
 .slidev-layout blockquote {
-  padding: 0.45rem 0 0.45rem 1.1rem;
-  border-left: 3px solid var(--obsidian-blockquote-border);
+  padding: 0.5rem 0 0.5rem 1rem;
+  border-left: 2px solid var(--obsidian-blockquote-border);
   color: var(--obsidian-text-muted);
   background: var(--obsidian-blockquote-bg);
   font-style: var(--obsidian-blockquote-font-style);
@@ -219,7 +215,7 @@
 
 .slidev-layout strong {
   color: var(--obsidian-text);
-  font-weight: 760;
+  font-weight: 730;
 }
 
 .slidev-layout mark {
