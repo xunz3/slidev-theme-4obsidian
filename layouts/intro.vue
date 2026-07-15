@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ObsidianFrame from '../components/ObsidianFrame.vue'
+import SlideFrame from '../components/SlideFrame.vue'
 import { computed } from 'vue'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
@@ -34,8 +34,8 @@ const style = computed(() => {
 
 <template>
   <div class="slidev-layout intro" :style="style">
-    <ObsidianFrame variant="intro" :title="title" :subtitle="subtitle" :chrome="chrome">
+    <SlideFrame variant="intro" :title="title" :subtitle="subtitle" :chrome="chrome">
       <slot />
-    </ObsidianFrame>
+    </SlideFrame>
   </div>
 </template>

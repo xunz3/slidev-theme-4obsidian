@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ObsidianFrame from '../components/ObsidianFrame.vue'
+import SlideFrame from '../components/SlideFrame.vue'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
 
@@ -15,16 +15,16 @@ defineProps<{
 
 <template>
   <div class="slidev-layout quote">
-    <ObsidianFrame variant="quote" :title="title" :subtitle="subtitle" :chrome="chrome">
-      <figure class="obsidian-layout-quote">
-        <blockquote>
+    <SlideFrame variant="quote" :title="title" :subtitle="subtitle" :chrome="chrome">
+      <figure class="slide-layout-quote">
+        <div class="slide-layout-quote__content">
           <slot />
-        </blockquote>
-        <div v-if="author || source || cite" class="obsidian-layout-quote__meta">
-          <div v-if="author || cite" class="obsidian-layout-quote__author">{{ author ?? cite }}</div>
-          <div v-if="source" class="obsidian-layout-quote__source">{{ source }}</div>
+        </div>
+        <div v-if="author || source || cite" class="slide-layout-quote__meta">
+          <div v-if="author || cite" class="slide-layout-quote__author">{{ author ?? cite }}</div>
+          <div v-if="source" class="slide-layout-quote__source">{{ source }}</div>
         </div>
       </figure>
-    </ObsidianFrame>
+    </SlideFrame>
   </div>
 </template>

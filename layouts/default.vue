@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ObsidianFrame from '../components/ObsidianFrame.vue'
+import SlideFrame from '../components/SlideFrame.vue'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
 
@@ -12,8 +12,8 @@ defineProps<{
 
 <template>
   <div class="slidev-layout default">
-    <ObsidianFrame variant="default" :title="title" :subtitle="subtitle" :chrome="chrome">
+    <SlideFrame variant="default" :title="title" :subtitle="subtitle" :chrome="chrome">
       <slot />
-    </ObsidianFrame>
+    </SlideFrame>
   </div>
 </template>

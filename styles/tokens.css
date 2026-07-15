@@ -1,98 +1,99 @@
 :root {
   --slidev-theme-primary: #3f6f68;
-  --obsidian-accent: var(--slidev-theme-primary);
-  --obsidian-bg: #faf9f5;
-  --obsidian-bg-elevated: #ffffff;
-  --obsidian-bg-muted: #efeee8;
-  --obsidian-frame-bg: transparent;
-  --obsidian-text: #202529;
-  --obsidian-text-muted: #68706f;
-  --obsidian-border: rgba(32, 37, 41, 0.13);
-  --obsidian-border-strong: rgba(32, 37, 41, 0.34);
-  --obsidian-shadow: 0 16px 42px rgba(32, 37, 41, 0.10);
-  --obsidian-scrollbar-thumb: color-mix(in srgb, var(--obsidian-accent) 32%, transparent);
-  --obsidian-scrollbar-track: transparent;
-  --obsidian-font-sans: Aptos, Inter, "Source Sans 3", "Noto Sans SC", sans-serif;
-  --obsidian-font-serif: "Source Serif 4", "Iowan Old Style", Georgia, "Noto Serif SC", serif;
-  --obsidian-font-quote: var(--obsidian-font-serif);
-  --obsidian-font-mono: "JetBrains Mono", "Fira Code", monospace;
-  --obsidian-slide-padding: 3rem;
-  --obsidian-content-gap: 1.15rem;
-  --obsidian-body-size: 1.05rem;
-  --obsidian-body-line-height: 1.58;
-  --obsidian-heading-scale: 1;
-  --obsidian-heading-weight: 700;
-  --obsidian-heading-letter-spacing: -0.018em;
-  --obsidian-heading-line-height: 1.05;
-  --obsidian-list-spacing: 0.28em;
-  --obsidian-table-header-bg: color-mix(in srgb, var(--obsidian-accent) 8%, transparent);
-  --obsidian-table-row-alt-bg: color-mix(in srgb, var(--obsidian-bg-muted) 42%, transparent);
-  --obsidian-code-bg: color-mix(in srgb, var(--obsidian-bg-muted) 70%, transparent);
-  --obsidian-code-border: var(--obsidian-border);
-  --obsidian-inline-code-bg: color-mix(in srgb, var(--obsidian-accent) 9%, transparent);
-  --obsidian-inline-code-border: color-mix(in srgb, var(--obsidian-accent) 22%, var(--obsidian-border));
-  --obsidian-inline-code-shadow: none;
-  --obsidian-blockquote-bg: transparent;
-  --obsidian-blockquote-border: var(--obsidian-border);
-  --obsidian-blockquote-font-style: normal;
-  --obsidian-callout-bg: rgba(63, 111, 104, 0.08);
-  --obsidian-callout-border: color-mix(in srgb, var(--obsidian-accent) 54%, transparent);
-  --obsidian-callout-radius: 12px;
-  --obsidian-callout-shadow: 0 8px 24px rgba(32, 37, 41, 0.05);
-  --obsidian-warning-bg: rgba(184, 121, 63, 0.12);
-  --obsidian-warning-border: #b8793f;
-  --obsidian-warning-text: #744a25;
-  --obsidian-caption-font-style: normal;
-  --obsidian-caption-letter-spacing: 0;
-  --obsidian-media-max-height: 62vh;
-  --obsidian-statement-size: 3.05rem;
-  --obsidian-quote-size: 1.68rem;
-  --obsidian-quote-line-height: 1.46;
-  --obsidian-reference-size: 0.92rem;
+  --presentation-accent: var(--slidev-theme-primary);
+  --presentation-bg: #faf9f5;
+  --presentation-bg-elevated: #ffffff;
+  --presentation-bg-muted: #efeee8;
+  --presentation-frame-bg: transparent;
+  --presentation-text: #202529;
+  --presentation-text-muted: #68706f;
+  --presentation-border: rgba(32, 37, 41, 0.13);
+  --presentation-border-strong: rgba(32, 37, 41, 0.34);
+  --presentation-shadow: 0 16px 42px rgba(32, 37, 41, 0.10);
+  --presentation-scrollbar-thumb: color-mix(in srgb, var(--presentation-accent) 32%, transparent);
+  --presentation-scrollbar-track: transparent;
+  --presentation-font-sans: "Source Sans 3", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --presentation-font-serif: "Source Serif 4", "Noto Serif SC", ui-serif, Georgia, serif;
+  --presentation-font-quote: var(--presentation-font-serif);
+  --presentation-font-mono: "JetBrains Mono", "Noto Sans SC", ui-monospace, monospace;
+  --presentation-slide-padding: 3rem;
+  --presentation-two-cols-gap: 2.5rem;
+  --presentation-content-gap: 1.15rem;
+  --presentation-body-size: 1.05rem;
+  --presentation-body-line-height: 1.58;
+  --presentation-heading-scale: 1;
+  --presentation-heading-weight: 700;
+  --presentation-heading-letter-spacing: -0.018em;
+  --presentation-heading-line-height: 1.05;
+  --presentation-list-spacing: 0.28em;
+  --presentation-table-header-bg: color-mix(in srgb, var(--presentation-accent) 8%, transparent);
+  --presentation-table-row-alt-bg: color-mix(in srgb, var(--presentation-bg-muted) 42%, transparent);
+  --presentation-code-bg: color-mix(in srgb, var(--presentation-bg-muted) 70%, transparent);
+  --presentation-code-border: var(--presentation-border);
+  --presentation-inline-code-bg: color-mix(in srgb, var(--presentation-accent) 9%, transparent);
+  --presentation-inline-code-border: color-mix(in srgb, var(--presentation-accent) 22%, var(--presentation-border));
+  --presentation-inline-code-shadow: none;
+  --presentation-blockquote-bg: transparent;
+  --presentation-blockquote-border: var(--presentation-border);
+  --presentation-blockquote-font-style: normal;
+  --presentation-callout-bg: rgba(63, 111, 104, 0.08);
+  --presentation-callout-border: color-mix(in srgb, var(--presentation-accent) 54%, transparent);
+  --presentation-callout-radius: 12px;
+  --presentation-callout-shadow: 0 8px 24px rgba(32, 37, 41, 0.05);
+  --presentation-warning-bg: rgba(184, 121, 63, 0.12);
+  --presentation-warning-border: #b8793f;
+  --presentation-warning-text: #744a25;
+  --presentation-caption-font-style: normal;
+  --presentation-caption-letter-spacing: 0;
+  --presentation-media-max-height: 62vh;
+  --presentation-statement-size: 3.05rem;
+  --presentation-quote-size: 1.68rem;
+  --presentation-quote-line-height: 1.46;
+  --presentation-reference-size: 0.92rem;
 }
 
 html.dark {
   --slidev-theme-primary: #77b5aa;
-  --obsidian-bg: #141514;
-  --obsidian-bg-elevated: #1f211f;
-  --obsidian-bg-muted: #2a2d2b;
-  --obsidian-frame-bg: transparent;
-  --obsidian-text: #f0efe9;
-  --obsidian-text-muted: #b8bab4;
-  --obsidian-border: rgba(240, 239, 233, 0.15);
-  --obsidian-border-strong: rgba(240, 239, 233, 0.38);
-  --obsidian-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
-  --obsidian-scrollbar-thumb: rgba(184, 186, 180, 0.34);
-  --obsidian-table-row-alt-bg: rgba(255, 255, 255, 0.035);
-  --obsidian-code-bg: rgba(255, 255, 255, 0.06);
-  --obsidian-inline-code-bg: rgba(119, 181, 170, 0.16);
-  --obsidian-inline-code-border: rgba(119, 181, 170, 0.28);
-  --obsidian-inline-code-shadow: none;
-  --obsidian-callout-bg: rgba(119, 181, 170, 0.15);
-  --obsidian-warning-bg: rgba(184, 121, 63, 0.18);
-  --obsidian-warning-text: #f0cfaa;
+  --presentation-bg: #141514;
+  --presentation-bg-elevated: #1f211f;
+  --presentation-bg-muted: #2a2d2b;
+  --presentation-frame-bg: transparent;
+  --presentation-text: #f0efe9;
+  --presentation-text-muted: #b8bab4;
+  --presentation-border: rgba(240, 239, 233, 0.15);
+  --presentation-border-strong: rgba(240, 239, 233, 0.38);
+  --presentation-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+  --presentation-scrollbar-thumb: rgba(184, 186, 180, 0.34);
+  --presentation-table-row-alt-bg: rgba(255, 255, 255, 0.035);
+  --presentation-code-bg: rgba(255, 255, 255, 0.06);
+  --presentation-inline-code-bg: rgba(119, 181, 170, 0.16);
+  --presentation-inline-code-border: rgba(119, 181, 170, 0.28);
+  --presentation-inline-code-shadow: none;
+  --presentation-callout-bg: rgba(119, 181, 170, 0.15);
+  --presentation-warning-bg: rgba(184, 121, 63, 0.18);
+  --presentation-warning-text: #f0cfaa;
 }
 
-:root[data-obsidian-density="compact"],
-.obsidian-frame[data-obsidian-density="compact"] {
-  --obsidian-slide-padding: 2.35rem;
-  --obsidian-content-gap: 0.8rem;
-  --obsidian-body-size: 0.98rem;
-  --obsidian-list-spacing: 0.18em;
-  --obsidian-statement-size: 2.8rem;
-  --obsidian-quote-size: 1.48rem;
-  --obsidian-quote-line-height: 1.38;
-  --obsidian-reference-size: 0.86rem;
+:root[data-presentation-density="compact"],
+.slide-frame[data-presentation-density="compact"] {
+  --presentation-slide-padding: 2.35rem;
+  --presentation-content-gap: 0.8rem;
+  --presentation-body-size: 0.98rem;
+  --presentation-list-spacing: 0.18em;
+  --presentation-statement-size: 2.8rem;
+  --presentation-quote-size: 1.48rem;
+  --presentation-quote-line-height: 1.38;
+  --presentation-reference-size: 0.86rem;
 }
 
-:root[data-obsidian-density="relaxed"],
-.obsidian-frame[data-obsidian-density="relaxed"] {
-  --obsidian-slide-padding: 3.45rem;
-  --obsidian-content-gap: 1.45rem;
-  --obsidian-body-size: 1.16rem;
-  --obsidian-list-spacing: 0.42em;
-  --obsidian-statement-size: 3.55rem;
-  --obsidian-quote-size: 1.9rem;
-  --obsidian-quote-line-height: 1.46;
-  --obsidian-reference-size: 0.98rem;
+:root[data-presentation-density="relaxed"],
+.slide-frame[data-presentation-density="relaxed"] {
+  --presentation-slide-padding: 3.45rem;
+  --presentation-content-gap: 1.45rem;
+  --presentation-body-size: 1.16rem;
+  --presentation-list-spacing: 0.42em;
+  --presentation-statement-size: 3.55rem;
+  --presentation-quote-size: 1.9rem;
+  --presentation-quote-line-height: 1.46;
+  --presentation-reference-size: 0.98rem;
 }

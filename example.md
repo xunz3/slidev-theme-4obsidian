@@ -2,17 +2,17 @@
 theme: ./
 addons:
   - slidev-pane
-title: Obsidian Slidev Theme
-subtitle: A theme shell for turning Obsidian notes into Slidev presentations
+title: Slidev Presentation Theme
+subtitle: Reusable presets with optional Obsidian integration
 authors:
-  - name: Obsidian Slidev
-    institution: Local-first presentations
+  - name: Theme Demo
+    institution: Slidev presentations
     email: deck@example.com
   - name: Slidev Theme
     institution: Frontend-native rendering
     email: theme@example.com
 themeConfig:
-  obsidian:
+  presentation:
     preset: clean
     density: normal
     chrome: auto
@@ -21,7 +21,7 @@ themeConfig:
     pageNumber: true
 ---
 
-# Slidev Theme Obsidian
+# Slidev Presentation Theme
 
 ---
 title: Notes as Slides
@@ -30,7 +30,7 @@ subtitle: Default layout
 
 # Notes as Slides
 
-The theme expects `obsidian-slidev` to convert Obsidian-specific syntax into frontend-native Slidev markup.
+The theme works with ordinary Slidev Markdown and also understands markup emitted by `obsidian-slidev`.
 
 - Source notes stay in the vault.
 - Generated runtime files live under the Slidev workspace.
@@ -73,11 +73,11 @@ layout: section
 
 # Presets
 
-The same markup can switch visual systems through `themeConfig.obsidian.preset`.
+The same markup can switch visual systems through `themeConfig.presentation.preset`.
 
 ---
 title: Scholarly preset
-obsidianPreset: scholarly
+presentationPreset: scholarly
 ---
 
 # Scholarly Is a Preset
@@ -91,7 +91,7 @@ It is not the whole theme. It only changes the chrome and typography tokens whil
 | Layer | Responsibility |
 | --- | --- |
 | `obsidian-slidev` | Convert vault notes into Slidev-native markup |
-| `slidev-theme-obsidian` | Render Obsidian semantics and style presets |
+| `slidev-theme-4obsidian` | Render Slidev layouts, presets, and optional Obsidian semantics |
 
 ---
 layout: center

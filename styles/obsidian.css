@@ -1,20 +1,20 @@
 .obsidian-slidev-link {
-  color: var(--obsidian-accent);
+  color: var(--presentation-accent);
   font-weight: 620;
   text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--obsidian-accent) 42%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--presentation-accent) 42%, transparent);
   transition:
     border-color 160ms ease,
     color 160ms ease;
 }
 
 .obsidian-slidev-link:hover {
-  color: color-mix(in srgb, var(--obsidian-accent) 84%, var(--obsidian-text));
-  border-bottom-color: var(--obsidian-accent);
+  color: color-mix(in srgb, var(--presentation-accent) 84%, var(--presentation-text));
+  border-bottom-color: var(--presentation-accent);
 }
 
 .obsidian-slidev-link:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--obsidian-accent) 44%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--presentation-accent) 44%, transparent);
   outline-offset: 0.18em;
   border-bottom-color: transparent;
   border-radius: 0.18em;
@@ -23,11 +23,11 @@
 .obsidian-slidev-warning {
   margin: 1rem 0;
   padding: 0.78rem 0.95rem;
-  border: 1px solid color-mix(in srgb, var(--obsidian-warning-border) 36%, transparent);
-  border-left: 3px solid var(--obsidian-warning-border);
+  border: 1px solid color-mix(in srgb, var(--presentation-warning-border) 36%, transparent);
+  border-left: 3px solid var(--presentation-warning-border);
   border-radius: 10px;
-  color: var(--obsidian-warning-text);
-  background: var(--obsidian-warning-bg);
+  color: var(--presentation-warning-text);
+  background: var(--presentation-warning-bg);
   box-shadow: 0 8px 24px rgba(30, 36, 40, 0.045);
 }
 
@@ -39,11 +39,11 @@
 .obsidian-slidev-callout {
   margin: 1rem 0;
   padding: 0.86rem 1rem 0.92rem;
-  border: 1px solid color-mix(in srgb, var(--obsidian-callout-border) 82%, transparent);
-  border-left: 3px solid var(--obsidian-callout-border);
-  border-radius: var(--obsidian-callout-radius);
-  background: var(--obsidian-callout-bg);
-  box-shadow: var(--obsidian-callout-shadow);
+  border: 1px solid color-mix(in srgb, var(--presentation-callout-border) 82%, transparent);
+  border-left: 3px solid var(--presentation-callout-border);
+  border-radius: var(--presentation-callout-radius);
+  background: var(--presentation-callout-bg);
+  box-shadow: var(--presentation-callout-shadow);
 }
 
 .obsidian-slidev-callout__title {
@@ -51,7 +51,7 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.42rem;
-  color: var(--obsidian-text);
+  color: var(--presentation-text);
   font-size: 0.94em;
   font-weight: 720;
   letter-spacing: 0.01em;
@@ -62,12 +62,12 @@
   width: 0.48rem;
   height: 0.48rem;
   border-radius: 999px;
-  background: var(--obsidian-callout-border);
+  background: var(--presentation-callout-border);
   content: "";
 }
 
 .obsidian-slidev-callout__content {
-  color: color-mix(in srgb, var(--obsidian-text) 88%, var(--obsidian-text-muted));
+  color: color-mix(in srgb, var(--presentation-text) 88%, var(--presentation-text-muted));
 }
 
 .obsidian-slidev-callout__content > :last-child {
@@ -79,42 +79,42 @@
 .obsidian-slidev-callout--todo,
 .obsidian-slidev-callout--abstract,
 .obsidian-slidev-callout--summary {
-  --obsidian-callout-border: color-mix(in srgb, var(--obsidian-accent) 58%, transparent);
-  --obsidian-callout-bg: color-mix(in srgb, var(--obsidian-accent) 8%, transparent);
+  --presentation-callout-border: color-mix(in srgb, var(--presentation-accent) 58%, transparent);
+  --presentation-callout-bg: color-mix(in srgb, var(--presentation-accent) 8%, transparent);
 }
 
 .obsidian-slidev-callout--tip,
 .obsidian-slidev-callout--success,
 .obsidian-slidev-callout--check {
-  --obsidian-callout-border: #3f8f68;
-  --obsidian-callout-bg: rgba(63, 143, 104, 0.10);
+  --presentation-callout-border: #3f8f68;
+  --presentation-callout-bg: rgba(63, 143, 104, 0.10);
 }
 
 .obsidian-slidev-callout--warning,
 .obsidian-slidev-callout--caution,
 .obsidian-slidev-callout--attention {
-  --obsidian-callout-border: #b8793f;
-  --obsidian-callout-bg: rgba(184, 121, 63, 0.11);
+  --presentation-callout-border: #b8793f;
+  --presentation-callout-bg: rgba(184, 121, 63, 0.11);
 }
 
 .obsidian-slidev-callout--danger,
 .obsidian-slidev-callout--error,
 .obsidian-slidev-callout--failure {
-  --obsidian-callout-border: #c64e4e;
-  --obsidian-callout-bg: rgba(198, 78, 78, 0.10);
+  --presentation-callout-border: #c64e4e;
+  --presentation-callout-bg: rgba(198, 78, 78, 0.10);
 }
 
 .obsidian-slidev-callout--question,
 .obsidian-slidev-callout--help,
 .obsidian-slidev-callout--faq {
-  --obsidian-callout-border: #6f63a6;
-  --obsidian-callout-bg: rgba(111, 99, 166, 0.10);
+  --presentation-callout-border: #6f63a6;
+  --presentation-callout-bg: rgba(111, 99, 166, 0.10);
 }
 
 .obsidian-slidev-callout--quote,
 .obsidian-slidev-callout--cite {
-  --obsidian-callout-border: #7a7466;
-  --obsidian-callout-bg: rgba(122, 116, 102, 0.10);
+  --presentation-callout-border: #7a7466;
+  --presentation-callout-bg: rgba(122, 116, 102, 0.10);
 }
 
 .obsidian-slidev-media {
@@ -138,11 +138,11 @@
 .obsidian-slidev-media img,
 .obsidian-slidev-media video {
   width: auto;
-  max-height: var(--obsidian-media-max-height);
+  max-height: var(--presentation-media-max-height);
   margin-inline: auto;
-  border: 1px solid color-mix(in srgb, var(--obsidian-border) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--presentation-border) 72%, transparent);
   border-radius: 13px;
-  background: color-mix(in srgb, var(--obsidian-bg-elevated) 84%, transparent);
+  background: color-mix(in srgb, var(--presentation-bg-elevated) 84%, transparent);
   box-shadow: 0 12px 34px rgba(30, 36, 40, 0.08);
   object-fit: contain;
 }
@@ -156,7 +156,7 @@
 .obsidian-slidev-media--video video,
 .obsidian-slidev-media--youtube iframe {
   width: 100%;
-  border: 1px solid color-mix(in srgb, var(--obsidian-border) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--presentation-border) 78%, transparent);
   border-radius: 13px;
   background: #000;
   box-shadow: 0 12px 34px rgba(30, 36, 40, 0.08);
@@ -172,11 +172,11 @@
 }
 
 .obsidian-slidev-media__caption {
-  color: var(--obsidian-text-muted);
+  color: var(--presentation-text-muted);
   font-size: 0.76rem;
-  font-style: var(--obsidian-caption-font-style);
+  font-style: var(--presentation-caption-font-style);
   font-weight: 520;
-  letter-spacing: var(--obsidian-caption-letter-spacing);
+  letter-spacing: var(--presentation-caption-letter-spacing);
   line-height: 1.4;
   text-align: center;
 }

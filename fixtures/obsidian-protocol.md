@@ -19,7 +19,7 @@ authors:
     institution: Slidev fixture
     email: contract@example.com
 themeConfig:
-  obsidian:
+  presentation:
     preset: scholarly
     density: normal
     chrome: auto
@@ -170,7 +170,7 @@ subtitle: Lists, tables, inline code, code blocks
 - The clean preset should handle ordinary note-like bullet density.
 - The theme owns spacing, typography, and slide chrome.
 - The plugin only emits markdown, semantic HTML, and Slidev-native components.
-- Inline code such as `obsidian-slidev`, `themeConfig.obsidian`, and `frontmatter.footer` should remain readable.
+- Inline code such as `obsidian-slidev`, `themeConfig.presentation`, and `frontmatter.footer` should remain readable.
 - Tables and code should stay legible at normal presentation scale.
 
 ```ts
@@ -202,8 +202,8 @@ Clean and scholarly presets should share markup and diverge only in presentation
 
 ---
 title: Scholarly Mode
-obsidianPreset: scholarly
-obsidianDensity: compact
+presentationPreset: scholarly
+presentationDensity: compact
 footer: Scholarly compact preset
 ---
 
@@ -220,7 +220,7 @@ The scholarly preset changes visual tokens and layout mood, but keeps the genera
 
 ---
 title: Clean Preset Contrast
-obsidianPreset: clean
+presentationPreset: clean
 footerAuthors: false
 ---
 
@@ -244,7 +244,7 @@ Clean is the default note-to-presentation mode. It should feel light, readable, 
 
 ---
 title: Scholarly Preset Contrast
-obsidianPreset: scholarly
+presentationPreset: scholarly
 ---
 
 # Scholarly Preset Contrast
@@ -268,7 +268,7 @@ Scholarly uses the same generated markup, but shifts toward formal reporting: fi
 ---
 title: Optional Header
 subtitle: Explicit opt-in
-obsidianHeader: true
+presentationHeader: true
 ---
 
 # Optional Header
@@ -290,7 +290,7 @@ Statement, quote, figure, references, center, and default content layouts.
 ---
 layout: statement
 title: Statement Layout
-obsidianPreset: clean
+presentationPreset: clean
 ---
 
 # Theme Owns Presentation
@@ -302,7 +302,7 @@ layout: quote
 title: Quote Layout
 author: Obsidian Slidev protocol
 source: Theme contract fixture
-obsidianPreset: scholarly
+presentationPreset: scholarly
 ---
 
 Generated Obsidian semantics should remain simple enough to inspect, but expressive enough for a theme to elevate across multiple lines without collapsing the quote rhythm.
@@ -310,7 +310,7 @@ Generated Obsidian semantics should remain simple enough to inspect, but express
 ---
 layout: figure
 title: Figure Layout
-obsidianPreset: clean
+presentationPreset: clean
 ---
 
 <figure class="obsidian-slidev-media obsidian-slidev-media--image">
@@ -321,7 +321,7 @@ obsidianPreset: clean
 ---
 layout: references
 title: References Layout
-obsidianPreset: scholarly
+presentationPreset: scholarly
 ---
 
 # References

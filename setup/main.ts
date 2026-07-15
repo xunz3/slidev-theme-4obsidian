@@ -2,50 +2,50 @@ import { configs } from '@slidev/client'
 import { defineAppSetup } from '@slidev/types'
 import { watch } from 'vue'
 
-type ObsidianPreset = 'clean' | 'scholarly'
-type ObsidianDensity = 'compact' | 'normal' | 'relaxed'
-type ObsidianChrome = 'auto' | 'on' | 'off'
+type PresentationPreset = 'clean' | 'scholarly' | 'ucas'
+type PresentationDensity = 'compact' | 'normal' | 'relaxed'
+type PresentationChrome = 'auto' | 'on' | 'off'
 
-type ObsidianThemeConfig = {
-  preset?: ObsidianPreset
+type PresentationThemeConfig = {
+  preset?: PresentationPreset
   accent?: string
-  density?: ObsidianDensity
-  chrome?: ObsidianChrome
+  density?: PresentationDensity
+  chrome?: PresentationChrome
   header?: boolean
   footerAuthors?: boolean
   pageNumber?: boolean
 }
 
-const isPreset = (value: unknown): value is ObsidianPreset => {
-  return value === 'clean' || value === 'scholarly'
+const isPreset = (value: unknown): value is PresentationPreset => {
+  return value === 'clean' || value === 'scholarly' || value === 'ucas'
 }
 
-const isDensity = (value: unknown): value is ObsidianDensity => {
+const isDensity = (value: unknown): value is PresentationDensity => {
   return value === 'compact' || value === 'normal' || value === 'relaxed'
 }
 
-const isChrome = (value: unknown): value is ObsidianChrome => {
+const isChrome = (value: unknown): value is PresentationChrome => {
   return value === 'auto' || value === 'on' || value === 'off'
 }
 
 const applyConfig = () => {
   if (typeof document === 'undefined') return
 
-  const config = (((configs as any)?.themeConfig?.obsidian ?? {}) as ObsidianThemeConfig)
+  const config = (((configs as any)?.themeConfig?.presentation ?? {}) as PresentationThemeConfig)
   const root = document.documentElement
   const preset = isPreset(config.preset) ? config.preset : 'clean'
   const density = isDensity(config.density) ? config.density : 'normal'
   const chrome = isChrome(config.chrome) ? config.chrome : 'auto'
 
-  root.dataset.obsidianPreset = preset
-  root.dataset.obsidianDensity = density
-  root.dataset.obsidianChrome = chrome
+  root.dataset.presentationPreset = preset
+  root.dataset.presentationDensity = density
+  root.dataset.presentationChrome = chrome
 
   if (typeof config.accent === 'string' && config.accent.trim()) {
-    root.style.setProperty('--obsidian-accent', config.accent.trim())
+    root.style.setProperty('--presentation-accent', config.accent.trim())
     root.style.setProperty('--slidev-theme-primary', config.accent.trim())
   } else {
-    root.style.removeProperty('--obsidian-accent')
+    root.style.removeProperty('--presentation-accent')
     root.style.removeProperty('--slidev-theme-primary')
   }
 }
@@ -54,7 +54,7 @@ export default defineAppSetup(() => {
   applyConfig()
 
   watch(
-    () => (configs as any)?.themeConfig?.obsidian,
+    () => (configs as any)?.themeConfig?.presentation,
     () => applyConfig(),
     { deep: true },
   )

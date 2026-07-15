@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ObsidianFrame from '../components/ObsidianFrame.vue'
+import SlideFrame from '../components/SlideFrame.vue'
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 import { formatAuthorDetails, normalizeAuthors } from '../setup/authors'
@@ -45,26 +45,26 @@ const style = computed(() => {
 
 <template>
   <div class="slidev-layout cover" :style="style">
-    <ObsidianFrame variant="cover" :chrome="chrome">
-      <div class="obsidian-cover" :class="{ 'obsidian-cover--has-title': title }">
-        <div class="obsidian-cover__main">
-          <h1 v-if="title" class="obsidian-cover__title">{{ title }}</h1>
-          <div v-if="subtitle" class="obsidian-cover__subtitle">{{ subtitle }}</div>
+    <SlideFrame variant="cover" :chrome="chrome">
+      <div class="slide-cover" :class="{ 'slide-cover--has-title': title }">
+        <div class="slide-cover__main">
+          <h1 v-if="title" class="slide-cover__title">{{ title }}</h1>
+          <div v-if="subtitle" class="slide-cover__subtitle">{{ subtitle }}</div>
 
-          <div class="obsidian-cover__body">
+          <div class="slide-cover__body">
             <slot />
           </div>
         </div>
 
-        <div v-if="authors.length > 0" class="obsidian-cover__authors">
-          <div v-for="(author, index) in authors" :key="`${author.name}-${author.email ?? index}`" class="obsidian-cover__author">
-            <div class="obsidian-cover__author-name">{{ author.name }}</div>
-            <div v-if="formatAuthorDetails(author)" class="obsidian-cover__author-details">
+        <div v-if="authors.length > 0" class="slide-cover__authors">
+          <div v-for="(author, index) in authors" :key="`${author.name}-${author.email ?? index}`" class="slide-cover__author">
+            <div class="slide-cover__author-name">{{ author.name }}</div>
+            <div v-if="formatAuthorDetails(author)" class="slide-cover__author-details">
               {{ formatAuthorDetails(author) }}
             </div>
           </div>
         </div>
       </div>
-    </ObsidianFrame>
+    </SlideFrame>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import ObsidianFrame from '../components/ObsidianFrame.vue'
+import SlideFrame from '../components/SlideFrame.vue'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
 type TocSectionInput = string | { title?: string; subtitle?: string; slideNo?: number }
@@ -78,26 +78,26 @@ const goToSection = (slideNo?: number) => {
 
 <template>
   <div class="slidev-layout toc">
-    <ObsidianFrame variant="toc" :title="typeof title === 'string' ? title : undefined" :subtitle="subtitle" :chrome="chrome">
-      <div class="obsidian-layout-toc">
+    <SlideFrame variant="toc" :title="typeof title === 'string' ? title : undefined" :subtitle="subtitle" :chrome="chrome">
+      <div class="slide-layout-toc">
         <h1 v-if="tocTitle">{{ tocTitle }}</h1>
 
-        <div class="obsidian-layout-toc__list" role="list">
-          <div v-for="section in tocSections" :key="`${section.index}-${section.title}`" class="obsidian-layout-toc__item" role="listitem">
-            <button class="obsidian-layout-toc__button" type="button" @click="goToSection(section.slideNo)">
-              <span v-if="showNumbers" class="obsidian-layout-toc__number">{{ section.index }}</span>
-              <span class="obsidian-layout-toc__text">
-                <span class="obsidian-layout-toc__title">{{ section.title }}</span>
-                <span v-if="section.subtitle" class="obsidian-layout-toc__subtitle">{{ section.subtitle }}</span>
+        <div class="slide-layout-toc__list" role="list">
+          <div v-for="section in tocSections" :key="`${section.index}-${section.title}`" class="slide-layout-toc__item" role="listitem">
+            <button class="slide-layout-toc__button" type="button" @click="goToSection(section.slideNo)">
+              <span v-if="showNumbers" class="slide-layout-toc__number">{{ section.index }}</span>
+              <span class="slide-layout-toc__text">
+                <span class="slide-layout-toc__title">{{ section.title }}</span>
+                <span v-if="section.subtitle" class="slide-layout-toc__subtitle">{{ section.subtitle }}</span>
               </span>
             </button>
           </div>
         </div>
 
-        <div class="obsidian-layout-toc__extra">
+        <div class="slide-layout-toc__extra">
           <slot />
         </div>
       </div>
-    </ObsidianFrame>
+    </SlideFrame>
   </div>
 </template>

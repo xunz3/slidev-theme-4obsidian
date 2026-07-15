@@ -2,6 +2,8 @@ node_modules
 .DS_Store
 dist
 dist-fixture
+dist-ucas
+fixtures/dist-ucas
 *.local
 .vite-inspect
 .remote-assets

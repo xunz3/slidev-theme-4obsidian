@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ObsidianFrame from '../components/ObsidianFrame.vue'
+import SlideFrame from '../components/SlideFrame.vue'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
 
@@ -17,19 +17,19 @@ withDefaults(defineProps<{
 
 <template>
   <div class="slidev-layout two-cols">
-    <ObsidianFrame variant="two-cols" :title="title" :subtitle="subtitle" :chrome="chrome">
+    <SlideFrame variant="two-cols" :title="title" :subtitle="subtitle" :chrome="chrome">
       <div
-        class="obsidian-layout-two-cols"
-        :class="{ 'obsidian-layout-two-cols--reverse': reverse }"
-        :style="{ '--obsidian-two-cols-gap': gap }"
+        class="slide-layout-two-cols"
+        :class="{ 'slide-layout-two-cols--reverse': reverse }"
+        :style="{ '--presentation-two-cols-gap': gap }"
       >
-        <div class="obsidian-layout-two-cols__pane">
+        <div class="slide-layout-two-cols__pane">
           <slot />
         </div>
-        <div class="obsidian-layout-two-cols__pane">
+        <div class="slide-layout-two-cols__pane">
           <slot name="right" />
         </div>
       </div>
-    </ObsidianFrame>
+    </SlideFrame>
   </div>
 </template>
