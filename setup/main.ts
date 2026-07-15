@@ -2,7 +2,7 @@ import { configs } from '@slidev/client'
 import { defineAppSetup } from '@slidev/types'
 import { watch } from 'vue'
 
-type PresentationPreset = 'clean' | 'scholarly' | 'ucas'
+type PresentationPreset = 'clean' | 'scholarly' | 'ucas' | 'ict'
 type PresentationDensity = 'compact' | 'normal' | 'relaxed'
 type PresentationChrome = 'auto' | 'on' | 'off'
 
@@ -17,7 +17,7 @@ type PresentationThemeConfig = {
 }
 
 const isPreset = (value: unknown): value is PresentationPreset => {
-  return value === 'clean' || value === 'scholarly' || value === 'ucas'
+  return value === 'clean' || value === 'scholarly' || value === 'ucas' || value === 'ict'
 }
 
 const isDensity = (value: unknown): value is PresentationDensity => {

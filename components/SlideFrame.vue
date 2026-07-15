@@ -7,9 +7,11 @@ import ucasEmblemWhite from '../assets/UCAS/emblem-white.png'
 import ucasWordmark from '../assets/UCAS/emblem-name-bilingual-hz.svg'
 import ucasWordmarkWhite from '../assets/UCAS/emblem-name-bilingual-hz-white.png'
 import ucasVerticalWordmark from '../assets/UCAS/emblem-name-bilingual-vt-white.png'
+import ictEmblem from '../assets/ICT/emblem.svg'
+import ictWordmark from '../assets/ICT/emblem-name-bilingual-stacked.svg'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
-type Preset = 'clean' | 'scholarly' | 'ucas'
+type Preset = 'clean' | 'scholarly' | 'ucas' | 'ict'
 type Density = 'compact' | 'normal' | 'relaxed'
 type FrameStyle = Record<string, string>
 
@@ -38,7 +40,7 @@ const normalizeChrome = (value: unknown): ChromeSetting | null => {
 }
 
 const normalizePreset = (value: unknown): Preset => {
-  if (value === 'scholarly' || value === 'ucas') return value
+  if (value === 'scholarly' || value === 'ucas' || value === 'ict') return value
   return 'clean'
 }
 
@@ -150,6 +152,28 @@ const footerMiddle = computed(() => {
     </aside>
 
     <img
+      v-if="resolvedPreset === 'ict' && variant === 'cover'"
+      class="slide-frame__ict-lockup"
+      :src="ictWordmark"
+      alt="Institute of Computing Technology, Chinese Academy of Sciences"
+    />
+
+    <img
+      v-if="resolvedPreset === 'ict' && variant !== 'cover'"
+      class="slide-frame__ict-mark"
+      :src="ictEmblem"
+      alt="Institute of Computing Technology, Chinese Academy of Sciences"
+    />
+
+    <img
+      v-if="resolvedPreset === 'ict'"
+      class="slide-frame__ict-watermark"
+      :src="ictEmblem"
+      alt=""
+      aria-hidden="true"
+    />
+
+    <img
       v-if="resolvedPreset === 'ucas' && variant !== 'cover'"
       class="slide-frame__ucas-wordmark"
       :src="variant === 'section' ? ucasWordmarkWhite : ucasWordmark"
@@ -174,6 +198,12 @@ const footerMiddle = computed(() => {
         class="slide-frame__header-logo"
         :src="variant === 'section' ? ucasWordmarkWhite : ucasWordmark"
         alt="University of Chinese Academy of Sciences"
+      />
+      <img
+        v-else-if="resolvedPreset === 'ict'"
+        class="slide-frame__header-logo slide-frame__header-logo--ict"
+        :src="ictEmblem"
+        alt="Institute of Computing Technology, Chinese Academy of Sciences"
       />
       <div v-else class="slide-frame__header-mark">Slidev</div>
     </header>

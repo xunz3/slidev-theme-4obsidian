@@ -4,6 +4,8 @@ dist
 dist-fixture
 dist-ucas
 fixtures/dist-ucas
+dist-ict
+fixtures/dist-ict
 *.local
 .vite-inspect
 .remote-assets

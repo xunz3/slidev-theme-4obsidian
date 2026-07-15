@@ -13,6 +13,7 @@
 		"slides"
 	],
 	"files": [
+		"assets/ICT",
 		"assets/UCAS",
 		"components",
 		"layouts",
@@ -31,7 +32,9 @@
 		"export": "slidev export example.md",
 		"screenshot": "slidev export example.md --format png",
 		"build:ucas": "slidev build fixtures/ucas-preset.md --out dist-ucas",
-		"screenshot:ucas": "slidev export fixtures/ucas-preset.md --format png --output dist-ucas/ucas-preset"
+		"screenshot:ucas": "slidev export fixtures/ucas-preset.md --format png --output dist-ucas/ucas-preset",
+		"build:ict": "slidev build fixtures/ict-preset.md --out dist-ict",
+		"screenshot:ict": "slidev export fixtures/ict-preset.md --format png --output dist-ict/ict-preset"
 	},
 	"dependencies": {
 		"@slidev/client": "^52.15.2",

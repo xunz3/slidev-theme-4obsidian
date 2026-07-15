@@ -91,7 +91,7 @@ Supported keys:
 
 | Key | Values | Default | Purpose |
 | --- | --- | --- | --- |
-| `preset` | `clean`, `scholarly`, `ucas` | `clean` | Selects the visual system without changing generated markup |
+| `preset` | `clean`, `scholarly`, `ucas`, `ict` | `clean` | Selects the visual system without changing generated markup |
 | `accent` | Any CSS color | theme default | Overrides the primary accent color |
 | `density` | `compact`, `normal`, `relaxed` | `normal` | Adjusts slide padding, spacing, and body scale |
 | `chrome` | `auto`, `on`, `off` | `auto` | Controls footer metadata chrome |
@@ -103,7 +103,7 @@ Per-slide overrides:
 
 | Frontmatter key | Values | Purpose |
 | --- | --- | --- |
-| `presentationPreset` | `clean`, `scholarly`, `ucas` | Override the preset for one slide |
+| `presentationPreset` | `clean`, `scholarly`, `ucas`, `ict` | Override the preset for one slide |
 | `presentationDensity` | `compact`, `normal`, `relaxed` | Override density for one slide |
 | `presentationChrome` | `auto`, `on`, `off` | Override slide chrome behavior |
 | `presentationHeader` | `true`, `false` | Force the optional header on or off for one slide |
@@ -190,10 +190,13 @@ Use `themeConfig.presentation.preset` to switch visual systems without changing 
 | `clean` | Default note-like presentation style |
 | `scholarly` | Formal report styling inspired by academic Slidev themes |
 | `ucas` | UCAS-branded courses, seminars, project reviews, and research talks |
+| `ict` | ICT-branded systems, architecture, AI, and computing research talks |
 
 `clean` is intentionally neutral, airy, and card-like for everyday vault notes. `scholarly` borrows academic conventions such as serif headings, stronger chrome, booktabs-like tables, flatter code blocks, tighter spacing, and italic figure captions.
 
-`ucas` is an independent visual direction based on the official UCAS blue and the bundled bilingual identity assets. Its cover uses a deep-blue-to-white gradient brand rail with the vertical UCAS lockup; later slides return to a clean, rail-free canvas with serif display titles, compact horizontal wordmarks, and subtle emblem watermarks. The preset supports the same layouts and generated Obsidian markup as the other presets, and it also works with ordinary Slidev Markdown.
+`ucas` is an independent research-oriented direction based on the official UCAS blue and the bundled bilingual identity assets. Its cover uses a deep-blue-to-white gradient brand rail with the vertical UCAS lockup; ordinary slides return to a cold-white, rail-free canvas with restrained serif display titles, booktabs-like tables, and a compact horizontal wordmark. Emblem watermarks are reserved for cover, section, statement, and center layouts so research content remains primary. The preset supports the same layouts and generated Obsidian markup as the other presets, and it also works with ordinary Slidev Markdown.
+
+`ict` is a separate computing-research visual system based on the official two-blue ICT orbital emblem and bilingual institute lockup. It combines a cool-white editorial canvas with muted navy brand fields, precise cyan accents, sans-serif display typography, restrained technical chrome, and dark code surfaces. Strong branding is concentrated on cover, section, and statement layouts; ordinary content slides remain quiet and projection-friendly.
 
 ## Typography
 
@@ -254,5 +257,7 @@ pnpm run build:fixture
 - `pnpm run dev:fixture` to start the protocol fixture preview
 - `pnpm run build:ucas` to build the UCAS preset showcase
 - `pnpm run screenshot:ucas` to render the UCAS showcase as PNG slides
+- `pnpm run build:ict` to build the ICT preset showcase
+- `pnpm run screenshot:ict` to render the ICT showcase as PNG slides
 - `pnpm run build` to verify the example can be built
 - `pnpm run build:fixture` to verify the plugin/theme protocol fixture can be built
