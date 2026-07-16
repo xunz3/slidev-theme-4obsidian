@@ -1,6 +1,6 @@
 .obsidian-slidev-link {
   color: var(--presentation-accent);
-  font-weight: 620;
+  font-weight: 600;
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--presentation-accent) 42%, transparent);
   transition:
@@ -33,7 +33,7 @@
 
 .obsidian-slidev-warning strong {
   color: inherit;
-  font-weight: 730;
+  font-weight: 700;
 }
 
 .obsidian-slidev-callout {
@@ -53,7 +53,7 @@
   margin-bottom: 0.42rem;
   color: var(--presentation-text);
   font-size: 0.94em;
-  font-weight: 720;
+  font-weight: 700;
   letter-spacing: 0.01em;
 }
 
@@ -173,9 +173,9 @@
 
 .obsidian-slidev-media__caption {
   color: var(--presentation-text-muted);
-  font-size: 0.76rem;
+  font-size: var(--presentation-caption-size);
   font-style: var(--presentation-caption-font-style);
-  font-weight: 520;
+  font-weight: 500;
   letter-spacing: var(--presentation-caption-letter-spacing);
   line-height: 1.4;
   text-align: center;

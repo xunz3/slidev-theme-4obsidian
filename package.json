@@ -22,7 +22,7 @@
 		"README.md"
 	],
 	"engines": {
-		"node": ">=20.12.0"
+		"node": ">=20.19.0"
 	},
 	"scripts": {
 		"build": "slidev build example.md",
@@ -31,6 +31,10 @@
 		"dev:fixture": "slidev fixtures/obsidian-protocol.md --open",
 		"export": "slidev export example.md",
 		"screenshot": "slidev export example.md --format png",
+		"build:clean": "slidev build fixtures/clean-preset.md --out dist-clean",
+		"screenshot:clean": "slidev export fixtures/clean-preset.md --format png --output dist-clean/clean-preset",
+		"build:scholarly": "slidev build fixtures/scholarly-preset.md --out dist-scholarly",
+		"screenshot:scholarly": "slidev export fixtures/scholarly-preset.md --format png --output dist-scholarly/scholarly-preset",
 		"build:ucas": "slidev build fixtures/ucas-preset.md --out dist-ucas",
 		"screenshot:ucas": "slidev export fixtures/ucas-preset.md --format png --output dist-ucas/ucas-preset",
 		"build:ict": "slidev build fixtures/ict-preset.md --out dist-ict",
@@ -54,7 +58,17 @@
 				"sans": "Source Sans 3, Noto Sans SC",
 				"serif": "Source Serif 4, Noto Serif SC",
 				"mono": "JetBrains Mono",
-				"weights": "400,500,600,700"
+				"webfonts": [
+					"Source Sans 3",
+					"Source Serif 4",
+					"JetBrains Mono"
+				],
+				"local": [
+					"Noto Sans SC",
+					"Noto Serif SC"
+				],
+				"weights": "400,500,600,700",
+				"italic": true
 			}
 		},
 		"themeConfig": {

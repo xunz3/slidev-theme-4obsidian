@@ -2,6 +2,11 @@ node_modules
 .DS_Store
 dist
 dist-fixture
+example-export
+dist-clean
+fixtures/dist-clean
+dist-scholarly
+fixtures/dist-scholarly
 dist-ucas
 fixtures/dist-ucas
 dist-ict

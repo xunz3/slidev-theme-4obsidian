@@ -162,7 +162,8 @@ const footerMiddle = computed(() => {
       v-if="resolvedPreset === 'ict' && variant !== 'cover'"
       class="slide-frame__ict-mark"
       :src="ictEmblem"
-      alt="Institute of Computing Technology, Chinese Academy of Sciences"
+      alt=""
+      aria-hidden="true"
     />
 
     <img
@@ -177,7 +178,8 @@ const footerMiddle = computed(() => {
       v-if="resolvedPreset === 'ucas' && variant !== 'cover'"
       class="slide-frame__ucas-wordmark"
       :src="variant === 'section' ? ucasWordmarkWhite : ucasWordmark"
-      alt="University of Chinese Academy of Sciences"
+      alt=""
+      aria-hidden="true"
     />
 
     <img
@@ -197,13 +199,15 @@ const footerMiddle = computed(() => {
         v-if="resolvedPreset === 'ucas'"
         class="slide-frame__header-logo"
         :src="variant === 'section' ? ucasWordmarkWhite : ucasWordmark"
-        alt="University of Chinese Academy of Sciences"
+        alt=""
+        aria-hidden="true"
       />
       <img
         v-else-if="resolvedPreset === 'ict'"
         class="slide-frame__header-logo slide-frame__header-logo--ict"
         :src="ictEmblem"
-        alt="Institute of Computing Technology, Chinese Academy of Sciences"
+        alt=""
+        aria-hidden="true"
       />
       <div v-else class="slide-frame__header-mark">Slidev</div>
     </header>

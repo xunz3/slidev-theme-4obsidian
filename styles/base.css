@@ -4,11 +4,18 @@
   padding: 0;
   color: var(--presentation-text);
   background: var(--presentation-bg);
-  font-family: var(--presentation-font-sans);
+  font-family: var(--presentation-font-body, var(--presentation-font-sans));
   font-size: var(--presentation-body-size);
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-optical-sizing: auto;
+  font-synthesis: none;
   line-height: var(--presentation-body-line-height);
   text-rendering: optimizeLegibility;
+}
+
+.slidev-layout ::selection {
+  color: var(--presentation-text);
+  background: color-mix(in srgb, var(--presentation-accent) 22%, transparent);
 }
 
 .slidev-layout h1,
@@ -17,11 +24,25 @@
 .slidev-layout h4 {
   margin: 0 0 0.55em;
   color: var(--presentation-text);
-  font-family: var(--presentation-font-serif);
+  font-family: var(--presentation-font-display, var(--presentation-font-serif));
   font-weight: var(--presentation-heading-weight);
   letter-spacing: var(--presentation-heading-letter-spacing);
   line-height: var(--presentation-heading-line-height);
   text-wrap: balance;
+}
+
+.slidev-layout :is(p, li, figcaption) {
+  text-wrap: pretty;
+}
+
+.slidev-layout:lang(zh) :is(h1, h2, h3, h4, figcaption, .slide-layout-quote__content),
+.slidev-layout :lang(zh):is(h1, h2, h3, h4, figcaption, .slide-layout-quote__content) {
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+.slidev-layout .slide-frame__content > :is(p, ul, ol, blockquote) {
+  max-width: var(--presentation-reading-width);
 }
 
 .slidev-layout h1 {
@@ -68,11 +89,19 @@
     text-decoration-color 160ms ease;
 }
 
+.slidev-layout a:focus-visible,
+.slidev-layout button:focus-visible {
+  border-radius: 0.18rem;
+  outline: 2px solid color-mix(in srgb, var(--presentation-accent) 72%, var(--presentation-text));
+  outline-offset: 0.2rem;
+}
+
 .slidev-layout table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 0.92em;
+  font-size: var(--presentation-table-size);
+  font-variant-numeric: tabular-nums;
 }
 
 .slidev-layout th,
@@ -118,7 +147,7 @@
   -webkit-box-decoration-break: clone;
   font-family: var(--presentation-font-mono);
   font-size: 0.88em;
-  font-weight: 560;
+  font-weight: 600;
   line-height: 1.28;
 }
 
@@ -147,7 +176,7 @@
 
 .slidev-layout .footnote-ref a {
   color: color-mix(in srgb, var(--presentation-accent) 78%, var(--presentation-text));
-  font-weight: 680;
+  font-weight: 700;
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--presentation-accent) 48%, transparent);
   text-underline-offset: 0.12em;
@@ -184,7 +213,7 @@
 .slidev-layout .footnotes {
   flex-shrink: 0;
   color: var(--presentation-text-muted);
-  font-size: 0.70rem;
+  font-size: var(--presentation-footnote-size);
   line-height: 1.30;
 }
 
@@ -215,7 +244,7 @@
 
 .slidev-layout strong {
   color: var(--presentation-text);
-  font-weight: 730;
+  font-weight: 700;
 }
 
 .slidev-layout mark {
@@ -223,4 +252,24 @@
   border-radius: 0.28em;
   color: var(--presentation-text);
   background: color-mix(in srgb, var(--presentation-accent) 24%, transparent);
+}
+
+.slidev-layout kbd {
+  padding: 0.08em 0.4em 0.14em;
+  border: 1px solid var(--presentation-border-strong);
+  border-radius: 0.28rem;
+  color: var(--presentation-text);
+  background: var(--presentation-bg-elevated);
+  box-shadow: 0 1px 0 var(--presentation-border-strong);
+  font-family: var(--presentation-font-mono);
+  font-size: 0.76em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slidev-layout *,
+  .slidev-layout *::before,
+  .slidev-layout *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

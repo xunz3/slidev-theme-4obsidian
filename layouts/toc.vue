@@ -84,13 +84,19 @@ const goToSection = (slideNo?: number) => {
 
         <div class="slide-layout-toc__list" role="list">
           <div v-for="section in tocSections" :key="`${section.index}-${section.title}`" class="slide-layout-toc__item" role="listitem">
-            <button class="slide-layout-toc__button" type="button" @click="goToSection(section.slideNo)">
+            <component
+              :is="section.slideNo ? 'button' : 'div'"
+              class="slide-layout-toc__button"
+              :class="{ 'slide-layout-toc__button--static': !section.slideNo }"
+              :type="section.slideNo ? 'button' : undefined"
+              @click="section.slideNo && goToSection(section.slideNo)"
+            >
               <span v-if="showNumbers" class="slide-layout-toc__number">{{ section.index }}</span>
               <span class="slide-layout-toc__text">
                 <span class="slide-layout-toc__title">{{ section.title }}</span>
                 <span v-if="section.subtitle" class="slide-layout-toc__subtitle">{{ section.subtitle }}</span>
               </span>
-            </button>
+            </component>
           </div>
         </div>
 

@@ -20,10 +20,10 @@ defineProps<{
         <div class="slide-layout-quote__content">
           <slot />
         </div>
-        <div v-if="author || source || cite" class="slide-layout-quote__meta">
-          <div v-if="author || cite" class="slide-layout-quote__author">{{ author ?? cite }}</div>
-          <div v-if="source" class="slide-layout-quote__source">{{ source }}</div>
-        </div>
+        <figcaption v-if="author || source || cite" class="slide-layout-quote__meta">
+          <cite v-if="author || cite" class="slide-layout-quote__author">{{ author ?? cite }}</cite>
+          <span v-if="source" class="slide-layout-quote__source">{{ source }}</span>
+        </figcaption>
       </figure>
     </SlideFrame>
   </div>
