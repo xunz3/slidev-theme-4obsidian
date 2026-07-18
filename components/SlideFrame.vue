@@ -11,7 +11,7 @@ import ictEmblem from '../assets/ICT/emblem.svg'
 import ictWordmark from '../assets/ICT/emblem-name-bilingual-stacked.svg'
 
 type ChromeSetting = 'auto' | 'on' | 'off'
-type Preset = 'clean' | 'scholarly' | 'ucas' | 'ict'
+type Preset = 'scholarly' | 'ucas' | 'ict'
 type Density = 'compact' | 'normal' | 'relaxed'
 type FrameStyle = Record<string, string>
 
@@ -41,7 +41,7 @@ const normalizeChrome = (value: unknown): ChromeSetting | null => {
 
 const normalizePreset = (value: unknown): Preset => {
   if (value === 'scholarly' || value === 'ucas' || value === 'ict') return value
-  return 'clean'
+  return 'scholarly'
 }
 
 const normalizeDensity = (value: unknown): Density => {

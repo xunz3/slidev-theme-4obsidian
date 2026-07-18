@@ -1,31 +1,27 @@
 # Preset Design QA
 
-Date: 2026-07-15
+Date: 2026-07-18
 
-This pass treats the four presets as one research-presentation system with four distinct voices:
+This pass treats the three presets as one research-presentation system with three distinct voices. `scholarly` is the default:
 
-- `clean`: editorial minimal, sans display, warm paper, restrained sage.
 - `scholarly`: paper-inspired, serif display, booktabs, ink-blue section fields.
 - `ucas`: humanist institutional, serif display, official UCAS identity assets.
 - `ict`: technical systems, sans display, mono labels, navy/cyan signature surfaces.
 
 ## Visual evidence
 
-- Light, normal-density contact sheets: `clean-contact-sheet.png`, `scholarly-contact-sheet.png`, `ucas-contact-sheet.png`, and `ict-contact-sheet.png`.
-- Representative dark-mode matrix: `presets-dark-contact-sheet.png`.
-- Source decks: `fixtures/clean-preset.md`, `fixtures/scholarly-preset.md`, `fixtures/ucas-preset.md`, and `fixtures/ict-preset.md`.
+- Light, normal-density contact sheets: `scholarly-contact-sheet.png`, `ucas-contact-sheet.png`, and `ict-contact-sheet.png`.
+- Source decks: `fixtures/scholarly-preset.md`, `fixtures/ucas-preset.md`, and `fixtures/ict-preset.md`.
 - Export viewport: 1960 × 1104, 16:9.
 
-The light sheets cover cover, default, TOC where available, section, two-column evidence, code/callout, quote, statement, references, and center layouts. The dark matrix compares cover, section, and statement layouts for all four presets at the same viewport.
+The light sheets cover cover, default, TOC where available, section, two-column evidence, code/callout, quote, statement, references, and center layouts.
 
 ## Checks completed
 
-- `pnpm run build:clean`
 - `pnpm run build:scholarly`
 - `pnpm run build:ucas`
 - `pnpm run build:ict`
-- Light PNG exports for all four preset fixtures.
-- Representative dark PNG exports for all four presets.
+- Light PNG exports for all three preset fixtures.
 - Font requests contain only Source Sans 3, Source Serif 4, and JetBrains Mono, with real roman and italic faces at 400/500/600/700.
 - CSS font weights are limited to the loaded 400/500/600/700 set.
 - Dark section surfaces use dedicated `section` / `on-section` colors instead of a bright accent as a background.

@@ -20,7 +20,6 @@ authors:
     email: contract@example.com
 themeConfig:
   presentation:
-    preset: scholarly
     density: normal
     chrome: auto
     header: false
@@ -89,7 +88,7 @@ The plugin converts Obsidian callouts into stable semantic blocks.
 <div class="obsidian-slidev-callout obsidian-slidev-callout--warning" data-callout="warning">
   <div class="obsidian-slidev-callout__title">Warning callout</div>
   <div class="obsidian-slidev-callout__content">
-    <p>Warnings need to stay readable in both clean and scholarly presets.</p>
+    <p>Warnings need to stay readable in every supported preset.</p>
   </div>
 </div>
 
@@ -167,7 +166,7 @@ subtitle: Lists, tables, inline code, code blocks
 
 # Long Content
 
-- The clean preset should handle ordinary note-like bullet density.
+- The default scholarly preset should handle ordinary note-like bullet density.
 - The theme owns spacing, typography, and slide chrome.
 - The plugin only emits markdown, semantic HTML, and Slidev-native components.
 - Inline code such as `obsidian-slidev`, `themeConfig.presentation`, and `frontmatter.footer` should remain readable.
@@ -192,24 +191,23 @@ Footnote references should remain readable inside ordinary slides.[^protocol-foo
 
 ---
 layout: section
-title: Preset Contrast
-subtitle: Same protocol, different visual systems
+title: Preset Overrides
+subtitle: Scholarly by default, branded when requested
 ---
 
-# Preset Contrast
+# Preset Overrides
 
-Clean and scholarly presets should share markup and diverge only in presentation.
+Scholarly is the default; UCAS and ICT remain opt-in visual systems over the same markup.
 
 ---
-title: Scholarly Mode
-presentationPreset: scholarly
+title: Default Scholarly Mode
 presentationDensity: compact
 footer: Scholarly compact preset
 ---
 
-# Scholarly Mode Uses The Same Protocol
+# Default Scholarly Mode
 
-The scholarly preset changes visual tokens and layout mood, but keeps the generated markup contract identical.
+With no preset override, the scholarly visual system keeps the generated markup contract intact.
 
 <div class="obsidian-slidev-callout obsidian-slidev-callout--quote" data-callout="quote">
   <div class="obsidian-slidev-callout__title">Protocol rule</div>
@@ -219,51 +217,51 @@ The scholarly preset changes visual tokens and layout mood, but keeps the genera
 </div>
 
 ---
-title: Clean Preset Contrast
-presentationPreset: clean
+title: UCAS Preset Contrast
+presentationPreset: ucas
 footerAuthors: false
 ---
 
-# Clean Preset Contrast
+# UCAS Preset Contrast
 
-Clean is the default note-to-presentation mode. It should feel light, readable, and close to a polished Obsidian note.
+UCAS applies institutional identity while preserving the same generated content structure.
 
 <div class="obsidian-slidev-callout obsidian-slidev-callout--note" data-callout="note">
   <div class="obsidian-slidev-callout__title">Working note</div>
   <div class="obsidian-slidev-callout__content">
-    <p>Use this mode for project updates, planning decks, and ordinary vault notes that become slides.</p>
+    <p>Use this mode for UCAS courses, seminars, project reviews, and research talks.</p>
   </div>
 </div>
 
-| Area | Clean expectation |
+| Area | UCAS expectation |
 | --- | --- |
-| Headings | Cool-neutral, expressive, not overly formal |
-| Tables | Soft structure with subtle row guidance |
-| Code | Card-like block with gentle elevation |
-| Callouts | Note-like surfaces with rounded edges |
+| Headings | Restrained serif with institutional blue |
+| Tables | Research-oriented structure with clear rules |
+| Code | Quiet technical block |
+| Callouts | Branded but content-first annotation |
 
 ---
-title: Scholarly Preset Contrast
-presentationPreset: scholarly
+title: ICT Preset Contrast
+presentationPreset: ict
 ---
 
-# Scholarly Preset Contrast
+# ICT Preset Contrast
 
-Scholarly uses the same generated markup, but shifts toward formal reporting: firmer heading rules, booktabs-like tables, quieter callouts, and italic captions.
+ICT uses the same generated markup, but shifts toward a contemporary technical system with navy fields, cyan accents, and mono labels.
 
 <div class="obsidian-slidev-callout obsidian-slidev-callout--note" data-callout="note">
   <div class="obsidian-slidev-callout__title">Research note</div>
   <div class="obsidian-slidev-callout__content">
-    <p>Use this mode for lab meetings, paper reading, formal progress reports, and thesis-style decks.</p>
+    <p>Use this mode for systems, architecture, AI, and computing research talks.</p>
   </div>
 </div>
 
-| Area | Scholarly expectation |
+| Area | ICT expectation |
 | --- | --- |
-| Headings | Serif, restrained, report-like |
-| Tables | Three-line academic table style |
-| Code | Flat, low-shadow technical block |
-| Callouts | More formal annotation blocks |
+| Headings | Precise sans-serif hierarchy |
+| Tables | Technical structure with strong labels |
+| Code | Dark, high-contrast technical block |
+| Callouts | Compact systems-oriented annotation |
 
 ---
 title: Optional Header
@@ -290,7 +288,6 @@ Statement, quote, figure, references, center, and default content layouts.
 ---
 layout: statement
 title: Statement Layout
-presentationPreset: clean
 ---
 
 # Theme Owns Presentation
@@ -310,7 +307,6 @@ Generated Obsidian semantics should remain simple enough to inspect, but express
 ---
 layout: figure
 title: Figure Layout
-presentationPreset: clean
 ---
 
 <figure class="obsidian-slidev-media obsidian-slidev-media--image">
@@ -328,7 +324,7 @@ presentationPreset: scholarly
 
 1. Obsidian vault notes and generated semantic HTML.
 2. Slidev built-in components for media and presentation runtime.
-3. Theme-owned visual presets for clean and scholarly decks.
+3. Theme-owned visual presets for scholarly, UCAS, and ICT decks.
 
 ---
 layout: section

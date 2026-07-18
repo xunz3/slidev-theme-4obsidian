@@ -23,7 +23,6 @@ authors:
     email: jane@example.com
 themeConfig:
   presentation:
-    preset: clean
     density: normal
     chrome: auto
     header: false
@@ -78,7 +77,7 @@ authors:
     email: jane@example.com
 themeConfig:
   presentation:
-    preset: clean
+    preset: scholarly
     accent: "#345f8f"
     density: normal
     chrome: auto
@@ -91,7 +90,7 @@ Supported keys:
 
 | Key | Values | Default | Purpose |
 | --- | --- | --- | --- |
-| `preset` | `clean`, `scholarly`, `ucas`, `ict` | `clean` | Selects the visual system without changing generated markup |
+| `preset` | `scholarly`, `ucas`, `ict` | `scholarly` | Selects the visual system without changing generated markup |
 | `accent` | Any CSS color | theme default | Overrides the primary accent color |
 | `density` | `compact`, `normal`, `relaxed` | `normal` | Adjusts slide padding, spacing, and body scale |
 | `chrome` | `auto`, `on`, `off` | `auto` | Controls footer metadata chrome |
@@ -103,7 +102,7 @@ Per-slide overrides:
 
 | Frontmatter key | Values | Purpose |
 | --- | --- | --- |
-| `presentationPreset` | `clean`, `scholarly`, `ucas`, `ict` | Override the preset for one slide |
+| `presentationPreset` | `scholarly`, `ucas`, `ict` | Override the preset for one slide |
 | `presentationDensity` | `compact`, `normal`, `relaxed` | Override density for one slide |
 | `presentationChrome` | `auto`, `on`, `off` | Override slide chrome behavior |
 | `presentationHeader` | `true`, `false` | Force the optional header on or off for one slide |
@@ -194,14 +193,11 @@ Use `themeConfig.presentation.preset` to switch visual systems without changing 
 
 | Preset | Use case |
 | --- | --- |
-| `clean` | Editorial-minimal research sharing, project reviews, and group meetings |
 | `scholarly` | Paper talks, methods reports, reading groups, and thesis defenses |
 | `ucas` | UCAS-branded courses, seminars, project reviews, and research talks |
 | `ict` | ICT-branded systems, architecture, AI, and computing research talks |
 
-`clean` is a warm editorial-minimal system: sans-serif display type, generous whitespace, restrained sage accents, and serif reserved for quotations. Cards and elevation are limited to components that need containment, so a deck reads like a composed research briefing rather than a web dashboard.
-
-`scholarly` is a paper-inspired but projection-aware system. Serif display type, booktabs-like tables, flat code and callout surfaces, italic captions, and an ink-blue section field create academic formality without reproducing the density of a printed article.
+`scholarly` is the default preset. It is a paper-inspired but projection-aware system: serif display type, booktabs-like tables, flat code and callout surfaces, italic captions, and an ink-blue section field create academic formality without reproducing the density of a printed article.
 
 `ucas` is an independent research-oriented direction based on the official UCAS blue and the bundled bilingual identity assets. Its cover uses a deep-blue-to-white gradient brand rail with the vertical UCAS lockup; ordinary slides return to a cold-white, rail-free canvas with restrained serif display titles, booktabs-like tables, and a compact horizontal wordmark. Emblem watermarks are reserved for cover, section, statement, and center layouts so research content remains primary. The preset supports the same layouts and generated Obsidian markup as the other presets, and it also works with ordinary Slidev Markdown.
 
@@ -215,7 +211,6 @@ All presets share the same three bilingual families, but map them to different r
 
 | Preset | Display | Body | Quote | Labels / code |
 | --- | --- | --- | --- | --- |
-| `clean` | Source Sans 3 / Noto Sans SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | Source Sans 3 / JetBrains Mono |
 | `scholarly` | Source Serif 4 / Noto Serif SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | Source Sans 3 / JetBrains Mono |
 | `ucas` | Source Serif 4 / Noto Serif SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | Source Sans 3 / JetBrains Mono |
 | `ict` | Source Sans 3 / Noto Sans SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | JetBrains Mono |
@@ -252,8 +247,8 @@ It covers:
 - Generated image, video, audio, and YouTube media figures
 - Obsidian links and warning blocks
 - Long lists, tables, inline code, code blocks, and footnotes
-- Clean and scholarly presets on the same generated protocol
-- Clean/scholarly contrast slides with identical content structure
+- Scholarly default behavior plus UCAS and ICT overrides on the same generated protocol
+- Preset contrast slides with identical content structure
 - Section-driven deck structure with TOC
 - Preset-specific statement, quote, figure, references, and center layouts
 
@@ -271,7 +266,6 @@ The latest light/dark visual review is recorded in [`qa/preset-design-qa.md`](qa
 - `pnpm install`
 - `pnpm run dev` to start theme preview of `example.md`
 - `pnpm run dev:fixture` to start the protocol fixture preview
-- `pnpm run build:clean` / `pnpm run screenshot:clean` for the Clean research showcase
 - `pnpm run build:scholarly` / `pnpm run screenshot:scholarly` for the Scholarly research showcase
 - `pnpm run build:ucas` to build the UCAS preset showcase
 - `pnpm run screenshot:ucas` to render the UCAS showcase as PNG slides

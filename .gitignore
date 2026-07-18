@@ -3,8 +3,6 @@ node_modules
 dist
 dist-fixture
 example-export
-dist-clean
-fixtures/dist-clean
 dist-scholarly
 fixtures/dist-scholarly
 dist-ucas

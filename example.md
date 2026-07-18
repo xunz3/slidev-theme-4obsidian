@@ -13,7 +13,6 @@ authors:
     email: theme@example.com
 themeConfig:
   presentation:
-    preset: clean
     density: normal
     chrome: auto
     header: false
@@ -76,13 +75,13 @@ layout: section
 The same markup can switch visual systems through `themeConfig.presentation.preset`.
 
 ---
-title: Scholarly preset
-presentationPreset: scholarly
+title: UCAS preset
+presentationPreset: ucas
 ---
 
-# Scholarly Is a Preset
+# UCAS Is an Override
 
-It is not the whole theme. It only changes the chrome and typography tokens while keeping the same Obsidian integration contract.
+Scholarly is the default visual system. UCAS can be selected for institutional decks without changing the Obsidian integration contract.
 
 <div class="obsidian-slidev-warning">
   <strong>Slidev warning:</strong> unresolved links and missing assets stay visible instead of silently disappearing.
@@ -99,4 +98,4 @@ layout: center
 
 # Next
 
-Use `preset: clean` for note-like decks and `preset: scholarly` for formal reports.
+Use the default scholarly preset for research reports, or select `ucas` and `ict` for institutional decks.

@@ -73,11 +73,22 @@
 
 .slidev-layout ul,
 .slidev-layout ol {
-  padding-left: 1.35em;
+  padding-left: 1.3em;
 }
 
 .slidev-layout li + li {
   margin-top: var(--presentation-list-spacing);
+}
+
+.slidev-layout li::marker {
+  color: color-mix(in srgb, var(--presentation-accent) 68%, var(--presentation-text-muted));
+  font-weight: 600;
+}
+
+.slidev-layout li > ul,
+.slidev-layout li > ol {
+  margin-top: calc(var(--presentation-list-spacing) * 0.8);
+  margin-bottom: 0;
 }
 
 .slidev-layout a {
@@ -152,7 +163,7 @@
 }
 
 .slidev-layout blockquote {
-  padding: 0.5rem 0 0.5rem 1rem;
+  padding: 0.55rem 0 0.55rem 1.2rem;
   border-left: 2px solid var(--presentation-blockquote-border);
   color: var(--presentation-text-muted);
   background: var(--presentation-blockquote-bg);
