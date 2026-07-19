@@ -47,7 +47,7 @@ This deck is intentionally organized as `section -> slides`, matching how a real
 ---
 layout: toc
 title: Outline
-subtitle: Sections extracted from `layout: section`
+subtitle: "Sections extracted from `layout: section`"
 ---
 
 The TOC layout is generated from section divider slides, so the fixture follows the same structure expected from real decks.
@@ -166,7 +166,7 @@ subtitle: Lists, tables, inline code, code blocks
 
 # Long Content
 
-- The default scholarly preset should handle ordinary note-like bullet density.
+- The default preset should handle ordinary note-like bullet density.
 - The theme owns spacing, typography, and slide chrome.
 - The plugin only emits markdown, semantic HTML, and Slidev-native components.
 - Inline code such as `obsidian-slidev`, `themeConfig.presentation`, and `frontmatter.footer` should remain readable.
@@ -192,22 +192,22 @@ Footnote references should remain readable inside ordinary slides.[^protocol-foo
 ---
 layout: section
 title: Preset Overrides
-subtitle: Scholarly by default, branded when requested
+subtitle: Default by default, branded when requested
 ---
 
 # Preset Overrides
 
-Scholarly is the default; UCAS and ICT remain opt-in visual systems over the same markup.
+The default preset is selected automatically; UCAS and ICT remain opt-in visual systems over the same markup.
 
 ---
-title: Default Scholarly Mode
+title: Default Preset
 presentationDensity: compact
-footer: Scholarly compact preset
+footer: Default compact preset
 ---
 
-# Default Scholarly Mode
+# Default Preset
 
-With no preset override, the scholarly visual system keeps the generated markup contract intact.
+With no preset override, the default visual system keeps the generated markup contract intact.
 
 <div class="obsidian-slidev-callout obsidian-slidev-callout--quote" data-callout="quote">
   <div class="obsidian-slidev-callout__title">Protocol rule</div>
@@ -299,7 +299,7 @@ layout: quote
 title: Quote Layout
 author: Obsidian Slidev protocol
 source: Theme contract fixture
-presentationPreset: scholarly
+presentationPreset: default
 ---
 
 Generated Obsidian semantics should remain simple enough to inspect, but expressive enough for a theme to elevate across multiple lines without collapsing the quote rhythm.
@@ -317,14 +317,14 @@ title: Figure Layout
 ---
 layout: references
 title: References Layout
-presentationPreset: scholarly
+presentationPreset: default
 ---
 
 # References
 
 1. Obsidian vault notes and generated semantic HTML.
 2. Slidev built-in components for media and presentation runtime.
-3. Theme-owned visual presets for scholarly, UCAS, and ICT decks.
+3. Theme-owned visual presets for default, UCAS, and ICT decks.
 
 ---
 layout: section

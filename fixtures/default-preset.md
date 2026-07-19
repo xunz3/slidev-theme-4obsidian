@@ -10,7 +10,7 @@ authors:
     email: ruoheng.wang@example.edu
 themeConfig:
   presentation:
-    preset: scholarly
+    preset: default
     density: normal
     chrome: auto
     header: false

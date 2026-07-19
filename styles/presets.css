@@ -1,5 +1,6 @@
-:root[data-presentation-preset="scholarly"],
-.slide-frame[data-presentation-preset="scholarly"] {
+:root,
+:root[data-presentation-preset="default"],
+.slide-frame[data-presentation-preset="default"] {
   --slidev-theme-primary: #315f7d;
   --presentation-accent: var(--slidev-theme-primary);
   --presentation-bg: #fbfaf7;
@@ -52,14 +53,17 @@
   --presentation-caption-font-style: italic;
   --presentation-caption-letter-spacing: 0.01em;
   --presentation-media-max-height: 72vh;
+  --presentation-media-radius: 0.2rem;
+  --presentation-media-shadow: none;
   --presentation-statement-size: 3.05rem;
   --presentation-quote-size: 1.82rem;
   --presentation-quote-line-height: 1.46;
   --presentation-reference-size: 0.86rem;
 }
 
-html.dark[data-presentation-preset="scholarly"],
-html.dark .slide-frame[data-presentation-preset="scholarly"] {
+html.dark,
+html.dark[data-presentation-preset="default"],
+html.dark .slide-frame[data-presentation-preset="default"] {
   --slidev-theme-primary: #91b9d6;
   --presentation-bg: #111821;
   --presentation-bg-elevated: #18222d;
@@ -87,8 +91,8 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   --presentation-on-section-muted: #c5d3dc;
 }
 
-:root[data-presentation-preset="scholarly"][data-presentation-density="compact"],
-.slide-frame[data-presentation-preset="scholarly"][data-presentation-density="compact"] {
+:root[data-presentation-preset="default"][data-presentation-density="compact"],
+.slide-frame[data-presentation-preset="default"][data-presentation-density="compact"] {
   --presentation-slide-padding: 1.15rem 1.45rem 0.85rem;
   --presentation-content-gap: 0.58rem;
   --presentation-body-size: 0.96rem;
@@ -100,8 +104,8 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   --presentation-reference-size: 0.78rem;
 }
 
-:root[data-presentation-preset="scholarly"][data-presentation-density="relaxed"],
-.slide-frame[data-presentation-preset="scholarly"][data-presentation-density="relaxed"] {
+:root[data-presentation-preset="default"][data-presentation-density="relaxed"],
+.slide-frame[data-presentation-preset="default"][data-presentation-density="relaxed"] {
   --presentation-slide-padding: 1.85rem 2.35rem 1.35rem;
   --presentation-content-gap: 0.95rem;
   --presentation-body-size: 1.08rem;
@@ -113,29 +117,29 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   --presentation-reference-size: 0.92rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout {
+:root[data-presentation-preset="default"] .slidev-layout {
   background: var(--presentation-bg);
 }
 
-:root[data-presentation-preset="scholarly"] .slide-frame--chrome,
-.slide-frame[data-presentation-preset="scholarly"].slide-frame--chrome {
+:root[data-presentation-preset="default"] .slide-frame--chrome,
+.slide-frame[data-presentation-preset="default"].slide-frame--chrome {
   grid-template-rows: minmax(0, 1fr) auto;
   gap: 0;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-frame--header,
-.slide-frame[data-presentation-preset="scholarly"].slide-frame--header {
+:root[data-presentation-preset="default"] .slide-frame--header,
+.slide-frame[data-presentation-preset="default"].slide-frame--header {
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 0.52rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout :is(h1, h2, h3, h4),
-.slide-frame[data-presentation-preset="scholarly"] :is(h1, h2, h3, h4) {
+:root[data-presentation-preset="default"] .slidev-layout :is(h1, h2, h3, h4),
+.slide-frame[data-presentation-preset="default"] :is(h1, h2, h3, h4) {
   margin-bottom: 0.38em;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-frame__header,
-.slide-frame[data-presentation-preset="scholarly"] .slide-frame__header {
+:root[data-presentation-preset="default"] .slide-frame__header,
+.slide-frame[data-presentation-preset="default"] .slide-frame__header {
   padding: 0 0 0.44rem;
   border-bottom: 1px solid color-mix(in srgb, var(--presentation-border-strong) 36%, transparent);
   color: var(--presentation-text-muted);
@@ -143,20 +147,20 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   background: transparent;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-frame__title,
-.slide-frame[data-presentation-preset="scholarly"] .slide-frame__title {
+:root[data-presentation-preset="default"] .slide-frame__title,
+.slide-frame[data-presentation-preset="default"] .slide-frame__title {
   color: var(--presentation-text);
   font-weight: 700;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-frame__header-mark,
-.slide-frame[data-presentation-preset="scholarly"] .slide-frame__header-mark {
+:root[data-presentation-preset="default"] .slide-frame__header-mark,
+.slide-frame[data-presentation-preset="default"] .slide-frame__header-mark {
   color: color-mix(in srgb, var(--presentation-accent) 72%, var(--presentation-text-muted));
   font-weight: 700;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-frame__footer,
-.slide-frame[data-presentation-preset="scholarly"] .slide-frame__footer {
+:root[data-presentation-preset="default"] .slide-frame__footer,
+.slide-frame[data-presentation-preset="default"] .slide-frame__footer {
   margin-inline: 0;
   padding: 0.42rem 0 0.02rem;
   border-top: 1px solid color-mix(in srgb, var(--presentation-border-strong) 36%, transparent);
@@ -165,13 +169,13 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   background: transparent;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-frame__page,
-.slide-frame[data-presentation-preset="scholarly"] .slide-frame__page {
+:root[data-presentation-preset="default"] .slide-frame__page,
+.slide-frame[data-presentation-preset="default"] .slide-frame__page {
   color: color-mix(in srgb, var(--presentation-accent) 70%, var(--presentation-text));
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout h1,
-.slide-frame[data-presentation-preset="scholarly"] h1 {
+:root[data-presentation-preset="default"] .slidev-layout h1,
+.slide-frame[data-presentation-preset="default"] h1 {
   padding-bottom: 0.42em;
   border-bottom: 0;
   background-image: linear-gradient(color-mix(in srgb, var(--presentation-accent) 58%, transparent), color-mix(in srgb, var(--presentation-accent) 58%, transparent));
@@ -180,46 +184,46 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   background-size: 2.9rem 2px;
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout h2,
-.slide-frame[data-presentation-preset="scholarly"] h2 {
+:root[data-presentation-preset="default"] .slidev-layout h2,
+.slide-frame[data-presentation-preset="default"] h2 {
   color: color-mix(in srgb, var(--presentation-accent) 82%, var(--presentation-text));
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout table,
-.slide-frame[data-presentation-preset="scholarly"] table {
+:root[data-presentation-preset="default"] .slidev-layout table,
+.slide-frame[data-presentation-preset="default"] table {
   border-top: 1px solid var(--presentation-border-strong);
   border-bottom: 1px solid var(--presentation-border-strong);
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout th,
-.slide-frame[data-presentation-preset="scholarly"] th {
+:root[data-presentation-preset="default"] .slidev-layout th,
+.slide-frame[data-presentation-preset="default"] th {
   border-bottom: 1px solid var(--presentation-border-strong);
   font-weight: 700;
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout th,
-:root[data-presentation-preset="scholarly"] .slidev-layout td,
-.slide-frame[data-presentation-preset="scholarly"] th,
-.slide-frame[data-presentation-preset="scholarly"] td {
+:root[data-presentation-preset="default"] .slidev-layout th,
+:root[data-presentation-preset="default"] .slidev-layout td,
+.slide-frame[data-presentation-preset="default"] th,
+.slide-frame[data-presentation-preset="default"] td {
   padding: 0.38rem 0.55rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout td,
-.slide-frame[data-presentation-preset="scholarly"] td {
+:root[data-presentation-preset="default"] .slidev-layout td,
+.slide-frame[data-presentation-preset="default"] td {
   border-bottom: 0;
 }
 
-:root[data-presentation-preset="scholarly"] .slidev-layout pre,
-.slide-frame[data-presentation-preset="scholarly"] pre {
+:root[data-presentation-preset="default"] .slidev-layout pre,
+.slide-frame[data-presentation-preset="default"] pre {
   padding: 0.72rem;
   border-radius: 0.3rem;
   box-shadow: none;
 }
 
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-callout,
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-warning,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-callout,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-warning {
+:root[data-presentation-preset="default"] .obsidian-slidev-callout,
+:root[data-presentation-preset="default"] .obsidian-slidev-warning,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-callout,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-warning {
   margin: 0.7rem 0;
   padding: 0.56rem 0 0.58rem 0.82rem;
   border: 0;
@@ -228,27 +232,27 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   box-shadow: none;
 }
 
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-callout,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-callout {
+:root[data-presentation-preset="default"] .obsidian-slidev-callout,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-callout {
   background: var(--presentation-callout-bg);
 }
 
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-warning,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-warning {
+:root[data-presentation-preset="default"] .obsidian-slidev-warning,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-warning {
   border-left-color: var(--presentation-warning-border);
   background: var(--presentation-warning-bg);
 }
 
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-callout__title,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-callout__title {
+:root[data-presentation-preset="default"] .obsidian-slidev-callout__title,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-callout__title {
   font-family: var(--presentation-font-serif);
   font-size: 0.9em;
   font-weight: 700;
   letter-spacing: 0.012em;
 }
 
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-callout__title::before,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-callout__title::before {
+:root[data-presentation-preset="default"] .obsidian-slidev-callout__title::before,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-callout__title::before {
   width: 0.38rem;
   height: 0.38rem;
   border-radius: 0;
@@ -256,228 +260,225 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   transform: rotate(45deg);
 }
 
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-callout--quote,
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-callout--cite,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-callout--quote,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-callout--cite {
+:root[data-presentation-preset="default"] .obsidian-slidev-callout--quote,
+:root[data-presentation-preset="default"] .obsidian-slidev-callout--cite,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-callout--quote,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-callout--cite {
   border-left-color: var(--presentation-blockquote-border);
   background: color-mix(in srgb, var(--presentation-bg-elevated) 82%, var(--presentation-blockquote-border) 10%);
   font-style: italic;
 }
 
-:root[data-presentation-preset="scholarly"] .obsidian-slidev-media__caption,
-.slide-frame[data-presentation-preset="scholarly"] .obsidian-slidev-media__caption {
+:root[data-presentation-preset="default"] .obsidian-slidev-media__caption,
+.slide-frame[data-presentation-preset="default"] .obsidian-slidev-media__caption {
   max-width: 56rem;
   margin-inline: auto;
   font-family: var(--presentation-font-serif);
 }
 
-:root[data-presentation-preset="scholarly"] .slide-layout-center,
-.slide-frame[data-presentation-preset="scholarly"] .slide-layout-center {
+:root[data-presentation-preset="default"] .slide-layout-center,
+.slide-frame[data-presentation-preset="default"] .slide-layout-center {
   max-width: 50rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-layout-section,
-.slide-frame[data-presentation-preset="scholarly"] .slide-layout-section {
+:root[data-presentation-preset="default"] .slide-layout-section,
+.slide-frame[data-presentation-preset="default"] .slide-layout-section {
   max-width: 60rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-layout-statement,
-.slide-frame[data-presentation-preset="scholarly"] .slide-layout-statement {
+:root[data-presentation-preset="default"] .slide-layout-statement,
+.slide-frame[data-presentation-preset="default"] .slide-layout-statement {
   max-width: 64rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-layout-quote,
-.slide-frame[data-presentation-preset="scholarly"] .slide-layout-quote {
+:root[data-presentation-preset="default"] .slide-layout-quote,
+.slide-frame[data-presentation-preset="default"] .slide-layout-quote {
   max-width: 50rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-layout-references,
-.slide-frame[data-presentation-preset="scholarly"] .slide-layout-references {
+:root[data-presentation-preset="default"] .slide-layout-references,
+.slide-frame[data-presentation-preset="default"] .slide-layout-references {
   max-width: 68rem;
 }
 
-:root[data-presentation-preset="scholarly"] .slide-layout-section::before,
-.slide-frame[data-presentation-preset="scholarly"] .slide-layout-section::before {
+:root[data-presentation-preset="default"] .slide-layout-section::before,
+.slide-frame[data-presentation-preset="default"] .slide-layout-section::before {
   width: 8rem;
 }
 
-.slidev-layout.toc .slide-frame[data-presentation-preset="scholarly"] .slide-layout-toc__extra {
+.slidev-layout.toc .slide-frame[data-presentation-preset="default"] .slide-layout-toc__extra {
   order: -1;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] h1 {
-  max-width: 16ch;
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] h1 {
+  max-width: 18ch;
   border-bottom: 0;
   background-image: none;
   font-size: calc(4.1rem * var(--presentation-heading-scale));
   line-height: 1.02;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"]::before {
-  position: absolute;
-  z-index: 2;
-  top: 2.3rem;
-  left: 3.2rem;
-  width: 7rem;
-  height: 2px;
-  background: color-mix(in srgb, var(--presentation-accent) 78%, transparent);
-  content: "";
-}
-
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] {
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] {
   --presentation-slide-padding: 2.3rem 3.2rem 2.25rem;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover {
-  width: min(100%, 62rem);
-  margin-top: 1.6rem;
-  justify-items: start;
-  gap: 1.8rem;
-  text-align: left;
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover {
+  width: min(100%, 58rem);
+  justify-items: center;
+  gap: 1.65rem;
+  text-align: center;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover__main,
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover__body {
-  justify-items: start;
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover__main,
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover__body {
+  justify-items: center;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover__subtitle {
-  max-width: 42rem;
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover__subtitle {
+  max-width: 44rem;
   color: color-mix(in srgb, var(--presentation-text) 66%, var(--presentation-text-muted));
   font-family: var(--presentation-font-serif);
   font-size: 1.24rem;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover__subtitle::before {
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover__subtitle::before {
   display: none;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover__body {
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover__body {
   color: var(--presentation-text-muted);
   font-family: var(--presentation-font-label);
   font-size: 0.9rem;
   letter-spacing: 0.025em;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover__authors {
-  width: min(100%, 48rem);
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover__authors {
+  width: min(100%, 46rem);
   padding-top: 0.95rem;
   border-top: 1px solid var(--presentation-border-strong);
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0.9rem 2.2rem;
 }
 
-.slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] .slide-cover__author {
+.slidev-layout.cover .slide-frame[data-presentation-preset="default"] .slide-cover__author {
   min-width: min(100%, 14rem);
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] {
   color: var(--presentation-on-section);
   background: var(--presentation-section-bg);
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] :is(h1, h2, h3, p),
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-layout-section::before {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] :is(h1, h2, h3, p),
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-layout-section::before {
   color: var(--presentation-on-section);
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-layout-section::before {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-layout-section::before {
   background: rgba(255, 255, 255, 0.72);
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-frame__header,
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-frame__footer {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-frame__header,
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-frame__footer {
   border-color: rgba(255, 255, 255, 0.28);
   color: rgba(255, 255, 255, 0.78);
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-frame__title,
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-frame__header-mark,
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-frame__page {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-frame__title,
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-frame__header-mark,
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-frame__page {
   color: var(--presentation-on-section);
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-layout-section {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-layout-section {
   width: min(100%, 60rem);
   text-align: left;
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] .slide-layout-section::before {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] .slide-layout-section::before {
   margin-inline: 0;
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] h1 {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] h1 {
   max-width: 15ch;
   border-bottom: 0;
   background-image: none;
   font-size: calc(4.15rem * var(--presentation-heading-scale));
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] p {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] p {
   max-width: 40rem;
   color: var(--presentation-on-section-muted);
   font-size: 1.1rem;
 }
 
-.slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] :not(pre) > code {
+.slidev-layout.section .slide-frame[data-presentation-preset="default"] :not(pre) > code {
   border-color: rgba(255, 255, 255, 0.22);
   color: var(--presentation-on-section);
   background: rgba(255, 255, 255, 0.09);
 }
 
-.slidev-layout.statement .slide-frame[data-presentation-preset="scholarly"] .slide-layout-statement {
+.slidev-layout.statement .slide-frame[data-presentation-preset="default"] .slide-layout-statement {
   width: min(100%, 60rem);
   text-align: left;
 }
 
-.slidev-layout.statement .slide-frame[data-presentation-preset="scholarly"] .slide-layout-statement h1 {
-  border-bottom: 0;
-  background-image: none;
-}
-
-.slidev-layout.center .slide-frame[data-presentation-preset="scholarly"] h1 {
-  background-image: none;
-}
-
-.slidev-layout.statement .slide-frame[data-presentation-preset="scholarly"] .slide-layout-statement::after {
+.slidev-layout.statement .slide-frame[data-presentation-preset="default"] .slide-layout-statement::before {
   display: block;
-  width: 9rem;
-  height: 2px;
-  margin-top: 1.25rem;
+  width: 5rem;
+  height: 1px;
+  margin-bottom: 1rem;
   background: var(--presentation-accent);
   content: "";
 }
 
-.slidev-layout.references .slide-frame[data-presentation-preset="scholarly"] .slide-layout-references li {
+.slidev-layout.statement .slide-frame[data-presentation-preset="default"] .slide-layout-statement h1 {
+  border-bottom: 0;
+  background-image: none;
+}
+
+.slidev-layout.center .slide-frame[data-presentation-preset="default"] h1 {
+  background-image: none;
+}
+
+.slidev-layout.statement .slide-frame[data-presentation-preset="default"] .slide-layout-statement p {
+  margin-inline: 0;
+}
+
+.slidev-layout.two-cols .slide-frame[data-presentation-preset="default"] .slide-layout-two-cols__pane + .slide-layout-two-cols__pane {
+  padding-left: var(--presentation-two-cols-gap);
+  border-left: 1px solid var(--presentation-border);
+}
+
+.slidev-layout.references .slide-frame[data-presentation-preset="default"] .slide-layout-references li {
   padding-left: 0.25rem;
 }
 
-.slidev-layout.quote .slide-frame[data-presentation-preset="scholarly"] .slide-layout-quote {
+.slidev-layout.quote .slide-frame[data-presentation-preset="default"] .slide-layout-quote {
   width: min(100%, 52rem);
   justify-items: start;
   text-align: left;
 }
 
-.slidev-layout.quote .slide-frame[data-presentation-preset="scholarly"] .slide-layout-quote__content {
+.slidev-layout.quote .slide-frame[data-presentation-preset="default"] .slide-layout-quote__content {
   padding-left: 1.45rem;
   border-left: 2px solid color-mix(in srgb, var(--presentation-accent) 74%, transparent);
 }
 
-.slidev-layout.quote .slide-frame[data-presentation-preset="scholarly"] .slide-layout-quote__meta {
+.slidev-layout.quote .slide-frame[data-presentation-preset="default"] .slide-layout-quote__meta {
   justify-items: start;
 }
 
-.slidev-layout.toc .slide-frame[data-presentation-preset="scholarly"] .slide-layout-toc {
+.slidev-layout.toc .slide-frame[data-presentation-preset="default"] .slide-layout-toc {
   width: min(100%, 54rem);
 }
 
-.slidev-layout.toc .slide-frame[data-presentation-preset="scholarly"] .slide-layout-toc__button {
+.slidev-layout.toc .slide-frame[data-presentation-preset="default"] .slide-layout-toc__button {
   grid-template-columns: 3.1rem minmax(0, 1fr);
   padding: 0.78rem 0;
 }
 
-.slidev-layout.toc .slide-frame[data-presentation-preset="scholarly"] .slide-layout-toc__number {
+.slidev-layout.toc .slide-frame[data-presentation-preset="default"] .slide-layout-toc__number {
   color: var(--presentation-accent);
   font-family: var(--presentation-font-serif);
   font-size: 1.3rem;
@@ -486,17 +487,12 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
 }
 
 @media (max-width: 720px) {
-  .slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] {
+  .slidev-layout.cover .slide-frame[data-presentation-preset="default"] {
     --presentation-slide-padding: 1.5rem;
   }
 
-  .slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"]::before {
-    top: 1.5rem;
-    left: 1.5rem;
-  }
-
-  .slidev-layout.cover .slide-frame[data-presentation-preset="scholarly"] h1,
-  .slidev-layout.section .slide-frame[data-presentation-preset="scholarly"] h1 {
+  .slidev-layout.cover .slide-frame[data-presentation-preset="default"] h1,
+  .slidev-layout.section .slide-frame[data-presentation-preset="default"] h1 {
     font-size: calc(2.9rem * var(--presentation-heading-scale));
   }
 }
@@ -556,6 +552,8 @@ html.dark .slide-frame[data-presentation-preset="scholarly"] {
   --presentation-caption-font-style: normal;
   --presentation-caption-letter-spacing: 0.01em;
   --presentation-media-max-height: 70vh;
+  --presentation-media-radius: 0.28rem;
+  --presentation-media-shadow: 0 8px 24px rgba(9, 47, 92, 0.07);
   --presentation-statement-size: 3.12rem;
   --presentation-quote-size: 1.82rem;
   --presentation-quote-line-height: 1.48;
@@ -626,6 +624,18 @@ html.dark .slide-frame[data-presentation-preset="ucas"] {
   height: auto;
   opacity: 0.92;
   pointer-events: none;
+}
+
+.slide-frame[data-presentation-preset="ucas"] :is(.slide-frame__ucas-wordmark--theme-dark, .slide-frame__header-logo--theme-dark) {
+  display: none;
+}
+
+html.dark .slide-frame[data-presentation-preset="ucas"] :is(.slide-frame__ucas-wordmark--theme-light, .slide-frame__header-logo--theme-light) {
+  display: none;
+}
+
+html.dark .slide-frame[data-presentation-preset="ucas"] :is(.slide-frame__ucas-wordmark--theme-dark, .slide-frame__header-logo--theme-dark) {
+  display: block;
 }
 
 .slide-frame[data-presentation-preset="ucas"] .slide-frame__ucas-watermark {
@@ -794,7 +804,7 @@ html.dark .slide-frame[data-presentation-preset="ucas"] th {
 }
 
 .slidev-layout.cover .slide-frame[data-presentation-preset="ucas"] h1 {
-  max-width: 15ch;
+  max-width: 19ch;
   margin-bottom: 0.1em;
   color: var(--presentation-brand-title);
   font-size: calc(3.58rem * var(--presentation-heading-scale));
@@ -968,9 +978,7 @@ html.dark .slide-frame[data-presentation-preset="ucas"] th {
   padding-left: 0.18rem;
 }
 
-html.dark .slide-frame[data-presentation-preset="ucas"] .slide-frame__ucas-wordmark,
-html.dark .slide-frame[data-presentation-preset="ucas"] .slide-frame__header-logo {
-  filter: brightness(0) invert(1);
+html.dark .slide-frame[data-presentation-preset="ucas"] :is(.slide-frame__ucas-wordmark, .slide-frame__header-logo) {
   opacity: 0.9;
 }
 
@@ -1045,8 +1053,9 @@ html.dark .slidev-layout.statement .slide-frame[data-presentation-preset="ucas"]
   --presentation-heading-line-height: 1.07;
   --presentation-table-header-bg: rgba(0, 103, 165, 0.045);
   --presentation-table-row-alt-bg: rgba(0, 85, 161, 0.025);
-  --presentation-code-bg: #09273d;
-  --presentation-code-border: rgba(0, 139, 213, 0.3);
+  --presentation-code-bg: #f1f6f9;
+  --presentation-code-border: rgba(0, 103, 165, 0.2);
+  --presentation-code-copy-color: var(--presentation-brand-ink);
   --presentation-inline-code-bg: rgba(0, 139, 213, 0.07);
   --presentation-inline-code-border: rgba(0, 85, 161, 0.18);
   --presentation-inline-code-shadow: none;
@@ -1063,6 +1072,8 @@ html.dark .slidev-layout.statement .slide-frame[data-presentation-preset="ucas"]
   --presentation-caption-font-style: normal;
   --presentation-caption-letter-spacing: 0.015em;
   --presentation-media-max-height: 70vh;
+  --presentation-media-radius: 0.3rem;
+  --presentation-media-shadow: none;
   --presentation-statement-size: 3.28rem;
   --presentation-quote-size: 1.78rem;
   --presentation-quote-line-height: 1.48;
@@ -1084,6 +1095,7 @@ html.dark .slide-frame[data-presentation-preset="ict"] {
   --presentation-table-row-alt-bg: rgba(255, 255, 255, 0.035);
   --presentation-code-bg: #04131f;
   --presentation-code-border: rgba(53, 168, 224, 0.28);
+  --presentation-code-copy-color: #dff5ff;
   --presentation-inline-code-bg: rgba(53, 168, 224, 0.1);
   --presentation-inline-code-border: rgba(53, 168, 224, 0.23);
   --presentation-blockquote-bg: rgba(53, 168, 224, 0.065);
@@ -1189,6 +1201,10 @@ html.dark .slide-frame[data-presentation-preset="ict"] {
   letter-spacing: 0.03em;
 }
 
+.slide-frame[data-presentation-preset="ict"] .slide-frame__footer-middle {
+  font-size: 0.94em;
+}
+
 .slide-frame[data-presentation-preset="ict"] .slide-frame__footer::before {
   position: absolute;
   top: -1px;
@@ -1252,7 +1268,7 @@ html.dark .slide-frame[data-presentation-preset="ict"] th {
 
 .slide-frame[data-presentation-preset="ict"] pre,
 .slide-frame[data-presentation-preset="ict"] pre code {
-  color: #dff5ff;
+  color: var(--presentation-text);
 }
 
 .slide-frame[data-presentation-preset="ict"] :not(pre) > code {
@@ -1271,6 +1287,7 @@ html.dark .slide-frame[data-presentation-preset="ict"] th {
 
 .slide-frame[data-presentation-preset="ict"] .obsidian-slidev-callout__title {
   color: var(--presentation-brand-muted);
+  font-family: var(--presentation-font-mono);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.055em;
@@ -1350,10 +1367,18 @@ html.dark .slide-frame[data-presentation-preset="ict"] .obsidian-slidev-callout_
   justify-items: start;
   margin-top: 0.55rem;
   padding-top: 0.9rem;
-  border-top: 1px solid var(--presentation-border-strong);
+  border-top: 0;
   color: var(--presentation-text-muted);
   font-size: 0.9rem;
   line-height: 1.5;
+}
+
+.slidev-layout.cover .slide-frame[data-presentation-preset="ict"] .slide-cover__body::before {
+  width: 5rem;
+  height: 1px;
+  margin-bottom: 0.2rem;
+  background: var(--presentation-border-strong);
+  content: "";
 }
 
 .slidev-layout.cover .slide-frame[data-presentation-preset="ict"] .slide-cover__authors {

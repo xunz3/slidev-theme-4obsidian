@@ -141,9 +141,9 @@
   max-height: var(--presentation-media-max-height);
   margin-inline: auto;
   border: 1px solid color-mix(in srgb, var(--presentation-border) 72%, transparent);
-  border-radius: 13px;
+  border-radius: var(--presentation-media-radius);
   background: color-mix(in srgb, var(--presentation-bg-elevated) 84%, transparent);
-  box-shadow: 0 12px 34px rgba(30, 36, 40, 0.08);
+  box-shadow: var(--presentation-media-shadow);
   object-fit: contain;
 }
 
@@ -157,9 +157,9 @@
 .obsidian-slidev-media--youtube iframe {
   width: 100%;
   border: 1px solid color-mix(in srgb, var(--presentation-border) 78%, transparent);
-  border-radius: 13px;
+  border-radius: var(--presentation-media-radius);
   background: #000;
-  box-shadow: 0 12px 34px rgba(30, 36, 40, 0.08);
+  box-shadow: var(--presentation-media-shadow);
 }
 
 .obsidian-slidev-media--youtube iframe {

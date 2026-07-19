@@ -81,7 +81,7 @@ presentationPreset: ucas
 
 # UCAS Is an Override
 
-Scholarly is the default visual system. UCAS can be selected for institutional decks without changing the Obsidian integration contract.
+The default visual system is selected automatically. UCAS can be selected for institutional decks without changing the Obsidian integration contract.
 
 <div class="obsidian-slidev-warning">
   <strong>Slidev warning:</strong> unresolved links and missing assets stay visible instead of silently disappearing.
@@ -98,4 +98,4 @@ layout: center
 
 # Next
 
-Use the default scholarly preset for research reports, or select `ucas` and `ict` for institutional decks.
+Use the default preset for research reports, or select `ucas` and `ict` for institutional decks.

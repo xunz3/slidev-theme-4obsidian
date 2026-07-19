@@ -16,9 +16,10 @@ const props = withDefaults(defineProps<{
   showNumbers: true,
 })
 
-const { $slidev } = useSlideContext()
+const { $slidev, $frontmatter } = useSlideContext()
 
 const slides = computed(() => (($slidev.nav as any)?.slides ?? []) as any[])
+const frontmatter = computed(() => ($frontmatter as Record<string, any>))
 
 const getFrontmatter = (slide: any): Record<string, any> => {
   return slide?.meta?.slide?.frontmatter ?? slide?.slide?.frontmatter ?? slide?.frontmatter ?? {}
@@ -38,7 +39,9 @@ const getTitle = (slide: any, fallback: string): string => {
 }
 
 const tocTitle = computed(() => {
-  if (props.title === false) return ''
+  const value = frontmatter.value.title
+  if (value === false) return ''
+  if (typeof value === 'string' && value.trim()) return value.trim()
   return typeof props.title === 'string' && props.title.trim() ? props.title.trim() : 'Outline'
 })
 

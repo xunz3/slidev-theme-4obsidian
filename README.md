@@ -77,7 +77,7 @@ authors:
     email: jane@example.com
 themeConfig:
   presentation:
-    preset: scholarly
+    preset: default
     accent: "#345f8f"
     density: normal
     chrome: auto
@@ -90,7 +90,7 @@ Supported keys:
 
 | Key | Values | Default | Purpose |
 | --- | --- | --- | --- |
-| `preset` | `scholarly`, `ucas`, `ict` | `scholarly` | Selects the visual system without changing generated markup |
+| `preset` | `default`, `ucas`, `ict` | `default` | Selects the visual system without changing generated markup |
 | `accent` | Any CSS color | theme default | Overrides the primary accent color |
 | `density` | `compact`, `normal`, `relaxed` | `normal` | Adjusts slide padding, spacing, and body scale |
 | `chrome` | `auto`, `on`, `off` | `auto` | Controls footer metadata chrome |
@@ -102,7 +102,7 @@ Per-slide overrides:
 
 | Frontmatter key | Values | Purpose |
 | --- | --- | --- |
-| `presentationPreset` | `scholarly`, `ucas`, `ict` | Override the preset for one slide |
+| `presentationPreset` | `default`, `ucas`, `ict` | Override the preset for one slide |
 | `presentationDensity` | `compact`, `normal`, `relaxed` | Override density for one slide |
 | `presentationChrome` | `auto`, `on`, `off` | Override slide chrome behavior |
 | `presentationHeader` | `true`, `false` | Force the optional header on or off for one slide |
@@ -139,7 +139,7 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--presentation-text` | Main text color |
 | `--presentation-text-muted` | Secondary text, captions, and chrome text |
 | `--presentation-border` | Borders for tables, chrome, callouts, and inline code |
-| `--presentation-border-strong` | Strong table and scholarly divider borders |
+| `--presentation-border-strong` | Strong table and default divider borders |
 | `--presentation-shadow` | Shared elevation shadow |
 | `--presentation-scrollbar-thumb` | Scrollbar thumb color for overflowing slide content |
 | `--presentation-scrollbar-track` | Scrollbar track color for overflowing slide content |
@@ -150,6 +150,8 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--presentation-font-quote` | Quote layout italic font stack |
 | `--presentation-font-label` | Chrome, metadata, and numeric-label family |
 | `--presentation-font-mono` | Code font stack |
+| `--presentation-reading-width` | Maximum width for paragraphs, lists, and blockquotes |
+| `--presentation-block-width` | Maximum width for tables, code blocks, callouts, and warnings |
 | `--presentation-slide-padding` | Frame padding |
 | `--presentation-two-cols-gap` | Gap between columns in the `two-cols` layout |
 | `--presentation-content-gap` | Vertical rhythm between common markdown blocks |
@@ -184,8 +186,12 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--presentation-caption-font-style` | Generated media caption font style |
 | `--presentation-caption-letter-spacing` | Generated media caption tracking |
 | `--presentation-media-max-height` | Maximum generated image/video height |
+| `--presentation-media-radius` | Generated image/video corner radius |
+| `--presentation-media-shadow` | Generated image/video shadow |
 | `--presentation-quote-size` | Quote layout text size |
 | `--presentation-quote-line-height` | Quote layout line height |
+
+Tables, code blocks, callouts, and warnings use the quieter block measure by default. Add `class="presentation-full-width"` to one of those top-level blocks when a wide table or code sample genuinely needs the full content area.
 
 ## Presets
 
@@ -193,15 +199,15 @@ Use `themeConfig.presentation.preset` to switch visual systems without changing 
 
 | Preset | Use case |
 | --- | --- |
-| `scholarly` | Paper talks, methods reports, reading groups, and thesis defenses |
+| `default` | Paper talks, methods reports, reading groups, and thesis defenses |
 | `ucas` | UCAS-branded courses, seminars, project reviews, and research talks |
 | `ict` | ICT-branded systems, architecture, AI, and computing research talks |
 
-`scholarly` is the default preset. It is a paper-inspired but projection-aware system: serif display type, booktabs-like tables, flat code and callout surfaces, italic captions, and an ink-blue section field create academic formality without reproducing the density of a printed article.
+When no preset is specified, `default` is selected. It is a paper-inspired but projection-aware system: serif display type, a centered academic title page, booktabs-like tables, flat code and callout surfaces, italic captions, and an ink-blue section field create academic formality without reproducing the density of a printed article.
 
 `ucas` is an independent research-oriented direction based on the official UCAS blue and the bundled bilingual identity assets. Its cover uses a deep-blue-to-white gradient brand rail with the vertical UCAS lockup; ordinary slides return to a cold-white, rail-free canvas with restrained serif display titles, booktabs-like tables, and a compact horizontal wordmark. Emblem watermarks are reserved for cover, section, statement, and center layouts so research content remains primary. The preset supports the same layouts and generated Obsidian markup as the other presets, and it also works with ordinary Slidev Markdown.
 
-`ict` is a separate computing-research visual system based on the official two-blue ICT orbital emblem and bilingual institute lockup. It combines a cool-white editorial canvas with muted navy brand fields, precise cyan accents, sans-serif display typography, restrained technical chrome, and dark code surfaces. Strong branding is concentrated on cover, section, and statement layouts; ordinary content slides remain quiet and projection-friendly.
+`ict` is a separate computing-research visual system based on the official two-blue ICT orbital emblem and bilingual institute lockup. It combines a cool-white editorial canvas with muted navy brand fields, precise cyan accents, sans-serif display typography, restrained technical chrome, and mode-aware code surfaces. Strong branding is concentrated on cover, section, and statement layouts; ordinary content slides remain quiet and projection-friendly.
 
 For `ucas` and `ict`, `themeConfig.presentation.accent` changes content accents such as links, callouts, and chrome while the official identity colors used by logos and signature layouts remain locked.
 
@@ -211,13 +217,13 @@ All presets share the same three bilingual families, but map them to different r
 
 | Preset | Display | Body | Quote | Labels / code |
 | --- | --- | --- | --- | --- |
-| `scholarly` | Source Serif 4 / Noto Serif SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | Source Sans 3 / JetBrains Mono |
+| `default` | Source Serif 4 / Noto Serif SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | Source Sans 3 / JetBrains Mono |
 | `ucas` | Source Serif 4 / Noto Serif SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | Source Sans 3 / JetBrains Mono |
 | `ict` | Source Sans 3 / Noto Sans SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | JetBrains Mono |
 
-Slidev loads Source Sans 3, Source Serif 4, and JetBrains Mono as web fonts and exposes the same families through UnoCSS utilities such as `font-sans`, `font-serif`, and `font-mono`. The theme requests real roman and italic faces at weights 400, 500, 600, and 700; its CSS uses only those weights. CJK text first uses a local Noto, PingFang, Microsoft YaHei, Source Han, or Songti family and then the platform UI fallback, avoiding a very large remote CJK request. Decks marked with a Chinese `lang` keep CJK headings, captions, and quotations upright with neutral tracking.
+Slidev loads Source Sans 3, Source Serif 4, and JetBrains Mono as web fonts and exposes the same families through UnoCSS utilities such as `font-sans`, `font-serif`, and `font-mono`. The theme requests real roman and italic faces at weights 400, 500, 600, and 700; its CSS uses only those weights. Noto Sans SC and Noto Serif SC are loaded separately at upright weights so mixed Chinese/Latin headings keep a coherent sans or serif voice; Google Fonts serves them in unicode-range subsets, so a deck fetches only the ranges it uses. Decks marked with a Chinese `lang` keep CJK headings, captions, and quotations upright with neutral tracking.
 
-For offline venues, preload or self-host the three Latin web families, or override the `--presentation-font-*` variables with fonts installed on the presentation machine.
+For offline venues, preload or self-host the five web families, or override the `--presentation-font-*` variables with fonts installed on the presentation machine.
 
 ## Layouts
 
@@ -247,7 +253,7 @@ It covers:
 - Generated image, video, audio, and YouTube media figures
 - Obsidian links and warning blocks
 - Long lists, tables, inline code, code blocks, and footnotes
-- Scholarly default behavior plus UCAS and ICT overrides on the same generated protocol
+- Default preset behavior plus UCAS and ICT overrides on the same generated protocol
 - Preset contrast slides with identical content structure
 - Section-driven deck structure with TOC
 - Preset-specific statement, quote, figure, references, and center layouts
@@ -266,7 +272,7 @@ The latest light/dark visual review is recorded in [`qa/preset-design-qa.md`](qa
 - `pnpm install`
 - `pnpm run dev` to start theme preview of `example.md`
 - `pnpm run dev:fixture` to start the protocol fixture preview
-- `pnpm run build:scholarly` / `pnpm run screenshot:scholarly` for the Scholarly research showcase
+- `pnpm run build:default` / `pnpm run screenshot:default` for the Default research showcase
 - `pnpm run build:ucas` to build the UCAS preset showcase
 - `pnpm run screenshot:ucas` to render the UCAS showcase as PNG slides
 - `pnpm run build:ict` to build the ICT preset showcase

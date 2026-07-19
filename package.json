@@ -31,8 +31,8 @@
 		"dev:fixture": "slidev fixtures/obsidian-protocol.md --open",
 		"export": "slidev export example.md",
 		"screenshot": "slidev export example.md --format png",
-		"build:scholarly": "slidev build fixtures/scholarly-preset.md --out dist-scholarly",
-		"screenshot:scholarly": "slidev export fixtures/scholarly-preset.md --format png --output dist-scholarly/scholarly-preset",
+		"build:default": "slidev build fixtures/default-preset.md --out dist-default",
+		"screenshot:default": "slidev export fixtures/default-preset.md --format png --output dist-default/default-preset",
 		"build:ucas": "slidev build fixtures/ucas-preset.md --out dist-ucas",
 		"screenshot:ucas": "slidev export fixtures/ucas-preset.md --format png --output dist-ucas/ucas-preset",
 		"build:ict": "slidev build fixtures/ict-preset.md --out dist-ict",
@@ -71,7 +71,7 @@
 		},
 		"themeConfig": {
 			"presentation": {
-				"preset": "scholarly",
+				"preset": "default",
 				"density": "normal",
 				"chrome": "auto",
 				"header": false,

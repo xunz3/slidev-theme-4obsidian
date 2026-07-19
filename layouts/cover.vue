@@ -20,7 +20,8 @@ const props = defineProps({
 const { $slidev, $frontmatter } = useSlideContext()
 
 const configs = computed(() => (($slidev.configs ?? {}) as Record<string, unknown>))
-const frontmatter = computed(() => (($frontmatter.value ?? {}) as Record<string, unknown>))
+// Slidev injects frontmatter as a reactive object, not a Ref.
+const frontmatter = computed(() => ($frontmatter as Record<string, unknown>))
 const authors = computed(() => {
   const configuredAuthors = normalizeAuthors(configs.value.authors)
   return configuredAuthors.length > 0 ? configuredAuthors : normalizeAuthors(configs.value.author)

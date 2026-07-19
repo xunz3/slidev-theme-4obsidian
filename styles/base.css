@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap");
+
 .slidev-layout {
   width: 100%;
   height: 100%;
@@ -43,6 +45,15 @@
 
 .slidev-layout .slide-frame__content > :is(p, ul, ol, blockquote) {
   max-width: var(--presentation-reading-width);
+}
+
+.slidev-layout .slide-frame__content > :is(table, pre, .slidev-code-wrapper, .obsidian-slidev-callout, .obsidian-slidev-warning) {
+  width: 100%;
+  max-width: var(--presentation-block-width);
+}
+
+.slidev-layout .slide-frame__content > .presentation-full-width {
+  max-width: none;
 }
 
 .slidev-layout h1 {
@@ -125,7 +136,7 @@
 .slidev-layout th {
   color: var(--presentation-text);
   background: var(--presentation-table-header-bg);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .slidev-layout tbody tr:nth-child(even) {
@@ -147,10 +158,14 @@
   line-height: 1.6;
 }
 
+.slidev-layout .slidev-code-copy {
+  color: var(--presentation-code-copy-color);
+}
+
 .slidev-layout :not(pre) > code {
-  padding: 0.04em 0.36em 0.07em;
-  border: 1px solid var(--presentation-inline-code-border);
-  border-radius: 0.44em;
+  padding: 0.02em 0.28em 0.04em;
+  border: 0;
+  border-radius: 0.32em;
   color: color-mix(in srgb, var(--presentation-accent) 76%, var(--presentation-text));
   background: var(--presentation-inline-code-bg);
   box-decoration-break: clone;
@@ -158,8 +173,8 @@
   -webkit-box-decoration-break: clone;
   font-family: var(--presentation-font-mono);
   font-size: 0.88em;
-  font-weight: 600;
-  line-height: 1.28;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .slidev-layout blockquote {
@@ -191,14 +206,6 @@
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--presentation-accent) 48%, transparent);
   text-underline-offset: 0.12em;
-}
-
-.slidev-layout .footnote-ref a::before {
-  content: "[";
-}
-
-.slidev-layout .footnote-ref a::after {
-  content: "]";
 }
 
 .slidev-layout .footnote-ref a:focus-visible {

@@ -1,24 +1,24 @@
 # Preset Design QA
 
-Date: 2026-07-18
+Date: 2026-07-19
 
-This pass treats the three presets as one research-presentation system with three distinct voices. `scholarly` is the default:
+This pass treats the three presets as one research-presentation system with three distinct voices. `default` is selected when no override is provided:
 
-- `scholarly`: paper-inspired, serif display, booktabs, ink-blue section fields.
+- `default`: paper-inspired, serif display, booktabs, ink-blue section fields.
 - `ucas`: humanist institutional, serif display, official UCAS identity assets.
 - `ict`: technical systems, sans display, mono labels, navy/cyan signature surfaces.
 
 ## Visual evidence
 
-- Light, normal-density contact sheets: `scholarly-contact-sheet.png`, `ucas-contact-sheet.png`, and `ict-contact-sheet.png`.
-- Source decks: `fixtures/scholarly-preset.md`, `fixtures/ucas-preset.md`, and `fixtures/ict-preset.md`.
+- Light, normal-density contact sheets: `default-contact-sheet.png`, `ucas-contact-sheet.png`, and `ict-contact-sheet.png`.
+- Source decks: `fixtures/default-preset.md`, `fixtures/ucas-preset.md`, and `fixtures/ict-preset.md`.
 - Export viewport: 1960 × 1104, 16:9.
 
 The light sheets cover cover, default, TOC where available, section, two-column evidence, code/callout, quote, statement, references, and center layouts.
 
 ## Checks completed
 
-- `pnpm run build:scholarly`
+- `pnpm run build:default`
 - `pnpm run build:ucas`
 - `pnpm run build:ict`
 - Light PNG exports for all three preset fixtures.
@@ -32,7 +32,7 @@ The light sheets cover cover, default, TOC where available, section, two-column 
 
 ## Known limits
 
-- Latin and mono faces are still remote web fonts. Noto CJK faces are treated as local fonts and fall back to PingFang SC, Microsoft YaHei, Source Han, Songti SC, or the platform UI family when unavailable.
+- The five configured web families require network access unless they are preloaded or self-hosted for offline venues.
 - Compact and relaxed densities build from the same token system but are not included in the contact sheets.
 - The screenshots support visual review; they do not claim full accessibility conformance or replace a projector test in the target room.
 

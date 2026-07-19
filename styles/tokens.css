@@ -20,6 +20,8 @@
   --presentation-font-label: var(--presentation-font-sans);
   --presentation-font-mono: "JetBrains Mono", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-monospace, monospace;
   --presentation-reading-width: 68ch;
+  --presentation-block-width: 84ch;
+  --presentation-code-copy-color: var(--presentation-text);
   --presentation-slide-padding: 3rem;
   --presentation-two-cols-gap: 2.5rem;
   --presentation-content-gap: 1.15rem;
@@ -54,6 +56,8 @@
   --presentation-caption-font-style: normal;
   --presentation-caption-letter-spacing: 0;
   --presentation-media-max-height: 62vh;
+  --presentation-media-radius: 0.2rem;
+  --presentation-media-shadow: none;
   --presentation-statement-size: 3.05rem;
   --presentation-quote-size: 1.68rem;
   --presentation-quote-line-height: 1.46;

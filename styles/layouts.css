@@ -90,11 +90,6 @@
   background-clip: padding-box;
 }
 
-.slidev-layout.default .slide-frame__content {
-  display: flex;
-  flex-direction: column;
-}
-
 .slide-frame__footer {
   grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr);
   padding-top: 0.62rem;
@@ -328,6 +323,11 @@
   margin-bottom: 0.05em;
 }
 
+/* Keep the legacy slot-heading pattern usable without duplicating the title. */
+.slide-layout-toc:has(.slide-layout-toc__extra h1) > h1 {
+  display: none;
+}
+
 .slide-layout-toc__list {
   display: grid;
   gap: 0;
@@ -442,11 +442,13 @@
 
 .slide-layout-references ol,
 .slide-layout-references ul {
-  padding-left: 1.2em;
+  padding-left: 1.6em;
+  font-variant-numeric: tabular-nums;
 }
 
 .slide-layout-references li {
   margin-bottom: 0.52em;
+  padding-left: 0;
 }
 
 .slide-layout-two-cols {

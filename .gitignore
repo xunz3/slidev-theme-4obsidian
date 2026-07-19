@@ -3,12 +3,8 @@ node_modules
 dist
 dist-fixture
 example-export
-dist-scholarly
-fixtures/dist-scholarly
-dist-ucas
-fixtures/dist-ucas
-dist-ict
-fixtures/dist-ict
+dist-*
+fixtures/dist-*
 *.local
 .vite-inspect
 .remote-assets
