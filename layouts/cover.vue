@@ -3,8 +3,7 @@ import SlideFrame from '../components/SlideFrame.vue'
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 import { formatAuthorDetails, normalizeAuthors } from '../setup/authors'
-
-type ChromeSetting = 'auto' | 'on' | 'off'
+import type { PresentationChrome } from '../setup/presentation-config'
 
 const props = defineProps({
   background: {
@@ -12,7 +11,7 @@ const props = defineProps({
     default: undefined,
   },
   chrome: {
-    type: String as () => ChromeSetting,
+    type: String as () => PresentationChrome,
     default: undefined,
   },
 })
@@ -45,27 +44,25 @@ const style = computed(() => {
 </script>
 
 <template>
-  <div class="slidev-layout cover" :style="style">
-    <SlideFrame variant="cover" :chrome="chrome">
-      <div class="slide-cover" :class="{ 'slide-cover--has-title': title }">
-        <div class="slide-cover__main">
-          <h1 v-if="title" class="slide-cover__title">{{ title }}</h1>
-          <div v-if="subtitle" class="slide-cover__subtitle">{{ subtitle }}</div>
+  <SlideFrame variant="cover" :chrome="chrome" :canvas-style="style">
+    <div class="slide-cover" :class="{ 'slide-cover--has-title': title }">
+      <div class="slide-cover__main">
+        <h1 v-if="title" class="slide-cover__title">{{ title }}</h1>
+        <div v-if="subtitle" class="slide-cover__subtitle">{{ subtitle }}</div>
 
-          <div class="slide-cover__body">
-            <slot />
-          </div>
+        <div class="slide-cover__body">
+          <slot />
         </div>
+      </div>
 
-        <div v-if="authors.length > 0" class="slide-cover__authors">
-          <div v-for="(author, index) in authors" :key="`${author.name}-${author.email ?? index}`" class="slide-cover__author">
-            <div class="slide-cover__author-name">{{ author.name }}</div>
-            <div v-if="formatAuthorDetails(author)" class="slide-cover__author-details">
-              {{ formatAuthorDetails(author) }}
-            </div>
+      <div v-if="authors.length > 0" class="slide-cover__authors">
+        <div v-for="(author, index) in authors" :key="`${author.name}-${author.email ?? index}`" class="slide-cover__author">
+          <div class="slide-cover__author-name">{{ author.name }}</div>
+          <div v-if="formatAuthorDetails(author)" class="slide-cover__author-details">
+            {{ formatAuthorDetails(author) }}
           </div>
         </div>
       </div>
-    </SlideFrame>
-  </div>
+    </div>
+  </SlideFrame>
 </template>

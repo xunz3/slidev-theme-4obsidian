@@ -1,49 +1,25 @@
 import { configs } from '@slidev/client'
 import { defineAppSetup } from '@slidev/types'
 import { watch } from 'vue'
+import { resolveDeckPresentation } from './presentation-config'
 
-type PresentationPreset = 'default' | 'ucas' | 'ict'
-type PresentationDensity = 'compact' | 'normal' | 'relaxed'
-type PresentationChrome = 'auto' | 'on' | 'off'
-
-type PresentationThemeConfig = {
-  preset?: PresentationPreset
-  accent?: string
-  density?: PresentationDensity
-  chrome?: PresentationChrome
-  header?: boolean
-  footerAuthors?: boolean
-  pageNumber?: boolean
+const getRawPresentationConfig = (): unknown => {
+  return (configs as any)?.themeConfig?.presentation
 }
 
-const isPreset = (value: unknown): value is PresentationPreset => {
-  return value === 'default' || value === 'ucas' || value === 'ict'
-}
-
-const isDensity = (value: unknown): value is PresentationDensity => {
-  return value === 'compact' || value === 'normal' || value === 'relaxed'
-}
-
-const isChrome = (value: unknown): value is PresentationChrome => {
-  return value === 'auto' || value === 'on' || value === 'off'
-}
-
-const applyConfig = () => {
+export const applyPresentationConfig = (rawPresentation = getRawPresentationConfig()) => {
   if (typeof document === 'undefined') return
 
-  const config = (((configs as any)?.themeConfig?.presentation ?? {}) as PresentationThemeConfig)
+  const config = resolveDeckPresentation(rawPresentation)
   const root = document.documentElement
-  const preset = isPreset(config.preset) ? config.preset : 'default'
-  const density = isDensity(config.density) ? config.density : 'normal'
-  const chrome = isChrome(config.chrome) ? config.chrome : 'auto'
 
-  root.dataset.presentationPreset = preset
-  root.dataset.presentationDensity = density
-  root.dataset.presentationChrome = chrome
+  root.dataset.presentationPreset = config.preset
+  root.dataset.presentationDensity = config.density
+  root.dataset.presentationChrome = config.chrome
 
-  if (typeof config.accent === 'string' && config.accent.trim()) {
-    root.style.setProperty('--presentation-accent', config.accent.trim())
-    root.style.setProperty('--slidev-theme-primary', config.accent.trim())
+  if (config.accent) {
+    root.style.setProperty('--presentation-accent', config.accent)
+    root.style.setProperty('--slidev-theme-primary', config.accent)
   } else {
     root.style.removeProperty('--presentation-accent')
     root.style.removeProperty('--slidev-theme-primary')
@@ -51,11 +27,11 @@ const applyConfig = () => {
 }
 
 export default defineAppSetup(() => {
-  applyConfig()
+  applyPresentationConfig()
 
   watch(
-    () => (configs as any)?.themeConfig?.presentation,
-    () => applyConfig(),
+    () => getRawPresentationConfig(),
+    value => applyPresentationConfig(value),
     { deep: true },
   )
 })

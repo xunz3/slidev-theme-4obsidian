@@ -2,8 +2,8 @@
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 import SlideFrame from '../components/SlideFrame.vue'
+import type { PresentationChrome } from '../setup/presentation-config'
 
-type ChromeSetting = 'auto' | 'on' | 'off'
 type TocSectionInput = string | { title?: string; subtitle?: string; slideNo?: number }
 
 const props = withDefaults(defineProps<{
@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<{
   subtitle?: string
   sections?: TocSectionInput[]
   showNumbers?: boolean
-  chrome?: ChromeSetting
+  chrome?: PresentationChrome
 }>(), {
   showNumbers: true,
 })
@@ -80,33 +80,31 @@ const goToSection = (slideNo?: number) => {
 </script>
 
 <template>
-  <div class="slidev-layout toc">
-    <SlideFrame variant="toc" :title="typeof title === 'string' ? title : undefined" :subtitle="subtitle" :chrome="chrome">
-      <div class="slide-layout-toc">
-        <h1 v-if="tocTitle">{{ tocTitle }}</h1>
+  <SlideFrame variant="toc" :title="typeof title === 'string' ? title : undefined" :subtitle="subtitle" :chrome="chrome">
+    <div class="slide-layout-toc">
+      <h1 v-if="tocTitle">{{ tocTitle }}</h1>
 
-        <div class="slide-layout-toc__list" role="list">
-          <div v-for="section in tocSections" :key="`${section.index}-${section.title}`" class="slide-layout-toc__item" role="listitem">
-            <component
-              :is="section.slideNo ? 'button' : 'div'"
-              class="slide-layout-toc__button"
-              :class="{ 'slide-layout-toc__button--static': !section.slideNo }"
-              :type="section.slideNo ? 'button' : undefined"
-              @click="section.slideNo && goToSection(section.slideNo)"
-            >
-              <span v-if="showNumbers" class="slide-layout-toc__number">{{ section.index }}</span>
-              <span class="slide-layout-toc__text">
-                <span class="slide-layout-toc__title">{{ section.title }}</span>
-                <span v-if="section.subtitle" class="slide-layout-toc__subtitle">{{ section.subtitle }}</span>
-              </span>
-            </component>
-          </div>
-        </div>
-
-        <div class="slide-layout-toc__extra">
-          <slot />
+      <div class="slide-layout-toc__list" role="list">
+        <div v-for="section in tocSections" :key="`${section.index}-${section.title}`" class="slide-layout-toc__item" role="listitem">
+          <component
+            :is="section.slideNo ? 'button' : 'div'"
+            class="slide-layout-toc__button"
+            :class="{ 'slide-layout-toc__button--static': !section.slideNo }"
+            :type="section.slideNo ? 'button' : undefined"
+            @click="section.slideNo && goToSection(section.slideNo)"
+          >
+            <span v-if="showNumbers" class="slide-layout-toc__number">{{ section.index }}</span>
+            <span class="slide-layout-toc__text">
+              <span class="slide-layout-toc__title">{{ section.title }}</span>
+              <span v-if="section.subtitle" class="slide-layout-toc__subtitle">{{ section.subtitle }}</span>
+            </span>
+          </component>
         </div>
       </div>
-    </SlideFrame>
-  </div>
+
+      <div class="slide-layout-toc__extra">
+        <slot />
+      </div>
+    </div>
+  </SlideFrame>
 </template>

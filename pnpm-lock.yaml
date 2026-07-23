@@ -21,6 +21,9 @@ importers:
       '@slidev/cli':
         specifier: ^52.15.2
         version: 52.15.2(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@nuxt/kit@3.21.6)(@types/markdown-it@14.1.2)(@types/node@22.19.19)(@vue/compiler-sfc@3.5.34)(markdown-it@14.1.1)(playwright-chromium@1.61.1)(postcss@8.5.14)
+      axe-core:
+        specifier: 4.12.1
+        version: 4.12.1
       playwright-chromium:
         specifier: ^1.61.1
         version: 1.61.1
@@ -1011,6 +1014,10 @@ packages:
   ast-walker-scope@0.8.3:
     resolution: {integrity: sha512-cbdCP0PGOBq0ASG+sjnKIoYkWMKhhz+F/h9pRexUdX2Hd38+WOlBkRKlqkGOSm0YQpcFMQBJeK4WspUAkwsEdg==}
     engines: {node: '>=20.19.0'}
+
+  axe-core@4.12.1:
+    resolution: {integrity: sha512-s7iGf5GaVMxEG0ENN9x+xTr7GFZCb1ZP/1uATUpCEK2X78nDB3RwbtFCo9pGAf9ru+VwoQ464DkaLEeRM08wJA==}
+    engines: {node: '>=4'}
 
   baseline-browser-mapping@2.10.30:
     resolution: {integrity: sha512-xjOFN16Ha1+Rz4nFYKqHU/LSB+gx/Vi3yQLX7r7sAW+Wa+8hhF2h4pvqTrTMc8+WcDBEunnUurr46Jvv0jk3Vg==}
@@ -4065,6 +4072,8 @@ snapshots:
     dependencies:
       '@babel/parser': 7.29.3
       ast-kit: 2.2.0
+
+  axe-core@4.12.1: {}
 
   baseline-browser-mapping@2.10.30: {}
 

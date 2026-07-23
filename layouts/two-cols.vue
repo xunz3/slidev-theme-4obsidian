@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import SlideFrame from '../components/SlideFrame.vue'
-
-type ChromeSetting = 'auto' | 'on' | 'off'
+import type { PresentationChrome } from '../setup/presentation-config'
 
 withDefaults(defineProps<{
   title?: string
   subtitle?: string
-  chrome?: ChromeSetting
+  chrome?: PresentationChrome
   gap?: string
   reverse?: boolean
 }>(), {
@@ -16,20 +15,18 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="slidev-layout two-cols">
-    <SlideFrame variant="two-cols" :title="title" :subtitle="subtitle" :chrome="chrome">
-      <div
-        class="slide-layout-two-cols"
-        :class="{ 'slide-layout-two-cols--reverse': reverse }"
-        :style="{ '--presentation-two-cols-gap': gap }"
-      >
-        <div class="slide-layout-two-cols__pane">
-          <slot />
-        </div>
-        <div class="slide-layout-two-cols__pane">
-          <slot name="right" />
-        </div>
+  <SlideFrame variant="two-cols" :title="title" :subtitle="subtitle" :chrome="chrome">
+    <div
+      class="slide-layout-two-cols"
+      :class="{ 'slide-layout-two-cols--reverse': reverse }"
+      :style="{ '--presentation-two-cols-gap': gap }"
+    >
+      <div class="slide-layout-two-cols__pane">
+        <slot />
       </div>
-    </SlideFrame>
-  </div>
+      <div class="slide-layout-two-cols__pane">
+        <slot name="right" />
+      </div>
+    </div>
+  </SlideFrame>
 </template>

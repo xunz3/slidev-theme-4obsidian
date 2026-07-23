@@ -1,0 +1,1080 @@
+{
+  "schemaVersion": 1,
+  "phase": "after",
+  "measuredAt": "2026-07-23T15:50:50.605Z",
+  "gitCommit": "275797679531f2e418bc93b82929b757ab8e2991",
+  "workingTreeDirty": true,
+  "nodeVersion": "v26.5.0",
+  "pnpmVersion": "11.13.1",
+  "lockfileSha256": "4bb18aa8b427b07f4f14c868b702a2aa1e86631ff7eb114f741aff7884809beb",
+  "baselineRecord": "tests/quality/baselines/output-sizes.json",
+  "status": "pass",
+  "decks": {
+    "example": {
+      "source": "example.md",
+      "outputDirectory": ".artifacts/quality/build/maintained/example",
+      "baselineBytes": 3232547,
+      "maximumBytes": 3394174,
+      "totalBytes": 1363968,
+      "status": "pass",
+      "files": [
+        {
+          "path": "_redirects",
+          "bytes": 24
+        },
+        {
+          "path": "404.html",
+          "bytes": 2992
+        },
+        {
+          "path": "assets/_plugin-vue_export-helper-BOai-rQB.js",
+          "bytes": 84
+        },
+        {
+          "path": "assets/404-kaxLOuCG.css",
+          "bytes": 157
+        },
+        {
+          "path": "assets/default-CzEc_izY.js",
+          "bytes": 525
+        },
+        {
+          "path": "assets/DrawingControls-Dhbx0szf.css",
+          "bytes": 73
+        },
+        {
+          "path": "assets/emblem-BQDapz9b.svg",
+          "bytes": 8119
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-DV4IIcz1.svg",
+          "bytes": 179085
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-white-V9bAWGsJ.png",
+          "bytes": 31923
+        },
+        {
+          "path": "assets/emblem-name-bilingual-stacked-ZKQ7LqUz.svg",
+          "bytes": 99508
+        },
+        {
+          "path": "assets/emblem-name-bilingual-vt-white-Bfx5k6zX.png",
+          "bytes": 25961
+        },
+        {
+          "path": "assets/emblem-TS3BWHEu.svg",
+          "bytes": 70710
+        },
+        {
+          "path": "assets/emblem-white-CDdvkJic.png",
+          "bytes": 30431
+        },
+        {
+          "path": "assets/entry-Dtc0Qqat.css",
+          "bytes": 324
+        },
+        {
+          "path": "assets/index-1KdXgrTY.css",
+          "bytes": 172989
+        },
+        {
+          "path": "assets/index-DV8GJeFY.js",
+          "bytes": 125226
+        },
+        {
+          "path": "assets/logo-BYkHSa_O.png",
+          "bytes": 94320
+        },
+        {
+          "path": "assets/md-Boc_TFp-.js",
+          "bytes": 3485
+        },
+        {
+          "path": "assets/md-CI_ZpClm.js",
+          "bytes": 1033
+        },
+        {
+          "path": "assets/md-CIjMKv0D.js",
+          "bytes": 1220
+        },
+        {
+          "path": "assets/md-D4CClZPJ.js",
+          "bytes": 1985
+        },
+        {
+          "path": "assets/md-DqwWgnD7.js",
+          "bytes": 1350
+        },
+        {
+          "path": "assets/md-zAyds2QJ.js",
+          "bytes": 1005
+        },
+        {
+          "path": "assets/modules/file-saver-Cv5wbHQp.js",
+          "bytes": 2690
+        },
+        {
+          "path": "assets/modules/shiki-BhczoDnk.css",
+          "bytes": 14622
+        },
+        {
+          "path": "assets/modules/shiki-BiiZU2CK.js",
+          "bytes": 220462
+        },
+        {
+          "path": "assets/modules/unplugin-icons-CcHyyibr.js",
+          "bytes": 1653
+        },
+        {
+          "path": "assets/modules/vue-BY1aeybS.js",
+          "bytes": 84496
+        },
+        {
+          "path": "assets/NavControls-Dd_n1RRn.css",
+          "bytes": 1040
+        },
+        {
+          "path": "assets/NoteDisplay-BtAu3nCu.css",
+          "bytes": 293
+        },
+        {
+          "path": "assets/play-D_7yfuao.css",
+          "bytes": 62
+        },
+        {
+          "path": "assets/presenter-Dr1UtNhq.css",
+          "bytes": 3446
+        },
+        {
+          "path": "assets/rolldown-runtime-S-ySWqyJ.js",
+          "bytes": 694
+        },
+        {
+          "path": "assets/shortcuts-DukGRGdL.css",
+          "bytes": 525
+        },
+        {
+          "path": "assets/SidebarPreviewPresenter-BmoQ63YR.css",
+          "bytes": 11546
+        },
+        {
+          "path": "assets/SidebarPreviewPresenter-s9bDwK5w.js",
+          "bytes": 18470
+        },
+        {
+          "path": "assets/SlideFrame-B4lrDB9s.js",
+          "bytes": 5900
+        },
+        {
+          "path": "assets/slidev/404-M3COIiz4.js",
+          "bytes": 1164
+        },
+        {
+          "path": "assets/slidev/DrawingControls-w2ckJK5k.js",
+          "bytes": 5398
+        },
+        {
+          "path": "assets/slidev/DrawingLayer-BIoFylRw.js",
+          "bytes": 594
+        },
+        {
+          "path": "assets/slidev/entry-DrsLyyeA.js",
+          "bytes": 938
+        },
+        {
+          "path": "assets/slidev/IconButton-Cm_5h3zC.js",
+          "bytes": 588
+        },
+        {
+          "path": "assets/slidev/Modal-AU4qW7-Z.js",
+          "bytes": 715
+        },
+        {
+          "path": "assets/slidev/NavControls-YHcde0O4.js",
+          "bytes": 14155
+        },
+        {
+          "path": "assets/slidev/NoteDisplay-CZKUePuF.js",
+          "bytes": 4844
+        },
+        {
+          "path": "assets/slidev/NoteEditable-C3c2Hzvm.js",
+          "bytes": 2215
+        },
+        {
+          "path": "assets/slidev/notes-BNR2LdLu.js",
+          "bytes": 3300
+        },
+        {
+          "path": "assets/slidev/notes-edit-c46gzVBD.js",
+          "bytes": 2132
+        },
+        {
+          "path": "assets/slidev/NoteStatic-DeMwIE9Q.js",
+          "bytes": 459
+        },
+        {
+          "path": "assets/slidev/overview-COJ-zAWh.js",
+          "bytes": 5798
+        },
+        {
+          "path": "assets/slidev/play-DmGSU7P1.js",
+          "bytes": 5190
+        },
+        {
+          "path": "assets/slidev/presenter-BPiCPPbQ.js",
+          "bytes": 10203
+        },
+        {
+          "path": "assets/slidev/shortcuts-Dm1EvnEN.js",
+          "bytes": 50400
+        },
+        {
+          "path": "assets/slidev/SlideWrapper-B_3zdxMi.js",
+          "bytes": 4437
+        },
+        {
+          "path": "assets/slidev/TimerBar-DHzVIoNb.js",
+          "bytes": 2770
+        },
+        {
+          "path": "assets/slidev/useNav-UkR8DY3u.js",
+          "bytes": 22664
+        },
+        {
+          "path": "assets/SlideWrapper-CynDdCKi.css",
+          "bytes": 920
+        },
+        {
+          "path": "assets/syncState-BEH2kddf.js",
+          "bytes": 1398
+        },
+        {
+          "path": "index.html",
+          "bytes": 2992
+        },
+        {
+          "path": "obsidian-card.svg",
+          "bytes": 1133
+        },
+        {
+          "path": "theme/public/obsidian-card.svg",
+          "bytes": 1133
+        }
+      ]
+    },
+    "default-only": {
+      "source": "fixtures/default-preset.md",
+      "outputDirectory": ".artifacts/quality/build/maintained/default-only",
+      "baselineBytes": 4318670,
+      "maximumBytes": 4534603,
+      "totalBytes": 2449866,
+      "status": "pass",
+      "files": [
+        {
+          "path": "_redirects",
+          "bytes": 24
+        },
+        {
+          "path": "404.html",
+          "bytes": 1648
+        },
+        {
+          "path": "assets/_plugin-vue_export-helper-BOai-rQB.js",
+          "bytes": 84
+        },
+        {
+          "path": "assets/404-BeFn1IQi.css",
+          "bytes": 157
+        },
+        {
+          "path": "assets/default-CaFUpWNH.js",
+          "bytes": 525
+        },
+        {
+          "path": "assets/DrawingControls-Dhbx0szf.css",
+          "bytes": 73
+        },
+        {
+          "path": "assets/emblem-BQDapz9b.svg",
+          "bytes": 8119
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-DV4IIcz1.svg",
+          "bytes": 179085
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-white-V9bAWGsJ.png",
+          "bytes": 31923
+        },
+        {
+          "path": "assets/emblem-name-bilingual-stacked-ZKQ7LqUz.svg",
+          "bytes": 99508
+        },
+        {
+          "path": "assets/emblem-name-bilingual-vt-white-Bfx5k6zX.png",
+          "bytes": 25961
+        },
+        {
+          "path": "assets/emblem-TS3BWHEu.svg",
+          "bytes": 70710
+        },
+        {
+          "path": "assets/emblem-white-CDdvkJic.png",
+          "bytes": 30431
+        },
+        {
+          "path": "assets/entry-BRPSgtoU.css",
+          "bytes": 324
+        },
+        {
+          "path": "assets/index-B9CKzx7J.css",
+          "bytes": 200146
+        },
+        {
+          "path": "assets/index-CbBntupE.js",
+          "bytes": 121216
+        },
+        {
+          "path": "assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+          "bytes": 28076
+        },
+        {
+          "path": "assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+          "bytes": 33516
+        },
+        {
+          "path": "assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+          "bytes": 63632
+        },
+        {
+          "path": "assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+          "bytes": 12368
+        },
+        {
+          "path": "assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+          "bytes": 7716
+        },
+        {
+          "path": "assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+          "bytes": 6912
+        },
+        {
+          "path": "assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+          "bytes": 7656
+        },
+        {
+          "path": "assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+          "bytes": 6908
+        },
+        {
+          "path": "assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+          "bytes": 12344
+        },
+        {
+          "path": "assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+          "bytes": 19584
+        },
+        {
+          "path": "assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+          "bytes": 13296
+        },
+        {
+          "path": "assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+          "bytes": 11348
+        },
+        {
+          "path": "assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+          "bytes": 19572
+        },
+        {
+          "path": "assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+          "bytes": 11316
+        },
+        {
+          "path": "assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+          "bytes": 13208
+        },
+        {
+          "path": "assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+          "bytes": 25324
+        },
+        {
+          "path": "assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+          "bytes": 29912
+        },
+        {
+          "path": "assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+          "bytes": 51336
+        },
+        {
+          "path": "assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+          "bytes": 16780
+        },
+        {
+          "path": "assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+          "bytes": 32968
+        },
+        {
+          "path": "assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+          "bytes": 19412
+        },
+        {
+          "path": "assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+          "bytes": 33580
+        },
+        {
+          "path": "assets/KaTeX_Main-Italic-BMLOBm91.woff",
+          "bytes": 19676
+        },
+        {
+          "path": "assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+          "bytes": 16988
+        },
+        {
+          "path": "assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "bytes": 26272
+        },
+        {
+          "path": "assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+          "bytes": 30772
+        },
+        {
+          "path": "assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+          "bytes": 53580
+        },
+        {
+          "path": "assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+          "bytes": 31196
+        },
+        {
+          "path": "assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+          "bytes": 16400
+        },
+        {
+          "path": "assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+          "bytes": 18668
+        },
+        {
+          "path": "assets/KaTeX_Math-Italic-DA0__PXp.woff",
+          "bytes": 18748
+        },
+        {
+          "path": "assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+          "bytes": 31308
+        },
+        {
+          "path": "assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "bytes": 16440
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+          "bytes": 24504
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+          "bytes": 12216
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+          "bytes": 14408
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+          "bytes": 12028
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+          "bytes": 14112
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+          "bytes": 22364
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+          "bytes": 19436
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+          "bytes": 12316
+        },
+        {
+          "path": "assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+          "bytes": 10344
+        },
+        {
+          "path": "assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+          "bytes": 16648
+        },
+        {
+          "path": "assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+          "bytes": 9644
+        },
+        {
+          "path": "assets/KaTeX_Script-Regular-D5yQViql.woff",
+          "bytes": 10588
+        },
+        {
+          "path": "assets/KaTeX_Size1-Regular-C195tn64.woff",
+          "bytes": 6496
+        },
+        {
+          "path": "assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+          "bytes": 12228
+        },
+        {
+          "path": "assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+          "bytes": 5468
+        },
+        {
+          "path": "assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+          "bytes": 11508
+        },
+        {
+          "path": "assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+          "bytes": 5208
+        },
+        {
+          "path": "assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+          "bytes": 6188
+        },
+        {
+          "path": "assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+          "bytes": 4420
+        },
+        {
+          "path": "assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+          "bytes": 7588
+        },
+        {
+          "path": "assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+          "bytes": 5980
+        },
+        {
+          "path": "assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+          "bytes": 4928
+        },
+        {
+          "path": "assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+          "bytes": 10364
+        },
+        {
+          "path": "assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+          "bytes": 16028
+        },
+        {
+          "path": "assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+          "bytes": 13568
+        },
+        {
+          "path": "assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+          "bytes": 27556
+        },
+        {
+          "path": "assets/logo-BYkHSa_O.png",
+          "bytes": 94320
+        },
+        {
+          "path": "assets/md-BYekSFTQ.js",
+          "bytes": 2841
+        },
+        {
+          "path": "assets/md-ChvZxmj3.js",
+          "bytes": 1378
+        },
+        {
+          "path": "assets/md-CLA6spBO.js",
+          "bytes": 8043
+        },
+        {
+          "path": "assets/md-CrRYHiRx.js",
+          "bytes": 962
+        },
+        {
+          "path": "assets/md-D_V-9goZ.js",
+          "bytes": 954
+        },
+        {
+          "path": "assets/md-D9cLDRbk.js",
+          "bytes": 1356
+        },
+        {
+          "path": "assets/md-DNvMBY8I.js",
+          "bytes": 2064
+        },
+        {
+          "path": "assets/md-DTZ-dXCT.js",
+          "bytes": 1117
+        },
+        {
+          "path": "assets/md-srhfF3K0.js",
+          "bytes": 1034
+        },
+        {
+          "path": "assets/modules/file-saver-BDKcwkUL.js",
+          "bytes": 2690
+        },
+        {
+          "path": "assets/modules/shiki-BhczoDnk.css",
+          "bytes": 14622
+        },
+        {
+          "path": "assets/modules/shiki-BiiZU2CK.js",
+          "bytes": 220462
+        },
+        {
+          "path": "assets/modules/unplugin-icons-BdNXfkgm.js",
+          "bytes": 2600
+        },
+        {
+          "path": "assets/modules/vue-CXcjqcnt.js",
+          "bytes": 86665
+        },
+        {
+          "path": "assets/NoteDisplay-BW4FV8RW.css",
+          "bytes": 293
+        },
+        {
+          "path": "assets/play-D_7yfuao.css",
+          "bytes": 62
+        },
+        {
+          "path": "assets/presenter-D8BjR0UM.css",
+          "bytes": 3446
+        },
+        {
+          "path": "assets/rolldown-runtime-S-ySWqyJ.js",
+          "bytes": 694
+        },
+        {
+          "path": "assets/shortcuts-CAX8msaP.css",
+          "bytes": 1564
+        },
+        {
+          "path": "assets/SlideFrame-B_ZOMdYS.js",
+          "bytes": 5900
+        },
+        {
+          "path": "assets/slidev/404-Cbm3YXgQ.js",
+          "bytes": 1164
+        },
+        {
+          "path": "assets/slidev/DrawingControls-Cm-Tl8vE.js",
+          "bytes": 5398
+        },
+        {
+          "path": "assets/slidev/DrawingLayer-23ERFyre.js",
+          "bytes": 594
+        },
+        {
+          "path": "assets/slidev/entry-BHNd_i0t.js",
+          "bytes": 938
+        },
+        {
+          "path": "assets/slidev/IconButton-CZCDRC09.js",
+          "bytes": 588
+        },
+        {
+          "path": "assets/slidev/md-Cghu6G1W.js",
+          "bytes": 8546
+        },
+        {
+          "path": "assets/slidev/Modal-DY1rSYdq.js",
+          "bytes": 715
+        },
+        {
+          "path": "assets/slidev/NoteDisplay-BG3ZwqDV.js",
+          "bytes": 4844
+        },
+        {
+          "path": "assets/slidev/NoteEditable-DFch6vx-.js",
+          "bytes": 2215
+        },
+        {
+          "path": "assets/slidev/notes-DF5_c6Aq.js",
+          "bytes": 3300
+        },
+        {
+          "path": "assets/slidev/notes-edit-AdVDtKB_.js",
+          "bytes": 2132
+        },
+        {
+          "path": "assets/slidev/overview-BMYDD-hS.js",
+          "bytes": 5798
+        },
+        {
+          "path": "assets/slidev/play-LYeeda2h.js",
+          "bytes": 5151
+        },
+        {
+          "path": "assets/slidev/presenter-Ca0QWeUL.js",
+          "bytes": 10412
+        },
+        {
+          "path": "assets/slidev/shortcuts-Bl5ZfIVt.js",
+          "bytes": 63129
+        },
+        {
+          "path": "assets/slidev/SlideWrapper-mrjBNq1j.js",
+          "bytes": 4442
+        },
+        {
+          "path": "assets/slidev/TimerBar-vcmdBmdJ.js",
+          "bytes": 2770
+        },
+        {
+          "path": "assets/slidev/useNav-OLA-Lxph.js",
+          "bytes": 26682
+        },
+        {
+          "path": "assets/SlideWrapper-B6L0eUoe.css",
+          "bytes": 920
+        },
+        {
+          "path": "assets/syncState-BEH2kddf.js",
+          "bytes": 1398
+        },
+        {
+          "path": "index.html",
+          "bytes": 1648
+        },
+        {
+          "path": "theme/public/obsidian-card.svg",
+          "bytes": 1133
+        }
+      ]
+    },
+    "protocol": {
+      "source": "fixtures/obsidian-protocol.md",
+      "outputDirectory": ".artifacts/quality/build/maintained/protocol",
+      "baselineBytes": 3282934,
+      "maximumBytes": 3447080,
+      "totalBytes": 1414020,
+      "status": "pass",
+      "files": [
+        {
+          "path": "_redirects",
+          "bytes": 24
+        },
+        {
+          "path": "404.html",
+          "bytes": 2974
+        },
+        {
+          "path": "assets/_plugin-vue_export-helper-BOai-rQB.js",
+          "bytes": 84
+        },
+        {
+          "path": "assets/404-BeFn1IQi.css",
+          "bytes": 157
+        },
+        {
+          "path": "assets/default-DODtV3hF.js",
+          "bytes": 525
+        },
+        {
+          "path": "assets/DrawingControls-Dhbx0szf.css",
+          "bytes": 73
+        },
+        {
+          "path": "assets/emblem-BQDapz9b.svg",
+          "bytes": 8119
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-DV4IIcz1.svg",
+          "bytes": 179085
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-white-V9bAWGsJ.png",
+          "bytes": 31923
+        },
+        {
+          "path": "assets/emblem-name-bilingual-stacked-ZKQ7LqUz.svg",
+          "bytes": 99508
+        },
+        {
+          "path": "assets/emblem-name-bilingual-vt-white-Bfx5k6zX.png",
+          "bytes": 25961
+        },
+        {
+          "path": "assets/emblem-TS3BWHEu.svg",
+          "bytes": 70710
+        },
+        {
+          "path": "assets/emblem-white-CDdvkJic.png",
+          "bytes": 30431
+        },
+        {
+          "path": "assets/entry-BRPSgtoU.css",
+          "bytes": 324
+        },
+        {
+          "path": "assets/index-bBQ-PtLr.css",
+          "bytes": 173201
+        },
+        {
+          "path": "assets/index-Cve77sxH.js",
+          "bytes": 125593
+        },
+        {
+          "path": "assets/logo-BYkHSa_O.png",
+          "bytes": 94320
+        },
+        {
+          "path": "assets/md-1EtsOrfd.js",
+          "bytes": 962
+        },
+        {
+          "path": "assets/md-a6IoO4Wz.js",
+          "bytes": 562
+        },
+        {
+          "path": "assets/md-B0xuHWW9.js",
+          "bytes": 857
+        },
+        {
+          "path": "assets/md-B8bDdA1s.js",
+          "bytes": 580
+        },
+        {
+          "path": "assets/md-BEbCHOq9.js",
+          "bytes": 617
+        },
+        {
+          "path": "assets/md-BJ2maEPh.js",
+          "bytes": 1986
+        },
+        {
+          "path": "assets/md-BokY1VGj.js",
+          "bytes": 594
+        },
+        {
+          "path": "assets/md-C77gdGuU.js",
+          "bytes": 1483
+        },
+        {
+          "path": "assets/md-CCnX5Dxv.js",
+          "bytes": 1468
+        },
+        {
+          "path": "assets/md-CGljZwnG.js",
+          "bytes": 2936
+        },
+        {
+          "path": "assets/md-cgUhvOql.js",
+          "bytes": 1393
+        },
+        {
+          "path": "assets/md-CriaVhiu.js",
+          "bytes": 1462
+        },
+        {
+          "path": "assets/md-CSl1JtA9.js",
+          "bytes": 913
+        },
+        {
+          "path": "assets/md-CT5oL_M-.js",
+          "bytes": 1032
+        },
+        {
+          "path": "assets/md-D7eWIEsP.js",
+          "bytes": 2526
+        },
+        {
+          "path": "assets/md-DfWiTz87.js",
+          "bytes": 1427
+        },
+        {
+          "path": "assets/md-Dg5--XZz.js",
+          "bytes": 1420
+        },
+        {
+          "path": "assets/md-DPFFdGc4.js",
+          "bytes": 582
+        },
+        {
+          "path": "assets/md-Dx2742PY.js",
+          "bytes": 1130
+        },
+        {
+          "path": "assets/md-n20JAWE-.js",
+          "bytes": 1103
+        },
+        {
+          "path": "assets/modules/file-saver-BOcWHTmY.js",
+          "bytes": 2690
+        },
+        {
+          "path": "assets/modules/shiki-BhczoDnk.css",
+          "bytes": 14622
+        },
+        {
+          "path": "assets/modules/shiki-BiiZU2CK.js",
+          "bytes": 220462
+        },
+        {
+          "path": "assets/modules/unplugin-icons-BdzPTNx4.js",
+          "bytes": 2600
+        },
+        {
+          "path": "assets/modules/vue-CXcjqcnt.js",
+          "bytes": 86665
+        },
+        {
+          "path": "assets/NavControls-C0Adng0O.css",
+          "bytes": 1040
+        },
+        {
+          "path": "assets/NoteDisplay-BW4FV8RW.css",
+          "bytes": 293
+        },
+        {
+          "path": "assets/obsidian-card-BZi_Axmi.js",
+          "bytes": 1348
+        },
+        {
+          "path": "assets/play-D_7yfuao.css",
+          "bytes": 62
+        },
+        {
+          "path": "assets/presenter-D8BjR0UM.css",
+          "bytes": 3446
+        },
+        {
+          "path": "assets/rolldown-runtime-S-ySWqyJ.js",
+          "bytes": 694
+        },
+        {
+          "path": "assets/section-BEH-7FgB.js",
+          "bytes": 578
+        },
+        {
+          "path": "assets/shortcuts-B-yPioNQ.css",
+          "bytes": 525
+        },
+        {
+          "path": "assets/SidebarPreviewPresenter-C1vQBam5.css",
+          "bytes": 11546
+        },
+        {
+          "path": "assets/SidebarPreviewPresenter-D2n-glAN.js",
+          "bytes": 18471
+        },
+        {
+          "path": "assets/SlideFrame-D-Cb_2Wl.js",
+          "bytes": 5900
+        },
+        {
+          "path": "assets/slidev/404-DoZpSW1E.js",
+          "bytes": 1164
+        },
+        {
+          "path": "assets/slidev/DrawingControls-D8hZSaKX.js",
+          "bytes": 5398
+        },
+        {
+          "path": "assets/slidev/DrawingLayer-PLV6GRxX.js",
+          "bytes": 589
+        },
+        {
+          "path": "assets/slidev/entry-BNgGPYTQ.js",
+          "bytes": 938
+        },
+        {
+          "path": "assets/slidev/IconButton-DqEuPEM2.js",
+          "bytes": 588
+        },
+        {
+          "path": "assets/slidev/md-BKXxwUm6.js",
+          "bytes": 4146
+        },
+        {
+          "path": "assets/slidev/md-CbrPiD0C.js",
+          "bytes": 8453
+        },
+        {
+          "path": "assets/slidev/md-Chy88JqB.js",
+          "bytes": 1591
+        },
+        {
+          "path": "assets/slidev/Modal-Cqsl2xuP.js",
+          "bytes": 715
+        },
+        {
+          "path": "assets/slidev/NavControls-iIHTfxBP.js",
+          "bytes": 14154
+        },
+        {
+          "path": "assets/slidev/NoteDisplay-A9kExXpW.js",
+          "bytes": 4844
+        },
+        {
+          "path": "assets/slidev/NoteEditable-DpoZ5q_l.js",
+          "bytes": 2215
+        },
+        {
+          "path": "assets/slidev/notes-DzGekrvA.js",
+          "bytes": 3300
+        },
+        {
+          "path": "assets/slidev/notes-edit-Cy0wtRcc.js",
+          "bytes": 2137
+        },
+        {
+          "path": "assets/slidev/NoteStatic-2ekUWYvk.js",
+          "bytes": 459
+        },
+        {
+          "path": "assets/slidev/overview-Do3dcPK0.js",
+          "bytes": 5798
+        },
+        {
+          "path": "assets/slidev/play-byrRGiVF.js",
+          "bytes": 5190
+        },
+        {
+          "path": "assets/slidev/presenter-T_GOrJvN.js",
+          "bytes": 10203
+        },
+        {
+          "path": "assets/slidev/shortcuts-DBYxBiJu.js",
+          "bytes": 51465
+        },
+        {
+          "path": "assets/slidev/SlideWrapper-BS5k3vd4.js",
+          "bytes": 4526
+        },
+        {
+          "path": "assets/slidev/TimerBar-DWA4-RfO.js",
+          "bytes": 2770
+        },
+        {
+          "path": "assets/slidev/useNav-CGyGAKVl.js",
+          "bytes": 37090
+        },
+        {
+          "path": "assets/SlideWrapper-B6L0eUoe.css",
+          "bytes": 920
+        },
+        {
+          "path": "assets/syncState-BEH2kddf.js",
+          "bytes": 1398
+        },
+        {
+          "path": "assets/two-cols-NmTNqsXa.js",
+          "bytes": 875
+        },
+        {
+          "path": "index.html",
+          "bytes": 2974
+        },
+        {
+          "path": "theme/public/obsidian-card.svg",
+          "bytes": 1133
+        }
+      ]
+    }
+  }
+}

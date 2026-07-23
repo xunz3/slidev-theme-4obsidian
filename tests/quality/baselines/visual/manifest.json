@@ -1,0 +1,565 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-07-23T15:33:35.202Z",
+  "gitCommit": "275797679531f2e418bc93b82929b757ab8e2991",
+  "lockfileSha256": "4bb18aa8b427b07f4f14c868b702a2aa1e86631ff7eb114f741aff7884809beb",
+  "reviewer": "Codex spec-001 implementation",
+  "rationale": "Initial spec-001 references after shared-frame isolation and verified metadata-only brand optimization",
+  "viewport": {
+    "deviceScaleFactor": 2,
+    "logicalHeight": 552,
+    "logicalWidth": 980,
+    "rasterHeight": 1104,
+    "rasterWidth": 1960
+  },
+  "tolerance": {
+    "maximumChangedPixelRatio": 0,
+    "maximumChannelDelta": 0,
+    "perChannelThreshold": 0,
+    "rationale": "Pinned Chromium, DPR 2, settled fonts/images, and disabled font subpixel positioning make the reviewed references exact."
+  },
+  "scenarios": [
+    {
+      "buildId": "matrix-default",
+      "caseId": "baseline-default",
+      "coverage": [
+        "preset",
+        "chrome"
+      ],
+      "id": "preset-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 2,
+      "bytes": 171897,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/preset-default-light.png",
+      "sha256": "e7348fcb3d5b4d35e896f8a30ba0a774e5cf0d6a46e55fca606083fd1a1d7802",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "caseId": "baseline-default",
+      "coverage": [
+        "preset",
+        "chrome"
+      ],
+      "id": "preset-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 2,
+      "bytes": 173218,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/preset-default-dark.png",
+      "sha256": "f2d5e0c193dad56617bf0a7fa6c170396a3d5d31b41d26ccb76905c651646ad6",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-ucas",
+      "caseId": "baseline-ucas",
+      "coverage": [
+        "preset",
+        "chrome"
+      ],
+      "id": "preset-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 2,
+      "bytes": 192883,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/preset-ucas-light.png",
+      "sha256": "8f774edf79bf71f7062e8c1fc407f567d838a97453abbf599d374059565727ce",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-ucas",
+      "caseId": "baseline-ucas",
+      "coverage": [
+        "preset",
+        "chrome"
+      ],
+      "id": "preset-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 2,
+      "bytes": 204730,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/preset-ucas-dark.png",
+      "sha256": "84dd7563a9f0852bedeb7f8e15975e01ce8c7e49ed04a4a69be1a08c783a416b",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-ict",
+      "caseId": "baseline-ict",
+      "coverage": [
+        "preset",
+        "chrome"
+      ],
+      "id": "preset-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 2,
+      "bytes": 175085,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/preset-ict-light.png",
+      "sha256": "324b922191d707423f85d57a44df20a63621c92220ffe5f9316a4b871a97a68d",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-ict",
+      "caseId": "baseline-ict",
+      "coverage": [
+        "preset",
+        "chrome"
+      ],
+      "id": "preset-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 2,
+      "bytes": 175732,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/preset-ict-dark.png",
+      "sha256": "fb47489bc6e987e8b7082ba99694c045bea5d1a8e4051884079c855c2ef7a1b8",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-default-light",
+      "layout": "default",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "invalid-inputs",
+      "slide": 6,
+      "bytes": 49486,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-default-light.png",
+      "sha256": "7dd99e22c319ec1f19e3da5c7a93c48c2408f5d2f815f5f4fef47bd0724dcce7",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-default-dark",
+      "layout": "default",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "invalid-inputs",
+      "slide": 6,
+      "bytes": 49830,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-default-dark.png",
+      "sha256": "32e2b5d99405b6d2d12de412a3150673919d1e0cde93c77ad1efe046daf3717f",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-cover-light",
+      "layout": "cover",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-cover",
+      "slide": 8,
+      "bytes": 47436,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-cover-light.png",
+      "sha256": "c5b5bbb30aaa60a094bf426c9dd8ad9e587645e7898f02a182ed41cf86d6877e",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-cover-dark",
+      "layout": "cover",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-cover",
+      "slide": 8,
+      "bytes": 47783,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-cover-dark.png",
+      "sha256": "2c3c4a04f6d02dfdf0275ca17aac12460f558d6f2930448147b9381a2d210250",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-intro-light",
+      "layout": "intro",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-intro",
+      "slide": 9,
+      "bytes": 47233,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-intro-light.png",
+      "sha256": "a6a8615516f33e810751f9c176f94dbc4ecfd7727168005cc4d5dfd4a50d82b4",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-intro-dark",
+      "layout": "intro",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-intro",
+      "slide": 9,
+      "bytes": 47654,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-intro-dark.png",
+      "sha256": "33524f47eaa184cc76d3ad789ca0eac7f811f7370216e68aaac6b1316e616f03",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-section-light",
+      "layout": "section",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-section",
+      "slide": 10,
+      "bytes": 37996,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-section-light.png",
+      "sha256": "88b259c16a8e916f83354c34cf77d08527b95453022bd55c9e96c13163ff155b",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-section-dark",
+      "layout": "section",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-section",
+      "slide": 10,
+      "bytes": 37870,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-section-dark.png",
+      "sha256": "ef892387a37660e6647f79ff1434f8bdce29d2374dd1132cf41dd7afcec2b8fa",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-toc-light",
+      "layout": "toc",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-toc",
+      "slide": 11,
+      "bytes": 53069,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-toc-light.png",
+      "sha256": "7877b95253d7ff1017e37d945b6e144a3255b3162b70ac5a74c6d628090be3e5",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-toc-dark",
+      "layout": "toc",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-toc",
+      "slide": 11,
+      "bytes": 53445,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-toc-dark.png",
+      "sha256": "22dbf5ecc139111139f5cca1b76226c2ba47fd97f635000f3bb5680accda03b0",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-center-light",
+      "layout": "center",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-center",
+      "slide": 12,
+      "bytes": 32461,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-center-light.png",
+      "sha256": "e6351e703e9c1c61dceedf9b26f296729cbc517dbc01193749c8860d0fba3c4a",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-center-dark",
+      "layout": "center",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-center",
+      "slide": 12,
+      "bytes": 32654,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-center-dark.png",
+      "sha256": "f605b16e314cb84eae6de58a58c8fd350e93fa5a6bfc2c1bc4e2966555f48963",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-two-cols-light",
+      "layout": "two-cols",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-two-cols",
+      "slide": 13,
+      "bytes": 51105,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-two-cols-light.png",
+      "sha256": "e3f79cf80c4a3c399cfb3c5add926db24a9c90f170fec4d192c79ab9f323da46",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-two-cols-dark",
+      "layout": "two-cols",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-two-cols",
+      "slide": 13,
+      "bytes": 51336,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-two-cols-dark.png",
+      "sha256": "1345381e2230e7df8cab53d15c96c40436832979c8e400ac25faa52095c2403b",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-statement-light",
+      "layout": "statement",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-statement",
+      "slide": 14,
+      "bytes": 47928,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-statement-light.png",
+      "sha256": "67c87460c8bc52edb4c1c30df66b219164562f3f8967b95a1c94d4071030e646",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-statement-dark",
+      "layout": "statement",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-statement",
+      "slide": 14,
+      "bytes": 48305,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-statement-dark.png",
+      "sha256": "dc8cdcc6c90c6de4282b06428baefd1eaa79bdbc5d48f9084d808da273736159",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-quote-light",
+      "layout": "quote",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-quote",
+      "slide": 15,
+      "bytes": 44908,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-quote-light.png",
+      "sha256": "7e14a482bfcef0dd7a751762b5bcee9c7dbddd1d3f94a6cd1c377bfa33ac59eb",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-quote-dark",
+      "layout": "quote",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-quote",
+      "slide": 15,
+      "bytes": 45460,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-quote-dark.png",
+      "sha256": "370d58f7649270a8baee54b7f96003dbed2d7adf27d5efbfd5ea4b343bd5218c",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-figure-light",
+      "layout": "figure",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-figure",
+      "slide": 16,
+      "bytes": 31311,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-figure-light.png",
+      "sha256": "5e4a9e52014e05c003c75a06208de55b97f4406430c2523aed1e196f6664830c",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-figure-dark",
+      "layout": "figure",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-figure",
+      "slide": 16,
+      "bytes": 31753,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-figure-dark.png",
+      "sha256": "6d07822560b4895690bcccf6735807c5f42df27f03bebe323d98257504e8b60f",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-references-light",
+      "layout": "references",
+      "mode": "light",
+      "preset": "default",
+      "caseId": "layout-references",
+      "slide": 17,
+      "bytes": 48615,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-references-light.png",
+      "sha256": "feb2c26281074beaaeca3c9bef2ee6b4a21f851ebefda9969f4f7d3dd53b06bf",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "coverage": [
+        "layout"
+      ],
+      "id": "layout-references-dark",
+      "layout": "references",
+      "mode": "dark",
+      "preset": "default",
+      "caseId": "layout-references",
+      "slide": 17,
+      "bytes": 48746,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/layout-references-dark.png",
+      "sha256": "01ae70c8d323e504444071334377199e0264f2e2a684b49113ce0b37058670a9",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "caseId": "textual-booleans",
+      "coverage": [
+        "chrome",
+        "textual-booleans"
+      ],
+      "id": "chrome-textual-booleans-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 7,
+      "bytes": 44746,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/chrome-textual-booleans-light.png",
+      "sha256": "c84eba81cc316f274060941f5ed0ac9e987696d8d4eef74a36d969d937273953",
+      "width": 1960
+    },
+    {
+      "buildId": "matrix-default",
+      "caseId": "textual-booleans",
+      "coverage": [
+        "chrome",
+        "textual-booleans"
+      ],
+      "id": "chrome-textual-booleans-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 7,
+      "bytes": 44998,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/chrome-textual-booleans-dark.png",
+      "sha256": "8de2262c64a0d574c725831b7a20b18e9cff7a36a28ac79eb1415e244c4423b4",
+      "width": 1960
+    },
+    {
+      "buildId": "protocol",
+      "caseId": null,
+      "coverage": [
+        "generated-protocol"
+      ],
+      "id": "protocol-generated-callouts-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 5,
+      "bytes": 109206,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/protocol-generated-callouts-light.png",
+      "sha256": "327fcbf44cfeb44e1c4213f1f558c6e9c7baeee86586d0d69b1991af2ae47a15",
+      "width": 1960
+    },
+    {
+      "buildId": "protocol",
+      "caseId": null,
+      "coverage": [
+        "generated-protocol"
+      ],
+      "id": "protocol-generated-callouts-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 5,
+      "bytes": 110045,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/protocol-generated-callouts-dark.png",
+      "sha256": "add7a2a39a90092a2338adad4289d3db5a66178456a068d62bc82145d90a93d9",
+      "width": 1960
+    }
+  ]
+}

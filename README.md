@@ -105,11 +105,18 @@ Per-slide overrides:
 | `presentationPreset` | `default`, `ucas`, `ict` | Override the preset for one slide |
 | `presentationDensity` | `compact`, `normal`, `relaxed` | Override density for one slide |
 | `presentationChrome` | `auto`, `on`, `off` | Override slide chrome behavior |
+| `chrome` | `auto`, `on`, `off` | Alias for `presentationChrome` |
 | `presentationHeader` | `true`, `false` | Force the optional header on or off for one slide |
+| `header` | `true`, `false` | Alias for `presentationHeader` |
 | `footerAuthors` | `true`, `false` | Override left footer author visibility for one slide |
+| `pageNumber` | `true`, `false` | Override right footer page-number visibility for one slide |
 | `footer` | Text | Override the centered footer content for one slide |
 
 `themeConfig` is Slidev's standard theme/addon configuration object. This theme keeps its own options under `themeConfig.presentation` so they do not collide with Slidev core fields or other addons. `density` selects the spacing scale: `compact` uses tighter padding and lists for information-dense slides, `normal` is the default, and `relaxed` gives content more breathing room.
+
+Values resolve independently using first valid precedence. When a layer exists for an option, the order is an explicit layout prop, the canonical per-slide key, its documented alias, the deck-level `themeConfig.presentation` value, and finally the default. Invalid or empty values are skipped instead of suppressing a valid lower-priority value. `accent` is intentionally deck-only.
+
+Textual booleans are accepted for YAML and generator compatibility. Boolean options accept native booleans plus the strings `true`, `false`, `on`, and `off` after trimming; other spellings such as `yes`, `no`, `1`, or uppercase variants are invalid. `chrome` also maps native or textual `true` to `on` and `false` to `off`.
 
 Deck metadata such as `title`, `subtitle`, `footer`, and `authors` stays at the Slidev frontmatter root because it describes content, not theme behavior. The cover layout renders explicit `subtitle` metadata under the title; it does not infer a subtitle from the first paragraph. `authors` can be a list of strings or objects with `name`, `institution`, and `email`; the cover layout renders each author's full details side by side under the title, and the footer uses only author names on the left when `themeConfig.presentation.footerAuthors` is enabled. The centered footer uses per-slide `footer` first, then top-level `footer`, then top-level `title`.
 
@@ -123,6 +130,10 @@ Title rendering follows a fixed rule:
 | Footer center | Per-slide `footer`, then root `footer`, then root `title` | Footer content is deck chrome, not the slide's visible content title |
 
 Theme chrome means the non-content frame around each slide. By default it is footer-only: author names are used on the left footer, deck metadata is used in the centered footer, and `themeConfig.presentation.pageNumber` only controls the right footer page number. The header is intentionally opt-in because per-slide `title` and `subtitle` usually duplicate the visible Markdown heading.
+
+## Compatibility and migration
+
+No migration is required for existing decks. Ordinary Slidev Markdown, all eleven layout names and props, root deck metadata, `themeConfig.presentation`, documented per-slide overrides, and `.obsidian-slidev-*` semantic markup remain compatible. The refactor changes internal ownership—one shared frame and one configuration authority—without changing the public authoring surface. Legacy `chrome` and `header` per-slide aliases remain accepted; the `presentationChrome` and `presentationHeader` names are preferred in new decks.
 
 ## CSS Variables
 
@@ -265,9 +276,48 @@ pnpm run dev:fixture
 pnpm run build:fixture
 ```
 
+## Quality gates
+
+Install dependencies from the frozen lockfile before running release checks:
+
+```bash
+pnpm install --frozen-lockfile
+```
+
+Focused diagnostics:
+
+```bash
+node tests/quality/configuration.spec.mjs
+node scripts/check-presentation-css.mjs
+node --test tests/quality/preset-isolation.spec.mjs
+node --test tests/quality/accessibility.spec.mjs
+node --test tests/quality/visual.spec.mjs
+pnpm run assets:check
+```
+
+`pnpm run assets:optimize` is the deterministic source-maintenance command for the six UCAS SVGs. It removes only the reviewed non-rendering metadata and refuses unknown source hashes. Run `pnpm run assets:check` afterward to verify exact size budgets, structure, alpha, browser RGBA output, explicit image dimensions, and idempotence. Normal asset checks do not rewrite assets or approved baselines.
+
+The aggregate release command is:
+
+```bash
+pnpm run quality
+```
+
+It builds the five maintained decks and three generated preset-matrix decks with at most two builds at once, then runs configuration, architecture, preset isolation, accessibility, interaction, visual, asset, and output-size gates. Runtime evidence and a phase summary are retained under `.artifacts/quality/`. The gate exits `0` on success, `1` for product or contract failures, and `2` for harness errors, unapproved skips, or the hard limit of 300 seconds.
+
+Approved visual and output baselines are immutable during normal checks. Update them only for an intentional reviewed change:
+
+```bash
+pnpm run quality:update-baselines -- --reviewer "Reviewer name" --rationale "Approved visual or output change"
+git diff -- tests/quality/baselines
+pnpm run quality
+```
+
+Review the resulting PNG, manifest, byte-budget, and provenance diff. Never update a baseline merely to hide an unexplained failure.
+
 ## Development
 
-The latest light/dark visual review is recorded in [`qa/preset-design-qa.md`](qa/preset-design-qa.md).
+The latest cross-preset visual review is recorded in [`qa/refactor-theme-architecture/visual-review.md`](qa/refactor-theme-architecture/visual-review.md).
 
 - `pnpm install`
 - `pnpm run dev` to start theme preview of `example.md`

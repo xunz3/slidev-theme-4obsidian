@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import SlideFrame from '../components/SlideFrame.vue'
 import { computed } from 'vue'
-
-type ChromeSetting = 'auto' | 'on' | 'off'
+import type { PresentationChrome } from '../setup/presentation-config'
 
 const props = defineProps({
   background: {
@@ -18,7 +17,7 @@ const props = defineProps({
     default: undefined,
   },
   chrome: {
-    type: String as () => ChromeSetting,
+    type: String as () => PresentationChrome,
     default: undefined,
   },
 })
@@ -33,9 +32,13 @@ const style = computed(() => {
 </script>
 
 <template>
-  <div class="slidev-layout intro" :style="style">
-    <SlideFrame variant="intro" :title="title" :subtitle="subtitle" :chrome="chrome">
-      <slot />
-    </SlideFrame>
-  </div>
+  <SlideFrame
+    variant="intro"
+    :title="title"
+    :subtitle="subtitle"
+    :chrome="chrome"
+    :canvas-style="style"
+  >
+    <slot />
+  </SlideFrame>
 </template>

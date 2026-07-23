@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import SlideFrame from '../components/SlideFrame.vue'
-
-type ChromeSetting = 'auto' | 'on' | 'off'
+import type { PresentationChrome } from '../setup/presentation-config'
 
 defineProps<{
   title?: string
   subtitle?: string
-  chrome?: ChromeSetting
+  chrome?: PresentationChrome
 }>()
 </script>
 
 <template>
-  <div class="slidev-layout default">
-    <SlideFrame variant="default" :title="title" :subtitle="subtitle" :chrome="chrome">
-      <slot />
-    </SlideFrame>
-  </div>
+  <SlideFrame variant="default" :title="title" :subtitle="subtitle" :chrome="chrome">
+    <slot />
+  </SlideFrame>
 </template>
