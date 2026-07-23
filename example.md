@@ -90,7 +90,7 @@ The default visual system is selected automatically. UCAS can be selected for in
 | Layer | Responsibility |
 | --- | --- |
 | `obsidian-slidev` | Convert vault notes into Slidev-native markup |
-| `slidev-theme-4obsidian` | Render Slidev layouts, presets, and optional Obsidian semantics |
+| `slidev-theme-lilac` | Render Slidev layouts, presets, and optional Obsidian semantics |
 
 ---
 layout: center
