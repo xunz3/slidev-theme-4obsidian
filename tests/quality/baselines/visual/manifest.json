@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-07-23T15:33:35.202Z",
-  "gitCommit": "275797679531f2e418bc93b82929b757ab8e2991",
+  "capturedAt": "2026-07-24T17:49:44.917Z",
+  "gitCommit": "9ab72767e257287fc510865ec37d107566699863",
   "lockfileSha256": "4bb18aa8b427b07f4f14c868b702a2aa1e86631ff7eb114f741aff7884809beb",
-  "reviewer": "Codex spec-001 implementation",
-  "rationale": "Initial spec-001 references after shared-frame isolation and verified metadata-only brand optimization",
+  "reviewer": "Codex implementation review",
+  "rationale": "Reviewed expanded component, layout, slide-accent, technical-authoring, task, and highlight scenarios across all presets and modes",
   "viewport": {
     "deviceScaleFactor": 2,
     "logicalHeight": 552,
@@ -30,10 +30,10 @@
       "mode": "light",
       "preset": "default",
       "slide": 2,
-      "bytes": 171897,
+      "bytes": 171948,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-default-light.png",
-      "sha256": "e7348fcb3d5b4d35e896f8a30ba0a774e5cf0d6a46e55fca606083fd1a1d7802",
+      "sha256": "25f53d2e253e0b5dff70104f117825e1f2170bc21bad146ad6c4e394e7bf70bc",
       "width": 1960
     },
     {
@@ -47,10 +47,10 @@
       "mode": "dark",
       "preset": "default",
       "slide": 2,
-      "bytes": 173218,
+      "bytes": 173248,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-default-dark.png",
-      "sha256": "f2d5e0c193dad56617bf0a7fa6c170396a3d5d31b41d26ccb76905c651646ad6",
+      "sha256": "289841ae64f435dd742996b90b178baa29bcf7350a45ffbd086488b69116f1b3",
       "width": 1960
     },
     {
@@ -64,10 +64,10 @@
       "mode": "light",
       "preset": "ucas",
       "slide": 2,
-      "bytes": 192883,
+      "bytes": 192902,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ucas-light.png",
-      "sha256": "8f774edf79bf71f7062e8c1fc407f567d838a97453abbf599d374059565727ce",
+      "sha256": "9b8f797661349bf592a946f2b292ebc8aa81617731f948532ac77a78e14e551f",
       "width": 1960
     },
     {
@@ -81,10 +81,10 @@
       "mode": "dark",
       "preset": "ucas",
       "slide": 2,
-      "bytes": 204730,
+      "bytes": 204665,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ucas-dark.png",
-      "sha256": "84dd7563a9f0852bedeb7f8e15975e01ce8c7e49ed04a4a69be1a08c783a416b",
+      "sha256": "97b98a7d09a1a5e27f0729e9c2aa2881d7c0a24e133fb1d7fb938c3026f5d302",
       "width": 1960
     },
     {
@@ -98,10 +98,10 @@
       "mode": "light",
       "preset": "ict",
       "slide": 2,
-      "bytes": 175085,
+      "bytes": 175360,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ict-light.png",
-      "sha256": "324b922191d707423f85d57a44df20a63621c92220ffe5f9316a4b871a97a68d",
+      "sha256": "22036c568d1237e5264dc3f1f89ef93a28a5bb86710faf9e81a01b7c2ff7f821",
       "width": 1960
     },
     {
@@ -115,10 +115,10 @@
       "mode": "dark",
       "preset": "ict",
       "slide": 2,
-      "bytes": 175732,
+      "bytes": 175719,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ict-dark.png",
-      "sha256": "fb47489bc6e987e8b7082ba99694c045bea5d1a8e4051884079c855c2ef7a1b8",
+      "sha256": "569730027e9751baa23fb8ba174f1e9a9b1f7a3bcfb2ed7f9c81637ff40f9a8f",
       "width": 1960
     },
     {
@@ -132,10 +132,10 @@
       "preset": "default",
       "caseId": "invalid-inputs",
       "slide": 6,
-      "bytes": 49486,
+      "bytes": 49487,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-default-light.png",
-      "sha256": "7dd99e22c319ec1f19e3da5c7a93c48c2408f5d2f815f5f4fef47bd0724dcce7",
+      "sha256": "b9c15b93c92333d5bd17e62b5aa10909fc9edd65dc9fa9251657f63f17d0a5e2",
       "width": 1960
     },
     {
@@ -152,7 +152,7 @@
       "bytes": 49830,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-default-dark.png",
-      "sha256": "32e2b5d99405b6d2d12de412a3150673919d1e0cde93c77ad1efe046daf3717f",
+      "sha256": "931ce81cac223eaccf210eabb8c8959f4aad162a8bb3785a53e5ae3e616af2b8",
       "width": 1960
     },
     {
@@ -200,10 +200,10 @@
       "preset": "default",
       "caseId": "layout-intro",
       "slide": 9,
-      "bytes": 47233,
+      "bytes": 47235,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-intro-light.png",
-      "sha256": "a6a8615516f33e810751f9c176f94dbc4ecfd7727168005cc4d5dfd4a50d82b4",
+      "sha256": "6c53848d3ccb739ab6222b9ded9a325ebc7a3d9efcce23d206d26053cf467f68",
       "width": 1960
     },
     {
@@ -217,10 +217,10 @@
       "preset": "default",
       "caseId": "layout-intro",
       "slide": 9,
-      "bytes": 47654,
+      "bytes": 47655,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-intro-dark.png",
-      "sha256": "33524f47eaa184cc76d3ad789ca0eac7f811f7370216e68aaac6b1316e616f03",
+      "sha256": "c491caad3f388bf52aab8be12fa139069042a533aff753d0a49a1ac74b4a123f",
       "width": 1960
     },
     {
@@ -268,10 +268,10 @@
       "preset": "default",
       "caseId": "layout-toc",
       "slide": 11,
-      "bytes": 53069,
+      "bytes": 53068,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-toc-light.png",
-      "sha256": "7877b95253d7ff1017e37d945b6e144a3255b3162b70ac5a74c6d628090be3e5",
+      "sha256": "11dd152671e31e27e2760811250c508d8cfd67e81748b116ec8c639ea170f4ea",
       "width": 1960
     },
     {
@@ -285,10 +285,10 @@
       "preset": "default",
       "caseId": "layout-toc",
       "slide": 11,
-      "bytes": 53445,
+      "bytes": 53447,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-toc-dark.png",
-      "sha256": "22dbf5ecc139111139f5cca1b76226c2ba47fd97f635000f3bb5680accda03b0",
+      "sha256": "b38a449cbfb0bdc6d568707dce3e9297d3fd053f36992b5cd7a3dfbfd1c11a03",
       "width": 1960
     },
     {
@@ -302,10 +302,10 @@
       "preset": "default",
       "caseId": "layout-center",
       "slide": 12,
-      "bytes": 32461,
+      "bytes": 32462,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-center-light.png",
-      "sha256": "e6351e703e9c1c61dceedf9b26f296729cbc517dbc01193749c8860d0fba3c4a",
+      "sha256": "42a0c88e0af40bd0fb34e731cdd7915dc03893bbd114d8b762119921d01ee74b",
       "width": 1960
     },
     {
@@ -319,10 +319,10 @@
       "preset": "default",
       "caseId": "layout-center",
       "slide": 12,
-      "bytes": 32654,
+      "bytes": 32655,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-center-dark.png",
-      "sha256": "f605b16e314cb84eae6de58a58c8fd350e93fa5a6bfc2c1bc4e2966555f48963",
+      "sha256": "c6ca3bec544d6545c1e2eeebd5ee50157c03eaa364ec0fa900adb7daefe5c24b",
       "width": 1960
     },
     {
@@ -336,10 +336,10 @@
       "preset": "default",
       "caseId": "layout-two-cols",
       "slide": 13,
-      "bytes": 51105,
+      "bytes": 51126,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-two-cols-light.png",
-      "sha256": "e3f79cf80c4a3c399cfb3c5add926db24a9c90f170fec4d192c79ab9f323da46",
+      "sha256": "aad670d2c6e506a9ac006bca22b660a2a0ab446aca19815439f37f4c8b1e2d09",
       "width": 1960
     },
     {
@@ -353,10 +353,10 @@
       "preset": "default",
       "caseId": "layout-two-cols",
       "slide": 13,
-      "bytes": 51336,
+      "bytes": 51435,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-two-cols-dark.png",
-      "sha256": "1345381e2230e7df8cab53d15c96c40436832979c8e400ac25faa52095c2403b",
+      "sha256": "9bb9cb0c1b51a4448fd3e4aac719f7a13b9726c8e8c7f6fd1a323a364d6702cb",
       "width": 1960
     },
     {
@@ -370,10 +370,10 @@
       "preset": "default",
       "caseId": "layout-statement",
       "slide": 14,
-      "bytes": 47928,
+      "bytes": 47931,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-statement-light.png",
-      "sha256": "67c87460c8bc52edb4c1c30df66b219164562f3f8967b95a1c94d4071030e646",
+      "sha256": "565e261be722331b1615365d70f8615bb7ae0d25177b796746c49ac03d64a2a9",
       "width": 1960
     },
     {
@@ -387,10 +387,10 @@
       "preset": "default",
       "caseId": "layout-statement",
       "slide": 14,
-      "bytes": 48305,
+      "bytes": 48307,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-statement-dark.png",
-      "sha256": "dc8cdcc6c90c6de4282b06428baefd1eaa79bdbc5d48f9084d808da273736159",
+      "sha256": "91801b7bcbce4817ef276113cb27621bf78dedd406ddbd094cd1f418e2aacffc",
       "width": 1960
     },
     {
@@ -404,10 +404,10 @@
       "preset": "default",
       "caseId": "layout-quote",
       "slide": 15,
-      "bytes": 44908,
+      "bytes": 44907,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-quote-light.png",
-      "sha256": "7e14a482bfcef0dd7a751762b5bcee9c7dbddd1d3f94a6cd1c377bfa33ac59eb",
+      "sha256": "4965ab379a5ff538b346913e5a477f426f4a738e87b09599a460ddc5578b6143",
       "width": 1960
     },
     {
@@ -421,10 +421,10 @@
       "preset": "default",
       "caseId": "layout-quote",
       "slide": 15,
-      "bytes": 45460,
+      "bytes": 45462,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-quote-dark.png",
-      "sha256": "370d58f7649270a8baee54b7f96003dbed2d7adf27d5efbfd5ea4b343bd5218c",
+      "sha256": "d4ae00b275bd1bbcd044a1218cdfd551327d5017e39e3380a88a8cf5911550f8",
       "width": 1960
     },
     {
@@ -438,10 +438,10 @@
       "preset": "default",
       "caseId": "layout-figure",
       "slide": 16,
-      "bytes": 31311,
+      "bytes": 31314,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-figure-light.png",
-      "sha256": "5e4a9e52014e05c003c75a06208de55b97f4406430c2523aed1e196f6664830c",
+      "sha256": "84996d021c569bf8e2ce0d1fa6068a72d6428cc4d834281674e543c905d55714",
       "width": 1960
     },
     {
@@ -455,10 +455,10 @@
       "preset": "default",
       "caseId": "layout-figure",
       "slide": 16,
-      "bytes": 31753,
+      "bytes": 31754,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-figure-dark.png",
-      "sha256": "6d07822560b4895690bcccf6735807c5f42df27f03bebe323d98257504e8b60f",
+      "sha256": "adee24d2628f7c4233c7416d470b94db2bae7450b012824bc700bf768e414407",
       "width": 1960
     },
     {
@@ -472,10 +472,10 @@
       "preset": "default",
       "caseId": "layout-references",
       "slide": 17,
-      "bytes": 48615,
+      "bytes": 48617,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-references-light.png",
-      "sha256": "feb2c26281074beaaeca3c9bef2ee6b4a21f851ebefda9969f4f7d3dd53b06bf",
+      "sha256": "725033519999e82309bc5e2abc9fac397fddedd7c59e7fb64b7cecf3a674312f",
       "width": 1960
     },
     {
@@ -489,10 +489,10 @@
       "preset": "default",
       "caseId": "layout-references",
       "slide": 17,
-      "bytes": 48746,
+      "bytes": 48749,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/layout-references-dark.png",
-      "sha256": "01ae70c8d323e504444071334377199e0264f2e2a684b49113ce0b37058670a9",
+      "sha256": "6bdc023abe17f06a1cea05f23a7d3cd27a002c7f1d59fd00ab1cbca224544369",
       "width": 1960
     },
     {
@@ -506,10 +506,10 @@
       "mode": "light",
       "preset": "default",
       "slide": 7,
-      "bytes": 44746,
+      "bytes": 44775,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/chrome-textual-booleans-light.png",
-      "sha256": "c84eba81cc316f274060941f5ed0ac9e987696d8d4eef74a36d969d937273953",
+      "sha256": "3ec376ba7789e76cf5184e96309620d8f5445df1e3743cfe517e1efba021f871",
       "width": 1960
     },
     {
@@ -523,10 +523,10 @@
       "mode": "dark",
       "preset": "default",
       "slide": 7,
-      "bytes": 44998,
+      "bytes": 45003,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/chrome-textual-booleans-dark.png",
-      "sha256": "8de2262c64a0d574c725831b7a20b18e9cff7a36a28ac79eb1415e244c4423b4",
+      "sha256": "e2b834873859fc829f84c603749f80a8a2c20bdc39d7db1f221f18525e6a23a2",
       "width": 1960
     },
     {
@@ -539,10 +539,10 @@
       "mode": "light",
       "preset": "default",
       "slide": 5,
-      "bytes": 109206,
+      "bytes": 109072,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/protocol-generated-callouts-light.png",
-      "sha256": "327fcbf44cfeb44e1c4213f1f558c6e9c7baeee86586d0d69b1991af2ae47a15",
+      "sha256": "000a0d56913d1702366df67ab7f0cece9e6c833b941cfb2887c93be74331da02",
       "width": 1960
     },
     {
@@ -555,10 +555,2404 @@
       "mode": "dark",
       "preset": "default",
       "slide": 5,
-      "bytes": 110045,
+      "bytes": 109890,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/protocol-generated-callouts-dark.png",
-      "sha256": "add7a2a39a90092a2338adad4289d3db5a66178456a068d62bc82145d90a93d9",
+      "sha256": "0420179f3a36246b02641449a7abdae6763510916b90d8f01e0c2fca850732dd",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-info",
+      "coverage": [
+        "us1",
+        "callout",
+        "info"
+      ],
+      "id": "us1-callout-info-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 3,
+      "bytes": 58302,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-info-light.png",
+      "sha256": "29d57e256e8016a052da2d8c8f0e9b864488e5e2996ee63d0fcaf19e28253f7e",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-info",
+      "coverage": [
+        "us1",
+        "callout",
+        "info"
+      ],
+      "id": "us1-callout-info-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 3,
+      "bytes": 59010,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-info-dark.png",
+      "sha256": "f33c93088664de1be7c6293a2589bc885683f3250fa01dc53ff46788792fcec3",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-positive",
+      "coverage": [
+        "us1",
+        "callout",
+        "positive"
+      ],
+      "id": "us1-callout-positive-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 4,
+      "bytes": 44812,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-positive-light.png",
+      "sha256": "b13dd303a04b207fc4a6e25fac118d8095466a87f2c53ec359154fb89720b34c",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-positive",
+      "coverage": [
+        "us1",
+        "callout",
+        "positive"
+      ],
+      "id": "us1-callout-positive-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 4,
+      "bytes": 45150,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-positive-dark.png",
+      "sha256": "39d19feb693ed7543fd572e432ef337799d5d1e8986f37110a39c7e5046c17a1",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-caution",
+      "coverage": [
+        "us1",
+        "callout",
+        "caution"
+      ],
+      "id": "us1-callout-caution-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 5,
+      "bytes": 47322,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-caution-light.png",
+      "sha256": "80b20a948b4b81da4b50d8f6bf4f23b94c239201124dcfb3c368b1dce73f604c",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-caution",
+      "coverage": [
+        "us1",
+        "callout",
+        "caution"
+      ],
+      "id": "us1-callout-caution-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 5,
+      "bytes": 47689,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-caution-dark.png",
+      "sha256": "20f212bb126f8080321b1e5feb2e85260268b7fbab66ee02b1aa564d37d22b13",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-danger",
+      "coverage": [
+        "us1",
+        "callout",
+        "danger"
+      ],
+      "id": "us1-callout-danger-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 6,
+      "bytes": 44980,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-danger-light.png",
+      "sha256": "de9d2555912fc9a4c8e2d8b0e7395a73397e037393a28555f58863ea581b6d1a",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-danger",
+      "coverage": [
+        "us1",
+        "callout",
+        "danger"
+      ],
+      "id": "us1-callout-danger-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 6,
+      "bytes": 45366,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-danger-dark.png",
+      "sha256": "030b93ace486fefa446705e5921149afa7bf1ad4b5571f90b3547a93a4281edc",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-question",
+      "coverage": [
+        "us1",
+        "callout",
+        "question"
+      ],
+      "id": "us1-callout-question-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 7,
+      "bytes": 45751,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-question-light.png",
+      "sha256": "9e491de874d0bef533d70c617ea571f7252a22bfde256f6621199c882c8c1856",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-question",
+      "coverage": [
+        "us1",
+        "callout",
+        "question"
+      ],
+      "id": "us1-callout-question-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 7,
+      "bytes": 46232,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-question-dark.png",
+      "sha256": "010bea4e5452047428994bc9b01976aae9d4facd56e6e96e1856b79521746327",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-quotation",
+      "coverage": [
+        "us1",
+        "callout",
+        "quotation"
+      ],
+      "id": "us1-callout-quotation-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 8,
+      "bytes": 37932,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-quotation-light.png",
+      "sha256": "6169e93de73cd8e11ef2f623cafc2453156538c54908be4cacf63abced910e2b",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callouts-quotation",
+      "coverage": [
+        "us1",
+        "callout",
+        "quotation"
+      ],
+      "id": "us1-callout-quotation-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 8,
+      "bytes": 38407,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-quotation-dark.png",
+      "sha256": "ff362398a727627d0ffe96173182b93c2f9bf9b491b94767a9c39debda283e5e",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callout-fallbacks",
+      "coverage": [
+        "us1",
+        "callout",
+        "neutral"
+      ],
+      "id": "us1-callout-neutral-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 9,
+      "bytes": 98438,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-neutral-default-light.png",
+      "sha256": "9247c66c0e945ffdb89d6f377e7e1116ef883105a7e1b611ff46b53429b35cd9",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-figures-alternatives",
+      "coverage": [
+        "us1",
+        "figure"
+      ],
+      "id": "us1-figure-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 11,
+      "bytes": 134597,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-figure-default-light.png",
+      "sha256": "e6d79414ade384f1095bbc14579646c4a51fe45731f1e288fc34d305e14d06f0",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-authors-mixed",
+      "coverage": [
+        "us1",
+        "authors"
+      ],
+      "id": "us1-authors-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 13,
+      "bytes": 123036,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-authors-default-light.png",
+      "sha256": "8e7455d9b90393f0deecd57f59590160513d2d0e1f7808d1e67cf20d367871f7",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-callout-fallbacks",
+      "coverage": [
+        "us1",
+        "callout",
+        "neutral"
+      ],
+      "id": "us1-callout-neutral-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 9,
+      "bytes": 99454,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-neutral-default-dark.png",
+      "sha256": "4051dfe4b776fa65719ecce2acf8bc57ba4682791c4a3434919a504e5fccba8c",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-figures-alternatives",
+      "coverage": [
+        "us1",
+        "figure"
+      ],
+      "id": "us1-figure-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 11,
+      "bytes": 142491,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-figure-default-dark.png",
+      "sha256": "28d5de6d1a30154c0cf99da2e1f13f25b6c599231b86e082110db1556df5fb42",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us1-authors-mixed",
+      "coverage": [
+        "us1",
+        "authors"
+      ],
+      "id": "us1-authors-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 13,
+      "bytes": 128306,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-authors-default-dark.png",
+      "sha256": "26f08c2d726575cb4af9ef2e25cd61e70c04b69c26613e9252f03ddf8bd46873",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us1-callout-fallbacks",
+      "coverage": [
+        "us1",
+        "callout",
+        "neutral"
+      ],
+      "id": "us1-callout-neutral-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 9,
+      "bytes": 114964,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-neutral-ucas-light.png",
+      "sha256": "79d4e7d8746f2ef696a86e96052b3ee34582e09120a7cff4d10578f6d066ad9d",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us1-figures-alternatives",
+      "coverage": [
+        "us1",
+        "figure"
+      ],
+      "id": "us1-figure-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 11,
+      "bytes": 143049,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-figure-ucas-light.png",
+      "sha256": "c3bb2f1c4674f37c41ad8e3b8cfb308ceb48d03079b2cb5a3e7b80355f3c60a3",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us1-authors-mixed",
+      "coverage": [
+        "us1",
+        "authors"
+      ],
+      "id": "us1-authors-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 13,
+      "bytes": 136139,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-authors-ucas-light.png",
+      "sha256": "26c2c3c378431caf7023c445b0b34b64d6fb0afc981e1218f6a20fd4b587b274",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us1-callout-fallbacks",
+      "coverage": [
+        "us1",
+        "callout",
+        "neutral"
+      ],
+      "id": "us1-callout-neutral-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 9,
+      "bytes": 118211,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-neutral-ucas-dark.png",
+      "sha256": "51df0895cdeff510853f64d50bef51a1008c366032049c5bbd58717546476d20",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us1-figures-alternatives",
+      "coverage": [
+        "us1",
+        "figure"
+      ],
+      "id": "us1-figure-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 11,
+      "bytes": 148847,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-figure-ucas-dark.png",
+      "sha256": "17f497a0c2e154c67cf1b425bdbaf089805e118feae43ee9be192476f27caf74",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us1-authors-mixed",
+      "coverage": [
+        "us1",
+        "authors"
+      ],
+      "id": "us1-authors-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 13,
+      "bytes": 145179,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-authors-ucas-dark.png",
+      "sha256": "9afb617d09c477976a6dc3bb1d0802d837ec100bc31eb3406e53e5a733ae58b3",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us1-callout-fallbacks",
+      "coverage": [
+        "us1",
+        "callout",
+        "neutral"
+      ],
+      "id": "us1-callout-neutral-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 9,
+      "bytes": 104151,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-neutral-ict-light.png",
+      "sha256": "cf33d4fd63728c620ec20f530388c5ec72c624b020794f3caf11af648634c68e",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us1-figures-alternatives",
+      "coverage": [
+        "us1",
+        "figure"
+      ],
+      "id": "us1-figure-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 11,
+      "bytes": 128870,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-figure-ict-light.png",
+      "sha256": "ffc9ed93e40d815362b2f9cd5bfad41542589087b5a0adfdfa5aee5df8d63eea",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us1-authors-mixed",
+      "coverage": [
+        "us1",
+        "authors"
+      ],
+      "id": "us1-authors-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 13,
+      "bytes": 123701,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-authors-ict-light.png",
+      "sha256": "252fbf63b38c291f317806ecf34e0c89dace449f9a46d0ea3f1b8f92694b69e6",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us1-callout-fallbacks",
+      "coverage": [
+        "us1",
+        "callout",
+        "neutral"
+      ],
+      "id": "us1-callout-neutral-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 9,
+      "bytes": 104109,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-callout-neutral-ict-dark.png",
+      "sha256": "848fc85c69c716af7390b360884fd6e84c3f5e895adb1da5812d8d2efe73514f",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us1-figures-alternatives",
+      "coverage": [
+        "us1",
+        "figure"
+      ],
+      "id": "us1-figure-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 11,
+      "bytes": 135524,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-figure-ict-dark.png",
+      "sha256": "bf9a66ec8fe0d6a87f5f7668f01bd344b98f0beb8e2a7e7658fe0b2f9a06c5cf",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us1-authors-mixed",
+      "coverage": [
+        "us1",
+        "authors"
+      ],
+      "id": "us1-authors-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 13,
+      "bytes": 130486,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us1-authors-ict-dark.png",
+      "sha256": "0b0a16aed5059d6e5f8bc316c7461e5cf30d33a70e5431f4b29428af30b6ed69",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-closing-metadata",
+      "coverage": [
+        "us2",
+        "closing",
+        "metadata"
+      ],
+      "id": "us2-closing-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 16,
+      "bytes": 134147,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-closing-default-light.png",
+      "sha256": "c5cf2ec43f474050a961878340e941d8a991cdd432aa460456ce5dd55c8440d3",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-image-left",
+      "coverage": [
+        "us2",
+        "image-text",
+        "left"
+      ],
+      "id": "us2-image-left-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 20,
+      "bytes": 150417,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-left-default-light.png",
+      "sha256": "1c6c360acae369b4a392190507d5ffc1aa825e70ef24da64b522c50ad901ec3c",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-image-right",
+      "coverage": [
+        "us2",
+        "image-text",
+        "right"
+      ],
+      "id": "us2-image-right-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 21,
+      "bytes": 152577,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-right-default-light.png",
+      "sha256": "d573fd048d2dc36088709c10f4e8ff8787bfc8fd8a42e69eb4336e3d6ad619a6",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-image-bilingual",
+      "coverage": [
+        "us2",
+        "image-text",
+        "long",
+        "bilingual"
+      ],
+      "id": "us2-image-bilingual-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 25,
+      "bytes": 203051,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-bilingual-default-light.png",
+      "sha256": "3a08e2f44ef161747530d2c22bee0fb8f41cd81b2e25af0c4658c6fb6d87bcb6",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-closing-metadata",
+      "coverage": [
+        "us2",
+        "closing",
+        "metadata"
+      ],
+      "id": "us2-closing-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 16,
+      "bytes": 140834,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-closing-default-dark.png",
+      "sha256": "ddcdb83033c537bd757aef2e6dad677b669f3c2477d15ac156f36591d36c327a",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-image-left",
+      "coverage": [
+        "us2",
+        "image-text",
+        "left"
+      ],
+      "id": "us2-image-left-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 20,
+      "bytes": 164058,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-left-default-dark.png",
+      "sha256": "de4f793a802e6bc7cc075487dd294f9e50e8f8e31a1413d4b308b737a4f0c916",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-image-right",
+      "coverage": [
+        "us2",
+        "image-text",
+        "right"
+      ],
+      "id": "us2-image-right-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 21,
+      "bytes": 165812,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-right-default-dark.png",
+      "sha256": "00e18b6df77c3040c176373153998df7cd988fa5f6fff5c88a4105f7185dbf15",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-image-bilingual",
+      "coverage": [
+        "us2",
+        "image-text",
+        "long",
+        "bilingual"
+      ],
+      "id": "us2-image-bilingual-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 25,
+      "bytes": 215251,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-bilingual-default-dark.png",
+      "sha256": "93c7a8eb2c8c52aeebd7f5167285d72eff1ee93094d7e9c3d7d75bcf22983541",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-closing-metadata",
+      "coverage": [
+        "us2",
+        "closing",
+        "metadata"
+      ],
+      "id": "us2-closing-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 16,
+      "bytes": 147964,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-closing-ucas-light.png",
+      "sha256": "c96c937f88c3a7bf79f4d3f4c0425943cf5ef3efaa25afab41021cafe30e8771",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-image-left",
+      "coverage": [
+        "us2",
+        "image-text",
+        "left"
+      ],
+      "id": "us2-image-left-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 20,
+      "bytes": 161753,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-left-ucas-light.png",
+      "sha256": "8fd9cd58dc6291d416de146b67ec4844051f0a0a226fcf22ace8002dec51ef3d",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-image-right",
+      "coverage": [
+        "us2",
+        "image-text",
+        "right"
+      ],
+      "id": "us2-image-right-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 21,
+      "bytes": 161775,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-right-ucas-light.png",
+      "sha256": "92f629929c67254be657ec98de0f330698fbb14aa16eb9a7ef223f52265f3905",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-image-bilingual",
+      "coverage": [
+        "us2",
+        "image-text",
+        "long",
+        "bilingual"
+      ],
+      "id": "us2-image-bilingual-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 25,
+      "bytes": 214074,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-bilingual-ucas-light.png",
+      "sha256": "5de249488469b608795d2b0364e8fc87d1c31717f9ac5405832be68bb473dece",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-closing-metadata",
+      "coverage": [
+        "us2",
+        "closing",
+        "metadata"
+      ],
+      "id": "us2-closing-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 16,
+      "bytes": 157115,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-closing-ucas-dark.png",
+      "sha256": "4afa2d6bf69d3375df6011ca5206ec0014c647a0be54e8e45db6f28a547285d7",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-image-left",
+      "coverage": [
+        "us2",
+        "image-text",
+        "left"
+      ],
+      "id": "us2-image-left-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 20,
+      "bytes": 175645,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-left-ucas-dark.png",
+      "sha256": "9c3dba602804bf981e29f24f9b0ca902e650eb2cbb173f61daabc658bf4193e3",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-image-right",
+      "coverage": [
+        "us2",
+        "image-text",
+        "right"
+      ],
+      "id": "us2-image-right-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 21,
+      "bytes": 175494,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-right-ucas-dark.png",
+      "sha256": "1a638746ebd4b17c4896e28ea397076900eacd19fa55a981d4465671de6353a7",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us2-image-bilingual",
+      "coverage": [
+        "us2",
+        "image-text",
+        "long",
+        "bilingual"
+      ],
+      "id": "us2-image-bilingual-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 25,
+      "bytes": 229200,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-bilingual-ucas-dark.png",
+      "sha256": "c6fdd01d52d4d6a3d7d4c448c00e7e88e0d80215c0e853d061c7703a9330721e",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-closing-metadata",
+      "coverage": [
+        "us2",
+        "closing",
+        "metadata"
+      ],
+      "id": "us2-closing-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 16,
+      "bytes": 135144,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-closing-ict-light.png",
+      "sha256": "ab25093872765a9236c77351564745c36059c6cd16373de371be516ac549c4df",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-image-left",
+      "coverage": [
+        "us2",
+        "image-text",
+        "left"
+      ],
+      "id": "us2-image-left-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 20,
+      "bytes": 148631,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-left-ict-light.png",
+      "sha256": "167fe8eb4922153872e89260e20cf34f82086293597b8f9c0203c880d4fbc17c",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-image-right",
+      "coverage": [
+        "us2",
+        "image-text",
+        "right"
+      ],
+      "id": "us2-image-right-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 21,
+      "bytes": 148844,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-right-ict-light.png",
+      "sha256": "52538281002f4d3bd1e16796ba89a1032fe9d6fd65d28eedfbaec6ad7c7507e2",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-image-bilingual",
+      "coverage": [
+        "us2",
+        "image-text",
+        "long",
+        "bilingual"
+      ],
+      "id": "us2-image-bilingual-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 25,
+      "bytes": 199935,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-bilingual-ict-light.png",
+      "sha256": "be87ac7398ec9a7d410d47582576c41a2fb3c8fc39fe7e9d13e91f100909e122",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-closing-metadata",
+      "coverage": [
+        "us2",
+        "closing",
+        "metadata"
+      ],
+      "id": "us2-closing-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 16,
+      "bytes": 143665,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-closing-ict-dark.png",
+      "sha256": "6ea9bbc9a330ad883df989a7b8e02ef0a38f95ffa5217cee576487c1b54b3c86",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-image-left",
+      "coverage": [
+        "us2",
+        "image-text",
+        "left"
+      ],
+      "id": "us2-image-left-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 20,
+      "bytes": 162736,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-left-ict-dark.png",
+      "sha256": "1ca024a3e2920975d338b611180d35b664abdc9f411e84a2fb51d67c57b46708",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-image-right",
+      "coverage": [
+        "us2",
+        "image-text",
+        "right"
+      ],
+      "id": "us2-image-right-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 21,
+      "bytes": 162751,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-right-ict-dark.png",
+      "sha256": "f3ee6914a47caeccdcd49a503f98891bf9e06d62e8d5cc5cd7f3d507a8b6a26b",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us2-image-bilingual",
+      "coverage": [
+        "us2",
+        "image-text",
+        "long",
+        "bilingual"
+      ],
+      "id": "us2-image-bilingual-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 25,
+      "bytes": 215323,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-image-bilingual-ict-dark.png",
+      "sha256": "8a84bc62402af374147a829730bb69922be0554aa2528ec698c2ad965a6c820c",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-end-minimal",
+      "coverage": [
+        "us2",
+        "closing",
+        "alias"
+      ],
+      "id": "us2-end-light",
+      "layout": "end",
+      "mode": "light",
+      "preset": "default",
+      "slide": 14,
+      "bytes": 32359,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-end-light.png",
+      "sha256": "6002fef92da570189e65fa6ae9b491b06fdba65b24539de4e8060d7716cc911f",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-end-minimal",
+      "coverage": [
+        "us2",
+        "closing",
+        "alias"
+      ],
+      "id": "us2-end-dark",
+      "layout": "end",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 14,
+      "bytes": 32574,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-end-dark.png",
+      "sha256": "08796b92396b9666fb657e444a4b9d5b02fc3096938bae9575285f555171f983",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-thanks-minimal",
+      "coverage": [
+        "us2",
+        "closing",
+        "alias"
+      ],
+      "id": "us2-thanks-light",
+      "layout": "thanks",
+      "mode": "light",
+      "preset": "default",
+      "slide": 15,
+      "bytes": 32359,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-thanks-light.png",
+      "sha256": "6002fef92da570189e65fa6ae9b491b06fdba65b24539de4e8060d7716cc911f",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us2-thanks-minimal",
+      "coverage": [
+        "us2",
+        "closing",
+        "alias"
+      ],
+      "id": "us2-thanks-dark",
+      "layout": "thanks",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 15,
+      "bytes": 32574,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us2-thanks-dark.png",
+      "sha256": "08796b92396b9666fb657e444a4b9d5b02fc3096938bae9575285f555171f983",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-local-a",
+      "coverage": [
+        "us3",
+        "accent",
+        "local",
+        "protected-brand"
+      ],
+      "id": "us3-accent-local-a-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 26,
+      "bytes": 105713,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-default-light.png",
+      "sha256": "b537596f782a7962cc81de633346bab22b7aec5fce4669b553354ddd2ccc7032",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-unaccented",
+      "coverage": [
+        "us3",
+        "accent",
+        "deck-fallback",
+        "leakage"
+      ],
+      "id": "us3-accent-fallback-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 27,
+      "bytes": 107639,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-default-light.png",
+      "sha256": "8d872e2dbee0de17311431ab5e5c63b5e778a2c75721493be2da5f15769b6c29",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-invalid",
+      "coverage": [
+        "us3",
+        "accent",
+        "invalid-fallback"
+      ],
+      "id": "us3-accent-invalid-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 29,
+      "bytes": 65211,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-invalid-default-light.png",
+      "sha256": "f3c83f0e8098eb04f557d54b13745a3d903eead09048317b830cfebaaff15f70",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-local-b",
+      "coverage": [
+        "us3",
+        "accent",
+        "second-local",
+        "leakage"
+      ],
+      "id": "us3-accent-local-b-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 30,
+      "bytes": 91333,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-b-default-light.png",
+      "sha256": "f1975ae3229b941180d3356168deec3511b6357acd2ef24e1ee8b69587fa1087",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-local-a",
+      "coverage": [
+        "us3",
+        "accent",
+        "local",
+        "protected-brand"
+      ],
+      "id": "us3-accent-local-a-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 26,
+      "bytes": 106037,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-default-dark.png",
+      "sha256": "4aa8577346c330723be5c3d0e2a640f0228f5466319ad900e184de1407c18c4d",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-unaccented",
+      "coverage": [
+        "us3",
+        "accent",
+        "deck-fallback",
+        "leakage"
+      ],
+      "id": "us3-accent-fallback-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 27,
+      "bytes": 108167,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-default-dark.png",
+      "sha256": "523d2b3d2c35cfcaa215413ba7f844e8c33ebcbb9daba2a87a1f9214c4eb8eb1",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-invalid",
+      "coverage": [
+        "us3",
+        "accent",
+        "invalid-fallback"
+      ],
+      "id": "us3-accent-invalid-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 29,
+      "bytes": 65765,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-invalid-default-dark.png",
+      "sha256": "72e9a4520ec63e011ed07ae33eaf0104a4499a426c625d4a1e4c82d4957906a8",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us3-accent-local-b",
+      "coverage": [
+        "us3",
+        "accent",
+        "second-local",
+        "leakage"
+      ],
+      "id": "us3-accent-local-b-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 30,
+      "bytes": 91884,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-b-default-dark.png",
+      "sha256": "a7b434152fd70f4be3faa14da8eb8e5ca5629879b4ae657e2b570f4d8baa3446",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-local-a",
+      "coverage": [
+        "us3",
+        "accent",
+        "local",
+        "protected-brand"
+      ],
+      "id": "us3-accent-local-a-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 26,
+      "bytes": 117712,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ucas-light.png",
+      "sha256": "09962960ec9c4a9a8cacd8be78b4c3792c0000ae0014744bee159e6960e892a5",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-unaccented",
+      "coverage": [
+        "us3",
+        "accent",
+        "deck-fallback",
+        "leakage"
+      ],
+      "id": "us3-accent-fallback-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 27,
+      "bytes": 120119,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ucas-light.png",
+      "sha256": "e62f10f4d5bb8dcf495d2ec2e432a11b1a50028db7ce121847e1c0b02a2e989d",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-invalid",
+      "coverage": [
+        "us3",
+        "accent",
+        "invalid-fallback"
+      ],
+      "id": "us3-accent-invalid-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 29,
+      "bytes": 85462,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-invalid-ucas-light.png",
+      "sha256": "2f6819ecd32562ac90b5db1f789493992b48d9229afbaf80672ae5ec3f6eb409",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-local-b",
+      "coverage": [
+        "us3",
+        "accent",
+        "second-local",
+        "leakage"
+      ],
+      "id": "us3-accent-local-b-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 30,
+      "bytes": 104895,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-b-ucas-light.png",
+      "sha256": "cb6eab35f2fceca0e820ddcd4f196ac032acea410a6b5c918bdfba7209f64861",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-local-a",
+      "coverage": [
+        "us3",
+        "accent",
+        "local",
+        "protected-brand"
+      ],
+      "id": "us3-accent-local-a-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 26,
+      "bytes": 129400,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ucas-dark.png",
+      "sha256": "45582acac0f3ae28bc61b93424bc4eeaa9526729250863afb56f93f715104950",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-unaccented",
+      "coverage": [
+        "us3",
+        "accent",
+        "deck-fallback",
+        "leakage"
+      ],
+      "id": "us3-accent-fallback-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 27,
+      "bytes": 131821,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ucas-dark.png",
+      "sha256": "149d8dac7f25c807e6973590210e673f4f62dbd6733494ddeee9f26f6e321f40",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-invalid",
+      "coverage": [
+        "us3",
+        "accent",
+        "invalid-fallback"
+      ],
+      "id": "us3-accent-invalid-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 29,
+      "bytes": 97031,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-invalid-ucas-dark.png",
+      "sha256": "2568f0ab1ad250ab477d789b2d3872e692296cceb6da4d37d1b34e8b0880b037",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us3-accent-local-b",
+      "coverage": [
+        "us3",
+        "accent",
+        "second-local",
+        "leakage"
+      ],
+      "id": "us3-accent-local-b-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 30,
+      "bytes": 116979,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-b-ucas-dark.png",
+      "sha256": "c85bccf9413e5e5aa7cbbc578b1cbbad97723bc18158bbbd8b05912a788fad20",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-local-a",
+      "coverage": [
+        "us3",
+        "accent",
+        "local",
+        "protected-brand"
+      ],
+      "id": "us3-accent-local-a-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 26,
+      "bytes": 109214,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ict-light.png",
+      "sha256": "0fd0665d482c422202912c5ff1da3bc58e3ae0fbad98611e2d5484f6cd4d584f",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-unaccented",
+      "coverage": [
+        "us3",
+        "accent",
+        "deck-fallback",
+        "leakage"
+      ],
+      "id": "us3-accent-fallback-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 27,
+      "bytes": 110416,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ict-light.png",
+      "sha256": "e45b1372cdd0981a6400dbefd76230329956ebd09bfbf60559b32fda33a51603",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-invalid",
+      "coverage": [
+        "us3",
+        "accent",
+        "invalid-fallback"
+      ],
+      "id": "us3-accent-invalid-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 29,
+      "bytes": 71548,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-invalid-ict-light.png",
+      "sha256": "58880253f79f84eb1365c49f7078bb921d98f00389212ab11847d92a73af28dc",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-local-b",
+      "coverage": [
+        "us3",
+        "accent",
+        "second-local",
+        "leakage"
+      ],
+      "id": "us3-accent-local-b-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 30,
+      "bytes": 95418,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-b-ict-light.png",
+      "sha256": "b5d1d039706a4528ade9ff6c4f4ce5351a181fb7de042b74b1477ee2e75e4031",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-local-a",
+      "coverage": [
+        "us3",
+        "accent",
+        "local",
+        "protected-brand"
+      ],
+      "id": "us3-accent-local-a-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 26,
+      "bytes": 109830,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ict-dark.png",
+      "sha256": "2986c852a2e19b27c77a900528970936c0b5fc2ac554f36d0cf259e234f92169",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-unaccented",
+      "coverage": [
+        "us3",
+        "accent",
+        "deck-fallback",
+        "leakage"
+      ],
+      "id": "us3-accent-fallback-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 27,
+      "bytes": 111082,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ict-dark.png",
+      "sha256": "9ef04f6c3ac51548b7199570e0e4d131b2ae470eaa9fc89b87cbc0b47ab114c6",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-invalid",
+      "coverage": [
+        "us3",
+        "accent",
+        "invalid-fallback"
+      ],
+      "id": "us3-accent-invalid-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 29,
+      "bytes": 72119,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-invalid-ict-dark.png",
+      "sha256": "33115d584e69d50ea3cd14d895724b49f817aae0daf1597554aac8cd648df810",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us3-accent-local-b",
+      "coverage": [
+        "us3",
+        "accent",
+        "second-local",
+        "leakage"
+      ],
+      "id": "us3-accent-local-b-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 30,
+      "bytes": 96007,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us3-accent-local-b-ict-dark.png",
+      "sha256": "6cb76b0c4089d9848d29676b0750463329c3b0483472e3298e20b0b562871244",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-code-titled",
+      "coverage": [
+        "us4",
+        "code",
+        "long-line",
+        "annotations"
+      ],
+      "id": "us4-code-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 32,
+      "bytes": 129798,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-default-light.png",
+      "sha256": "b986d2100f34832db527c87c9a5517c192c3e05a605eccecee676a5d1756e3f9",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-steps-many",
+      "coverage": [
+        "us4",
+        "steps",
+        "many",
+        "bilingual"
+      ],
+      "id": "us4-steps-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 36,
+      "bytes": 103061,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-steps-default-light.png",
+      "sha256": "28350c5bab9919898df0455d580d833d8d20a0e7a7e15f3ffb7297abb79928a5",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-timeline-many",
+      "coverage": [
+        "us4",
+        "timeline",
+        "dated",
+        "bilingual"
+      ],
+      "id": "us4-timeline-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 39,
+      "bytes": 94595,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-timeline-default-light.png",
+      "sha256": "7b710a97eccb26e38626983d50dc42fc9c254ddec52883ccca2ce4b2110d1bb4",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-status-labels",
+      "coverage": [
+        "us4",
+        "tag",
+        "badge",
+        "non-color",
+        "bilingual"
+      ],
+      "id": "us4-status-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 40,
+      "bytes": 82982,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-status-default-light.png",
+      "sha256": "6ffc0480daa91016eb8966c25d3f4ea470e53c988a9c292d743630d5a63d1d81",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-keyboard",
+      "coverage": [
+        "us4",
+        "kbd",
+        "chord",
+        "symbols",
+        "bilingual"
+      ],
+      "id": "us4-keyboard-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 41,
+      "bytes": 81883,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-keyboard-default-light.png",
+      "sha256": "4264dd4bd01a4f7f60ae8a65803dfb06c12db02bdb4c94ce7ced575f0c23eb90",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-code-titled",
+      "coverage": [
+        "us4",
+        "code",
+        "long-line",
+        "annotations"
+      ],
+      "id": "us4-code-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 32,
+      "bytes": 129266,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-default-dark.png",
+      "sha256": "3630fd3a56d519d5359eee2b3fb4c867b2a24191ec34546653d536cff7e9424a",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-steps-many",
+      "coverage": [
+        "us4",
+        "steps",
+        "many",
+        "bilingual"
+      ],
+      "id": "us4-steps-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 36,
+      "bytes": 103787,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-steps-default-dark.png",
+      "sha256": "5d00f2ac371712e58d3e8b8094e082051e3a7feff7123b37ce91b2ca9138fa86",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-timeline-many",
+      "coverage": [
+        "us4",
+        "timeline",
+        "dated",
+        "bilingual"
+      ],
+      "id": "us4-timeline-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 39,
+      "bytes": 94923,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-timeline-default-dark.png",
+      "sha256": "fcfa7c299c9d307ddad6d2e84682c4690a1d9d3149d1d16478fea778fc8c9f4f",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-status-labels",
+      "coverage": [
+        "us4",
+        "tag",
+        "badge",
+        "non-color",
+        "bilingual"
+      ],
+      "id": "us4-status-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 40,
+      "bytes": 83658,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-status-default-dark.png",
+      "sha256": "4276aa2f35a1af10661dd0e7b124147c6b1421222d9a21e86c8205b2af5f0e6b",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-keyboard",
+      "coverage": [
+        "us4",
+        "kbd",
+        "chord",
+        "symbols",
+        "bilingual"
+      ],
+      "id": "us4-keyboard-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 41,
+      "bytes": 82586,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-keyboard-default-dark.png",
+      "sha256": "a3cbffaa13771df2e4d1392fe59681914096348993011033e14c82215749fee0",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-code-titled",
+      "coverage": [
+        "us4",
+        "code",
+        "long-line",
+        "annotations"
+      ],
+      "id": "us4-code-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 32,
+      "bytes": 140393,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-ucas-light.png",
+      "sha256": "e60c6901915a352dea85842c2be2e74775f88d75d5df41b2acec156ff2e01a47",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-steps-many",
+      "coverage": [
+        "us4",
+        "steps",
+        "many",
+        "bilingual"
+      ],
+      "id": "us4-steps-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 36,
+      "bytes": 117800,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-steps-ucas-light.png",
+      "sha256": "f5f88463521c8e1b26b435524b78ac0de8971fe4dbcba8e2c2d4c1e73230b435",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-timeline-many",
+      "coverage": [
+        "us4",
+        "timeline",
+        "dated",
+        "bilingual"
+      ],
+      "id": "us4-timeline-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 39,
+      "bytes": 107142,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-timeline-ucas-light.png",
+      "sha256": "1e38f57ccb5948dcde3a7c0f63563f5308791dca6ab416531303e486dc5d7b40",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-status-labels",
+      "coverage": [
+        "us4",
+        "tag",
+        "badge",
+        "non-color",
+        "bilingual"
+      ],
+      "id": "us4-status-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 40,
+      "bytes": 95470,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-status-ucas-light.png",
+      "sha256": "e3469827db2a8c3000bc0bf424de276beed7f85dd85b19bf66933c3d2e85fcd4",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-keyboard",
+      "coverage": [
+        "us4",
+        "kbd",
+        "chord",
+        "symbols",
+        "bilingual"
+      ],
+      "id": "us4-keyboard-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 41,
+      "bytes": 96007,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-keyboard-ucas-light.png",
+      "sha256": "2e18b4f05a5ded1f32490ef58fde5ac279efb892e7b6d7492fe0f57c27c674f2",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-code-titled",
+      "coverage": [
+        "us4",
+        "code",
+        "long-line",
+        "annotations"
+      ],
+      "id": "us4-code-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 32,
+      "bytes": 142228,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-ucas-dark.png",
+      "sha256": "1d7efdb64e9b90ee1de8598af624d51c28f89612f1b5dd9836b7394e67ca1165",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-steps-many",
+      "coverage": [
+        "us4",
+        "steps",
+        "many",
+        "bilingual"
+      ],
+      "id": "us4-steps-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 36,
+      "bytes": 121322,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-steps-ucas-dark.png",
+      "sha256": "8b95b2867a658433edb9db551f8fd99ed1b83332bddc00ab065f067c3dd848d8",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-timeline-many",
+      "coverage": [
+        "us4",
+        "timeline",
+        "dated",
+        "bilingual"
+      ],
+      "id": "us4-timeline-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 39,
+      "bytes": 109904,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-timeline-ucas-dark.png",
+      "sha256": "9cf4e38cc6fb904f97f029de999a181ce56acba85f0016d6ed1f060d6b8c1071",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-status-labels",
+      "coverage": [
+        "us4",
+        "tag",
+        "badge",
+        "non-color",
+        "bilingual"
+      ],
+      "id": "us4-status-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 40,
+      "bytes": 98767,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-status-ucas-dark.png",
+      "sha256": "c4c324adc88c6744252614e67b1a20e6efcafee8afae40229c7cca79d0509c94",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us4-keyboard",
+      "coverage": [
+        "us4",
+        "kbd",
+        "chord",
+        "symbols",
+        "bilingual"
+      ],
+      "id": "us4-keyboard-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 41,
+      "bytes": 99362,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-keyboard-ucas-dark.png",
+      "sha256": "88a6c75327dc9860067ab9cd508a203fcbcb3fd68a8e54c394d2e7fbac0598a3",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-code-titled",
+      "coverage": [
+        "us4",
+        "code",
+        "long-line",
+        "annotations"
+      ],
+      "id": "us4-code-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 32,
+      "bytes": 132510,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-ict-light.png",
+      "sha256": "521e2abcdbf7661267c562b0c6407ae731aa9a203dd74f3499e3070b328f08f2",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-steps-many",
+      "coverage": [
+        "us4",
+        "steps",
+        "many",
+        "bilingual"
+      ],
+      "id": "us4-steps-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 36,
+      "bytes": 107413,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-steps-ict-light.png",
+      "sha256": "2512f143ef03b3145f2984f4a680a7109a58fce3442dcbe44d911581be6d522a",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-timeline-many",
+      "coverage": [
+        "us4",
+        "timeline",
+        "dated",
+        "bilingual"
+      ],
+      "id": "us4-timeline-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 39,
+      "bytes": 95318,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-timeline-ict-light.png",
+      "sha256": "e1938207cabc22432eb2f7a416b030b95c94c6841ff9c5f3a36cf62c4e2e3a8d",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-status-labels",
+      "coverage": [
+        "us4",
+        "tag",
+        "badge",
+        "non-color",
+        "bilingual"
+      ],
+      "id": "us4-status-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 40,
+      "bytes": 84612,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-status-ict-light.png",
+      "sha256": "a1a3abbe059ac46da3a9e144de632da4eb9790b83859448fd3f92f8158b7f5c7",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-keyboard",
+      "coverage": [
+        "us4",
+        "kbd",
+        "chord",
+        "symbols",
+        "bilingual"
+      ],
+      "id": "us4-keyboard-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 41,
+      "bytes": 84326,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-keyboard-ict-light.png",
+      "sha256": "fc6845e2034cfbeec97d9032cfc1d9d75dd21484ff8d18f4dce98410868654c8",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-code-titled",
+      "coverage": [
+        "us4",
+        "code",
+        "long-line",
+        "annotations"
+      ],
+      "id": "us4-code-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 32,
+      "bytes": 131872,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-ict-dark.png",
+      "sha256": "7532e31cc9ef0d9568bc069f3638f41c32bd9dc4866bc991e337a8293163975f",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-steps-many",
+      "coverage": [
+        "us4",
+        "steps",
+        "many",
+        "bilingual"
+      ],
+      "id": "us4-steps-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 36,
+      "bytes": 108542,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-steps-ict-dark.png",
+      "sha256": "b79871ca3b8bb2669a6da45d0748f39c4aadb6690c4f3db5faed4615f3f524e7",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-timeline-many",
+      "coverage": [
+        "us4",
+        "timeline",
+        "dated",
+        "bilingual"
+      ],
+      "id": "us4-timeline-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 39,
+      "bytes": 95861,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-timeline-ict-dark.png",
+      "sha256": "7e681cf613fabeb4f4306bd49d5976f5d1b1674b6239b305815f5db6a681fd10",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-status-labels",
+      "coverage": [
+        "us4",
+        "tag",
+        "badge",
+        "non-color",
+        "bilingual"
+      ],
+      "id": "us4-status-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 40,
+      "bytes": 85299,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-status-ict-dark.png",
+      "sha256": "4e01870e639df8f2ac6a680f64d9f30deb153cdcf4c6da44cc2ff6d837efee8e",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us4-keyboard",
+      "coverage": [
+        "us4",
+        "kbd",
+        "chord",
+        "symbols",
+        "bilingual"
+      ],
+      "id": "us4-keyboard-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 41,
+      "bytes": 85446,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-keyboard-ict-dark.png",
+      "sha256": "4288c51d08d077951a90f3a404fed25340566a6b98106b6a2874d5a9078d3048",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-code-titleless",
+      "coverage": [
+        "us4",
+        "code",
+        "missing-title",
+        "long-file"
+      ],
+      "id": "us4-code-titleless-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 33,
+      "bytes": 143834,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-titleless-light.png",
+      "sha256": "b8dcb60906dfd72a81240a128050d1c815a63c5ac04df56c8695e341c3ce2ebc",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us4-code-titleless",
+      "coverage": [
+        "us4",
+        "code",
+        "missing-title",
+        "long-file"
+      ],
+      "id": "us4-code-titleless-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 33,
+      "bytes": 144137,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us4-code-titleless-dark.png",
+      "sha256": "e84ad126b796277acaa17c43818ff8c2ebc8d79497949e8618e94b433d118977",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us5-tasks-native",
+      "coverage": [
+        "us5",
+        "tasks",
+        "checked",
+        "unchecked",
+        "nested",
+        "wrapped"
+      ],
+      "id": "us5-tasks-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 42,
+      "bytes": 128046,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-default-light.png",
+      "sha256": "d2196604a0743ca7ff7528d594a04761a54ccb9b5200b58b1bca914be361e7eb",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us5-highlights",
+      "coverage": [
+        "us5",
+        "highlight",
+        "native",
+        "generated",
+        "code-scope"
+      ],
+      "id": "us5-highlights-default-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 44,
+      "bytes": 107143,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-highlights-default-light.png",
+      "sha256": "a7f39bc54e190c91626463f4d56c29d5f01556066ec372db210b839b21e96ead",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us5-tasks-native",
+      "coverage": [
+        "us5",
+        "tasks",
+        "checked",
+        "unchecked",
+        "nested",
+        "wrapped"
+      ],
+      "id": "us5-tasks-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 42,
+      "bytes": 128666,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-default-dark.png",
+      "sha256": "fa7d35711234a32ff0bd9ef8da6e20539aa9677b1eebddfece2d1671911fb26c",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us5-highlights",
+      "coverage": [
+        "us5",
+        "highlight",
+        "native",
+        "generated",
+        "code-scope"
+      ],
+      "id": "us5-highlights-default-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 44,
+      "bytes": 108012,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-highlights-default-dark.png",
+      "sha256": "df51e345a52f2bb0bcc1a992820aee0926cf50d00e71628331c18d92b9c31d29",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us5-tasks-native",
+      "coverage": [
+        "us5",
+        "tasks",
+        "checked",
+        "unchecked",
+        "nested",
+        "wrapped"
+      ],
+      "id": "us5-tasks-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 42,
+      "bytes": 143674,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-ucas-light.png",
+      "sha256": "abdef216a5ea7222a7dce458e31f8f02cd1f939c8e39dbdfe0ebc7afa9be8bb2",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us5-highlights",
+      "coverage": [
+        "us5",
+        "highlight",
+        "native",
+        "generated",
+        "code-scope"
+      ],
+      "id": "us5-highlights-ucas-light",
+      "mode": "light",
+      "preset": "ucas",
+      "slide": 44,
+      "bytes": 118889,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-highlights-ucas-light.png",
+      "sha256": "face967fd977efe4785d7d8b3938ae9ad44b84a91cfbb04b9cb02ebeca5482af",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us5-tasks-native",
+      "coverage": [
+        "us5",
+        "tasks",
+        "checked",
+        "unchecked",
+        "nested",
+        "wrapped"
+      ],
+      "id": "us5-tasks-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 42,
+      "bytes": 147078,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-ucas-dark.png",
+      "sha256": "6b100d405978883d6c1b2713560dcf5b893c54d94425ec39a226b1356d760aa1",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ucas",
+      "caseId": "us5-highlights",
+      "coverage": [
+        "us5",
+        "highlight",
+        "native",
+        "generated",
+        "code-scope"
+      ],
+      "id": "us5-highlights-ucas-dark",
+      "mode": "dark",
+      "preset": "ucas",
+      "slide": 44,
+      "bytes": 122088,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-highlights-ucas-dark.png",
+      "sha256": "f6433a99f516b70e2d01d71e352915e07b602663cce3263c0a4245c4eb032c82",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us5-tasks-native",
+      "coverage": [
+        "us5",
+        "tasks",
+        "checked",
+        "unchecked",
+        "nested",
+        "wrapped"
+      ],
+      "id": "us5-tasks-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 42,
+      "bytes": 130052,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-ict-light.png",
+      "sha256": "4d9d6f61711e4ee5932e659565ed0a7742c7d5529db33891e87f996a5b4f4458",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us5-highlights",
+      "coverage": [
+        "us5",
+        "highlight",
+        "native",
+        "generated",
+        "code-scope"
+      ],
+      "id": "us5-highlights-ict-light",
+      "mode": "light",
+      "preset": "ict",
+      "slide": 44,
+      "bytes": 110218,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-highlights-ict-light.png",
+      "sha256": "8b5be12931cd2a22759e5ad426b7d123fc54c2dec72bd74603855cd6bf747767",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us5-tasks-native",
+      "coverage": [
+        "us5",
+        "tasks",
+        "checked",
+        "unchecked",
+        "nested",
+        "wrapped"
+      ],
+      "id": "us5-tasks-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 42,
+      "bytes": 131326,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-ict-dark.png",
+      "sha256": "2531ba0990a1298ced650915ce0c53a0bde7a203b5c6e0e626d1989cd4dd68c8",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-ict",
+      "caseId": "us5-highlights",
+      "coverage": [
+        "us5",
+        "highlight",
+        "native",
+        "generated",
+        "code-scope"
+      ],
+      "id": "us5-highlights-ict-dark",
+      "mode": "dark",
+      "preset": "ict",
+      "slide": 44,
+      "bytes": 111213,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-highlights-ict-dark.png",
+      "sha256": "f76975f8077693d139b98b73895c40735a51ad2cb5d7c77cfd4dc3df59bed105",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us5-tasks-generated",
+      "coverage": [
+        "us5",
+        "tasks",
+        "generated-compatibility"
+      ],
+      "id": "us5-tasks-generated-light",
+      "mode": "light",
+      "preset": "default",
+      "slide": 43,
+      "bytes": 77542,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-generated-light.png",
+      "sha256": "62c6877d2d75a8c5cbc09223d0b88e58bcf0d6274dce2b1e866e748e378e40de",
+      "width": 1960
+    },
+    {
+      "buildId": "expanded-default",
+      "caseId": "us5-tasks-generated",
+      "coverage": [
+        "us5",
+        "tasks",
+        "generated-compatibility"
+      ],
+      "id": "us5-tasks-generated-dark",
+      "mode": "dark",
+      "preset": "default",
+      "slide": 43,
+      "bytes": 78281,
+      "height": 1104,
+      "path": "tests/quality/baselines/visual/slides/us5-tasks-generated-dark.png",
+      "sha256": "a0e17622c0ba156e5fdde4805d52041517c2958ea585004267f63ba386f7cf6b",
       "width": 1960
     }
   ]
