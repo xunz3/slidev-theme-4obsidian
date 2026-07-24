@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-07-24T17:49:44.917Z",
-  "gitCommit": "9ab72767e257287fc510865ec37d107566699863",
+  "capturedAt": "2026-07-24T18:30:07.002Z",
+  "gitCommit": "22f6eab3d09ac4d79d0c1a344f008d7dc3bac686",
   "lockfileSha256": "4bb18aa8b427b07f4f14c868b702a2aa1e86631ff7eb114f741aff7884809beb",
   "reviewer": "Codex implementation review",
-  "rationale": "Reviewed expanded component, layout, slide-accent, technical-authoring, task, and highlight scenarios across all presets and modes",
+  "rationale": "Approve the finalized closing-layout rendering after CSS code splitting: three-column author cards, single-line heading where space permits, and stable logo placement in all presets and modes.",
   "viewport": {
     "deviceScaleFactor": 2,
     "logicalHeight": 552,
@@ -1101,10 +1101,10 @@
       "mode": "light",
       "preset": "default",
       "slide": 16,
-      "bytes": 134147,
+      "bytes": 116756,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us2-closing-default-light.png",
-      "sha256": "c5cf2ec43f474050a961878340e941d8a991cdd432aa460456ce5dd55c8440d3",
+      "sha256": "422ec9129e462cd584d311e7b1093979cb1d83ba0c676c2ecf26796eadd9ad7b",
       "width": 1960
     },
     {
@@ -1174,10 +1174,10 @@
       "mode": "dark",
       "preset": "default",
       "slide": 16,
-      "bytes": 140834,
+      "bytes": 122313,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us2-closing-default-dark.png",
-      "sha256": "ddcdb83033c537bd757aef2e6dad677b669f3c2477d15ac156f36591d36c327a",
+      "sha256": "3a0a43104062bc5b970249b30eb091bb33910f930789ef841b9a3adb37160005",
       "width": 1960
     },
     {
@@ -1247,10 +1247,10 @@
       "mode": "light",
       "preset": "ucas",
       "slide": 16,
-      "bytes": 147964,
+      "bytes": 128910,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us2-closing-ucas-light.png",
-      "sha256": "c96c937f88c3a7bf79f4d3f4c0425943cf5ef3efaa25afab41021cafe30e8771",
+      "sha256": "1cff7bc9f37c92fb9d120bbd48d0393226b1c019c8f9e6806eab410e323ab6e1",
       "width": 1960
     },
     {
@@ -1320,10 +1320,10 @@
       "mode": "dark",
       "preset": "ucas",
       "slide": 16,
-      "bytes": 157115,
+      "bytes": 137550,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us2-closing-ucas-dark.png",
-      "sha256": "4afa2d6bf69d3375df6011ca5206ec0014c647a0be54e8e45db6f28a547285d7",
+      "sha256": "0248fcb2028e998ad9fa5883ed1f1a3e77676fd66625339a8bc07d307ea97ea9",
       "width": 1960
     },
     {
@@ -1393,10 +1393,10 @@
       "mode": "light",
       "preset": "ict",
       "slide": 16,
-      "bytes": 135144,
+      "bytes": 120395,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us2-closing-ict-light.png",
-      "sha256": "ab25093872765a9236c77351564745c36059c6cd16373de371be516ac549c4df",
+      "sha256": "afb67e3cc9e01b15675fb32152dbc782b137047c7fdbf901526cab93825d9ce0",
       "width": 1960
     },
     {
@@ -1466,10 +1466,10 @@
       "mode": "dark",
       "preset": "ict",
       "slide": 16,
-      "bytes": 143665,
+      "bytes": 127054,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us2-closing-ict-dark.png",
-      "sha256": "6ea9bbc9a330ad883df989a7b8e02ef0a38f95ffa5217cee576487c1b54b3c86",
+      "sha256": "36f70f7cece30e50dc818eddbc914a0131e02305af5bfbb8868f977126f67efa",
       "width": 1960
     },
     {
