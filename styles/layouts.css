@@ -34,7 +34,11 @@
 
 .slide-frame__header {
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--presentation-border) 78%, transparent);
+  border-bottom: 1px solid color-mix(
+    in srgb,
+    var(--presentation-accent) 34%,
+    var(--presentation-border-strong)
+  );
 }
 
 .slide-frame__header-main {
@@ -93,7 +97,11 @@
 .slide-frame__footer {
   grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr);
   padding-top: 0.62rem;
-  border-top: 1px solid color-mix(in srgb, var(--presentation-border) 78%, transparent);
+  border-top: 1px solid color-mix(
+    in srgb,
+    var(--presentation-accent) 34%,
+    var(--presentation-border-strong)
+  );
 }
 
 .slide-frame__footer-left,
@@ -517,4 +525,5 @@
   .slide-layout-two-cols--reverse .slide-layout-two-cols__pane:first-child {
     order: initial;
   }
+
 }

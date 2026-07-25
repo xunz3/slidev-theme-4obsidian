@@ -15,6 +15,7 @@ import { chromium } from 'playwright-chromium'
 import {
   assertArtifactPath,
   buildDeck,
+  generateExpandedContentDefinitions,
   generatePresetMatrixDefinitions,
   mapConcurrent,
   qualityArtifactRoot,
@@ -28,7 +29,20 @@ import {
   createVisualBrowser,
   updateVisualBaselines,
 } from './visual-baselines.mjs'
-import { measureOutputDirectory } from '../../scripts/measure-build-output.mjs'
+import {
+  logicalBundleNames,
+  maximumBytesFor,
+  measureOutputDirectory,
+  validateOutputEvidence,
+} from '../../scripts/measure-build-output.mjs'
+import {
+  MINIMUM_NAVIGATION_SAMPLES,
+  NAVIGATION_ABSOLUTE_MAXIMUM_MS,
+  NAVIGATION_RELATIVE_RATIO,
+  measureNavigationScenario,
+  navigationScenarioDefinitions,
+  writeNavigationEvidence,
+} from './navigation-performance.mjs'
 
 const execFileAsync = promisify(execFile)
 const summaryPath = resolve(qualityArtifactRoot, 'summary.json')
@@ -37,12 +51,33 @@ const outputBaselinePath = resolve(
   baselineRoot,
   'output-sizes.json',
 )
+const navigationBaselinePath = resolve(
+  baselineRoot,
+  'navigation-performance.json',
+)
+const affectedNavigationAfterPath = resolve(
+  qualityArtifactRoot,
+  'navigation-performance-affected-after.json',
+)
+const performanceBeforePath = resolve(
+  repositoryRoot,
+  'qa/expand-theme-content/performance-before.json',
+)
+const performanceAfterPath = resolve(
+  repositoryRoot,
+  'qa/expand-theme-content/performance-after.json',
+)
 const deadlineMs = 300_000
 const requiredFailureFields = ['gate', 'caseId', 'status', 'artifactPaths']
 
 const sha256 = value => createHash('sha256').update(value).digest('hex')
 const relativePath = path => relative(repositoryRoot, path).split(sep).join('/')
 const now = () => new Date().toISOString()
+const resolvePnpmVersion = stdout => (
+  stdout.trim()
+  || process.env.npm_config_user_agent?.match(/\bpnpm\/([^\s]+)/)?.[1]
+  || ''
+)
 
 const snapshotTree = async (root) => {
   const entries = await readdir(root, { recursive: true, withFileTypes: true })
@@ -234,10 +269,12 @@ const collectEnvironment = async () => {
     { stdout: commit },
     { stdout: pnpmVersion },
     { stdout: chromiumVersion },
+    { stdout: status },
   ] = await Promise.all([
     execFileAsync('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot }),
     execFileAsync('pnpm', ['--version'], { cwd: repositoryRoot }),
     execFileAsync(chromium.executablePath(), ['--version'], { cwd: repositoryRoot }),
+    execFileAsync('git', ['status', '--porcelain'], { cwd: repositoryRoot }),
   ])
   return {
     architecture: arch(),
@@ -246,7 +283,8 @@ const collectEnvironment = async () => {
     lockfileSha256: sha256(lockfile),
     nodeVersion: process.version,
     operatingSystem: `${platform()} ${release()}`,
-    pnpmVersion: pnpmVersion.trim(),
+    pnpmVersion: resolvePnpmVersion(pnpmVersion),
+    workingTreeDirty: status.trim().length > 0,
   }
 }
 
@@ -260,20 +298,23 @@ const updateOutputBaselines = async ({
     'default-only': 'fixtures/default-preset.md',
     protocol: 'fixtures/obsidian-protocol.md',
   }
+  const [
+    { stdout: commit },
+    { stdout: pnpmVersion },
+    { stdout: status },
+  ] = await Promise.all([
+    execFileAsync('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot }),
+    execFileAsync('pnpm', ['--version'], { cwd: repositoryRoot }),
+    execFileAsync('git', ['status', '--porcelain'], { cwd: repositoryRoot }),
+  ])
   const record = {
-    schemaVersion: 1,
+    schemaVersion: 2,
+    phase: 'before',
     recordedAt: now(),
-    gitCommit: (await execFileAsync(
-      'git',
-      ['rev-parse', 'HEAD'],
-      { cwd: repositoryRoot },
-    )).stdout.trim(),
+    gitCommit: commit.trim(),
+    workingTreeDirty: status.trim().length > 0,
     nodeVersion: process.version,
-    pnpmVersion: (await execFileAsync(
-      'pnpm',
-      ['--version'],
-      { cwd: repositoryRoot },
-    )).stdout.trim(),
+    pnpmVersion: resolvePnpmVersion(pnpmVersion),
     lockfileSha256: sha256(
       await readFile(resolve(repositoryRoot, 'pnpm-lock.yaml')),
     ),
@@ -286,20 +327,313 @@ const updateOutputBaselines = async ({
 
   for (const [deckId, source] of Object.entries(sources)) {
     const measured = await measureOutputDirectory(buildContext[deckId].outDir)
+    const logicalBundles = Object.fromEntries(
+      logicalBundleNames.map((name) => {
+        const bundle = measured.logicalBundles[name]
+        return [name, {
+          ...bundle,
+          baselineBytes: bundle.totalBytes,
+          maximumBytes: maximumBytesFor(bundle.totalBytes),
+        }]
+      }),
+    )
     record.decks[deckId] = {
       source,
       baselineBytes: measured.totalBytes,
-      maximumBytes: Math.floor(measured.totalBytes * 1.05),
+      maximumBytes: maximumBytesFor(measured.totalBytes),
       totalBytes: measured.totalBytes,
       files: measured.files,
+      logicalBundles,
     }
   }
+  validateOutputEvidence(record, { phase: 'before', requireReview: true })
   await writeFile(outputBaselinePath, `${JSON.stringify(record, null, 2)}\n`)
   return {
     path: relativePath(outputBaselinePath),
+    record,
     totals: Object.fromEntries(
       Object.entries(record.decks).map(([id, deck]) => [id, deck.totalBytes]),
     ),
+  }
+}
+
+const navigationViewport = {
+  deviceScaleFactor: 2,
+  height: 552,
+  width: 980,
+}
+
+const validateNavigationRecord = (record, { phase }) => {
+  assert.equal(record.schemaVersion, 1)
+  assert.equal(record.phase, phase)
+  assert.ok(record.recordedAt)
+  assert.ok(record.environment?.gitCommit)
+  assert.ok(record.environment?.lockfileSha256)
+  assert.deepEqual(record.environment?.viewport, navigationViewport)
+  if (phase === 'before') {
+    assert.ok(record.review?.reviewer?.trim())
+    assert.ok(record.review?.rationale?.trim())
+  }
+  assert.ok(record.scenarios && typeof record.scenarios === 'object')
+  for (const [id, scenario] of Object.entries(record.scenarios)) {
+    assert.ok(
+      scenario.samplesMs?.length >= MINIMUM_NAVIGATION_SAMPLES,
+      `${id}: insufficient navigation samples`,
+    )
+    assert.equal(
+      scenario.p95Ms,
+      [...scenario.samplesMs].sort((left, right) => left - right)[
+        Math.ceil(scenario.samplesMs.length * 0.95) - 1
+      ],
+      `${id}: nearest-rank p95`,
+    )
+    assert.equal(scenario.absoluteMaximumMs, NAVIGATION_ABSOLUTE_MAXIMUM_MS)
+    assert.ok(Array.isArray(scenario.rawSamples))
+    assert.equal(scenario.rawSamples.length, scenario.samplesMs.length)
+  }
+  return record
+}
+
+const measureUnchangedNavigationControl = async ({
+  buildContext,
+  browserContext,
+}) => {
+  const page = await browserContext.newPage()
+  try {
+    return await measureNavigationScenario({
+      baseUrl: buildContext['default-only'].baseUrl,
+      fromSlide: 1,
+      mode: 'light',
+      page,
+      samples: MINIMUM_NAVIGATION_SAMPLES,
+      targetSelector: '.slidev-layout h1',
+      warmups: 2,
+    })
+  } finally {
+    await page.close()
+  }
+}
+
+const updateNavigationBaselines = async ({
+  buildContext,
+  rationale,
+  reviewer,
+}) => {
+  const browser = await chromium.launch({ headless: true })
+  const context = await browser.newContext({
+    colorScheme: 'light',
+    deviceScaleFactor: navigationViewport.deviceScaleFactor,
+    viewport: {
+      height: navigationViewport.height,
+      width: navigationViewport.width,
+    },
+  })
+  try {
+    const measured = await measureUnchangedNavigationControl({
+      browserContext: context,
+      buildContext,
+    })
+    const record = {
+      schemaVersion: 1,
+      phase: 'before',
+      recordedAt: now(),
+      environment: {
+        ...await collectEnvironment(),
+        viewport: navigationViewport,
+      },
+      review: {
+        rationale: rationale.trim(),
+        reviewer: reviewer.trim(),
+      },
+      scenarios: {
+        'unchanged-control': {
+          absoluteMaximumMs: NAVIGATION_ABSOLUTE_MAXIMUM_MS,
+          deckId: 'default-only',
+          fromSlide: 1,
+          mode: 'light',
+          preset: 'default',
+          targetSelector: '.slidev-layout h1',
+          targetSlide: 2,
+          ...measured,
+          status: measured.layoutShiftEntries.length === 0
+            ? 'recorded'
+            : 'fail',
+        },
+      },
+    }
+    validateNavigationRecord(record, { phase: 'before' })
+    await writeNavigationEvidence(navigationBaselinePath, record)
+    return {
+      path: relativePath(navigationBaselinePath),
+      record,
+      scenarios: Object.fromEntries(
+        Object.entries(record.scenarios).map(([id, scenario]) => [
+          id,
+          { p95Ms: scenario.p95Ms, samples: scenario.samplesMs.length },
+        ]),
+      ),
+    }
+  } finally {
+    await context.close()
+    await browser.close()
+  }
+}
+
+const writePerformanceBeforeReview = async ({
+  navigation,
+  output,
+  rationale,
+  reviewer,
+}) => {
+  const record = {
+    schemaVersion: 1,
+    phase: 'before',
+    recordedAt: now(),
+    environment: await collectEnvironment(),
+    review: {
+      rationale: rationale.trim(),
+      reviewer: reviewer.trim(),
+    },
+    status: 'reviewed',
+    output: output.record,
+    navigation: navigation.record,
+  }
+  await mkdir(dirname(performanceBeforePath), { recursive: true })
+  await writeFile(
+    performanceBeforePath,
+    `${JSON.stringify(record, null, 2)}\n`,
+  )
+  return {
+    path: relativePath(performanceBeforePath),
+    status: record.status,
+  }
+}
+
+const updatePerformanceBaselines = async ({
+  buildContext,
+  rationale,
+  reviewer,
+}) => {
+  const output = await updateOutputBaselines({
+    buildContext,
+    rationale,
+    reviewer,
+  })
+  const navigation = await updateNavigationBaselines({
+    buildContext,
+    rationale,
+    reviewer,
+  })
+  const durableReview = await writePerformanceBeforeReview({
+    navigation,
+    output,
+    rationale,
+    reviewer,
+  })
+  return { durableReview, navigation, output }
+}
+
+const measureNavigationAfter = async ({ buildContext, onRecord }) => {
+  const baseline = JSON.parse(await readFile(navigationBaselinePath, 'utf8'))
+  validateNavigationRecord(baseline, { phase: 'before' })
+  const browser = await chromium.launch({ headless: true })
+  const context = await browser.newContext({
+    colorScheme: 'light',
+    deviceScaleFactor: navigationViewport.deviceScaleFactor,
+    viewport: {
+      height: navigationViewport.height,
+      width: navigationViewport.width,
+    },
+  })
+  try {
+    const measured = await measureUnchangedNavigationControl({
+      browserContext: context,
+      buildContext,
+    })
+    const before = baseline.scenarios['unchanged-control']
+    const relativeMaximumMs = before.p95Ms * NAVIGATION_RELATIVE_RATIO
+    const scenario = {
+      absoluteMaximumMs: NAVIGATION_ABSOLUTE_MAXIMUM_MS,
+      baselineP95Ms: before.p95Ms,
+      deckId: 'default-only',
+      fromSlide: 1,
+      mode: 'light',
+      preset: 'default',
+      relativeMaximumMs,
+      targetSelector: '.slidev-layout h1',
+      targetSlide: 2,
+      ...measured,
+    }
+    scenario.status = scenario.p95Ms <= relativeMaximumMs
+      && scenario.layoutShiftEntries.length === 0
+      ? 'pass'
+      : 'fail'
+    const affected = JSON.parse(
+      await readFile(affectedNavigationAfterPath, 'utf8'),
+    )
+    const expectedAffectedIds = navigationScenarioDefinitions
+      .map(definition => definition.id)
+      .sort()
+    assert.deepEqual(
+      Object.keys(affected.scenarios ?? {}).sort(),
+      expectedAffectedIds,
+      'Affected navigation evidence does not match the registered scenario set',
+    )
+    for (const [id, affectedScenario] of Object.entries(affected.scenarios)) {
+      assert.ok(
+        affectedScenario.p95Ms <= NAVIGATION_ABSOLUTE_MAXIMUM_MS,
+        `${id}: affected navigation p95 exceeds the absolute ceiling`,
+      )
+      assert.deepEqual(
+        affectedScenario.layoutShiftEntries,
+        [],
+        `${id}: affected navigation produced target-attributed layout shift`,
+      )
+    }
+    const scenarios = {
+      'unchanged-control': scenario,
+      ...affected.scenarios,
+    }
+    const record = {
+      schemaVersion: 1,
+      phase: 'after',
+      recordedAt: now(),
+      baselineRecord: relativePath(navigationBaselinePath),
+      environment: {
+        ...await collectEnvironment(),
+        viewport: navigationViewport,
+      },
+      status: Object.values(scenarios).every(
+        measuredScenario => measuredScenario.status === 'pass',
+      )
+        ? 'pass'
+        : 'fail',
+      scenarios,
+    }
+    validateNavigationRecord(record, { phase: 'after' })
+    onRecord?.(record)
+    const artifactPath = resolve(
+      qualityArtifactRoot,
+      'navigation-performance-after.json',
+    )
+    await writeNavigationEvidence(artifactPath, record)
+    if (record.status !== 'pass') {
+      const error = new Error(
+        `Unchanged-control navigation p95 ${scenario.p95Ms} ms exceeds ${relativeMaximumMs} ms or produced layout shift`,
+      )
+      error.exitCode = 1
+      throw error
+    }
+    return {
+      evidencePath: relativePath(artifactPath),
+      affectedScenarios: expectedAffectedIds.length,
+      p95Ms: scenario.p95Ms,
+      relativeMaximumMs,
+      status: record.status,
+    }
+  } finally {
+    await context.close()
+    await browser.close()
   }
 }
 
@@ -307,6 +641,10 @@ const parseArguments = () => {
   const arguments_ = process.argv.slice(2)
   const selfCheck = arguments_.includes('--self-check')
   const updateBaselines = arguments_.includes('--update-baselines')
+  const updateVisualBaselines = arguments_.includes('--update-visual-baselines')
+  const updatePerformanceBaselines = arguments_.includes(
+    '--update-performance-baselines',
+  )
   const valueAfter = (name) => {
     const index = arguments_.indexOf(name)
     return index >= 0 ? arguments_[index + 1] : undefined
@@ -317,6 +655,8 @@ const parseArguments = () => {
     '--',
     '--self-check',
     '--update-baselines',
+    '--update-visual-baselines',
+    '--update-performance-baselines',
     '--reviewer',
     '--rationale',
     reviewer,
@@ -326,15 +666,30 @@ const parseArguments = () => {
   if (unknown.length > 0) {
     throw new Error(`Unsupported quality argument(s): ${unknown.join(', ')}`)
   }
-  if (selfCheck && updateBaselines) {
-    throw new Error('--self-check and --update-baselines are mutually exclusive')
+  const updateCount = [
+    updateBaselines,
+    updateVisualBaselines,
+    updatePerformanceBaselines,
+  ].filter(Boolean).length
+  if (selfCheck && updateCount > 0) {
+    throw new Error('--self-check and baseline updates are mutually exclusive')
   }
-  if (updateBaselines && (!reviewer?.trim() || !rationale?.trim())) {
+  if (updateCount > 1) {
+    throw new Error('Baseline update modes are mutually exclusive')
+  }
+  if (updateCount > 0 && (!reviewer?.trim() || !rationale?.trim())) {
     throw new Error(
-      '--update-baselines requires non-empty --reviewer and --rationale values',
+      'Baseline updates require non-empty --reviewer and --rationale values',
     )
   }
-  return { rationale, reviewer, selfCheck, updateBaselines }
+  return {
+    rationale,
+    reviewer,
+    selfCheck,
+    updateBaselines,
+    updatePerformanceBaselines,
+    updateVisualBaselines,
+  }
 }
 
 const executeQuality = async (options) => {
@@ -342,7 +697,13 @@ const executeQuality = async (options) => {
   const baselineBefore = await snapshotTree(baselineRoot)
   const summary = {
     schemaVersion: 1,
-    mode: options.updateBaselines ? 'baseline-update' : 'quality',
+    mode: options.updateBaselines
+      ? 'combined-baseline-update'
+      : options.updateVisualBaselines
+        ? 'visual-baseline-update'
+        : options.updatePerformanceBaselines
+          ? 'performance-baseline-update'
+          : 'quality',
     startedAt: now(),
     deadlineMs,
     environment: await collectEnvironment(),
@@ -433,13 +794,21 @@ const executeQuality = async (options) => {
       ].map(directory => resetArtifactDirectory(
         resolve(qualityArtifactRoot, directory),
       )))
-      await rm(summaryPath, { force: true })
+      await Promise.all([
+        summaryPath,
+        affectedNavigationAfterPath,
+        resolve(qualityArtifactRoot, 'navigation-performance-after.json'),
+        resolve(qualityArtifactRoot, 'performance-after.json'),
+      ].map(path => rm(path, { force: true })))
       return { root: relativePath(qualityArtifactRoot) }
     })
 
     let buildDefinitions
     await runPhase('prepare-builds', async () => {
-      const matrixDefinitions = await generatePresetMatrixDefinitions()
+      const [matrixDefinitions, expandedDefinitions] = await Promise.all([
+        generatePresetMatrixDefinitions(),
+        generateExpandedContentDefinitions(),
+      ])
       const maintainedRoot = await resetArtifactDirectory(
         resolve(qualityArtifactRoot, 'build/maintained'),
       )
@@ -460,8 +829,9 @@ const executeQuality = async (options) => {
           ...definition,
           id: `matrix-${definition.preset}`,
         })),
+        ...expandedDefinitions,
       ]
-      assert.equal(new Set(buildDefinitions.map(build => build.id)).size, 8)
+      assert.equal(new Set(buildDefinitions.map(build => build.id)).size, 11)
       for (const build of buildDefinitions) {
         assert.ok(resolve(build.outDir) === build.outDir, `${build.id}: absolute output`)
       }
@@ -522,7 +892,7 @@ const executeQuality = async (options) => {
       }
     })
 
-    if (options.updateBaselines) {
+    if (options.updateBaselines || options.updateVisualBaselines) {
       await runPhase('update-visual-baselines', async () => {
         const { browser, context } = await createVisualBrowser()
         try {
@@ -543,15 +913,32 @@ const executeQuality = async (options) => {
           await browser.close()
         }
       })
-      await runPhase('update-output-baselines', () => updateOutputBaselines({
+    }
+    if (options.updateBaselines || options.updatePerformanceBaselines) {
+      await runPhase('update-performance-baselines', () => updatePerformanceBaselines({
         buildContext,
         rationale: options.rationale,
         reviewer: options.reviewer,
       }))
+    }
+    if (options.updateBaselines
+      || options.updateVisualBaselines
+      || options.updatePerformanceBaselines) {
       return
     }
 
     await runPhase('self-checks', () => runSelfChecks())
+    await runPhase(
+      'performance-baseline-contracts',
+      () => runCommandPhase(
+        'performance-baseline-contracts',
+        [
+          '--test',
+          'tests/quality/performance-baselines.spec.mjs',
+        ],
+        30_000,
+      ),
+    )
     await runPhase(
       'configuration',
       () => runCommandPhase(
@@ -568,34 +955,61 @@ const executeQuality = async (options) => {
         30_000,
       ),
     )
-    await runPhase(
-      'preset-isolation',
-      () => runCommandPhase(
+    await Promise.all([
+      runPhase(
         'preset-isolation',
-        ['--test', 'tests/quality/preset-isolation.spec.mjs'],
+        () => runCommandPhase(
+          'preset-isolation',
+          ['--test', 'tests/quality/preset-isolation.spec.mjs'],
+        ),
       ),
-    )
-    await runPhase(
-      'accessibility',
-      () => runCommandPhase(
+      runPhase(
+        'content-contracts',
+        () => runCommandPhase(
+          'content-contracts',
+          ['--test', 'tests/quality/content-contracts.spec.mjs'],
+        ),
+      ),
+      runPhase(
         'accessibility',
-        ['--test', 'tests/quality/accessibility.spec.mjs'],
+        () => runCommandPhase(
+          'accessibility',
+          ['--test', 'tests/quality/accessibility.spec.mjs'],
+        ),
       ),
-    )
-    await runPhase(
-      'visual',
-      () => runCommandPhase(
+      runPhase(
         'visual',
-        ['--test', 'tests/quality/visual.spec.mjs'],
+        () => runCommandPhase(
+          'visual',
+          ['--test', 'tests/quality/visual.spec.mjs'],
+        ),
       ),
-    )
-    await runPhase(
-      'assets',
-      () => runCommandPhase(
+      runPhase(
         'assets',
-        ['--test', 'tests/quality/assets.spec.mjs'],
+        () => runCommandPhase(
+          'assets',
+          ['--test', 'tests/quality/assets.spec.mjs'],
+        ),
+      ),
+    ])
+    await runPhase(
+      'navigation-performance-affected',
+      () => runCommandPhase(
+        'navigation-performance-affected',
+        ['--test', 'tests/quality/navigation-performance.spec.mjs'],
       ),
     )
+    let navigationAfterRecord
+    await runPhase(
+      'navigation-performance',
+      () => measureNavigationAfter({
+        buildContext,
+        onRecord: (record) => {
+          navigationAfterRecord = record
+        },
+      }),
+    )
+    let outputAfterRecord
     await runPhase('output-size', async () => {
       const outputPath = resolve(
         qualityArtifactRoot,
@@ -620,9 +1034,46 @@ const executeQuality = async (options) => {
           timeoutMs: Math.min(30_000, remainingMs()),
         },
       )
+      outputAfterRecord = JSON.parse(await readFile(outputPath, 'utf8'))
+      validateOutputEvidence(outputAfterRecord, { phase: 'after' })
       return {
         durationMs: result.durationMs,
         evidencePath: relativePath(outputPath),
+      }
+    })
+    await runPhase('durable-performance-after', async () => {
+      assert.ok(navigationAfterRecord, 'Navigation after evidence is missing')
+      assert.ok(outputAfterRecord, 'Output after evidence is missing')
+      const record = {
+        schemaVersion: 1,
+        phase: 'after',
+        recordedAt: now(),
+        environment: navigationAfterRecord.environment,
+        baselineRecords: {
+          navigation: navigationAfterRecord.baselineRecord,
+          output: outputAfterRecord.baselineRecord,
+        },
+        thresholds: {
+          affectedNavigationMaximumMs: NAVIGATION_ABSOLUTE_MAXIMUM_MS,
+          outputMaximumRatio: 1.05,
+          unchangedControlMaximumRatio: NAVIGATION_RELATIVE_RATIO,
+        },
+        status: navigationAfterRecord.status === 'pass'
+          && outputAfterRecord.status === 'pass'
+          ? 'pass'
+          : 'fail',
+        output: outputAfterRecord,
+        navigation: navigationAfterRecord,
+      }
+      await mkdir(dirname(performanceAfterPath), { recursive: true })
+      await writeFile(
+        performanceAfterPath,
+        `${JSON.stringify(record, null, 2)}\n`,
+      )
+      return {
+        path: relativePath(performanceAfterPath),
+        scenarios: Object.keys(navigationAfterRecord.scenarios).length,
+        status: record.status,
       }
     })
     await runPhase('baseline-integrity', async () => {

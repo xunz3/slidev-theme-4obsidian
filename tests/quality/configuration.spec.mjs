@@ -65,6 +65,9 @@ test('option definitions are the immutable canonical public contract', () => {
     'quote',
     'figure',
     'references',
+    'closing',
+    'image-text',
+    'code',
   ])
 
   assert.deepEqual(Object.keys(config.PRESENTATION_OPTIONS), [
@@ -91,8 +94,8 @@ test('option definitions are the immutable canonical public contract', () => {
   assert.deepEqual(config.PRESENTATION_OPTIONS.chrome.slideKeys, ['presentationChrome', 'chrome'])
   assert.deepEqual(config.PRESENTATION_OPTIONS.header.slideKeys, ['presentationHeader', 'header'])
   assert.deepEqual(config.PRESENTATION_OPTIONS.pageNumber.slideKeys, ['pageNumber'])
-  assert.deepEqual(config.PRESENTATION_OPTIONS.accent.slideKeys, [])
-  assert.equal(config.PRESENTATION_OPTIONS.accent.scope, 'deck-only')
+  assert.deepEqual(config.PRESENTATION_OPTIONS.accent.slideKeys, ['accent'])
+  assert.equal(config.PRESENTATION_OPTIONS.accent.scope, 'deck-and-slide')
 
   assert.ok(Object.isFrozen(config.PRESENTATION_PRESETS))
   assert.ok(Object.isFrozen(config.PRESENTATION_DENSITIES))
@@ -265,20 +268,80 @@ test('invalid higher-priority input inherits the next valid candidate', () => {
   })
 })
 
-test('accent validation is trimmed, deck-only, and predicate-backed', () => {
-  const supportsColor = value => new Set(['rebeccapurple', 'oklch(60% 0.2 20)']).has(value)
+test('accent validation and local → deck → preset fallback are first-valid', () => {
+  const supported = new Set([
+    'rebeccapurple',
+    'oklch(60% 0.2 20)',
+    'color-mix(in srgb, currentColor 70%, #5b4fc4)',
+  ])
+  const supportsColor = value => supported.has(value)
 
   assert.equal(config.normalizeAccent(' rebeccapurple ', supportsColor), 'rebeccapurple')
   assert.equal(config.normalizeAccent('not-a-color', supportsColor), undefined)
   assert.equal(config.normalizeAccent('', supportsColor), undefined)
   assert.equal(config.normalizeAccent(42, supportsColor), undefined)
 
+  for (const value of [
+    'blue',
+    '#345f8f',
+    'rgb(20 40 60)',
+    'hsl(210 50% 40%)',
+    'oklch(60% 0.2 20)',
+    'color(display-p3 0.2 0.4 0.8)',
+    'color-mix(in srgb, currentColor 70%, #5b4fc4)',
+    'var(--authored-accent)',
+  ]) {
+    assert.equal(config.normalizeAccent(value), value, value)
+  }
+
   assert.equal(config.resolvePresentation({
     deck: { accent: 'oklch(60% 0.2 20)' },
-    slide: { presentationAccent: '#fff', accent: '#fff' },
+    slide: { accent: 'rebeccapurple' },
     variant: 'default',
     supportsColor,
-  }).accent, 'oklch(60% 0.2 20)')
+  }).accent, 'rebeccapurple')
+
+  for (const accent of [undefined, '', 'not-a-color', 42]) {
+    assert.equal(config.resolvePresentation({
+      deck: { accent: 'oklch(60% 0.2 20)' },
+      slide: { accent },
+      variant: 'default',
+      supportsColor,
+    }).accent, 'oklch(60% 0.2 20)')
+  }
+
+  assert.equal(config.resolvePresentation({
+    deck: { accent: 'not-a-color' },
+    slide: { accent: '' },
+    variant: 'default',
+    supportsColor,
+  }).accent, null)
+
+  assert.equal(config.resolvePresentation({
+    deck: { accent: 'rebeccapurple' },
+    slide: {
+      accent: 'rebeccapurple',
+      presentationAccent: 'oklch(60% 0.2 20)',
+    },
+    variant: 'default',
+    supportsColor,
+  }).accent, 'rebeccapurple')
+})
+
+test('app setup remains deck-only while the shared frame owns local accent scope', async () => {
+  const [setupSource, frameSource] = await Promise.all([
+    readFile(resolve(repositoryRoot, 'setup/main.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'components/SlideFrame.vue'), 'utf8'),
+  ])
+
+  assert.match(setupSource, /resolveDeckPresentation/)
+  assert.doesNotMatch(
+    setupSource,
+    /\$frontmatter|useSlideContext|currentPage|nav\.|afterEach|onAfterRoute/,
+  )
+  assert.match(frameSource, /slide:\s*frontmatter\.value/)
+  assert.match(frameSource, /--presentation-accent/)
+  assert.match(frameSource, /--slidev-theme-primary/)
 })
 
 test('derived chrome and header behavior covers every frame variant', () => {
@@ -287,7 +350,7 @@ test('derived chrome and header behavior covers every frame variant', () => {
       deck: { chrome: 'auto', header: true },
       variant,
     })
-    const expectedChrome = variant !== 'cover' && variant !== 'section'
+    const expectedChrome = !['cover', 'section', 'closing'].includes(variant)
     assert.equal(auto.showChrome, expectedChrome, variant)
     assert.equal(auto.showHeader, expectedChrome, variant)
 
@@ -305,6 +368,11 @@ test('derived chrome and header behavior covers every frame variant', () => {
     assert.equal(forcedOff.showChrome, false, variant)
     assert.equal(forcedOff.showHeader, false, variant)
   }
+
+  assert.equal(config.normalizeFrameVariant('closing'), 'closing')
+  assert.equal(config.normalizeFrameVariant('image-text'), 'image-text')
+  assert.equal(config.normalizeFrameVariant('code'), 'code')
+  assert.equal(config.normalizeFrameVariant('unsupported'), undefined)
 })
 
 const sourceFiles = async (directory) => {
@@ -322,6 +390,7 @@ test('presentation types, defaults, and normalizers have one source authority', 
   const canonicalPath = resolve(repositoryRoot, 'setup/presentation-config.ts')
   const files = [
     ...await sourceFiles('components'),
+    ...await sourceFiles('internals'),
     ...await sourceFiles('layouts'),
     ...await sourceFiles('setup'),
   ]
@@ -384,14 +453,48 @@ test('presentation types, defaults, and normalizers have one source authority', 
 
 test('only the shared frame resolves presentation state and owns preset attributes', async () => {
   const layoutFiles = await sourceFiles('layouts')
+  const delegatedLayouts = new Map([
+    ['layouts/end.vue', 'ClosingLayout'],
+    ['layouts/image-left.vue', 'ImageTextLayout'],
+    ['layouts/image-right.vue', 'ImageTextLayout'],
+  ])
   for (const file of layoutFiles) {
     const source = await readFile(file, 'utf8')
     const name = relative(repositoryRoot, file)
-    assert.match(source, /import\s+SlideFrame\s+from/, `${name}: shared frame import`)
-    assert.match(source, /<SlideFrame\b/, `${name}: shared frame usage`)
+    if (name === 'layouts/thanks.vue') {
+      assert.match(source, /import\s+EndLayout\s+from\s+['"]\.\/end\.vue['"]/)
+      assert.match(source, /<EndLayout\b/)
+      assert.doesNotMatch(
+        source,
+        /defineProps|<SlideFrame|ClosingLayout|presentation-closing/,
+      )
+      continue
+    }
+    const delegate = delegatedLayouts.get(name)
+    if (delegate) {
+      assert.match(
+        source,
+        new RegExp(`import\\s+${delegate}\\s+from`),
+        `${name}: shared internal import`,
+      )
+      assert.match(source, new RegExp(`<${delegate}\\b`), `${name}: internal usage`)
+    } else {
+      assert.match(source, /import\s+SlideFrame\s+from/, `${name}: shared frame import`)
+      assert.match(source, /<SlideFrame\b/, `${name}: shared frame usage`)
+    }
     assert.doesNotMatch(source, /\bresolvePresentation\s*\(/, `${name}: local resolver`)
     assert.doesNotMatch(source, /themeConfig\??\.presentation/, `${name}: deck resolution`)
     assert.doesNotMatch(source, /data-presentation-(?:preset|density)/, `${name}: state ownership`)
+  }
+
+  for (const [path, expectedVariant] of [
+    ['internals/ClosingLayout.vue', 'closing'],
+    ['internals/ImageTextLayout.vue', 'image-text'],
+  ]) {
+    const source = await readFile(resolve(repositoryRoot, path), 'utf8')
+    assert.match(source, /import\s+SlideFrame\s+from/, `${path}: frame import`)
+    assert.match(source, /<SlideFrame\b/, `${path}: frame usage`)
+    assert.match(source, new RegExp(`variant=["']${expectedVariant}["']`))
   }
 
   const componentFiles = await sourceFiles('components')

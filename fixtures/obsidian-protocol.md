@@ -179,6 +179,29 @@ export function isObsidianSlidevDeck(frontmatter: Record<string, unknown>) {
 ```
 
 ---
+title: Generated Tasks And Highlights
+subtitle: Presentation-only reading cues
+presentationDensity: compact
+---
+
+# Generated Tasks And Highlights
+
+<ul class="obsidian-slidev-task-list contains-task-list">
+  <li class="obsidian-slidev-task-list-item task-list-item" data-task="">
+    <input type="checkbox" />
+    Generated unchecked protocol task.
+  </li>
+  <li class="obsidian-slidev-task-list-item task-list-item is-checked" data-task="x">
+    <input type="checkbox" checked />
+    Generated checked protocol task.
+  </li>
+</ul>
+
+Generated <span class="obsidian-slidev-highlight">highlighted evidence</span> remains distinct
+from <a class="obsidian-slidev-link" href="https://example.com/protocol">a protocol link</a>
+and `inline code`.
+
+---
 title: Footnotes
 subtitle: Markdown footnote support
 ---

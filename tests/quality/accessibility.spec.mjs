@@ -6,6 +6,7 @@ import axe from 'axe-core'
 import { chromium } from 'playwright-chromium'
 import {
   buildDeck,
+  generateExpandedContentBuilds,
   generatePresetMatrixBuilds,
   qualityArtifactRoot,
   readQualityBuildContext,
@@ -36,7 +37,10 @@ const serializeError = error => ({
 })
 
 const createFallbackContext = async () => {
-  const matrixBuilds = await generatePresetMatrixBuilds()
+  const [matrixBuilds, expandedBuilds] = await Promise.all([
+    generatePresetMatrixBuilds(),
+    generateExpandedContentBuilds(),
+  ])
   const protocolBuild = {
     id: 'protocol',
     outDir: resolve(qualityArtifactRoot, 'build/accessibility/protocol'),
@@ -48,6 +52,7 @@ const createFallbackContext = async () => {
       ...build,
       id: `matrix-${build.preset}`,
     })),
+    ...expandedBuilds,
     protocolBuild,
   ]
   const servers = await Promise.all(
@@ -115,7 +120,9 @@ const pageState = async (page, marker) => page.evaluate((qualityMarker) => {
     .filter((element) => {
       const style = getComputedStyle(element)
       const rect = element.getBoundingClientRect()
-      return style.display !== 'none'
+      return !element.matches(':disabled')
+        && element.tabIndex >= 0
+        && style.display !== 'none'
         && style.visibility !== 'hidden'
         && rect.width > 0
         && rect.height > 0
@@ -300,7 +307,15 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
   const externalContext = readQualityBuildContext()
   const fallback = externalContext ? null : await createFallbackContext()
   const builds = externalContext ?? fallback.builds
-  for (const id of ['matrix-default', 'matrix-ucas', 'matrix-ict', 'protocol']) {
+  for (const id of [
+    'matrix-default',
+    'matrix-ucas',
+    'matrix-ict',
+    'expanded-default',
+    'expanded-ucas',
+    'expanded-ict',
+    'protocol',
+  ]) {
     assert.ok(builds[id], `quality build context is missing ${id}`)
   }
 
@@ -347,6 +362,291 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
               preset,
               slide: definition.slide,
             })
+            await result.page.close()
+          })
+        }
+      }
+    }
+
+    const us1Scenarios = [
+      {
+        marker: 'us1-callouts-info',
+        name: 'callouts',
+        slide: 3,
+      },
+      {
+        marker: 'us1-callout-fallbacks',
+        name: 'callout-rich-long-bilingual',
+        slide: 9,
+      },
+      {
+        marker: 'us1-figures-alternatives',
+        name: 'figure-alternatives',
+        slide: 11,
+      },
+      {
+        marker: 'us1-authors-mixed',
+        name: 'authors-email',
+        slide: 13,
+      },
+      {
+        marker: 'us2-closing-metadata',
+        name: 'us2-closing-metadata',
+        slide: 16,
+      },
+      {
+        marker: 'us2-closing-failed-logo',
+        name: 'us2-closing-failed-logo',
+        slide: 18,
+      },
+      {
+        marker: 'us2-image-left',
+        name: 'us2-image-left',
+        slide: 20,
+      },
+      {
+        marker: 'us2-image-right',
+        name: 'us2-image-right',
+        slide: 21,
+      },
+      {
+        marker: 'us2-image-bilingual',
+        name: 'us2-image-bilingual',
+        slide: 25,
+      },
+      {
+        marker: 'us3-accent-local-a',
+        name: 'us3-accent-local-a',
+        slide: 26,
+      },
+      {
+        marker: 'us3-accent-unaccented',
+        name: 'us3-accent-unaccented',
+        slide: 27,
+      },
+      {
+        marker: 'us3-accent-local-b',
+        name: 'us3-accent-local-b',
+        slide: 30,
+      },
+      {
+        marker: 'us4-code-titled',
+        name: 'us4-code-titled',
+        slide: 32,
+      },
+      {
+        marker: 'us4-code-titleless',
+        name: 'us4-code-titleless',
+        slide: 33,
+      },
+      {
+        marker: 'us4-steps-many',
+        name: 'us4-steps-many',
+        slide: 36,
+      },
+      {
+        marker: 'us4-timeline-many',
+        name: 'us4-timeline-many',
+        slide: 39,
+      },
+      {
+        marker: 'us4-status-labels',
+        name: 'us4-status-labels',
+        slide: 40,
+      },
+      {
+        marker: 'us4-keyboard',
+        name: 'us4-keyboard',
+        slide: 41,
+      },
+      {
+        marker: 'us5-tasks-native',
+        name: 'us5-tasks-native',
+        slide: 42,
+      },
+      {
+        marker: 'us5-tasks-generated',
+        name: 'us5-tasks-generated',
+        slide: 43,
+      },
+      {
+        marker: 'us5-highlights',
+        name: 'us5-highlights',
+        slide: 44,
+      },
+    ]
+    for (const preset of presets) {
+      const baseUrl = builds[`expanded-${preset}`].baseUrl
+      for (const mode of modes) {
+        for (const definition of us1Scenarios) {
+          const caseId = `${preset}-us1-${definition.name}-${mode}`
+          await t.test(caseId, async () => {
+            const result = await inspectScenario({
+              axeDirectory,
+              baseUrl,
+              browserContext,
+              caseId,
+              marker: definition.marker,
+              mode,
+              preset,
+              slide: definition.slide,
+            })
+            if (definition.name === 'callouts') {
+              const cue = await result.page.locator(
+                '.obsidian-slidev-callout__title',
+              ).first().evaluate((element) => {
+                const callout = element.closest('.obsidian-slidev-callout')
+                const calloutStyle = getComputedStyle(callout)
+                const markerStyle = getComputedStyle(element, '::before')
+                return {
+                  borderLeftWidth: calloutStyle.borderLeftWidth,
+                  markerHeight: markerStyle.height,
+                  markerWidth: markerStyle.width,
+                }
+              })
+              assert.notEqual(cue.borderLeftWidth, '0px')
+              assert.notEqual(cue.markerHeight, '0px')
+              assert.notEqual(cue.markerWidth, '0px')
+            }
+            if (definition.name === 'figure-alternatives') {
+              const alternatives = await result.page.locator(
+                `[data-quality-case="${definition.marker}"] > .obsidian-slidev-media`,
+              ).evaluateAll(figures => figures.map((figure) => {
+                const image = figure.querySelector('img')
+                return {
+                  alt: image?.getAttribute('alt') ?? null,
+                  fallback: figure.querySelector(
+                    '.obsidian-slidev-media__fallback',
+                  )?.textContent?.trim() ?? null,
+                }
+              }))
+              assert.deepEqual(
+                alternatives.map(item => item.alt),
+                [
+                  'Obsidian card connected to a presentation',
+                  'Caption supplies the omitted alternative.',
+                  '',
+                  null,
+                  null,
+                ],
+              )
+              assert.ok(alternatives[3].fallback)
+              assert.ok(alternatives[4].fallback)
+            }
+            if (definition.name === 'authors-email') {
+              const email = result.page.locator(
+                '.presentation-author a[href^="mailto:"]',
+              ).first()
+              await email.focus()
+              const focus = await email.evaluate((element) => {
+                const style = getComputedStyle(element)
+                return {
+                  outlineStyle: style.outlineStyle,
+                  outlineWidth: style.outlineWidth,
+                }
+              })
+              assert.notEqual(focus.outlineStyle, 'none')
+              assert.notEqual(focus.outlineWidth, '0px')
+            }
+            if (definition.name === 'us2-closing-metadata') {
+              const contact = result.page.locator(
+                '.presentation-closing__contact[href^="mailto:"]',
+              )
+              await contact.focus()
+              const style = await contact.evaluate((element) => {
+                const computed = getComputedStyle(element)
+                return {
+                  outlineStyle: computed.outlineStyle,
+                  outlineWidth: computed.outlineWidth,
+                }
+              })
+              assert.notEqual(style.outlineStyle, 'none')
+              assert.notEqual(style.outlineWidth, '0px')
+            }
+            if (definition.name.startsWith('us2-image-')) {
+              assert.deepEqual(
+                await result.page.locator(
+                  `.slidev-page-${definition.slide} .presentation-image-text`,
+                )
+                  .evaluate(root => [...root.children].map(
+                    element => element.className,
+                  )),
+                [
+                  'presentation-image-text__narrative',
+                  'obsidian-slidev-media obsidian-slidev-media--image presentation-image-text__figure',
+                ],
+              )
+            }
+            if (definition.name === 'us4-status-labels') {
+              const labels = result.page.locator(
+                `.slidev-page-${definition.slide} :is(.presentation-tag, .presentation-badge)`,
+              )
+              assert.equal(await labels.count(), 4)
+              assert.equal(await labels.locator('[role], [tabindex]').count(), 0)
+            }
+            if (definition.name === 'us4-keyboard') {
+              const keys = result.page.locator(
+                `.slidev-page-${definition.slide} :is(.presentation-kbd--single, .presentation-kbd-sequence, .presentation-kbd-key)`,
+              )
+              assert.ok(await keys.count() > 0)
+              assert.equal(await keys.locator('[tabindex]').count(), 0)
+              assert.equal(
+                await result.page.locator(
+                  `.slidev-page-${definition.slide} button`,
+                ).count(),
+                0,
+              )
+            }
+            if (definition.name.startsWith('us5-tasks-')) {
+              const tasks = result.page.locator(
+                `.slidev-page-${definition.slide} input[type="checkbox"]`,
+              )
+              assert.ok(await tasks.count() > 0)
+              assert.ok(await tasks.evaluateAll(inputs => inputs.every(
+                input => input.disabled
+                  && input.tabIndex === -1
+                  && input.dataset.presentationTask === 'true',
+              )))
+              assert.equal(
+                result.state.focusables.filter(
+                  item => item.tagName === 'input',
+                ).length,
+                0,
+              )
+              const cues = await tasks.evaluateAll(inputs => inputs.map(
+                (input) => {
+                  const item = input.closest('li')
+                  return {
+                    checked: input.checked,
+                    checkedCue: item
+                      ? getComputedStyle(item, '::after').content
+                      : 'none',
+                    emptyCue: item
+                      ? getComputedStyle(item, '::before').borderStyle
+                      : 'none',
+                  }
+                },
+              ))
+              assert.ok(cues.every(cue => cue.emptyCue !== 'none'))
+              assert.ok(cues.filter(cue => cue.checked)
+                .every(cue => cue.checkedCue !== 'none'))
+            }
+            if (definition.name === 'us5-highlights') {
+              const proseHighlights = result.page.locator(
+                `.slidev-page-${definition.slide} [data-highlight-case]`,
+              )
+              assert.equal(await proseHighlights.count(), 2)
+              const codeHighlights = result.page.locator(
+                `.slidev-page-${definition.slide} [data-highlight-code-scope] :is(mark, .obsidian-slidev-highlight)`,
+              )
+              assert.ok(await codeHighlights.evaluateAll(elements => (
+                elements.every((element) => {
+                  const style = getComputedStyle(element)
+                  return style.backgroundColor === 'rgba(0, 0, 0, 0)'
+                    && style.borderBottomWidth === '0px'
+                })
+              )))
+            }
             await result.page.close()
           })
         }

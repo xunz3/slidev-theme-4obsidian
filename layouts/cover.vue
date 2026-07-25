@@ -2,7 +2,7 @@
 import SlideFrame from '../components/SlideFrame.vue'
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import { formatAuthorDetails, normalizeAuthors } from '../setup/authors'
+import { formatAuthorDetails, resolveDeckAuthors } from '../setup/authors'
 import type { PresentationChrome } from '../setup/presentation-config'
 
 const props = defineProps({
@@ -21,10 +21,7 @@ const { $slidev, $frontmatter } = useSlideContext()
 const configs = computed(() => (($slidev.configs ?? {}) as Record<string, unknown>))
 // Slidev injects frontmatter as a reactive object, not a Ref.
 const frontmatter = computed(() => ($frontmatter as Record<string, unknown>))
-const authors = computed(() => {
-  const configuredAuthors = normalizeAuthors(configs.value.authors)
-  return configuredAuthors.length > 0 ? configuredAuthors : normalizeAuthors(configs.value.author)
-})
+const authors = computed(() => resolveDeckAuthors(configs.value))
 const title = computed(() => {
   const value = frontmatter.value.title ?? configs.value.title
   return typeof value === 'string' ? value.trim() : ''

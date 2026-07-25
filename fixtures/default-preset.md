@@ -145,3 +145,158 @@ layout: center
 # 谢谢 · Thank you
 
 Questions, assumptions, and replication notes are welcome.
+
+---
+layout: section
+---
+
+# Fixture appendix
+
+Complete public authoring examples · 完整创作示例
+
+---
+title: Public components
+presentationDensity: compact
+accent: "#8a4b2a"
+---
+
+# Callouts, labels, and keyboard input
+
+<Callout type="warning" title="Calibration boundary">
+
+Do not reuse the held-out test batches when fitting the temperature parameter.
+
+</Callout>
+
+<div class="presentation-label-gallery">
+  <Tag>Method</Tag>
+  <Tag>Shift analysis</Tag>
+  <Badge>Reviewed</Badge>
+  <Badge>Ready to replicate</Badge>
+</div>
+
+Press <Kbd>Esc</Kbd> to leave overview, or use
+<Kbd :keys="['Ctrl', 'Shift', 'P']" /> to open commands.
+
+---
+layout: two-cols
+title: Figure and author metadata
+presentationDensity: compact
+---
+
+# Accessible figure
+
+<Figure
+  src="/obsidian-card.svg"
+  alt="A compact research card summarizing one evidence record"
+  caption="Figure A. A bounded, captioned fixture image."
+/>
+
+::right::
+
+# Root authors
+
+<Authors />
+
+The component reads the deck-level author collection and keeps valid email addresses actionable.
+
+---
+layout: two-cols
+title: Ordered research processes
+presentationDensity: compact
+---
+
+# Steps
+
+<Steps>
+
+1. **Collect** shifted batches.
+2. **Calibrate** on validation data.
+3. **Report** uncertainty.
+
+</Steps>
+
+::right::
+
+# Timeline
+
+<Timeline>
+
+1. <time datetime="2026-05">May</time> — Protocol frozen.
+2. <time datetime="2026-06">June</time> — Audit completed.
+3. **July** — Evidence released.
+
+</Timeline>
+
+---
+title: Tasks and highlights
+presentationDensity: compact
+---
+
+# Presentation-only review checklist
+
+- [x] Preserve the raw logits and environment metadata.
+- [ ] Reproduce calibration on the held-out scanner.
+- [x] Publish confidence intervals with every primary estimate.
+
+The <mark>reviewed operating boundary</mark> is emphasized as prose, while
+`==literal code syntax==` remains code.
+
+---
+layout: code
+title: Full-width code example
+presentationDensity: compact
+---
+
+# Calibration contract
+
+```ts
+const report = calibrate({
+  metric: 'expected-calibration-error',
+  fitOn: 'validation',
+  groupBy: ['site', 'scanner'],
+  confidence: 0.95,
+})
+
+assert(report.testDataUsedForFit === false)
+```
+
+---
+layout: image-left
+title: Image-left example
+image: /obsidian-card.svg
+imageAlt: Research evidence card placed to the left of the narrative
+caption: Figure B. Narrative remains first in source order.
+backgroundSize: contain
+---
+
+# Evidence before ornament
+
+The narrative stays first in the document. CSS places the accessible figure on the left while
+preserving reading order, caption semantics, and bounded geometry.
+
+---
+layout: image-right
+title: Image-right example
+image: /obsidian-card.svg
+imageAlt: Research evidence card placed to the right of the narrative
+caption: Figure C. The mirrored visual orientation uses the same source order.
+backgroundSize: contain
+---
+
+# Mirrored presentation
+
+Use the right-hand orientation when the prose should lead visually. The authoring and
+accessibility contract is otherwise identical to `image-left`.
+
+---
+layout: end
+contact: ruoheng.wang@example.edu
+showAuthors: true
+logo: /obsidian-card.svg
+logoAlt: Reproducible calibration study mark
+---
+
+# Fixture complete
+
+Every public component and expanded layout has a maintained default-preset example.

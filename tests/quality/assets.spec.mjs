@@ -8,10 +8,13 @@ import { chromium } from 'playwright-chromium'
 import {
   brandAssetDefinitions,
   brandBaselinePath,
+  discoverThemeOwnedAssets,
+  findOversizedThemeAssets,
   inspectBrandSource,
   renderBrandReference,
   requiredPairPaths,
   sha256,
+  themeOwnedAssetPolicy,
   ucasSvgPaths,
   visualReferenceName,
 } from './brand-assets.mjs'
@@ -41,6 +44,44 @@ const assetDataUrl = async (path) => {
   const mediaType = format === 'svg' ? 'image/svg+xml' : 'image/png'
   return `data:${mediaType};base64,${buffer.toString('base64')}`
 }
+
+test('recursive shipped-asset policy covers unlisted files under assets and public', async () => {
+  assert.equal(themeOwnedAssetPolicy.maximumBytes, 256_000)
+  assert.deepEqual(themeOwnedAssetPolicy.roots, ['assets', 'public'])
+  assert.ok(
+    themeOwnedAssetPolicy.authorFixtureExclusions.every(exclusion => (
+      exclusion.path.startsWith('public/')
+      && exclusion.owner
+      && exclusion.rationale
+    )),
+  )
+
+  const discovered = await discoverThemeOwnedAssets()
+  const paths = discovered.map(asset => asset.path)
+  for (const definition of brandAssetDefinitions) {
+    assert.ok(paths.includes(definition.path), `${definition.path}: recursively discovered`)
+  }
+  assert.ok(paths.includes('public/obsidian-card.svg'))
+  assert.deepEqual(findOversizedThemeAssets(discovered), [])
+
+  assert.deepEqual(findOversizedThemeAssets([
+    { bytes: 256_000, path: 'assets/reviewed.bin' },
+    { bytes: 256_001, path: 'assets/unlisted.bin' },
+  ]), [{
+    bytes: 256_001,
+    maximumBytes: 256_000,
+    path: 'assets/unlisted.bin',
+  }])
+
+  for (const exception of themeOwnedAssetPolicy.reviewedExceptions) {
+    assert.ok(exception.path)
+    assert.ok(Number.isSafeInteger(exception.bytes))
+    assert.ok(exception.reviewer)
+    assert.ok(exception.rationale)
+    assert.ok(exception.mitigation)
+    assert.ok(exception.followUp)
+  }
+})
 
 test('reviewed manifest covers every shipped brand asset and its provenance', async () => {
   const shipped = [

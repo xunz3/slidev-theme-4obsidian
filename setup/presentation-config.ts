@@ -28,6 +28,9 @@ export const FRAME_VARIANTS = Object.freeze([
   'quote',
   'figure',
   'references',
+  'closing',
+  'image-text',
+  'code',
 ] as const)
 
 const BOOLEAN_TEXT_VALUES = Object.freeze([
@@ -215,11 +218,11 @@ export const PRESENTATION_OPTIONS = Object.freeze({
   accent: freezeDefinition<string | null>({
     key: 'accent',
     deckKey: 'accent',
-    slideKeys: [],
+    slideKeys: ['accent'],
     acceptedValues: 'css-color',
     defaultValue: null,
     normalize: normalizeAccent,
-    scope: 'deck-only',
+    scope: 'deck-and-slide',
   }),
 } satisfies Record<string, PresentationOptionDefinition<unknown>>)
 
@@ -276,7 +279,9 @@ export const deriveChromeVisibility = (
 ): boolean => {
   if (chrome === 'on') return true
   if (chrome === 'off') return false
-  return variant !== 'cover' && variant !== 'section'
+  return variant !== 'cover'
+    && variant !== 'section'
+    && variant !== 'closing'
 }
 
 export const deriveHeaderVisibility = (
@@ -331,6 +336,14 @@ export const resolvePresentation = (
     [slide.pageNumber, deck.pageNumber],
     PRESENTATION_DEFAULTS.pageNumber,
   )
+  const accent = firstValid(
+    value => normalizeAccent(
+      value,
+      input.supportsColor ?? supportsCssColor,
+    ),
+    [slide.accent, deck.accent],
+    PRESENTATION_DEFAULTS.accent,
+  )
   const showChrome = deriveChromeVisibility(chrome, variant)
 
   return Object.freeze({
@@ -340,7 +353,7 @@ export const resolvePresentation = (
     header,
     footerAuthors,
     pageNumber,
-    accent: deck.accent,
+    accent,
     variant,
     showChrome,
     showHeader: deriveHeaderVisibility(showChrome, header),

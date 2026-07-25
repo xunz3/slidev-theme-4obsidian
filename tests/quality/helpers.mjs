@@ -222,6 +222,47 @@ export const generatePresetMatrixBuilds = async () => {
   return definitions
 }
 
+export const generateExpandedContentDefinitions = async () => {
+  const templatePath = resolve(repositoryRoot, 'fixtures/expanded-content.md')
+  const generatedRoot = await resetArtifactDirectory(
+    resolve(qualityArtifactRoot, 'generated/expanded-content'),
+  )
+  const buildRoot = await resetArtifactDirectory(
+    resolve(qualityArtifactRoot, 'build/expanded-content'),
+  )
+  const template = await readFile(templatePath, 'utf8')
+  const presetMarker = 'preset: default # __EXPANDED_PRESET__'
+  if (!template.includes(presetMarker)) {
+    throw new Error('expanded-content fixture is missing its preset-generation marker')
+  }
+
+  return Promise.all(['default', 'ucas', 'ict'].map(async (preset) => {
+    const source = resolve(generatedRoot, `${preset}.md`)
+    const content = template
+      .replace(
+        /^theme:\s+\.\.\/$/m,
+        `theme: ${JSON.stringify(repositoryRoot)}`,
+      )
+      .replace(
+        presetMarker,
+        `preset: ${preset} # generated from __EXPANDED_PRESET__`,
+      )
+    await writeFile(source, content, 'utf8')
+    return {
+      id: `expanded-${preset}`,
+      outDir: resolve(buildRoot, preset),
+      preset,
+      source,
+    }
+  }))
+}
+
+export const generateExpandedContentBuilds = async () => {
+  const definitions = await generateExpandedContentDefinitions()
+  await mapConcurrent(definitions, 2, buildDeck)
+  return definitions
+}
+
 export const readQualityBuildContext = () => {
   const serialized = process.env.QUALITY_BUILD_CONTEXT
   if (!serialized) return null

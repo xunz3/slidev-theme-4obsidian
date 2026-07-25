@@ -1,0 +1,99 @@
+/*
+ * Preset identity tokens stay locked, while common presentation roles inherit the accent from
+ * the rendered canvas. This layer follows the preset token rules in the compiled stylesheet so a
+ * local frame value cannot be shadowed by a deck default on a simultaneously mounted slide.
+ */
+.slidev-layout[data-presentation-preset] .slide-frame {
+  --slidev-theme-primary: inherit;
+  --presentation-accent: inherit;
+  --presentation-scrollbar-thumb: color-mix(
+    in srgb,
+    var(--presentation-accent) 34%,
+    transparent
+  );
+  --presentation-table-header-bg: color-mix(
+    in srgb,
+    var(--presentation-accent) 8%,
+    transparent
+  );
+  --presentation-code-border: color-mix(
+    in srgb,
+    var(--presentation-accent) 24%,
+    var(--presentation-border)
+  );
+  --presentation-code-copy-color: color-mix(
+    in srgb,
+    var(--presentation-accent) 74%,
+    var(--presentation-text)
+  );
+  --presentation-inline-code-bg: color-mix(
+    in srgb,
+    var(--presentation-accent) 9%,
+    transparent
+  );
+  --presentation-inline-code-border: color-mix(
+    in srgb,
+    var(--presentation-accent) 24%,
+    var(--presentation-border)
+  );
+  --presentation-blockquote-border: color-mix(
+    in srgb,
+    var(--presentation-accent) 72%,
+    var(--presentation-border)
+  );
+  --presentation-callout-bg: color-mix(
+    in srgb,
+    var(--presentation-accent) 7%,
+    transparent
+  );
+  --presentation-callout-border: color-mix(
+    in srgb,
+    var(--presentation-accent) 58%,
+    transparent
+  );
+}
+
+html.dark .slidev-layout[data-presentation-preset] .slide-frame {
+  --presentation-table-header-bg: color-mix(
+    in srgb,
+    var(--presentation-accent) 12%,
+    transparent
+  );
+  --presentation-inline-code-bg: color-mix(
+    in srgb,
+    var(--presentation-accent) 14%,
+    transparent
+  );
+  --presentation-callout-bg: color-mix(
+    in srgb,
+    var(--presentation-accent) 11%,
+    transparent
+  );
+}
+
+.slidev-layout[data-presentation-preset] .slide-frame
+  :is(.slide-frame__header, .slide-frame__footer) {
+  border-color: color-mix(
+    in srgb,
+    var(--presentation-accent) 34%,
+    var(--presentation-border-strong)
+  );
+}
+
+.slidev-layout[data-presentation-preset] .slide-frame th {
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--presentation-accent) 34%,
+    var(--presentation-border-strong)
+  );
+}
+
+.slidev-layout[data-presentation-preset] .slide-frame
+  .presentation-code-layout .slidev-code-wrapper > pre.shiki {
+  background: var(--shiki-light-bg, var(--presentation-code-bg));
+}
+
+html.dark .slidev-layout[data-presentation-preset] .slide-frame
+  .presentation-code-layout .slidev-code-wrapper > pre.shiki {
+  background: var(--shiki-dark-bg, var(--presentation-code-bg));
+}

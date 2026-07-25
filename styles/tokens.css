@@ -58,6 +58,18 @@
   --presentation-media-max-height: 62vh;
   --presentation-media-radius: 0.2rem;
   --presentation-media-shadow: none;
+  --presentation-media-viewport-bg: color-mix(in srgb, var(--presentation-bg-muted) 58%, transparent);
+  --presentation-media-viewport-height: clamp(8.5rem, 34vh, 18rem);
+  --presentation-author-card-bg: color-mix(in srgb, var(--presentation-bg-elevated) 88%, transparent);
+  --presentation-author-card-border: var(--presentation-border);
+  --presentation-author-card-radius: 0.7rem;
+  --presentation-author-card-shadow: 0 8px 24px rgba(32, 37, 41, 0.05);
+  --presentation-closing-gap: 0.8rem;
+  --presentation-image-text-gap: 2rem;
+  --presentation-sequence-gap: 0.68rem;
+  --presentation-sequence-rail-width: 0.12rem;
+  --presentation-label-gap: 0.38rem;
+  --presentation-keycap-gap: 0.28rem;
   --presentation-statement-size: 3.05rem;
   --presentation-quote-size: 1.68rem;
   --presentation-quote-line-height: 1.46;
@@ -82,6 +94,9 @@ html.dark {
   --presentation-inline-code-border: rgba(119, 181, 170, 0.28);
   --presentation-inline-code-shadow: none;
   --presentation-callout-bg: rgba(119, 181, 170, 0.15);
+  --presentation-media-viewport-bg: rgba(255, 255, 255, 0.045);
+  --presentation-author-card-bg: rgba(255, 255, 255, 0.055);
+  --presentation-author-card-shadow: 0 10px 28px rgba(0, 0, 0, 0.20);
   --presentation-warning-bg: rgba(184, 121, 63, 0.18);
   --presentation-warning-text: #f0cfaa;
 }

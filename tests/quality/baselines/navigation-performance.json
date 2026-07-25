@@ -1,0 +1,2024 @@
+{
+  "schemaVersion": 1,
+  "phase": "before",
+  "recordedAt": "2026-07-24T16:04:03.979Z",
+  "environment": {
+    "architecture": "x64",
+    "chromiumVersion": "Google Chrome for Testing 149.0.7827.55",
+    "gitCommit": "9ab72767e257287fc510865ec37d107566699863",
+    "lockfileSha256": "4bb18aa8b427b07f4f14c868b702a2aa1e86631ff7eb114f741aff7884809beb",
+    "nodeVersion": "v26.5.0",
+    "operatingSystem": "linux 6.18.33.2-microsoft-standard-WSL2",
+    "pnpmVersion": "11.13.1",
+    "workingTreeDirty": true,
+    "viewport": {
+      "deviceScaleFactor": 2,
+      "height": 552,
+      "width": 980
+    }
+  },
+  "review": {
+    "rationale": "Fresh pre-rendering baseline for expand-theme-content before any component, layout, setup, style, fixture, or published-content change",
+    "reviewer": "Codex implementation review"
+  },
+  "scenarios": {
+    "unchanged-control": {
+      "absoluteMaximumMs": 100,
+      "deckId": "default-only",
+      "fromSlide": 1,
+      "mode": "light",
+      "preset": "default",
+      "targetSelector": ".slidev-layout h1",
+      "targetSlide": 2,
+      "maximumMs": 754.1,
+      "medianMs": 83,
+      "p95Ms": 99.1,
+      "samplesMs": [
+        80.9,
+        85.5,
+        82.7,
+        754.1,
+        88.7,
+        77.4,
+        96.1,
+        84,
+        73.9,
+        87.6,
+        97.6,
+        99.1,
+        78.2,
+        78.9,
+        81.4,
+        83.3,
+        82.5,
+        98.4,
+        70.9,
+        76
+      ],
+      "layoutShiftEntries": [],
+      "rawSamples": [
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 144.10000000009313,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 161.4000000001397,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 178.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 97.5,
+          "lastSignalAt": 130.69999999995343,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 47.9000000001397,
+          "stableAt": 178.4000000001397,
+          "totalMs": 80.9000000001397,
+          "visibilityMs": 33,
+          "visibilitySamples": [
+            {
+              "at": 97.5,
+              "visible": false
+            },
+            {
+              "at": 101.4000000001397,
+              "visible": false
+            },
+            {
+              "at": 110.60000000009313,
+              "visible": false
+            },
+            {
+              "at": 130.5,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 143.9000000001397,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 161.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 177.80000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 92.30000000004657,
+          "lastSignalAt": 132.4000000001397,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 45.699999999953434,
+          "stableAt": 177.80000000004657,
+          "totalMs": 85.5,
+          "visibilityMs": 39.800000000046566,
+          "visibilitySamples": [
+            {
+              "at": 92.30000000004657,
+              "visible": false
+            },
+            {
+              "at": 96.20000000018626,
+              "visible": false
+            },
+            {
+              "at": 110.60000000009313,
+              "visible": false
+            },
+            {
+              "at": 132,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 144.4000000001397,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 161.4000000001397,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 178.20000000018626,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 95.5,
+          "lastSignalAt": 131,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 47.5,
+          "stableAt": 178.20000000018626,
+          "totalMs": 82.70000000018626,
+          "visibilityMs": 35.200000000186265,
+          "visibilitySamples": [
+            {
+              "at": 95.5,
+              "visible": false
+            },
+            {
+              "at": 98.70000000018626,
+              "visible": false
+            },
+            {
+              "at": 110.80000000004657,
+              "visible": false
+            },
+            {
+              "at": 130.70000000018626,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 158.125,
+              "left": 170,
+              "top": 91.938,
+              "width": 630
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 796.3000000000466,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 812.5,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 830.3999999999069,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            }
+          ],
+          "inputAt": 76.30000000004657,
+          "lastSignalAt": 127.19999999995343,
+          "layoutShiftEntries": [],
+          "signalCount": 8,
+          "stabilityMs": 703.3999999999069,
+          "stableAt": 830.3999999999069,
+          "totalMs": 754.0999999998603,
+          "visibilityMs": 50.699999999953434,
+          "visibilitySamples": [
+            {
+              "at": 76.30000000004657,
+              "visible": false
+            },
+            {
+              "at": 78.39999999990687,
+              "visible": false
+            },
+            {
+              "at": 96.69999999995343,
+              "visible": false
+            },
+            {
+              "at": 127,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 158.125,
+              "left": 170,
+              "top": 91.938,
+              "width": 630
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 153.69999999995343,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 170.5999999998603,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 187.39999999990687,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            }
+          ],
+          "inputAt": 98.69999999995343,
+          "lastSignalAt": 140.5999999998603,
+          "layoutShiftEntries": [],
+          "signalCount": 8,
+          "stabilityMs": 47,
+          "stableAt": 187.39999999990687,
+          "totalMs": 88.69999999995343,
+          "visibilityMs": 41.699999999953434,
+          "visibilitySamples": [
+            {
+              "at": 98.69999999995343,
+              "visible": false
+            },
+            {
+              "at": 103.39999999990687,
+              "visible": false
+            },
+            {
+              "at": 121.69999999995343,
+              "visible": false
+            },
+            {
+              "at": 140.39999999990687,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 146.19999999995343,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 163.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 180.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 103,
+          "lastSignalAt": 132.9000000001397,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 47.700000000186265,
+          "stableAt": 180.4000000001397,
+          "totalMs": 77.4000000001397,
+          "visibilityMs": 29.699999999953434,
+          "visibilitySamples": [
+            {
+              "at": 103,
+              "visible": false
+            },
+            {
+              "at": 107.5,
+              "visible": false
+            },
+            {
+              "at": 112.4000000001397,
+              "visible": false
+            },
+            {
+              "at": 132.69999999995343,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 158.125,
+              "left": 170,
+              "top": 91.938,
+              "width": 630
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 143.20000000018626,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 160.10000000009313,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 176.80000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            }
+          ],
+          "inputAt": 80.70000000018626,
+          "lastSignalAt": 131.20000000018626,
+          "layoutShiftEntries": [],
+          "signalCount": 8,
+          "stabilityMs": 45.800000000046566,
+          "stableAt": 176.80000000004657,
+          "totalMs": 96.0999999998603,
+          "visibilityMs": 50.299999999813735,
+          "visibilitySamples": [
+            {
+              "at": 80.70000000018626,
+              "visible": false
+            },
+            {
+              "at": 93,
+              "visible": false
+            },
+            {
+              "at": 109.60000000009313,
+              "visible": false
+            },
+            {
+              "at": 130.9000000001397,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 189,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 206.10000000009313,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 222.89999999990687,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 138.89999999990687,
+          "lastSignalAt": 177.5,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 45.5999999998603,
+          "stableAt": 222.89999999990687,
+          "totalMs": 84,
+          "visibilityMs": 38.4000000001397,
+          "visibilitySamples": [
+            {
+              "at": 138.89999999990687,
+              "visible": false
+            },
+            {
+              "at": 142.60000000009313,
+              "visible": false
+            },
+            {
+              "at": 155.5,
+              "visible": false
+            },
+            {
+              "at": 177.19999999995343,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 145,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 161.80000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 178.89999999990687,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 105.0999999998603,
+          "lastSignalAt": 130.69999999995343,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 48.4000000001397,
+          "stableAt": 179,
+          "totalMs": 73.9000000001397,
+          "visibilityMs": 25.5,
+          "visibilitySamples": [
+            {
+              "at": 105.19999999995343,
+              "visible": false
+            },
+            {
+              "at": 108.80000000004657,
+              "visible": false
+            },
+            {
+              "at": 111.89999999990687,
+              "visible": false
+            },
+            {
+              "at": 130.5,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 158.125,
+              "left": 170,
+              "top": 91.938,
+              "width": 630
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 141,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 158,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 174.60000000009313,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            }
+          ],
+          "inputAt": 87,
+          "lastSignalAt": 127.5,
+          "layoutShiftEntries": [],
+          "signalCount": 8,
+          "stabilityMs": 47.200000000186265,
+          "stableAt": 174.60000000009313,
+          "totalMs": 87.60000000009313,
+          "visibilityMs": 40.39999999990687,
+          "visibilitySamples": [
+            {
+              "at": 87,
+              "visible": false
+            },
+            {
+              "at": 90.60000000009313,
+              "visible": false
+            },
+            {
+              "at": 110.60000000009313,
+              "visible": false
+            },
+            {
+              "at": 127.39999999990687,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 158.125,
+              "left": 170,
+              "top": 91.938,
+              "width": 630
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 161.89999999990687,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 179.19999999995343,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 195.5999999998603,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            }
+          ],
+          "inputAt": 98,
+          "lastSignalAt": 151.0999999998603,
+          "layoutShiftEntries": [],
+          "signalCount": 8,
+          "stabilityMs": 44.799999999813735,
+          "stableAt": 195.5999999998603,
+          "totalMs": 97.5999999998603,
+          "visibilityMs": 52.800000000046566,
+          "visibilitySamples": [
+            {
+              "at": 98,
+              "visible": false
+            },
+            {
+              "at": 111.80000000004657,
+              "visible": false
+            },
+            {
+              "at": 128.19999999995343,
+              "visible": false
+            },
+            {
+              "at": 150.69999999995343,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 158.125,
+              "left": 170,
+              "top": 91.938,
+              "width": 630
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 143.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 160.39999999990687,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 176.89999999990687,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            }
+          ],
+          "inputAt": 77.80000000004657,
+          "lastSignalAt": 129.60000000009313,
+          "layoutShiftEntries": [],
+          "signalCount": 8,
+          "stabilityMs": 47.39999999990687,
+          "stableAt": 176.89999999990687,
+          "totalMs": 99.0999999998603,
+          "visibilityMs": 51.699999999953434,
+          "visibilitySamples": [
+            {
+              "at": 77.80000000004657,
+              "visible": false
+            },
+            {
+              "at": 93.39999999990687,
+              "visible": false
+            },
+            {
+              "at": 115.89999999990687,
+              "visible": false
+            },
+            {
+              "at": 129.5,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 158.5,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 175.5,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 192.19999999995343,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 114,
+          "lastSignalAt": 146.89999999990687,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 45.800000000046566,
+          "stableAt": 192.19999999995343,
+          "totalMs": 78.19999999995343,
+          "visibilityMs": 32.39999999990687,
+          "visibilitySamples": [
+            {
+              "at": 114,
+              "visible": false
+            },
+            {
+              "at": 117.89999999990687,
+              "visible": false
+            },
+            {
+              "at": 124.5,
+              "visible": false
+            },
+            {
+              "at": 146.39999999990687,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 161.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 178.10000000009313,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 195.19999999995343,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 116.30000000004657,
+          "lastSignalAt": 147.4000000001397,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 48.0999999998603,
+          "stableAt": 195.19999999995343,
+          "totalMs": 78.89999999990687,
+          "visibilityMs": 30.800000000046566,
+          "visibilitySamples": [
+            {
+              "at": 116.30000000004657,
+              "visible": false
+            },
+            {
+              "at": 119.80000000004657,
+              "visible": false
+            },
+            {
+              "at": 129,
+              "visible": false
+            },
+            {
+              "at": 147.10000000009313,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 144.29999999981374,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 161.69999999995343,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 178.5,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 97.0999999998603,
+          "lastSignalAt": 132.5999999998603,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 46.10000000009313,
+          "stableAt": 178.5,
+          "totalMs": 81.4000000001397,
+          "visibilityMs": 35.300000000046566,
+          "visibilitySamples": [
+            {
+              "at": 97.0999999998603,
+              "visible": false
+            },
+            {
+              "at": 100.69999999995343,
+              "visible": false
+            },
+            {
+              "at": 110.5,
+              "visible": false
+            },
+            {
+              "at": 132.39999999990687,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 159.4000000001397,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 176.5,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 193.4000000001397,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 110.10000000009313,
+          "lastSignalAt": 147.20000000018626,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 46.5,
+          "stableAt": 193.4000000001397,
+          "totalMs": 83.30000000004657,
+          "visibilityMs": 36.800000000046566,
+          "visibilitySamples": [
+            {
+              "at": 110.10000000009313,
+              "visible": false
+            },
+            {
+              "at": 114,
+              "visible": false
+            },
+            {
+              "at": 125.4000000001397,
+              "visible": false
+            },
+            {
+              "at": 146.9000000001397,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 144.10000000009313,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 161.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 177.4000000001397,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 94.9000000001397,
+          "lastSignalAt": 132.19999999995343,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 45.5,
+          "stableAt": 177.4000000001397,
+          "totalMs": 82.5,
+          "visibilityMs": 37,
+          "visibilitySamples": [
+            {
+              "at": 94.9000000001397,
+              "visible": false
+            },
+            {
+              "at": 98.69999999995343,
+              "visible": false
+            },
+            {
+              "at": 110,
+              "visible": false
+            },
+            {
+              "at": 131.80000000004657,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 158.125,
+              "left": 170,
+              "top": 91.938,
+              "width": 630
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 144.5999999998603,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 161.0999999998603,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            },
+            {
+              "at": 177.69999999995343,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 158.125,
+                  "left": 170,
+                  "top": 91.938,
+                  "width": 630
+                }
+              ],
+              "signalVersion": 8
+            }
+          ],
+          "inputAt": 79.30000000004657,
+          "lastSignalAt": 127.5,
+          "layoutShiftEntries": [],
+          "signalCount": 8,
+          "stabilityMs": 50.300000000046566,
+          "stableAt": 177.69999999995343,
+          "totalMs": 98.39999999990687,
+          "visibilityMs": 48.0999999998603,
+          "visibilitySamples": [
+            {
+              "at": 79.30000000004657,
+              "visible": false
+            },
+            {
+              "at": 93.80000000004657,
+              "visible": false
+            },
+            {
+              "at": 115,
+              "visible": false
+            },
+            {
+              "at": 127.30000000004657,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 128.89999999990687,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 145.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 162.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 91.39999999990687,
+          "lastSignalAt": 114.5,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 48.10000000009313,
+          "stableAt": 162.30000000004657,
+          "totalMs": 70.9000000001397,
+          "visibilityMs": 22.800000000046566,
+          "visibilitySamples": [
+            {
+              "at": 91.39999999990687,
+              "visible": false
+            },
+            {
+              "at": 95,
+              "visible": false
+            },
+            {
+              "at": 98.30000000004657,
+              "visible": false
+            },
+            {
+              "at": 114.19999999995343,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "geometry": [
+            {
+              "height": 552,
+              "left": 0,
+              "top": 0,
+              "width": 980
+            },
+            {
+              "height": 58.422,
+              "left": 40.797,
+              "top": 32.797,
+              "width": 888.406
+            }
+          ],
+          "geometrySamples": [
+            {
+              "at": 159.30000000004657,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 176.60000000009313,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            },
+            {
+              "at": 193.20000000018626,
+              "geometry": [
+                {
+                  "height": 552,
+                  "left": 0,
+                  "top": 0,
+                  "width": 980
+                },
+                {
+                  "height": 58.422,
+                  "left": 40.797,
+                  "top": 32.797,
+                  "width": 888.406
+                }
+              ],
+              "signalVersion": 14
+            }
+          ],
+          "inputAt": 117.20000000018626,
+          "lastSignalAt": 145.60000000009313,
+          "layoutShiftEntries": [],
+          "signalCount": 14,
+          "stabilityMs": 47.9000000001397,
+          "stableAt": 193.20000000018626,
+          "totalMs": 76,
+          "visibilityMs": 28.0999999998603,
+          "visibilitySamples": [
+            {
+              "at": 117.20000000018626,
+              "visible": false
+            },
+            {
+              "at": 121,
+              "visible": false
+            },
+            {
+              "at": 125.80000000004657,
+              "visible": false
+            },
+            {
+              "at": 145.30000000004657,
+              "visible": true
+            }
+          ]
+        }
+      ],
+      "status": "recorded"
+    }
+  }
+}

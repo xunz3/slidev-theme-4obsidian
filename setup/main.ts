@@ -2,6 +2,7 @@ import { configs } from '@slidev/client'
 import { defineAppSetup } from '@slidev/types'
 import { watch } from 'vue'
 import { resolveDeckPresentation } from './presentation-config'
+import { observePresentationTaskLists } from './task-lists'
 
 const getRawPresentationConfig = (): unknown => {
   return (configs as any)?.themeConfig?.presentation
@@ -26,12 +27,18 @@ export const applyPresentationConfig = (rawPresentation = getRawPresentationConf
   }
 }
 
-export default defineAppSetup(() => {
+export default defineAppSetup(({ app }) => {
   applyPresentationConfig()
+  const stopTaskObserver = observePresentationTaskLists()
 
-  watch(
+  const stopPresentationWatch = watch(
     () => getRawPresentationConfig(),
     value => applyPresentationConfig(value),
     { deep: true },
   )
+
+  app.onUnmount(() => {
+    stopPresentationWatch()
+    stopTaskObserver()
+  })
 })

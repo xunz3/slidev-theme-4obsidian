@@ -10,6 +10,7 @@ import { promisify } from 'node:util'
 import { chromium } from 'playwright-chromium'
 import {
   buildDeck,
+  generateExpandedContentBuilds,
   generatePresetMatrixBuilds,
   qualityArtifactRoot,
   readQualityBuildContext,
@@ -19,6 +20,15 @@ import {
 } from './helpers.mjs'
 
 const execFileAsync = promisify(execFile)
+
+const calloutFamiliesForVisual = () => [
+  { caseId: 'us1-callouts-info', family: 'info', slide: 3 },
+  { caseId: 'us1-callouts-positive', family: 'positive', slide: 4 },
+  { caseId: 'us1-callouts-caution', family: 'caution', slide: 5 },
+  { caseId: 'us1-callouts-danger', family: 'danger', slide: 6 },
+  { caseId: 'us1-callouts-question', family: 'question', slide: 7 },
+  { caseId: 'us1-callouts-quotation', family: 'quotation', slide: 8 },
+]
 
 export const visualBaselineDirectory = resolve(
   repositoryRoot,
@@ -83,12 +93,244 @@ const protocolScenarios = modes.map(mode => ({
   preset: 'default',
   slide: 5,
 }))
+const us1CalloutScenarios = calloutFamiliesForVisual().flatMap(definition => (
+  modes.map(mode => ({
+    buildId: 'expanded-default',
+    caseId: definition.caseId,
+    coverage: ['us1', 'callout', definition.family],
+    id: `us1-callout-${definition.family}-${mode}`,
+    mode,
+    preset: 'default',
+    slide: definition.slide,
+  }))
+))
+const us1SurfaceScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.flatMap(mode => [
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us1-callout-fallbacks',
+      coverage: ['us1', 'callout', 'neutral'],
+      id: `us1-callout-neutral-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 9,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us1-figures-alternatives',
+      coverage: ['us1', 'figure'],
+      id: `us1-figure-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 11,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us1-authors-mixed',
+      coverage: ['us1', 'authors'],
+      id: `us1-authors-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 13,
+    },
+  ])
+))
+const us2SurfaceScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.flatMap(mode => [
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us2-closing-metadata',
+      coverage: ['us2', 'closing', 'metadata'],
+      id: `us2-closing-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 16,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us2-image-left',
+      coverage: ['us2', 'image-text', 'left'],
+      id: `us2-image-left-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 20,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us2-image-right',
+      coverage: ['us2', 'image-text', 'right'],
+      id: `us2-image-right-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 21,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us2-image-bilingual',
+      coverage: ['us2', 'image-text', 'long', 'bilingual'],
+      id: `us2-image-bilingual-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 25,
+    },
+  ])
+))
+const us2AliasScenarios = ['end', 'thanks'].flatMap((layout, index) => (
+  modes.map(mode => ({
+    buildId: 'expanded-default',
+    caseId: `us2-${layout}-minimal`,
+    coverage: ['us2', 'closing', 'alias'],
+    id: `us2-${layout}-${mode}`,
+    layout,
+    mode,
+    preset: 'default',
+    slide: 14 + index,
+  }))
+))
+const us3AccentScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.flatMap(mode => [
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us3-accent-local-a',
+      coverage: ['us3', 'accent', 'local', 'protected-brand'],
+      id: `us3-accent-local-a-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 26,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us3-accent-unaccented',
+      coverage: ['us3', 'accent', 'deck-fallback', 'leakage'],
+      id: `us3-accent-fallback-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 27,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us3-accent-invalid',
+      coverage: ['us3', 'accent', 'invalid-fallback'],
+      id: `us3-accent-invalid-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 29,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us3-accent-local-b',
+      coverage: ['us3', 'accent', 'second-local', 'leakage'],
+      id: `us3-accent-local-b-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 30,
+    },
+  ])
+))
+const us4TechnicalScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.flatMap(mode => [
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-code-titled',
+      coverage: ['us4', 'code', 'long-line', 'annotations'],
+      id: `us4-code-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 32,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-steps-many',
+      coverage: ['us4', 'steps', 'many', 'bilingual'],
+      id: `us4-steps-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 36,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-timeline-many',
+      coverage: ['us4', 'timeline', 'dated', 'bilingual'],
+      id: `us4-timeline-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 39,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-status-labels',
+      coverage: ['us4', 'tag', 'badge', 'non-color', 'bilingual'],
+      id: `us4-status-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 40,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-keyboard',
+      coverage: ['us4', 'kbd', 'chord', 'symbols', 'bilingual'],
+      id: `us4-keyboard-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 41,
+    },
+  ])
+))
+const us4TitlelessCodeScenarios = modes.map(mode => ({
+  buildId: 'expanded-default',
+  caseId: 'us4-code-titleless',
+  coverage: ['us4', 'code', 'missing-title', 'long-file'],
+  id: `us4-code-titleless-${mode}`,
+  mode,
+  preset: 'default',
+  slide: 33,
+}))
+const us5ReadingCueScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.flatMap(mode => [
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us5-tasks-native',
+      coverage: ['us5', 'tasks', 'checked', 'unchecked', 'nested', 'wrapped'],
+      id: `us5-tasks-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 42,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us5-highlights',
+      coverage: ['us5', 'highlight', 'native', 'generated', 'code-scope'],
+      id: `us5-highlights-${preset}-${mode}`,
+      mode,
+      preset,
+      slide: 44,
+    },
+  ])
+))
+const us5GeneratedTaskScenarios = modes.map(mode => ({
+  buildId: 'expanded-default',
+  caseId: 'us5-tasks-generated',
+  coverage: ['us5', 'tasks', 'generated-compatibility'],
+  id: `us5-tasks-generated-${mode}`,
+  mode,
+  preset: 'default',
+  slide: 43,
+}))
 
 export const visualScenarios = Object.freeze([
   ...presetScenarios,
   ...layoutScenarios,
   ...chromeScenarios,
   ...protocolScenarios,
+  ...us1CalloutScenarios,
+  ...us1SurfaceScenarios,
+  ...us2SurfaceScenarios,
+  ...us2AliasScenarios,
+  ...us3AccentScenarios,
+  ...us4TechnicalScenarios,
+  ...us4TitlelessCodeScenarios,
+  ...us5ReadingCueScenarios,
+  ...us5GeneratedTaskScenarios,
 ])
 
 export const visualTolerance = Object.freeze({
@@ -103,13 +345,24 @@ export const sha256 = value => createHash('sha256').update(value).digest('hex')
 export const acquireVisualBuildContext = async () => {
   const external = readQualityBuildContext()
   if (external) {
-    for (const id of ['matrix-default', 'matrix-ucas', 'matrix-ict', 'protocol']) {
+    for (const id of [
+      'matrix-default',
+      'matrix-ucas',
+      'matrix-ict',
+      'expanded-default',
+      'expanded-ucas',
+      'expanded-ict',
+      'protocol',
+    ]) {
       if (!external[id]) throw new Error(`Quality build context is missing ${id}`)
     }
     return { builds: external, close: async () => {} }
   }
 
-  const matrixBuilds = await generatePresetMatrixBuilds()
+  const [matrixBuilds, expandedBuilds] = await Promise.all([
+    generatePresetMatrixBuilds(),
+    generateExpandedContentBuilds(),
+  ])
   const protocolBuild = {
     id: 'protocol',
     outDir: resolve(qualityArtifactRoot, 'build/visual/protocol'),
@@ -121,6 +374,7 @@ export const acquireVisualBuildContext = async () => {
       ...build,
       id: `matrix-${build.preset}`,
     })),
+    ...expandedBuilds,
     protocolBuild,
   ]
   const servers = await Promise.all(

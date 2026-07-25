@@ -253,6 +253,24 @@ html.dark .slidev-layout[data-presentation-preset="ucas"] .slide-frame th {
   text-transform: uppercase;
 }
 
+.slidev-layout[data-presentation-preset="ucas"] .slide-frame
+  .obsidian-slidev-callout:is(
+    .obsidian-slidev-callout--tip,
+    .obsidian-slidev-callout--success,
+    .obsidian-slidev-callout--check,
+    .obsidian-slidev-callout--warning,
+    .obsidian-slidev-callout--caution,
+    .obsidian-slidev-callout--attention,
+    .obsidian-slidev-callout--danger,
+    .obsidian-slidev-callout--error,
+    .obsidian-slidev-callout--failure,
+    .obsidian-slidev-callout--question,
+    .obsidian-slidev-callout--help,
+    .obsidian-slidev-callout--faq
+  ) .obsidian-slidev-callout__title {
+  color: var(--presentation-text);
+}
+
 .slidev-layout[data-presentation-preset="ucas"] .slide-frame .obsidian-slidev-media__caption {
   color: var(--presentation-text-muted);
   font-family: var(--presentation-font-serif);

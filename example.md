@@ -24,47 +24,39 @@ themeConfig:
 
 ---
 title: Notes as Slides
-subtitle: Default layout
+subtitle: Standalone components
 ---
 
 # Notes as Slides
 
-The theme works with ordinary Slidev Markdown and also understands markup emitted by `obsidian-slidev`.
+The theme works with ordinary Slidev Markdown and also styles markup emitted by `obsidian-slidev`.
 
-- Source notes stay in the vault.
-- Generated runtime files live under the Slidev workspace.
-- The theme styles the generated `obsidian-slidev-*` classes.
+<Callout type="note" title="One rendering vocabulary">
 
-<div class="obsidian-slidev-callout obsidian-slidev-callout--note" data-callout="note">
-  <div class="obsidian-slidev-callout__title">Obsidian callout</div>
-  <div class="obsidian-slidev-callout__content">
-    The plugin turns callouts into semantic HTML, and the theme owns the visual treatment.
-  </div>
-</div>
+Write semantic content directly with theme components, or let the conversion plugin emit its compatible frontend structure.
+
+</Callout>
 
 Open a source note with <a class="obsidian-slidev-link" href="obsidian://open?vault=Vault&file=Notes%2FDeck.md">an Obsidian link</a>.
 
 ---
 layout: two-cols
-title: Media
-subtitle: Generated assets
+title: Figure and authors
 ---
 
-# Images
+# Accessible Figure
 
-<figure class="obsidian-slidev-media obsidian-slidev-media--image">
-  <img class="obsidian-slidev-media__image obsidian-slidev-media__asset" src="./public/obsidian-card.svg" alt="Theme sample card" />
-  <figcaption class="obsidian-slidev-media__caption">Generated media keeps a predictable class structure.</figcaption>
-</figure>
+<Figure
+  src="./public/obsidian-card.svg"
+  alt="A note card connected to a presentation canvas"
+  caption="Figure 1. Media reserves space before it loads."
+/>
 
 ::right::
 
-# Video and YouTube
+# Deck Authors
 
-<figure class="obsidian-slidev-media obsidian-slidev-media--youtube">
-  <Youtube id="dQw4w9WgXcQ" />
-  <figcaption class="obsidian-slidev-media__caption">YouTube links can render through Slidev's built-in component.</figcaption>
-</figure>
+<Authors />
 
 ---
 layout: section
@@ -72,7 +64,7 @@ layout: section
 
 # Presets
 
-The same markup can switch visual systems through `themeConfig.presentation.preset`.
+The same authoring surface switches visual systems without changing its content structure.
 
 ---
 title: UCAS preset
@@ -81,21 +73,148 @@ presentationPreset: ucas
 
 # UCAS Is an Override
 
-The default visual system is selected automatically. UCAS can be selected for institutional decks without changing the Obsidian integration contract.
+UCAS can be selected for institutional decks without changing the standalone or generated-markup contracts.
 
-<div class="obsidian-slidev-warning">
-  <strong>Slidev warning:</strong> unresolved links and missing assets stay visible instead of silently disappearing.
-</div>
+<Callout type="warning" title="Visible failure">
+
+Unresolved links and missing assets stay visible instead of silently disappearing.
+
+</Callout>
 
 | Layer | Responsibility |
 | --- | --- |
 | `obsidian-slidev` | Convert vault notes into Slidev-native markup |
-| `slidev-theme-lilac` | Render Slidev layouts, presets, and optional Obsidian semantics |
+| `slidev-theme-lilac` | Render layouts, presets, components, and optional Obsidian semantics |
 
 ---
-layout: center
+title: Local accent
+accent: "#9a3412"
 ---
 
-# Next
+# Accent Belongs to This Slide
 
-Use the default preset for research reports, or select `ucas` and `ict` for institutional decks.
+The local accent affects [links](https://example.com), focus, general callouts, and reading cues without changing semantic or institutional colors.
+
+<Callout type="info">This informational surface follows the local accent.</Callout>
+<Callout type="success">Success keeps its own semantic treatment.</Callout>
+
+---
+layout: image-left
+title: Image and text
+image: ./public/obsidian-card.svg
+imageAlt: A note card connected to a presentation canvas
+caption: Figure 2. Narrative stays first in document order.
+backgroundSize: contain
+---
+
+# Image-and-Text Layout
+
+The image is visually left, but this narrative remains first for reading order.
+
+- Existing `image`, `class`, and `backgroundSize` inputs remain accepted.
+- `imageAlt` and `caption` add accessible figure semantics.
+
+---
+layout: code
+title: Code layout
+---
+
+# Full-Width Code
+
+```ts
+export const resolveAccent = (
+  local: string | undefined,
+  deck: string | undefined,
+) => firstValidCssColor(local, deck)
+```
+
+Long lines scroll inside the code region while the slide frame and chrome remain fixed.
+
+---
+layout: two-cols
+title: Process components
+---
+
+# Steps
+
+<Steps>
+
+1. **Collect** observations.
+2. **Normalize** measurements.
+3. **Report** uncertainty.
+
+</Steps>
+
+::right::
+
+# Timeline
+
+<Timeline>
+
+1. <time datetime="2026-06">June</time> — Dataset frozen.
+2. <time datetime="2026-07">July</time> — Results released.
+
+</Timeline>
+
+---
+title: Status and keyboard
+---
+
+# Compact Reading Cues
+
+<Tag>Method</Tag>
+<Tag>双语标签</Tag>
+
+<Badge>Complete</Badge>
+<Badge>✓ Reviewed</Badge>
+
+Press <Kbd>Esc</Kbd> to leave the overview.
+
+Open the command menu with <Kbd :keys="['Ctrl', 'Shift', 'P']" />.
+
+---
+title: Tasks and highlights
+---
+
+# Presentation-Only Tasks
+
+- [x] Reproduce the result
+- [ ] Archive the environment
+  - [x] Preserve raw observations
+  - [ ] Record a wrapped bilingual follow-up with enough text to demonstrate stable alignment · 记录换行后的双语任务
+
+Compare the <mark>validated cohort</mark> with a [linked cohort](https://example.com), *emphasis*, and `inline code`.
+
+```md
+Literal ==highlight-like syntax== stays code.
+```
+
+---
+title: Generated compatibility
+---
+
+# Existing Generated Markup Still Works
+
+<div class="obsidian-slidev-warning">
+  <strong>Compatibility:</strong> existing <code>.obsidian-slidev-*</code> structures need no migration.
+</div>
+
+<ul class="obsidian-slidev-task-list">
+  <li class="task-list-item"><input type="checkbox" checked> Generated checked task</li>
+  <li class="task-list-item"><input type="checkbox"> Generated open task</li>
+</ul>
+
+Generated <span class="obsidian-slidev-highlight">highlight markup</span> receives the same prose treatment without adding a parser.
+
+---
+layout: end
+title: Closing
+contact: deck@example.com
+showAuthors: true
+logo: ./public/obsidian-card.svg
+logoAlt: Slidev theme sample card
+---
+
+# Thank You
+
+Use ordinary Markdown, opt into the public components, or keep compatible generated markup.

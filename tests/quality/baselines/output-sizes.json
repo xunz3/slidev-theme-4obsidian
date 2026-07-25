@@ -1,76 +1,54 @@
 {
-  "schemaVersion": 1,
-  "recordedAt": "2026-07-23T21:57:50+08:00",
-  "gitCommit": "275797679531f2e418bc93b82929b757ab8e2991",
+  "schemaVersion": 2,
+  "phase": "before",
+  "recordedAt": "2026-07-24T16:03:47.036Z",
+  "gitCommit": "9ab72767e257287fc510865ec37d107566699863",
+  "workingTreeDirty": true,
   "nodeVersion": "v26.5.0",
   "pnpmVersion": "11.13.1",
-  "lockfileSha256": "72dca34e9dabdd317ae9f1565052b8b7a8d349601adf0bdb4d1e0528529394e8",
+  "lockfileSha256": "4bb18aa8b427b07f4f14c868b702a2aa1e86631ff7eb114f741aff7884809beb",
+  "review": {
+    "rationale": "Fresh pre-rendering baseline for expand-theme-content before any component, layout, setup, style, fixture, or published-content change",
+    "reviewer": "Codex implementation review"
+  },
   "decks": {
     "example": {
       "source": "example.md",
-      "baselineBytes": 3232547,
-      "maximumBytes": 3394174,
-      "totalBytes": 3232547,
+      "baselineBytes": 1363968,
+      "maximumBytes": 1432166,
+      "totalBytes": 1363968,
       "files": [
-        {
-          "path": "404.html",
-          "bytes": 2992
-        },
         {
           "path": "_redirects",
           "bytes": 24
         },
         {
-          "path": "assets/404-kaxLOuCG.css",
-          "bytes": 157
-        },
-        {
-          "path": "assets/DrawingControls-Dhbx0szf.css",
-          "bytes": 73
-        },
-        {
-          "path": "assets/NavControls-Dd_n1RRn.css",
-          "bytes": 1040
-        },
-        {
-          "path": "assets/NoteDisplay-BtAu3nCu.css",
-          "bytes": 293
-        },
-        {
-          "path": "assets/SidebarPreviewPresenter-BmoQ63YR.css",
-          "bytes": 11546
-        },
-        {
-          "path": "assets/SidebarPreviewPresenter-CxsYga39.js",
-          "bytes": 18470
-        },
-        {
-          "path": "assets/SlideFrame-C9q5umTH.js",
-          "bytes": 5227
-        },
-        {
-          "path": "assets/SlideWrapper-CynDdCKi.css",
-          "bytes": 920
+          "path": "404.html",
+          "bytes": 2992
         },
         {
           "path": "assets/_plugin-vue_export-helper-BOai-rQB.js",
           "bytes": 84
         },
         {
-          "path": "assets/default-DjiVUDlQ.js",
-          "bytes": 579
+          "path": "assets/404-kaxLOuCG.css",
+          "bytes": 157
+        },
+        {
+          "path": "assets/default-CzEc_izY.js",
+          "bytes": 525
+        },
+        {
+          "path": "assets/DrawingControls-Dhbx0szf.css",
+          "bytes": 73
         },
         {
           "path": "assets/emblem-BQDapz9b.svg",
           "bytes": 8119
         },
         {
-          "path": "assets/emblem-BU30X235.svg",
-          "bytes": 1008020
-        },
-        {
-          "path": "assets/emblem-name-bilingual-hz-D4Zx3toa.svg",
-          "bytes": 1116395
+          "path": "assets/emblem-name-bilingual-hz-DV4IIcz1.svg",
+          "bytes": 179085
         },
         {
           "path": "assets/emblem-name-bilingual-hz-white-V9bAWGsJ.png",
@@ -85,6 +63,10 @@
           "bytes": 25961
         },
         {
+          "path": "assets/emblem-TS3BWHEu.svg",
+          "bytes": 70710
+        },
+        {
           "path": "assets/emblem-white-CDdvkJic.png",
           "bytes": 30431
         },
@@ -93,40 +75,40 @@
           "bytes": 324
         },
         {
-          "path": "assets/index-3HQd2XD1.css",
-          "bytes": 170968
+          "path": "assets/index-1KdXgrTY.css",
+          "bytes": 172989
         },
         {
-          "path": "assets/index-Bpbrveqf.js",
-          "bytes": 121614
+          "path": "assets/index-DV8GJeFY.js",
+          "bytes": 125226
         },
         {
           "path": "assets/logo-BYkHSa_O.png",
           "bytes": 94320
         },
         {
-          "path": "assets/md-BEhhSIV5.js",
-          "bytes": 2022
+          "path": "assets/md-Boc_TFp-.js",
+          "bytes": 3485
         },
         {
-          "path": "assets/md-CXWvwj15.js",
-          "bytes": 1093
+          "path": "assets/md-CI_ZpClm.js",
+          "bytes": 1033
         },
         {
-          "path": "assets/md-Cmlyt-M6.js",
+          "path": "assets/md-CIjMKv0D.js",
           "bytes": 1220
         },
         {
-          "path": "assets/md-CttkbK6O.js",
+          "path": "assets/md-D4CClZPJ.js",
+          "bytes": 1985
+        },
+        {
+          "path": "assets/md-DqwWgnD7.js",
           "bytes": 1350
         },
         {
-          "path": "assets/md-DHCClVen.js",
-          "bytes": 1066
-        },
-        {
-          "path": "assets/md-DMuHUExo.js",
-          "bytes": 3533
+          "path": "assets/md-zAyds2QJ.js",
+          "bytes": 1005
         },
         {
           "path": "assets/modules/file-saver-Cv5wbHQp.js",
@@ -149,6 +131,14 @@
           "bytes": 84496
         },
         {
+          "path": "assets/NavControls-Dd_n1RRn.css",
+          "bytes": 1040
+        },
+        {
+          "path": "assets/NoteDisplay-BtAu3nCu.css",
+          "bytes": 293
+        },
+        {
           "path": "assets/play-D_7yfuao.css",
           "bytes": 62
         },
@@ -165,16 +155,32 @@
           "bytes": 525
         },
         {
-          "path": "assets/slidev/404-nrSxwKr9.js",
+          "path": "assets/SidebarPreviewPresenter-BmoQ63YR.css",
+          "bytes": 11546
+        },
+        {
+          "path": "assets/SidebarPreviewPresenter-s9bDwK5w.js",
+          "bytes": 18470
+        },
+        {
+          "path": "assets/SlideFrame-B4lrDB9s.js",
+          "bytes": 5900
+        },
+        {
+          "path": "assets/slidev/404-M3COIiz4.js",
           "bytes": 1164
         },
         {
-          "path": "assets/slidev/DrawingControls-Dd_gXxnd.js",
+          "path": "assets/slidev/DrawingControls-w2ckJK5k.js",
           "bytes": 5398
         },
         {
-          "path": "assets/slidev/DrawingLayer-C8pizvyj.js",
+          "path": "assets/slidev/DrawingLayer-BIoFylRw.js",
           "bytes": 594
+        },
+        {
+          "path": "assets/slidev/entry-DrsLyyeA.js",
+          "bytes": 938
         },
         {
           "path": "assets/slidev/IconButton-Cm_5h3zC.js",
@@ -185,60 +191,60 @@
           "bytes": 715
         },
         {
-          "path": "assets/slidev/NavControls-BqFYUm9n.js",
+          "path": "assets/slidev/NavControls-YHcde0O4.js",
           "bytes": 14155
         },
         {
-          "path": "assets/slidev/NoteDisplay-6OSW_lC4.js",
+          "path": "assets/slidev/NoteDisplay-CZKUePuF.js",
           "bytes": 4844
         },
         {
-          "path": "assets/slidev/NoteEditable-BCCmau4i.js",
+          "path": "assets/slidev/NoteEditable-C3c2Hzvm.js",
           "bytes": 2215
         },
         {
-          "path": "assets/slidev/NoteStatic-v2zWULrO.js",
-          "bytes": 459
-        },
-        {
-          "path": "assets/slidev/SlideWrapper-C64antEO.js",
-          "bytes": 4437
-        },
-        {
-          "path": "assets/slidev/TimerBar-C59rbiro.js",
-          "bytes": 2770
-        },
-        {
-          "path": "assets/slidev/entry-DrsLyyeA.js",
-          "bytes": 938
-        },
-        {
-          "path": "assets/slidev/notes-C9FSAHTk.js",
+          "path": "assets/slidev/notes-BNR2LdLu.js",
           "bytes": 3300
         },
         {
-          "path": "assets/slidev/notes-edit-C0itKUzB.js",
-          "bytes": 2137
+          "path": "assets/slidev/notes-edit-c46gzVBD.js",
+          "bytes": 2132
         },
         {
-          "path": "assets/slidev/overview-y-VwUD2G.js",
+          "path": "assets/slidev/NoteStatic-DeMwIE9Q.js",
+          "bytes": 459
+        },
+        {
+          "path": "assets/slidev/overview-COJ-zAWh.js",
           "bytes": 5798
         },
         {
-          "path": "assets/slidev/play-DIwnd7ot.js",
+          "path": "assets/slidev/play-DmGSU7P1.js",
           "bytes": 5190
         },
         {
-          "path": "assets/slidev/presenter-B9RfJIZj.js",
+          "path": "assets/slidev/presenter-BPiCPPbQ.js",
           "bytes": 10203
         },
         {
-          "path": "assets/slidev/shortcuts-BBuIsf0v.js",
+          "path": "assets/slidev/shortcuts-Dm1EvnEN.js",
           "bytes": 50400
         },
         {
-          "path": "assets/slidev/useNav-DxK7GNP5.js",
+          "path": "assets/slidev/SlideWrapper-B_3zdxMi.js",
+          "bytes": 4437
+        },
+        {
+          "path": "assets/slidev/TimerBar-DHzVIoNb.js",
+          "bytes": 2770
+        },
+        {
+          "path": "assets/slidev/useNav-UkR8DY3u.js",
           "bytes": 22664
+        },
+        {
+          "path": "assets/SlideWrapper-CynDdCKi.css",
+          "bytes": 920
         },
         {
           "path": "assets/syncState-BEH2kddf.js",
@@ -256,29 +262,112 @@
           "path": "theme/public/obsidian-card.svg",
           "bytes": 1133
         }
-      ]
+      ],
+      "logicalBundles": {
+        "mainCss": {
+          "files": [
+            {
+              "path": "assets/index-1KdXgrTY.css",
+              "bytes": 172989
+            }
+          ],
+          "totalBytes": 172989,
+          "baselineBytes": 172989,
+          "maximumBytes": 181638
+        },
+        "mainJs": {
+          "files": [
+            {
+              "path": "assets/index-DV8GJeFY.js",
+              "bytes": 125226
+            }
+          ],
+          "totalBytes": 125226,
+          "baselineBytes": 125226,
+          "maximumBytes": 131487
+        },
+        "slideFrame": {
+          "files": [
+            {
+              "path": "assets/SlideFrame-B4lrDB9s.js",
+              "bytes": 5900
+            }
+          ],
+          "totalBytes": 5900,
+          "baselineBytes": 5900,
+          "maximumBytes": 6195
+        }
+      }
     },
     "default-only": {
       "source": "fixtures/default-preset.md",
-      "baselineBytes": 4318670,
-      "maximumBytes": 4534603,
-      "totalBytes": 4318670,
+      "baselineBytes": 2449866,
+      "maximumBytes": 2572359,
+      "totalBytes": 2449866,
       "files": [
+        {
+          "path": "_redirects",
+          "bytes": 24
+        },
         {
           "path": "404.html",
           "bytes": 1648
         },
         {
-          "path": "_redirects",
-          "bytes": 24
+          "path": "assets/_plugin-vue_export-helper-BOai-rQB.js",
+          "bytes": 84
         },
         {
           "path": "assets/404-BeFn1IQi.css",
           "bytes": 157
         },
         {
+          "path": "assets/default-CaFUpWNH.js",
+          "bytes": 525
+        },
+        {
           "path": "assets/DrawingControls-Dhbx0szf.css",
           "bytes": 73
+        },
+        {
+          "path": "assets/emblem-BQDapz9b.svg",
+          "bytes": 8119
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-DV4IIcz1.svg",
+          "bytes": 179085
+        },
+        {
+          "path": "assets/emblem-name-bilingual-hz-white-V9bAWGsJ.png",
+          "bytes": 31923
+        },
+        {
+          "path": "assets/emblem-name-bilingual-stacked-ZKQ7LqUz.svg",
+          "bytes": 99508
+        },
+        {
+          "path": "assets/emblem-name-bilingual-vt-white-Bfx5k6zX.png",
+          "bytes": 25961
+        },
+        {
+          "path": "assets/emblem-TS3BWHEu.svg",
+          "bytes": 70710
+        },
+        {
+          "path": "assets/emblem-white-CDdvkJic.png",
+          "bytes": 30431
+        },
+        {
+          "path": "assets/entry-BRPSgtoU.css",
+          "bytes": 324
+        },
+        {
+          "path": "assets/index-B9CKzx7J.css",
+          "bytes": 200146
+        },
+        {
+          "path": "assets/index-CbBntupE.js",
+          "bytes": 121216
         },
         {
           "path": "assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
@@ -497,12 +586,12 @@
           "bytes": 5980
         },
         {
-          "path": "assets/KaTeX_Size4-Regular-DWFBv043.ttf",
-          "bytes": 10364
-        },
-        {
           "path": "assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
           "bytes": 4928
+        },
+        {
+          "path": "assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+          "bytes": 10364
         },
         {
           "path": "assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
@@ -517,104 +606,44 @@
           "bytes": 27556
         },
         {
-          "path": "assets/NoteDisplay-BW4FV8RW.css",
-          "bytes": 293
-        },
-        {
-          "path": "assets/SlideFrame-BKksapeR.js",
-          "bytes": 5227
-        },
-        {
-          "path": "assets/SlideWrapper-B6L0eUoe.css",
-          "bytes": 920
-        },
-        {
-          "path": "assets/_plugin-vue_export-helper-BOai-rQB.js",
-          "bytes": 84
-        },
-        {
-          "path": "assets/default-_VruO_QF.js",
-          "bytes": 579
-        },
-        {
-          "path": "assets/emblem-BQDapz9b.svg",
-          "bytes": 8119
-        },
-        {
-          "path": "assets/emblem-BU30X235.svg",
-          "bytes": 1008020
-        },
-        {
-          "path": "assets/emblem-name-bilingual-hz-D4Zx3toa.svg",
-          "bytes": 1116395
-        },
-        {
-          "path": "assets/emblem-name-bilingual-hz-white-V9bAWGsJ.png",
-          "bytes": 31923
-        },
-        {
-          "path": "assets/emblem-name-bilingual-stacked-ZKQ7LqUz.svg",
-          "bytes": 99508
-        },
-        {
-          "path": "assets/emblem-name-bilingual-vt-white-Bfx5k6zX.png",
-          "bytes": 25961
-        },
-        {
-          "path": "assets/emblem-white-CDdvkJic.png",
-          "bytes": 30431
-        },
-        {
-          "path": "assets/entry-BRPSgtoU.css",
-          "bytes": 324
-        },
-        {
-          "path": "assets/index-Bk9RV9Dv.js",
-          "bytes": 117607
-        },
-        {
-          "path": "assets/index-gW85EwDL.css",
-          "bytes": 198125
-        },
-        {
           "path": "assets/logo-BYkHSa_O.png",
           "bytes": 94320
         },
         {
-          "path": "assets/md-B2Pdc9Qx.js",
-          "bytes": 1442
+          "path": "assets/md-BYekSFTQ.js",
+          "bytes": 2841
         },
         {
-          "path": "assets/md-BMQh56iu.js",
-          "bytes": 8091
+          "path": "assets/md-ChvZxmj3.js",
+          "bytes": 1378
         },
         {
-          "path": "assets/md-Be7lLt5M.js",
-          "bytes": 2096
+          "path": "assets/md-CLA6spBO.js",
+          "bytes": 8043
         },
         {
-          "path": "assets/md-Cd8gvA4o.js",
-          "bytes": 1022
+          "path": "assets/md-CrRYHiRx.js",
+          "bytes": 962
         },
         {
-          "path": "assets/md-D4KBmnp6.js",
-          "bytes": 1015
+          "path": "assets/md-D_V-9goZ.js",
+          "bytes": 954
         },
         {
-          "path": "assets/md-DLlKmOuh.js",
-          "bytes": 2891
+          "path": "assets/md-D9cLDRbk.js",
+          "bytes": 1356
         },
         {
-          "path": "assets/md-Do8b7fkR.js",
+          "path": "assets/md-DNvMBY8I.js",
+          "bytes": 2064
+        },
+        {
+          "path": "assets/md-DTZ-dXCT.js",
           "bytes": 1117
         },
         {
-          "path": "assets/md-GuXZ_A28.js",
-          "bytes": 1097
-        },
-        {
-          "path": "assets/md-WShzoyET.js",
-          "bytes": 1408
+          "path": "assets/md-srhfF3K0.js",
+          "bytes": 1034
         },
         {
           "path": "assets/modules/file-saver-BDKcwkUL.js",
@@ -637,6 +666,10 @@
           "bytes": 86665
         },
         {
+          "path": "assets/NoteDisplay-BW4FV8RW.css",
+          "bytes": 293
+        },
+        {
           "path": "assets/play-D_7yfuao.css",
           "bytes": 62
         },
@@ -653,76 +686,84 @@
           "bytes": 1564
         },
         {
-          "path": "assets/slidev/404-DUwZE6HV.js",
+          "path": "assets/SlideFrame-B_ZOMdYS.js",
+          "bytes": 5900
+        },
+        {
+          "path": "assets/slidev/404-Cbm3YXgQ.js",
           "bytes": 1164
         },
         {
-          "path": "assets/slidev/DrawingControls-BcJ7FPyR.js",
+          "path": "assets/slidev/DrawingControls-Cm-Tl8vE.js",
           "bytes": 5398
         },
         {
-          "path": "assets/slidev/DrawingLayer-DqKPJxk1.js",
+          "path": "assets/slidev/DrawingLayer-23ERFyre.js",
           "bytes": 594
-        },
-        {
-          "path": "assets/slidev/IconButton-CZCDRC09.js",
-          "bytes": 588
-        },
-        {
-          "path": "assets/slidev/Modal-DY1rSYdq.js",
-          "bytes": 715
-        },
-        {
-          "path": "assets/slidev/NoteDisplay-Gmqg5zNq.js",
-          "bytes": 4844
-        },
-        {
-          "path": "assets/slidev/NoteEditable-tYrFsyCX.js",
-          "bytes": 2215
-        },
-        {
-          "path": "assets/slidev/SlideWrapper-DfunUsFH.js",
-          "bytes": 4442
-        },
-        {
-          "path": "assets/slidev/TimerBar-grQr0n2z.js",
-          "bytes": 2770
         },
         {
           "path": "assets/slidev/entry-BHNd_i0t.js",
           "bytes": 938
         },
         {
-          "path": "assets/slidev/md-4vcYNFZB.js",
+          "path": "assets/slidev/IconButton-CZCDRC09.js",
+          "bytes": 588
+        },
+        {
+          "path": "assets/slidev/md-Cghu6G1W.js",
           "bytes": 8546
         },
         {
-          "path": "assets/slidev/notes-DsjqwHej.js",
+          "path": "assets/slidev/Modal-DY1rSYdq.js",
+          "bytes": 715
+        },
+        {
+          "path": "assets/slidev/NoteDisplay-BG3ZwqDV.js",
+          "bytes": 4844
+        },
+        {
+          "path": "assets/slidev/NoteEditable-DFch6vx-.js",
+          "bytes": 2215
+        },
+        {
+          "path": "assets/slidev/notes-DF5_c6Aq.js",
           "bytes": 3300
         },
         {
-          "path": "assets/slidev/notes-edit-B1MnDpum.js",
-          "bytes": 2137
+          "path": "assets/slidev/notes-edit-AdVDtKB_.js",
+          "bytes": 2132
         },
         {
-          "path": "assets/slidev/overview-BO7SQah3.js",
+          "path": "assets/slidev/overview-BMYDD-hS.js",
           "bytes": 5798
         },
         {
-          "path": "assets/slidev/play-C0KC-y8c.js",
+          "path": "assets/slidev/play-LYeeda2h.js",
           "bytes": 5151
         },
         {
-          "path": "assets/slidev/presenter-Ch9RSZip.js",
+          "path": "assets/slidev/presenter-Ca0QWeUL.js",
           "bytes": 10412
         },
         {
-          "path": "assets/slidev/shortcuts-CEjtJQ8-.js",
-          "bytes": 63127
+          "path": "assets/slidev/shortcuts-Bl5ZfIVt.js",
+          "bytes": 63129
         },
         {
-          "path": "assets/slidev/useNav-DRUh8vIp.js",
+          "path": "assets/slidev/SlideWrapper-mrjBNq1j.js",
+          "bytes": 4442
+        },
+        {
+          "path": "assets/slidev/TimerBar-vcmdBmdJ.js",
+          "bytes": 2770
+        },
+        {
+          "path": "assets/slidev/useNav-OLA-Lxph.js",
           "bytes": 26682
+        },
+        {
+          "path": "assets/SlideWrapper-B6L0eUoe.css",
+          "bytes": 920
         },
         {
           "path": "assets/syncState-BEH2kddf.js",
@@ -736,73 +777,80 @@
           "path": "theme/public/obsidian-card.svg",
           "bytes": 1133
         }
-      ]
+      ],
+      "logicalBundles": {
+        "mainCss": {
+          "files": [
+            {
+              "path": "assets/index-B9CKzx7J.css",
+              "bytes": 200146
+            }
+          ],
+          "totalBytes": 200146,
+          "baselineBytes": 200146,
+          "maximumBytes": 210153
+        },
+        "mainJs": {
+          "files": [
+            {
+              "path": "assets/index-CbBntupE.js",
+              "bytes": 121216
+            }
+          ],
+          "totalBytes": 121216,
+          "baselineBytes": 121216,
+          "maximumBytes": 127276
+        },
+        "slideFrame": {
+          "files": [
+            {
+              "path": "assets/SlideFrame-B_ZOMdYS.js",
+              "bytes": 5900
+            }
+          ],
+          "totalBytes": 5900,
+          "baselineBytes": 5900,
+          "maximumBytes": 6195
+        }
+      }
     },
     "protocol": {
       "source": "fixtures/obsidian-protocol.md",
-      "baselineBytes": 3282934,
-      "maximumBytes": 3447080,
-      "totalBytes": 3282934,
+      "baselineBytes": 1414020,
+      "maximumBytes": 1484721,
+      "totalBytes": 1414020,
       "files": [
-        {
-          "path": "404.html",
-          "bytes": 2974
-        },
         {
           "path": "_redirects",
           "bytes": 24
         },
         {
-          "path": "assets/404-BeFn1IQi.css",
-          "bytes": 157
-        },
-        {
-          "path": "assets/DrawingControls-Dhbx0szf.css",
-          "bytes": 73
-        },
-        {
-          "path": "assets/NavControls-C0Adng0O.css",
-          "bytes": 1040
-        },
-        {
-          "path": "assets/NoteDisplay-BW4FV8RW.css",
-          "bytes": 293
-        },
-        {
-          "path": "assets/SidebarPreviewPresenter-BQ4mD1a4.js",
-          "bytes": 18471
-        },
-        {
-          "path": "assets/SidebarPreviewPresenter-C1vQBam5.css",
-          "bytes": 11546
-        },
-        {
-          "path": "assets/SlideFrame-DCT3nPtu.js",
-          "bytes": 5227
-        },
-        {
-          "path": "assets/SlideWrapper-B6L0eUoe.css",
-          "bytes": 920
+          "path": "404.html",
+          "bytes": 2974
         },
         {
           "path": "assets/_plugin-vue_export-helper-BOai-rQB.js",
           "bytes": 84
         },
         {
-          "path": "assets/default-CG1Pc9H6.js",
-          "bytes": 579
+          "path": "assets/404-BeFn1IQi.css",
+          "bytes": 157
+        },
+        {
+          "path": "assets/default-DODtV3hF.js",
+          "bytes": 525
+        },
+        {
+          "path": "assets/DrawingControls-Dhbx0szf.css",
+          "bytes": 73
         },
         {
           "path": "assets/emblem-BQDapz9b.svg",
           "bytes": 8119
         },
         {
-          "path": "assets/emblem-BU30X235.svg",
-          "bytes": 1008020
-        },
-        {
-          "path": "assets/emblem-name-bilingual-hz-D4Zx3toa.svg",
-          "bytes": 1116395
+          "path": "assets/emblem-name-bilingual-hz-DV4IIcz1.svg",
+          "bytes": 179085
         },
         {
           "path": "assets/emblem-name-bilingual-hz-white-V9bAWGsJ.png",
@@ -817,6 +865,10 @@
           "bytes": 25961
         },
         {
+          "path": "assets/emblem-TS3BWHEu.svg",
+          "bytes": 70710
+        },
+        {
           "path": "assets/emblem-white-CDdvkJic.png",
           "bytes": 30431
         },
@@ -825,96 +877,96 @@
           "bytes": 324
         },
         {
-          "path": "assets/index-BjWyNCKZ.js",
-          "bytes": 121983
+          "path": "assets/index-bBQ-PtLr.css",
+          "bytes": 173201
         },
         {
-          "path": "assets/index-DF6j8Y32.css",
-          "bytes": 171180
+          "path": "assets/index-Cve77sxH.js",
+          "bytes": 125593
         },
         {
           "path": "assets/logo-BYkHSa_O.png",
           "bytes": 94320
         },
         {
-          "path": "assets/md-BB_H3ZFa.js",
-          "bytes": 582
+          "path": "assets/md-1EtsOrfd.js",
+          "bytes": 962
         },
         {
-          "path": "assets/md-BCaNE9lj.js",
-          "bytes": 913
-        },
-        {
-          "path": "assets/md-BFTmeNju.js",
-          "bytes": 1022
-        },
-        {
-          "path": "assets/md-BdDjbnHR.js",
-          "bytes": 2023
-        },
-        {
-          "path": "assets/md-Bi2g6opB.js",
-          "bytes": 1103
-        },
-        {
-          "path": "assets/md-CHHdrCLW.js",
-          "bytes": 594
-        },
-        {
-          "path": "assets/md-CLOqL1Bs.js",
-          "bytes": 2586
-        },
-        {
-          "path": "assets/md-C_AYV7cq.js",
-          "bytes": 1483
-        },
-        {
-          "path": "assets/md-CiF9QmzH.js",
-          "bytes": 1393
-        },
-        {
-          "path": "assets/md-CoVhDCtN.js",
-          "bytes": 1520
-        },
-        {
-          "path": "assets/md-D1sVHkqU.js",
-          "bytes": 1462
-        },
-        {
-          "path": "assets/md-DGmSXzhg.js",
-          "bytes": 580
-        },
-        {
-          "path": "assets/md-DM9nOds5.js",
-          "bytes": 617
-        },
-        {
-          "path": "assets/md-DMzLeL9I.js",
-          "bytes": 1095
-        },
-        {
-          "path": "assets/md-DPhwZbvE.js",
-          "bytes": 1194
-        },
-        {
-          "path": "assets/md-DcaUyEL-.js",
-          "bytes": 1464
-        },
-        {
-          "path": "assets/md-Di7yj1_5.js",
+          "path": "assets/md-a6IoO4Wz.js",
           "bytes": 562
         },
         {
-          "path": "assets/md-YKOTntuQ.js",
+          "path": "assets/md-B0xuHWW9.js",
           "bytes": 857
         },
         {
-          "path": "assets/md-mKOAdGsm.js",
-          "bytes": 2986
+          "path": "assets/md-B8bDdA1s.js",
+          "bytes": 580
         },
         {
-          "path": "assets/md-saO3GUg2.js",
+          "path": "assets/md-BEbCHOq9.js",
+          "bytes": 617
+        },
+        {
+          "path": "assets/md-BJ2maEPh.js",
+          "bytes": 1986
+        },
+        {
+          "path": "assets/md-BokY1VGj.js",
+          "bytes": 594
+        },
+        {
+          "path": "assets/md-C77gdGuU.js",
+          "bytes": 1483
+        },
+        {
+          "path": "assets/md-CCnX5Dxv.js",
+          "bytes": 1468
+        },
+        {
+          "path": "assets/md-CGljZwnG.js",
+          "bytes": 2936
+        },
+        {
+          "path": "assets/md-cgUhvOql.js",
+          "bytes": 1393
+        },
+        {
+          "path": "assets/md-CriaVhiu.js",
+          "bytes": 1462
+        },
+        {
+          "path": "assets/md-CSl1JtA9.js",
+          "bytes": 913
+        },
+        {
+          "path": "assets/md-CT5oL_M-.js",
+          "bytes": 1032
+        },
+        {
+          "path": "assets/md-D7eWIEsP.js",
+          "bytes": 2526
+        },
+        {
+          "path": "assets/md-DfWiTz87.js",
           "bytes": 1427
+        },
+        {
+          "path": "assets/md-Dg5--XZz.js",
+          "bytes": 1420
+        },
+        {
+          "path": "assets/md-DPFFdGc4.js",
+          "bytes": 582
+        },
+        {
+          "path": "assets/md-Dx2742PY.js",
+          "bytes": 1130
+        },
+        {
+          "path": "assets/md-n20JAWE-.js",
+          "bytes": 1103
         },
         {
           "path": "assets/modules/file-saver-BOcWHTmY.js",
@@ -937,6 +989,14 @@
           "bytes": 86665
         },
         {
+          "path": "assets/NavControls-C0Adng0O.css",
+          "bytes": 1040
+        },
+        {
+          "path": "assets/NoteDisplay-BW4FV8RW.css",
+          "bytes": 293
+        },
+        {
           "path": "assets/obsidian-card-BZi_Axmi.js",
           "bytes": 1348
         },
@@ -953,108 +1013,124 @@
           "bytes": 694
         },
         {
-          "path": "assets/section-DION9ZYW.js",
-          "bytes": 632
+          "path": "assets/section-BEH-7FgB.js",
+          "bytes": 578
         },
         {
           "path": "assets/shortcuts-B-yPioNQ.css",
           "bytes": 525
         },
         {
-          "path": "assets/slidev/404-ItybGFUd.js",
+          "path": "assets/SidebarPreviewPresenter-C1vQBam5.css",
+          "bytes": 11546
+        },
+        {
+          "path": "assets/SidebarPreviewPresenter-D2n-glAN.js",
+          "bytes": 18471
+        },
+        {
+          "path": "assets/SlideFrame-D-Cb_2Wl.js",
+          "bytes": 5900
+        },
+        {
+          "path": "assets/slidev/404-DoZpSW1E.js",
           "bytes": 1164
         },
         {
-          "path": "assets/slidev/DrawingControls-DNnLfsRk.js",
+          "path": "assets/slidev/DrawingControls-D8hZSaKX.js",
           "bytes": 5398
         },
         {
-          "path": "assets/slidev/DrawingLayer-G6VkxtoN.js",
-          "bytes": 594
-        },
-        {
-          "path": "assets/slidev/IconButton-DqEuPEM2.js",
-          "bytes": 588
-        },
-        {
-          "path": "assets/slidev/Modal-Cqsl2xuP.js",
-          "bytes": 715
-        },
-        {
-          "path": "assets/slidev/NavControls-B7Tv2OQV.js",
-          "bytes": 14154
-        },
-        {
-          "path": "assets/slidev/NoteDisplay-D5uV-h2i.js",
-          "bytes": 4844
-        },
-        {
-          "path": "assets/slidev/NoteEditable-otxoKjob.js",
-          "bytes": 2215
-        },
-        {
-          "path": "assets/slidev/NoteStatic-DsaqxhnP.js",
-          "bytes": 459
-        },
-        {
-          "path": "assets/slidev/SlideWrapper-B2lPSLKG.js",
-          "bytes": 4526
-        },
-        {
-          "path": "assets/slidev/TimerBar-D_T2kaaA.js",
-          "bytes": 2770
+          "path": "assets/slidev/DrawingLayer-PLV6GRxX.js",
+          "bytes": 589
         },
         {
           "path": "assets/slidev/entry-BNgGPYTQ.js",
           "bytes": 938
         },
         {
-          "path": "assets/slidev/md-B16EPxnD.js",
+          "path": "assets/slidev/IconButton-DqEuPEM2.js",
+          "bytes": 588
+        },
+        {
+          "path": "assets/slidev/md-BKXxwUm6.js",
           "bytes": 4146
         },
         {
-          "path": "assets/slidev/md-CFT4sB_c.js",
+          "path": "assets/slidev/md-CbrPiD0C.js",
           "bytes": 8453
         },
         {
-          "path": "assets/slidev/md-D5Zzyv4-.js",
+          "path": "assets/slidev/md-Chy88JqB.js",
           "bytes": 1591
         },
         {
-          "path": "assets/slidev/notes-CWOCNsjV.js",
+          "path": "assets/slidev/Modal-Cqsl2xuP.js",
+          "bytes": 715
+        },
+        {
+          "path": "assets/slidev/NavControls-iIHTfxBP.js",
+          "bytes": 14154
+        },
+        {
+          "path": "assets/slidev/NoteDisplay-A9kExXpW.js",
+          "bytes": 4844
+        },
+        {
+          "path": "assets/slidev/NoteEditable-DpoZ5q_l.js",
+          "bytes": 2215
+        },
+        {
+          "path": "assets/slidev/notes-DzGekrvA.js",
           "bytes": 3300
         },
         {
-          "path": "assets/slidev/notes-edit-BOr8nay1.js",
+          "path": "assets/slidev/notes-edit-Cy0wtRcc.js",
           "bytes": 2137
         },
         {
-          "path": "assets/slidev/overview-Dd19nydf.js",
+          "path": "assets/slidev/NoteStatic-2ekUWYvk.js",
+          "bytes": 459
+        },
+        {
+          "path": "assets/slidev/overview-Do3dcPK0.js",
           "bytes": 5798
         },
         {
-          "path": "assets/slidev/play-DdlpfizY.js",
+          "path": "assets/slidev/play-byrRGiVF.js",
           "bytes": 5190
         },
         {
-          "path": "assets/slidev/presenter-DZKqehtf.js",
+          "path": "assets/slidev/presenter-T_GOrJvN.js",
           "bytes": 10203
         },
         {
-          "path": "assets/slidev/shortcuts-CHq_dDzZ.js",
+          "path": "assets/slidev/shortcuts-DBYxBiJu.js",
           "bytes": 51465
         },
         {
-          "path": "assets/slidev/useNav-Dqohzfrs.js",
+          "path": "assets/slidev/SlideWrapper-BS5k3vd4.js",
+          "bytes": 4526
+        },
+        {
+          "path": "assets/slidev/TimerBar-DWA4-RfO.js",
+          "bytes": 2770
+        },
+        {
+          "path": "assets/slidev/useNav-CGyGAKVl.js",
           "bytes": 37090
+        },
+        {
+          "path": "assets/SlideWrapper-B6L0eUoe.css",
+          "bytes": 920
         },
         {
           "path": "assets/syncState-BEH2kddf.js",
           "bytes": 1398
         },
         {
-          "path": "assets/two-cols-DuX4bTQW.js",
-          "bytes": 930
+          "path": "assets/two-cols-NmTNqsXa.js",
+          "bytes": 875
         },
         {
           "path": "index.html",
@@ -1064,7 +1140,42 @@
           "path": "theme/public/obsidian-card.svg",
           "bytes": 1133
         }
-      ]
+      ],
+      "logicalBundles": {
+        "mainCss": {
+          "files": [
+            {
+              "path": "assets/index-bBQ-PtLr.css",
+              "bytes": 173201
+            }
+          ],
+          "totalBytes": 173201,
+          "baselineBytes": 173201,
+          "maximumBytes": 181861
+        },
+        "mainJs": {
+          "files": [
+            {
+              "path": "assets/index-Cve77sxH.js",
+              "bytes": 125593
+            }
+          ],
+          "totalBytes": 125593,
+          "baselineBytes": 125593,
+          "maximumBytes": 131872
+        },
+        "slideFrame": {
+          "files": [
+            {
+              "path": "assets/SlideFrame-D-Cb_2Wl.js",
+              "bytes": 5900
+            }
+          ],
+          "totalBytes": 5900,
+          "baselineBytes": 5900,
+          "maximumBytes": 6195
+        }
+      }
     }
   }
 }

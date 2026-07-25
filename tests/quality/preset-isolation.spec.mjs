@@ -4,6 +4,7 @@ import { resolve } from 'node:path'
 import test from 'node:test'
 import { chromium } from 'playwright-chromium'
 import {
+  generateExpandedContentBuilds,
   generatePresetMatrixBuilds,
   qualityArtifactRoot,
   readQualityBuildContext,
@@ -443,6 +444,121 @@ test('3 × 3 × 2 public preset API is visually isolated', { timeout: 240_000 },
       await page.locator('[data-quality-case="layout-two-cols"]').waitFor({ state: 'attached' })
       await page.close()
     })
+  } finally {
+    await context.close()
+    await browser.close()
+    await Promise.all(servers.map(server => server.close()))
+  }
+})
+
+test('US3 local accents preserve UCAS and ICT identity pixels and styles', {
+  timeout: 240_000,
+}, async (t) => {
+  const externalContext = readQualityBuildContext()
+  const definitions = externalContext
+    ? ['ucas', 'ict'].map(preset => ({
+        ...externalContext[`expanded-${preset}`],
+        preset,
+      }))
+    : (await generateExpandedContentBuilds())
+        .filter(build => build.preset !== 'default')
+  const servers = externalContext
+    ? []
+    : await Promise.all(definitions.map(build => startStaticServer(build.outDir)))
+  const buildByPreset = Object.fromEntries(definitions.map((build, index) => [
+    build.preset,
+    externalContext ? build : { ...build, baseUrl: servers[index].baseUrl },
+  ]))
+  const browser = await chromium.launch({
+    headless: true,
+    args: [
+      '--disable-font-subpixel-positioning',
+      '--disable-lcd-text',
+      '--font-render-hinting=none',
+    ],
+  })
+  const context = await browser.newContext({
+    deviceScaleFactor: 2,
+    viewport: { height: 552, width: 980 },
+  })
+  const deckAccent = 'color-mix(in srgb, currentColor 72%, #5b4fc4)'
+  const localAccent = 'color-mix(in srgb, currentColor 68%, #c2410c)'
+
+  const capture = async ({ baseUrl, marker, mode, page, preset, slide }) => {
+    await waitForSlide(page, baseUrl, slide, mode, marker)
+    const logoSelector = preset === 'ucas'
+      ? `.slidev-page-${slide} .slide-frame__header-logo--theme-${mode}`
+      : `.slidev-page-${slide} .slide-frame__header-logo--ict`
+    const logo = page.locator(logoSelector)
+    await logo.waitFor({ state: 'visible' })
+    return {
+      pixels: await logo.screenshot({ type: 'png' }),
+      state: await page.evaluate(({ caseId, selector }) => {
+        const marked = document.querySelector(`[data-quality-case="${caseId}"]`)
+        const canvas = marked?.closest('.slidev-layout')
+        const image = document.querySelector(selector)
+        if (!(canvas instanceof HTMLElement) || !(image instanceof HTMLImageElement)) {
+          throw new Error(`${caseId}: protected identity target is missing`)
+        }
+        const imageStyle = getComputedStyle(image)
+        return {
+          canvasAccent: canvas.style
+            .getPropertyValue('--presentation-accent').trim(),
+          image: {
+            filter: imageStyle.filter,
+            height: imageStyle.height,
+            opacity: imageStyle.opacity,
+            src: image.currentSrc,
+            width: imageStyle.width,
+          },
+          rootAccent: document.documentElement.style
+            .getPropertyValue('--presentation-accent').trim(),
+        }
+      }, {
+        caseId: marker,
+        selector: logoSelector,
+      }),
+    }
+  }
+
+  try {
+    for (const preset of ['ucas', 'ict']) {
+      for (const mode of modes) {
+        await t.test(`${preset}-${mode}`, async () => {
+          const page = await context.newPage()
+          try {
+            const baseUrl = buildByPreset[preset].baseUrl
+            const local = await capture({
+              baseUrl,
+              marker: 'us3-accent-local-a',
+              mode,
+              page,
+              preset,
+              slide: 26,
+            })
+            const fallback = await capture({
+              baseUrl,
+              marker: 'us3-accent-unaccented',
+              mode,
+              page,
+              preset,
+              slide: 27,
+            })
+            assert.equal(local.state.canvasAccent, localAccent)
+            assert.equal(fallback.state.canvasAccent, deckAccent)
+            assert.equal(local.state.rootAccent, deckAccent)
+            assert.equal(fallback.state.rootAccent, deckAccent)
+            assert.deepEqual(local.state.image, fallback.state.image)
+            assert.ok(
+              local.pixels.equals(fallback.pixels),
+              `${preset}/${mode}: protected identity pixels changed`,
+            )
+          } finally {
+            await page.close()
+          }
+        })
+      }
+    }
   } finally {
     await context.close()
     await browser.close()

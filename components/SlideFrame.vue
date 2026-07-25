@@ -2,7 +2,7 @@
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
-import { formatAuthorNames, normalizeAuthors } from '../setup/authors'
+import { formatAuthorNames, resolveDeckAuthors } from '../setup/authors'
 import {
   resolvePresentation,
 } from '../setup/presentation-config'
@@ -58,10 +58,7 @@ const headerSubtitle = computed(() => {
 const footerLeft = computed(() => {
   if (!resolved.value.footerAuthors) return ''
 
-  const authors = normalizeAuthors(configs.value.authors)
-  if (authors.length > 0) return formatAuthorNames(authors)
-
-  return formatAuthorNames(normalizeAuthors(configs.value.author))
+  return formatAuthorNames(resolveDeckAuthors(configs.value))
 })
 
 const footerMiddle = computed(() => {

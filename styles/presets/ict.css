@@ -225,7 +225,7 @@ html.dark .slidev-layout[data-presentation-preset="ict"] .slide-frame {
 }
 
 .slidev-layout[data-presentation-preset="ict"] .slide-frame li::marker {
-  color: var(--presentation-brand-cyan);
+  color: var(--presentation-accent);
 }
 
 .slidev-layout[data-presentation-preset="ict"] .slide-frame table {
@@ -271,7 +271,7 @@ html.dark .slidev-layout[data-presentation-preset="ict"] .slide-frame th {
 }
 
 .slidev-layout[data-presentation-preset="ict"] .slide-frame .obsidian-slidev-callout__title {
-  color: var(--presentation-brand-muted);
+  color: var(--presentation-brand-ink);
   font-family: var(--presentation-font-mono);
   font-size: 0.8rem;
   font-weight: 700;

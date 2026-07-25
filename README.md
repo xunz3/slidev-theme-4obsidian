@@ -111,10 +111,11 @@ Per-slide overrides:
 | `footerAuthors` | `true`, `false` | Override left footer author visibility for one slide |
 | `pageNumber` | `true`, `false` | Override right footer page-number visibility for one slide |
 | `footer` | Text | Override the centered footer content for one slide |
+| `accent` | Any valid CSS color | Override the presentation accent for one slide |
 
 `themeConfig` is Slidev's standard theme/addon configuration object. This theme keeps its own options under `themeConfig.presentation` so they do not collide with Slidev core fields or other addons. `density` selects the spacing scale: `compact` uses tighter padding and lists for information-dense slides, `normal` is the default, and `relaxed` gives content more breathing room.
 
-Values resolve independently using first valid precedence. When a layer exists for an option, the order is an explicit layout prop, the canonical per-slide key, its documented alias, the deck-level `themeConfig.presentation` value, and finally the default. Invalid or empty values are skipped instead of suppressing a valid lower-priority value. `accent` is intentionally deck-only.
+Values resolve independently using first valid precedence. When a layer exists for an option, the order is an explicit layout prop, the canonical per-slide key, its documented alias, the deck-level `themeConfig.presentation` value, and finally the default. Invalid or empty values are skipped instead of suppressing a valid lower-priority value. `accent` uses the narrower order of valid slide `accent`, valid deck `themeConfig.presentation.accent`, then the active preset/mode token.
 
 Textual booleans are accepted for YAML and generator compatibility. Boolean options accept native booleans plus the strings `true`, `false`, `on`, and `off` after trimming; other spellings such as `yes`, `no`, `1`, or uppercase variants are invalid. `chrome` also maps native or textual `true` to `on` and `false` to `off`.
 
@@ -133,7 +134,144 @@ Theme chrome means the non-content frame around each slide. By default it is foo
 
 ## Compatibility and migration
 
-No migration is required for existing decks. Ordinary Slidev Markdown, all eleven layout names and props, root deck metadata, `themeConfig.presentation`, documented per-slide overrides, and `.obsidian-slidev-*` semantic markup remain compatible. The refactor changes internal ownership—one shared frame and one configuration authority—without changing the public authoring surface. Legacy `chrome` and `header` per-slide aliases remain accepted; the `presentationChrome` and `presentationHeader` names are preferred in new decks.
+No migration is required for existing decks. Ordinary Slidev Markdown, the existing layout names and props, root deck metadata, `themeConfig.presentation`, documented per-slide overrides, and `.obsidian-slidev-*` semantic markup remain compatible. The new components are optional, `end`/`image-left`/`image-right` retain their built-in-compatible inputs, and the theme does not convert Obsidian syntax. Legacy `chrome` and `header` per-slide aliases remain accepted; the `presentationChrome` and `presentationHeader` names are preferred in new decks.
+
+## Public content components
+
+These eight components auto-register for ordinary Slidev Markdown. They need no addon or conversion step, forward normal `class` and `style` attributes to their root, and introduce no focusable control except a valid authored email link.
+
+| Component | Props | Default / slot contract |
+| --- | --- | --- |
+| `Callout` | `type`, `title` | Neutral type; a type-specific title or `Callout`; default slot accepts Markdown/Vue |
+| `Figure` | `src`, `alt`, `caption`, `fit` | Missing-source state; resolved alt described below; no caption; `fit="contain"` |
+| `Authors` | none | Reads root `authors`, then legacy root `author`; renders nothing when no valid entry exists |
+| `Steps` | none | Default slot should contain one ordered Markdown list |
+| `Timeline` | none | Default slot should contain one ordered Markdown list; native `<time>` is optional |
+| `Tag` | none | Default slot is visible category text |
+| `Badge` | none | Default slot is visible status text |
+| `Kbd` | `keys` string array | Without `keys`, the default slot is one key; non-empty `keys` wins |
+
+### Callout
+
+`Callout` accepts all 19 canonical Obsidian types: `note`, `info`, `todo`, `abstract`, `summary`, `tip`, `success`, `check`, `warning`, `caution`, `attention`, `danger`, `error`, `failure`, `question`, `help`, `faq`, `quote`, and `cite`. Matching is case-insensitive after trimming. Empty or unsupported values use the neutral treatment and default title `Callout`; an authored non-empty `title` always wins.
+
+```md
+<Callout type="warning" title="Reproducibility">
+
+Keep the **raw observations** and link to the [protocol](https://example.com).
+
+</Callout>
+```
+
+The component emits the same core `.obsidian-slidev-callout` structure and preset treatment as generated callout markup. Type wording and shape accompany color, so meaning is not color-only.
+
+### Figure
+
+```md
+<Figure
+  src="/results.png"
+  alt="Accuracy increases across three evaluation rounds"
+  caption="Figure 1. Evaluation accuracy by round."
+/>
+```
+
+`alt` is tri-state:
+
+| Authored state | Result |
+| --- | --- |
+| Non-empty `alt` | Uses that text alternative |
+| Explicit `alt=""` | Treats the image as decorative; never substitutes the caption |
+| Omitted `alt`, non-empty caption | Uses the caption as the alternative |
+| Omitted `alt` and caption | Uses `Figure` |
+
+An empty `src` or failed request removes the broken image and retains meaningful fallback text. The bounded media viewport reserves space before decode. Empty captions add no `figcaption`; `fit` accepts `contain` or `cover`.
+
+### Authors
+
+Declare authors in root frontmatter, then place `<Authors />` on any slide:
+
+```yaml
+authors:
+  - Ada Lovelace
+  - name: Grace Hopper
+    institution: US Navy
+    email: grace@example.org
+```
+
+```md
+<Authors />
+```
+
+Strings become names. Objects accept `name`, `institution`, and `email`; empty fields and empty records disappear, while order and intentional duplicates remain. Root `authors` wins, with legacy root `author` used only when the plural value has no valid entry. An address matching `^[^\s@]+@[^\s@]+$` becomes a visible-focus `mailto:` link. Other non-empty email text remains visible but non-actionable.
+
+### Steps and Timeline
+
+Both components preserve the authored `<ol>` and source order. `Steps` adds numbered sequence cues; `Timeline` adds chronological markers and may contain author-controlled `<time datetime="…">` elements.
+
+```md
+<Steps>
+
+1. **Collect** observations.
+2. **Normalize** measurements.
+3. **Report** uncertainty.
+
+</Steps>
+
+<Timeline>
+
+1. <time datetime="2026-07">July 2026</time> — Dataset frozen.
+2. **Today** — Results released.
+
+</Timeline>
+```
+
+Zero or one item creates no orphan connector. Non-list slot content remains readable without sequence decoration.
+
+### Tag, Badge, and Kbd
+
+```md
+<Tag>Method</Tag>
+<Badge>Complete</Badge>
+
+Press <Kbd>Esc</Kbd>, or open commands with
+<Kbd :keys="['Ctrl', 'Shift', 'P']" />.
+```
+
+`Tag` is an outlined category cue; `Badge` is a filled status cue. Both remain visible text, non-focusable, and distinct without relying on hue. `Kbd` filters empty `keys` entries and renders a readable, non-focusable key sequence with visible `+` separators. It is never a button.
+
+### Tasks and highlights
+
+Normal Markdown task lists keep their checked state but become presentation-only: checkbox inputs are disabled, removed from tab order, and cannot toggle on click or key press. Nested and wrapped labels stay aligned, and checked items use a visible check plus text treatment rather than color alone. The same normalizer accepts generated `.obsidian-slidev-task-list` / `.task-list-item` markup, including nodes added after initial render.
+
+Use native `<mark>` for standalone highlights:
+
+```md
+- [x] Reproduce the result
+- [ ] Archive the environment
+
+Compare the <mark>validated cohort</mark> with a [linked cohort](https://example.com)
+and `inline code`.
+```
+
+Generated `.obsidian-slidev-highlight` markup receives the same prose treatment. The theme does not parse `==highlight==`, and highlight selectors are reset inside `pre` and `code`, so literal syntax and code samples remain code.
+
+### Containment and authoring fallback
+
+Components wrap at the canonical 980 × 552 viewport. Inline labels/keycaps cannot create slide-level horizontal overflow; sequences and author cards stay contained; media reserves bounded space; and the shared frame provides last-resort scrolling for unusually long callouts or figures. For long image-and-text narratives or code, prefer compact density, shorten the content, or split the slide rather than shrinking text below a readable size.
+
+## Slide-level accent
+
+Set a deck default under `themeConfig.presentation.accent`, or override one slide with frontmatter:
+
+```yaml
+---
+accent: "oklch(62% 0.18 28)"
+---
+```
+
+Values must be non-empty CSS colors accepted by the shared color validator. Resolution is first valid slide `accent`, then valid deck accent, then the active preset/mode token. Empty or invalid local values fall through; they never clear a valid deck value. A local value is bound only to that rendered slide's `--presentation-accent` and `--slidev-theme-primary`, so navigation, overview, presenter, and export views cannot leak one slide's color into another.
+
+The resolved accent affects links, focus treatment, general callouts, chrome, tables, code, highlights, and sequence/status decoration. It does not recolor official UCAS/ICT artwork or locked brand tokens, semantic warning/danger/success/question colors, or author-supplied image pixels.
 
 ## CSS Variables
 
@@ -253,6 +391,108 @@ This theme provides the following layouts:
 | `quote` | Pull quote with optional `author`, `source`, or `cite` frontmatter |
 | `figure` | Centered media-first slide |
 | `references` | Smaller reference/bibliography slide |
+| `end` | Closing message with optional contact, authors, and logo |
+| `thanks` | Exact alias of `end` |
+| `image-left` | Narrative plus a visually left-hand figure |
+| `image-right` | Narrative plus a visually right-hand figure |
+| `code` | Title plus a full-width, contained code region |
+
+### Closing layouts: `end` and `thanks`
+
+The two names share one implementation and are identical in props, slots, defaults, DOM, styling, and fallbacks.
+
+```md
+---
+layout: end
+contact: research@example.org
+showAuthors: true
+logo: /lab-mark.svg
+logoAlt: Example Research Lab
+---
+
+# Thank you
+
+Questions and discussion
+```
+
+| Input | Default | Behavior |
+| --- | --- | --- |
+| Default slot | Authored closing message | Primary content and first in DOM order |
+| `contact` | Omitted | Valid email becomes a visible-focus `mailto:` link; other text stays non-interactive |
+| `showAuthors` | `false` | When true, reuses the root author collection |
+| `logo` | Omitted | Adds the closing logo region |
+| `logoAlt` | `Presentation logo` when omitted | Explicit `""` is decorative; non-empty text is meaningful |
+| `chrome` | `auto` | Hides closing chrome; explicit `on` still works |
+
+Omitted regions consume no grid space. Missing/failed logos retain meaningful fallback text and do not shift the message, contact, or authors.
+
+### Image-and-text layouts: `image-left` and `image-right`
+
+```md
+---
+layout: image-left
+image: /experiment.png
+imageAlt: Diagram of the three-stage experiment
+caption: Figure 2. Collection, analysis, and validation.
+backgroundSize: contain
+---
+
+# Experimental design
+
+The narrative remains first in document reading order.
+```
+
+Both orientations keep narrative then figure in the DOM; CSS alone places the image on the left or right.
+
+| Input | Default | Behavior |
+| --- | --- | --- |
+| Default slot | Authored narrative | Heading and prose region |
+| `image` | Omitted | Existing Slidev key; omission collapses the figure region |
+| `class` | Omitted | Existing built-in-compatible class input |
+| `backgroundSize` | `cover` | Existing size/fit input; `cover` and `contain` are primary values |
+| `imageAlt` | Caption, then `Figure` | Same tri-state rules as `Figure`; explicit `""` is decorative |
+| `caption` | Omitted | Empty values create no `figcaption` |
+
+Both regions contain wrapping and overflow, while the media shell prevents image decode/failure from moving the narrative.
+
+### Code layout
+
+````md
+---
+layout: code
+title: Solver implementation
+---
+
+# Solver implementation
+
+```ts
+export const solve = (input: Input) => normalize(input)
+```
+````
+
+The default slot is the authored content. Its first visible `h1` remains the title region; frontmatter `title` remains navigation/TOC/optional-header metadata and is not duplicated. Without a visible heading, code receives the available title space. The primary Slidev code wrapper uses full content width, scrolls long lines horizontally, contains excess lines vertically, and preserves Slidev highlighting, annotations, line numbers, and copy controls without adding a renderer or dependency.
+
+## Maintained preset fixtures
+
+The three maintained preset decks now end with a complete public-authoring appendix:
+
+- `fixtures/default-preset.md` — academic calibration example using the default preset
+- `fixtures/ucas-preset.md` — geometric-learning example using the UCAS preset
+- `fixtures/ict-preset.md` — intelligent-systems example using the ICT preset
+
+Each appendix demonstrates `Callout`, `Figure`, `Authors`, `Steps`, `Timeline`, `Tag`, `Badge`,
+and `Kbd`; native task lists and prose highlights; slide-level accent override; the `code`,
+`image-left`, and `image-right` layouts; and a metadata-driven `end` or `thanks` closing slide.
+The examples use only ordinary Slidev authoring and the theme's bundled `/obsidian-card.svg`
+asset.
+
+Build them independently with:
+
+```bash
+pnpm run build:default
+pnpm run build:ucas
+pnpm run build:ict
+```
 
 ## Protocol Fixture
 
