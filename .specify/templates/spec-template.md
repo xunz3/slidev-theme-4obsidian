@@ -106,10 +106,10 @@
 - **COMP-001**: [Define impact on `themeConfig.presentation`, per-slide overrides, ordinary
   Slidev Markdown, and `.obsidian-slidev-*` markup]
 
-### Performance Requirements *(mandatory)*
+### Performance Requirements *(include only when explicitly requested)*
 
-- **PERF-001**: [Define a measurable build, bundle, asset, or rendering baseline and budget]
-- **PERF-002**: [Define how performance will be measured and the acceptance threshold]
+- **PERF-001**: [If performance is in scope, define the measurable outcome and acceptance
+  threshold. Otherwise delete this section.]
 
 ### Key Entities *(include if feature involves data)*
 
@@ -127,10 +127,13 @@
 
 - **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
+- **SC-003**: [Directly verifiable user or rendering outcome]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
 - **SC-005**: [Build and fixture verification outcome across affected presets and modes]
-- **SC-006**: [Measured performance outcome compared with the stated baseline]
+- **SC-006**: [Additional build, fixture, accessibility, or rendering outcome]
+
+Do not invent a reviewer count, user-study threshold, external review cohort, performance
+baseline, or benchmark task unless the user explicitly requested that evidence.
 
 ## Assumptions
 

@@ -30,7 +30,7 @@
 
 **Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]
 
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
+**Performance Goals**: [Only when explicitly required by the user/specification; otherwise N/A]
 
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]
 
@@ -47,8 +47,9 @@
   regression fixture or test, and light/dark 16:9 visual-review matrix.
 - **Consistent Presentation Experience**: Document public configuration or semantic-contract
   effects, cross-preset behavior, accessibility, overflow, and bilingual typography.
-- **Measured Projection Performance**: State the affected build or asset baseline, measurable
-  budget, collection method, and allowed threshold. Flag any new asset over 250 KiB.
+- **Stable Projection Behavior**: Identify theme-owned async media/font geometry and any new
+  shipped asset over 250 KiB. Do not invent build, bundle, or navigation benchmarks unless the
+  specification explicitly makes performance an outcome.
 
 Any failed gate MUST be recorded in Complexity Tracking with an approved exception before
 implementation proceeds.

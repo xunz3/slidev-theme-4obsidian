@@ -10,9 +10,10 @@ description: "Task list template for feature implementation"
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
 **Tests**: Tests and verification are REQUIRED for every behavior change. Include affected
-builds, the Obsidian protocol fixture when applicable, regression coverage, visual review,
-and performance measurement. Pure documentation changes MAY omit runtime checks with a
-documented reason.
+builds, the Obsidian protocol fixture when applicable, regression coverage, and visual review.
+Pure documentation changes MAY omit runtime checks with a documented reason. Do not create
+fixed reviewer-count, user-study, performance-baseline, or benchmark tasks unless the feature
+specification explicitly requires them.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -156,7 +157,7 @@ Examples of foundational tasks (adjust based on your project):
 
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
-- [ ] TXXX Record before-and-after build, bundle, or asset performance measurements
+- [ ] TXXX Verify stable geometry for affected theme-owned asynchronous media or fonts
 - [ ] TXXX [P] Add or update unit and regression tests in tests/unit/
 - [ ] TXXX Build every affected preset showcase
 - [ ] TXXX Build `fixtures/obsidian-protocol.md` when shared or integration behavior changes

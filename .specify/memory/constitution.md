@@ -1,24 +1,20 @@
 <!--
 Sync Impact Report
-- Version change: template (unratified) → 1.0.0
+- Version change: 1.0.0 → 2.0.0
 - Modified principles:
-  - Template Principle 1 → I. Maintainable Preset Architecture
-  - Template Principle 2 → II. Tests Are Release Gates
-  - Template Principle 3 → III. Consistent Presentation Experience
-  - Template Principle 4 → IV. Measured Projection Performance
-  - Template Principle 5 → removed (the project defines four principles)
-- Added sections:
-  - Architecture and Compatibility Constraints
-  - Development Workflow and Quality Gates
-- Removed sections:
-  - None; template placeholders were replaced by project-specific sections
+  - II. Tests Are Release Gates → proportional automated and maintainer-owned review, with no
+    default external reviewer cohort
+  - III. Consistent Presentation Experience → explicit pre-1.0 evolution policy
+  - IV. Measured Projection Performance → IV. Stable Projection Behavior
+- Added sections: none
+- Removed sections: mandatory build/output/navigation performance budgets and measurements
 - Templates requiring updates:
   - ✅ .specify/templates/plan-template.md
   - ✅ .specify/templates/spec-template.md
   - ✅ .specify/templates/tasks-template.md
   - ✅ .specify/templates/commands/ (directory not present; no command templates to update)
 - Runtime guidance reviewed:
-  - ✅ README.md (already documents presets, protocol fixtures, and validation commands)
+  - ✅ README.md
 - Follow-up TODOs: none
 -->
 # Slidev Theme Lilac Constitution
@@ -43,7 +39,10 @@ integration styling, or shared presentation behavior MUST also build
 in both light and dark modes where supported, at the canonical 16:9 viewport; the review MUST
 cover overflow, clipping, contrast, typography, and representative layouts. Bug fixes MUST add
 a reproducible fixture or automated regression test when feasible. Required checks MUST pass
-before merge; a skipped check requires a documented reason and follow-up owner.
+before merge; a skipped check requires a documented reason and follow-up owner. A fixed
+reviewer count, user-study threshold, or independently coordinated human cohort MUST NOT be
+invented as a default gate. Human studies are tasks only when the maintainer explicitly asks
+for them and identifies who will coordinate them.
 
 ### III. Consistent Presentation Experience
 The stable configuration surface is `themeConfig.presentation`, with documented per-slide
@@ -53,26 +52,26 @@ legible deck without preset-specific author work. Shared content MUST preserve h
 meaning, layout behavior, and interaction across presets even when visual identity differs.
 User-visible additions MUST define accessible contrast, readable projection sizing, keyboard
 and focus behavior when interactive, overflow behavior, and bilingual typography where
-applicable. Intentional compatibility changes require migration notes and a constitutionally
-reviewed version change.
+applicable. Before package version 1.0, duplicate, undocumented, or misleading public paths MAY
+be removed without a compatibility shim. User-visible removals MUST have a concise migration
+note and one documented canonical replacement when one exists.
 
-### IV. Measured Projection Performance
-Performance MUST be evaluated for changes to CSS, fonts, assets, components, or rendering.
-Plans MUST state a measurable budget or baseline for affected output, and reviews MUST record
-before-and-after evidence. Production build output MUST NOT grow by more than 5% in total or
-in the affected bundle without documented justification. Any new individual shipped asset
-larger than 250 KiB MUST be optimized or explicitly justified. Preset selection MUST reuse the
-shared render tree and MUST NOT duplicate content or introduce work proportional to the number
-of available presets. Slides MUST remain responsive during navigation and MUST avoid layout
-shift caused by theme-owned media or fonts. Performance regressions are release blockers unless
-the approved tradeoff and mitigation are recorded.
+### IV. Stable Projection Behavior
+Theme-owned media, fonts, and async rendering MUST reserve stable geometry and MUST NOT cause
+post-visibility layout shift in maintained fixtures. Preset selection MUST reuse the shared
+render tree and MUST NOT duplicate rendered content solely because more presets exist. New
+individual shipped assets larger than 250 KiB MUST be optimized or explicitly justified.
+Build duration, generated output size, bundle size, and navigation timing are not default
+requirements or release gates. They MUST be measured only when the user or feature
+specification explicitly makes performance an outcome; otherwise plans and tasks MUST omit
+performance baselines, raw-sample retention, and benchmark update workflows.
 
 ## Architecture and Compatibility Constraints
 
 - The theme owns presentation and rendering; `obsidian-slidev` owns Obsidian Markdown
   conversion.
-- `SlideFrame`, shared layouts, semantic class names, and `--presentation-*` tokens are
-  compatibility surfaces. Breaking changes require migration guidance.
+- `SlideFrame`, shared layouts, semantic class names, and `--presentation-*` tokens define the
+  current canonical surface. Pre-1.0 removals follow the migration-note rule in Principle III.
 - Presets MUST support standalone Slidev use and optional `obsidian-slidev` integration.
 - The supported Node.js version and package API MUST remain declared in `package.json`.
 - New runtime dependencies, remote resources, or bundled brand assets MUST include rationale,
@@ -81,12 +80,13 @@ the approved tradeoff and mitigation are recorded.
 ## Development Workflow and Quality Gates
 
 1. Specifications MUST define independent user scenarios plus measurable UX, compatibility,
-   accessibility, and performance outcomes.
+   and accessibility outcomes. Performance outcomes are included only when explicitly in scope.
 2. Plans MUST complete the Constitution Check before implementation and repeat it after design.
    Any exception MUST name the violated rule, why it is necessary, and the rejected simpler
    alternative.
-3. Tasks MUST include implementation, relevant build or fixture checks, visual review,
-   documentation, and performance measurement; tests are not optional for behavior changes.
+3. Tasks MUST include implementation, relevant build or fixture checks, visual review, and
+   documentation; tests are not optional for behavior changes. Tasks MUST NOT invent external
+   reviewer cohorts or performance baselines absent an explicit specification requirement.
 4. Reviews MUST verify the public API and semantic boundary, inspect affected presets and
    modes, and confirm that required commands pass.
 5. Releases MUST update user-facing documentation for configuration, layout, preset, or
@@ -108,4 +108,4 @@ scoped, time-bounded where possible, and recorded in the plan's Complexity Track
 The constitution and its dependent templates MUST be reviewed whenever the theme's public API,
 preset architecture, testing strategy, or release process changes.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-23 | **Last Amended**: 2026-07-23
+**Version**: 2.0.0 | **Ratified**: 2026-07-23 | **Last Amended**: 2026-07-26
