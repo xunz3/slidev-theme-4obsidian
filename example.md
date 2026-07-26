@@ -85,7 +85,7 @@ Unresolved links and missing assets stay visible instead of silently disappearin
 | Layer | Responsibility |
 | --- | --- |
 | `obsidian-slidev` | Convert vault notes into Slidev-native markup |
-| `slidev-theme-lilac` | Render layouts, presets, components, and optional Obsidian semantics |
+| `obsidian-theme-lilas` | Render layouts, presets, components, and optional Obsidian semantics |
 
 ---
 title: Local accent

@@ -17,7 +17,7 @@ Sync Impact Report
   - ✅ README.md
 - Follow-up TODOs: none
 -->
-# Slidev Theme Lilac Constitution
+# Obsidian Theme Lilas Constitution
 
 ## Core Principles
 

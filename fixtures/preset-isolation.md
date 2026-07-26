@@ -6,7 +6,7 @@ subtitle: Identical bilingual content · 相同双语内容
 footer: Theme architecture regression
 authors:
   - name: Quality Gate
-    institution: Slidev Theme Lilac
+    institution: Obsidian Theme Lilas
 themeConfig:
   presentation:
     preset: __GLOBAL_PRESET__
