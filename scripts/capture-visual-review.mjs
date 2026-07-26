@@ -2,7 +2,10 @@ import { createHash } from 'node:crypto'
 import { access, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import {
+  CANONICAL_VIEWPORT,
+  COMPACT_VIEWPORT,
   qualityArtifactRoot,
+  reviewMatrix,
   resetArtifactDirectory,
   startStaticServer,
 } from '../tests/quality/helpers.mjs'
@@ -27,6 +30,16 @@ const layouts = {
   references: { caseId: 'layout-references', slide: 17 },
 }
 const sha256 = value => createHash('sha256').update(value).digest('hex')
+const maintainedReviewMatrix = reviewMatrix({
+  compactCases: [
+    'visual-media-figure-fits',
+    'visual-callout-authored-compact',
+    'visual-closing-logo-wide',
+    'visual-sequences-custom',
+    'visual-chrome-safe-zone',
+    'visual-bilingual-heading',
+  ],
+})
 const evidenceDirectory = await resetArtifactDirectory(
   resolve(qualityArtifactRoot, 'screenshots/visual-review'),
 )
@@ -172,10 +185,10 @@ await writeFile(
     schemaVersion: 1,
     capturedAt: new Date().toISOString(),
     viewport: {
-      deviceScaleFactor: 2,
-      height: 552,
-      width: 980,
+      ...CANONICAL_VIEWPORT,
     },
+    compactViewport: COMPACT_VIEWPORT,
+    maintainedReviewMatrix,
     cases: captures.map(capture => ({
       ...capture,
       path: capture.path.replace(`${process.cwd()}/`, ''),

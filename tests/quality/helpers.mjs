@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process'
 import { createReadStream } from 'node:fs'
 import {
   access,
+  cp,
   mkdir,
   readFile,
   rm,
@@ -14,6 +15,48 @@ import { fileURLToPath } from 'node:url'
 
 export const repositoryRoot = resolve(fileURLToPath(new URL('../..', import.meta.url)))
 export const qualityArtifactRoot = resolve(repositoryRoot, '.artifacts/quality')
+export const CANONICAL_VIEWPORT = Object.freeze({
+  deviceScaleFactor: 2,
+  height: 552,
+  name: 'canonical',
+  width: 980,
+})
+export const COMPACT_VIEWPORT = Object.freeze({
+  deviceScaleFactor: 2,
+  height: 405,
+  name: 'compact',
+  width: 720,
+})
+export const REVIEW_VIEWPORTS = Object.freeze([
+  CANONICAL_VIEWPORT,
+  COMPACT_VIEWPORT,
+])
+
+export const browserContextOptionsForViewport = (viewport) => ({
+  deviceScaleFactor: viewport.deviceScaleFactor,
+  viewport: {
+    height: viewport.height,
+    width: viewport.width,
+  },
+})
+
+export const reviewMatrix = ({
+  compactCases = [],
+  modes = ['light', 'dark'],
+  presets = ['default', 'ucas', 'ict'],
+} = {}) => [
+  ...presets.flatMap(preset => modes.map(mode => ({
+    mode,
+    preset,
+    viewport: CANONICAL_VIEWPORT,
+  }))),
+  ...presets.flatMap(preset => modes.flatMap(mode => compactCases.map(caseId => ({
+    caseId,
+    mode,
+    preset,
+    viewport: COMPACT_VIEWPORT,
+  })))),
+]
 const activeProcesses = new Set()
 
 const mimeTypes = {
@@ -224,13 +267,23 @@ export const generatePresetMatrixBuilds = async () => {
 
 export const generateExpandedContentDefinitions = async () => {
   const templatePath = resolve(repositoryRoot, 'fixtures/expanded-content.md')
+  const fixtureCssPath = resolve(repositoryRoot, 'fixtures/expanded-content.css')
   const generatedRoot = await resetArtifactDirectory(
     resolve(qualityArtifactRoot, 'generated/expanded-content'),
   )
   const buildRoot = await resetArtifactDirectory(
     resolve(qualityArtifactRoot, 'build/expanded-content'),
   )
-  const template = await readFile(templatePath, 'utf8')
+  await cp(
+    resolve(repositoryRoot, 'fixtures/public/author-fixtures'),
+    resolve(generatedRoot, 'public/author-fixtures'),
+    { recursive: true },
+  )
+  const [template, fixtureCss] = await Promise.all([
+    readFile(templatePath, 'utf8'),
+    readFile(fixtureCssPath, 'utf8'),
+  ])
+  await writeFile(resolve(generatedRoot, 'style.css'), fixtureCss, 'utf8')
   const presetMarker = 'preset: default # __EXPANDED_PRESET__'
   if (!template.includes(presetMarker)) {
     throw new Error('expanded-content fixture is missing its preset-generation marker')
@@ -385,10 +438,29 @@ export const waitForSlide = async (
       [...document.images].map(async (image) => {
         if (!image.complete) {
           await new Promise(resolveImage => {
-            image.addEventListener('load', resolveImage, { once: true })
-            image.addEventListener('error', resolveImage, { once: true })
+            let frameId
+            let timeoutId
+            const finish = () => {
+              image.removeEventListener('load', finish)
+              image.removeEventListener('error', finish)
+              if (frameId !== undefined) cancelAnimationFrame(frameId)
+              clearTimeout(timeoutId)
+              resolveImage()
+            }
+            const checkConnection = () => {
+              if (image.complete || !image.isConnected) {
+                finish()
+                return
+              }
+              frameId = requestAnimationFrame(checkConnection)
+            }
+            image.addEventListener('load', finish, { once: true })
+            image.addEventListener('error', finish, { once: true })
+            timeoutId = setTimeout(finish, 5_000)
+            checkConnection()
           })
         }
+        if (!image.isConnected) return
         try {
           await image.decode()
         } catch {

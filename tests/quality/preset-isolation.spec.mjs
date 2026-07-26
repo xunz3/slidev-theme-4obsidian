@@ -496,13 +496,18 @@ test('US3 local accents preserve UCAS and ICT identity pixels and styles', {
       state: await page.evaluate(({ caseId, selector }) => {
         const marked = document.querySelector(`[data-quality-case="${caseId}"]`)
         const canvas = marked?.closest('.slidev-layout')
+        const frame = canvas?.querySelector('.slide-frame')
         const image = document.querySelector(selector)
-        if (!(canvas instanceof HTMLElement) || !(image instanceof HTMLImageElement)) {
+        if (
+          !(canvas instanceof HTMLElement)
+          || !(frame instanceof HTMLElement)
+          || !(image instanceof HTMLImageElement)
+        ) {
           throw new Error(`${caseId}: protected identity target is missing`)
         }
         const imageStyle = getComputedStyle(image)
         return {
-          canvasAccent: canvas.style
+          frameAccent: frame.style
             .getPropertyValue('--presentation-accent').trim(),
           image: {
             filter: imageStyle.filter,
@@ -511,6 +516,18 @@ test('US3 local accents preserve UCAS and ICT identity pixels and styles', {
             src: image.currentSrc,
             width: imageStyle.width,
           },
+          visibleIdentityCount: [
+            ...canvas.querySelectorAll(
+              '.slide-frame__header-logo, .slide-frame__ucas-wordmark, .slide-frame__ict-mark',
+            ),
+          ].filter((candidate) => {
+            const style = getComputedStyle(candidate)
+            const rect = candidate.getBoundingClientRect()
+            return style.display !== 'none'
+              && style.visibility !== 'hidden'
+              && rect.width > 0
+              && rect.height > 0
+          }).length,
           rootAccent: document.documentElement.style
             .getPropertyValue('--presentation-accent').trim(),
         }
@@ -544,10 +561,12 @@ test('US3 local accents preserve UCAS and ICT identity pixels and styles', {
               preset,
               slide: 27,
             })
-            assert.equal(local.state.canvasAccent, localAccent)
-            assert.equal(fallback.state.canvasAccent, deckAccent)
-            assert.equal(local.state.rootAccent, deckAccent)
-            assert.equal(fallback.state.rootAccent, deckAccent)
+            assert.equal(local.state.frameAccent, localAccent)
+            assert.equal(fallback.state.frameAccent, deckAccent)
+            assert.equal(local.state.rootAccent, '')
+            assert.equal(fallback.state.rootAccent, '')
+            assert.equal(local.state.visibleIdentityCount, 1)
+            assert.equal(fallback.state.visibleIdentityCount, 1)
             assert.deepEqual(local.state.image, fallback.state.image)
             assert.ok(
               local.pixels.equals(fallback.pixels),

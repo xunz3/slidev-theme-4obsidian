@@ -93,28 +93,56 @@ const protocolScenarios = modes.map(mode => ({
   preset: 'default',
   slide: 5,
 }))
-const us1CalloutScenarios = calloutFamiliesForVisual().flatMap(definition => (
-  modes.map(mode => ({
-    buildId: 'expanded-default',
-    caseId: definition.caseId,
-    coverage: ['us1', 'callout', definition.family],
-    id: `us1-callout-${definition.family}-${mode}`,
-    mode,
-    preset: 'default',
-    slide: definition.slide,
-  }))
+const us1CalloutScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  calloutFamiliesForVisual().flatMap(definition => (
+    modes.map(mode => ({
+      buildId: `expanded-${preset}`,
+      caseId: definition.caseId,
+      coverage: ['FR-008', 'FR-009', 'FR-010', 'callout', definition.family],
+      id: `visual-callout-${definition.family}-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-008', 'FR-009', 'FR-010', 'SC-003'],
+      slide: definition.slide,
+    }))
+  ))
 ))
-const us1SurfaceScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+const correctedCalloutScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
   modes.flatMap(mode => [
     {
       buildId: `expanded-${preset}`,
       caseId: 'us1-callout-fallbacks',
-      coverage: ['us1', 'callout', 'neutral'],
-      id: `us1-callout-neutral-${preset}-${mode}`,
+      coverage: ['FR-008', 'FR-011', 'callout', 'neutral', 'fallback'],
+      id: `visual-callout-neutral-${preset}-${mode}`,
       mode,
       preset,
+      requirementIds: ['FR-008', 'FR-011', 'SC-003'],
       slide: 9,
     },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'visual-callout-authored-compact',
+      coverage: ['FR-010', 'FR-012', 'callout', 'authored-casing', 'compact'],
+      id: `visual-callout-authored-compact-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-010', 'FR-012', 'SC-003'],
+      slide: 52,
+    },
+  ])
+))
+const generatedCalloutScenarios = modes.map(mode => ({
+  buildId: 'protocol',
+  caseId: 'protocol-callout-families',
+  coverage: ['FR-008', 'FR-009', 'FR-010', 'generated', 'callout'],
+  id: `visual-callout-generated-${mode}`,
+  mode,
+  preset: 'default',
+  requirementIds: ['FR-008', 'FR-009', 'FR-010', 'SC-003'],
+  slide: 25,
+}))
+const us1SurfaceScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.flatMap(mode => [
     {
       buildId: `expanded-${preset}`,
       caseId: 'us1-figures-alternatives',
@@ -127,11 +155,88 @@ const us1SurfaceScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
     {
       buildId: `expanded-${preset}`,
       caseId: 'us1-authors-mixed',
-      coverage: ['us1', 'authors'],
+      coverage: ['FR-007', 'authors', 'complete', 'fallback', 'duplicates'],
       id: `us1-authors-${preset}-${mode}`,
       mode,
       preset,
+      requirementIds: ['FR-007', 'SC-002', 'SC-004'],
       slide: 13,
+    },
+  ])
+))
+const correctedLinkScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.map(mode => ({
+    buildId: `expanded-${preset}`,
+    caseId: 'visual-links-authors',
+    coverage: ['FR-006', 'FR-007', 'inline', 'wrapped', 'block', 'authors'],
+    id: `visual-links-authors-${preset}-${mode}`,
+    mode,
+    preset,
+    requirementIds: ['FR-006', 'FR-007', 'SC-002', 'SC-004'],
+    slide: 53,
+  }))
+))
+const generatedLinkScenarios = modes.map(mode => ({
+  buildId: 'protocol',
+  caseId: 'protocol-link-forms',
+  coverage: ['FR-006', 'generated', 'inline', 'wrapped', 'block'],
+  id: `visual-links-generated-${mode}`,
+  mode,
+  preset: 'default',
+  requirementIds: ['FR-006', 'SC-002'],
+  slide: 28,
+}))
+const correctedMediaScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.flatMap(mode => [
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'visual-media-figure-fits',
+      coverage: ['FR-001', 'FR-002', 'FR-003', 'figure', 'same-source'],
+      id: `visual-media-figure-fits-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-001', 'FR-002', 'FR-003', 'SC-001'],
+      slide: 45,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'visual-image-left-contain',
+      coverage: ['FR-004', 'image-left', 'contain'],
+      id: `visual-image-left-contain-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-004', 'SC-001'],
+      slide: 46,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'visual-image-right-contain',
+      coverage: ['FR-004', 'image-right', 'contain'],
+      id: `visual-image-right-contain-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-004', 'SC-001'],
+      slide: 48,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'visual-closing-logo-wide',
+      coverage: ['FR-005', 'closing-logo', 'transparent', 'wide'],
+      id: `visual-closing-logo-wide-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-005', 'SC-007'],
+      slide: 50,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'visual-closing-logo-tall',
+      coverage: ['FR-005', 'closing-logo', 'transparent', 'tall'],
+      id: `visual-closing-logo-tall-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-005', 'SC-007'],
+      slide: 51,
     },
   ])
 ))
@@ -140,10 +245,11 @@ const us2SurfaceScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
     {
       buildId: `expanded-${preset}`,
       caseId: 'us2-closing-metadata',
-      coverage: ['us2', 'closing', 'metadata'],
+      coverage: ['FR-006', 'FR-007', 'closing', 'contact', 'authors'],
       id: `us2-closing-${preset}-${mode}`,
       mode,
       preset,
+      requirementIds: ['FR-006', 'FR-007', 'SC-002', 'SC-004'],
       slide: 16,
     },
     {
@@ -175,13 +281,13 @@ const us2SurfaceScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
     },
   ])
 ))
-const us2AliasScenarios = ['end', 'thanks'].flatMap((layout, index) => (
+const us2ClosingScenarios = ['end', 'thanks'].flatMap((caseName, index) => (
   modes.map(mode => ({
     buildId: 'expanded-default',
-    caseId: `us2-${layout}-minimal`,
-    coverage: ['us2', 'closing', 'alias'],
-    id: `us2-${layout}-${mode}`,
-    layout,
+    caseId: `us2-${caseName}-minimal`,
+    coverage: ['us2', 'closing', 'minimal'],
+    id: `us2-${caseName}-${mode}`,
+    layout: 'end',
     mode,
     preset: 'default',
     slide: 14 + index,
@@ -285,24 +391,38 @@ const us4TitlelessCodeScenarios = modes.map(mode => ({
   preset: 'default',
   slide: 33,
 }))
+const correctedBadgeScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
+  modes.map(mode => ({
+    buildId: `expanded-${preset}`,
+    caseId: 'visual-badge-matrix',
+    coverage: ['FR-014', 'FR-015', 'FR-016', 'badge', 'tone', 'marker'],
+    id: `visual-badge-matrix-${preset}-${mode}`,
+    mode,
+    preset,
+    requirementIds: ['FR-014', 'FR-015', 'FR-016', 'SC-005'],
+    slide: 54,
+  }))
+))
 const us5ReadingCueScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
   modes.flatMap(mode => [
     {
       buildId: `expanded-${preset}`,
       caseId: 'us5-tasks-native',
-      coverage: ['us5', 'tasks', 'checked', 'unchecked', 'nested', 'wrapped'],
+      coverage: ['FR-013', 'tasks', 'checked', 'unchecked', 'nested', 'wrapped'],
       id: `us5-tasks-${preset}-${mode}`,
       mode,
       preset,
+      requirementIds: ['FR-013', 'SC-006'],
       slide: 42,
     },
     {
       buildId: `expanded-${preset}`,
       caseId: 'us5-highlights',
-      coverage: ['us5', 'highlight', 'native', 'generated', 'code-scope'],
+      coverage: ['FR-017', 'FR-018', 'highlight', 'native', 'generated', 'code-scope'],
       id: `us5-highlights-${preset}-${mode}`,
       mode,
       preset,
+      requirementIds: ['FR-017', 'FR-018', 'SC-006'],
       slide: 44,
     },
   ])
@@ -310,12 +430,210 @@ const us5ReadingCueScenarios = ['default', 'ucas', 'ict'].flatMap(preset => (
 const us5GeneratedTaskScenarios = modes.map(mode => ({
   buildId: 'expanded-default',
   caseId: 'us5-tasks-generated',
-  coverage: ['us5', 'tasks', 'generated-compatibility'],
+  coverage: ['FR-013', 'tasks', 'generated-compatibility'],
   id: `us5-tasks-generated-${mode}`,
   mode,
   preset: 'default',
+  requirementIds: ['FR-013', 'SC-006'],
   slide: 43,
 }))
+const generatedStatusHighlightScenarios = modes.map(mode => ({
+  buildId: 'protocol',
+  caseId: 'protocol-task-highlight-scope',
+  coverage: ['FR-013', 'FR-017', 'FR-018', 'generated', 'tasks', 'highlight'],
+  id: `visual-generated-task-highlight-${mode}`,
+  mode,
+  preset: 'default',
+  requirementIds: ['FR-013', 'FR-017', 'FR-018', 'SC-006'],
+  slide: 29,
+}))
+const correctedSequenceScenarios = ['default', 'ucas', 'ict'].flatMap(
+  preset => modes.flatMap(mode => [
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-steps-zero',
+      coverage: ['FR-019', 'FR-022', 'steps', 'zero'],
+      id: `visual-steps-zero-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-019', 'FR-022', 'SC-006'],
+      slide: 34,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-steps-one',
+      coverage: ['FR-019', 'FR-022', 'steps', 'one'],
+      id: `visual-steps-one-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-019', 'FR-022', 'SC-006'],
+      slide: 35,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-steps-many',
+      coverage: ['FR-019', 'FR-022', 'steps', 'many', 'wrapped', 'bilingual'],
+      id: `visual-steps-many-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-019', 'FR-022', 'SC-006'],
+      slide: 36,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-timeline-zero',
+      coverage: ['FR-020', 'FR-022', 'timeline', 'zero'],
+      id: `visual-timeline-zero-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-020', 'FR-022', 'SC-006'],
+      slide: 37,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-timeline-one',
+      coverage: ['FR-020', 'FR-021', 'FR-022', 'timeline', 'one', 'undated'],
+      id: `visual-timeline-one-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-020', 'FR-021', 'FR-022', 'SC-006'],
+      slide: 38,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'us4-timeline-many',
+      coverage: ['FR-020', 'FR-021', 'FR-022', 'timeline', 'many', 'dated', 'undated', 'bilingual'],
+      id: `visual-timeline-many-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-020', 'FR-021', 'FR-022', 'SC-006'],
+      slide: 39,
+    },
+    {
+      buildId: `expanded-${preset}`,
+      caseId: 'visual-sequences-custom',
+      coverage: ['FR-019', 'FR-020', 'FR-021', 'FR-022', 'authored-numbering', 'plain-fallback'],
+      id: `visual-sequences-custom-${preset}-${mode}`,
+      mode,
+      preset,
+      requirementIds: ['FR-019', 'FR-020', 'FR-021', 'FR-022', 'SC-006'],
+      slide: 55,
+    },
+  ]),
+)
+const coherentCanonicalDefinitions = [
+  {
+    caseId: 'us2-end-minimal',
+    coverage: ['FR-023', 'closing', 'minimal'],
+    id: 'closing-minimal',
+    requirementIds: ['FR-023', 'SC-007'],
+    slide: 14,
+  },
+  {
+    caseId: 'us2-closing-metadata',
+    coverage: ['FR-005', 'FR-023', 'closing', 'rich'],
+    id: 'closing-rich',
+    requirementIds: ['FR-005', 'FR-023', 'SC-007'],
+    slide: 16,
+  },
+  {
+    caseId: 'visual-chrome-safe-zone',
+    coverage: ['FR-024', 'chrome', 'header', 'footer', 'table', 'list'],
+    id: 'chrome',
+    requirementIds: ['FR-024', 'SC-007'],
+    slide: 56,
+  },
+  {
+    caseId: 'visual-brand-collision',
+    coverage: ['FR-025', 'safe-zone', 'heading', 'figure', 'caption', 'link', 'control'],
+    id: 'brand-safe-zone',
+    requirementIds: ['FR-025', 'SC-007'],
+    slide: 58,
+  },
+  {
+    caseId: 'visual-bilingual-heading',
+    coverage: ['FR-026', 'bilingual', 'heading', 'wrapped-separator'],
+    id: 'bilingual-heading',
+    requirementIds: ['FR-026', 'SC-007'],
+    slide: 57,
+  },
+]
+const coherentCanonicalScenarios = ['default', 'ucas', 'ict'].flatMap(
+  preset => modes.flatMap(mode => coherentCanonicalDefinitions.map(
+    definition => ({
+      buildId: `expanded-${preset}`,
+      ...definition,
+      id: `visual-${definition.id}-${preset}-${mode}`,
+      mode,
+      preset,
+    }),
+  )),
+)
+const coherentGeneratedMediaScenarios = modes.flatMap(mode => [
+  {
+    buildId: 'protocol',
+    caseId: 'protocol-generated-image-states',
+    coverage: ['FR-004', 'FR-027', 'generated', 'media', 'states'],
+    id: `visual-generated-image-states-${mode}`,
+    mode,
+    preset: 'default',
+    requirementIds: ['FR-004', 'FR-027', 'SC-007'],
+    slide: 26,
+  },
+  {
+    buildId: 'protocol',
+    caseId: 'protocol-image-equivalence',
+    coverage: ['FR-004', 'FR-027', 'generated', 'public', 'media', 'equivalence'],
+    id: `visual-generated-image-equivalence-${mode}`,
+    mode,
+    preset: 'default',
+    requirementIds: ['FR-004', 'FR-027', 'SC-007'],
+    slide: 27,
+  },
+])
+const compactViewport = Object.freeze({ height: 405, width: 720 })
+const coherentCompactDefinitions = [
+  {
+    caseId: 'visual-callout-authored-compact',
+    coverage: ['FR-012', 'compact', 'callout'],
+    id: 'callout',
+    requirementIds: ['FR-012', 'SC-007'],
+    slide: 52,
+  },
+  {
+    caseId: 'us2-closing-metadata',
+    coverage: ['FR-005', 'FR-023', 'compact', 'closing', 'rich'],
+    id: 'closing-rich',
+    requirementIds: ['FR-005', 'FR-023', 'SC-007'],
+    slide: 16,
+  },
+  {
+    caseId: 'visual-brand-collision',
+    coverage: ['FR-025', 'compact', 'safe-zone'],
+    id: 'brand-safe-zone',
+    requirementIds: ['FR-025', 'SC-007'],
+    slide: 58,
+  },
+  {
+    caseId: 'visual-bilingual-heading',
+    coverage: ['FR-026', 'compact', 'bilingual'],
+    id: 'bilingual-heading',
+    requirementIds: ['FR-026', 'SC-007'],
+    slide: 57,
+  },
+]
+const coherentCompactScenarios = ['default', 'ucas', 'ict'].flatMap(
+  preset => modes.flatMap(mode => coherentCompactDefinitions.map(
+    definition => ({
+      buildId: `expanded-${preset}`,
+      ...definition,
+      id: `visual-compact-${definition.id}-${preset}-${mode}`,
+      mode,
+      preset,
+      viewport: compactViewport,
+    }),
+  )),
+)
 
 export const visualScenarios = Object.freeze([
   ...presetScenarios,
@@ -323,14 +641,25 @@ export const visualScenarios = Object.freeze([
   ...chromeScenarios,
   ...protocolScenarios,
   ...us1CalloutScenarios,
+  ...correctedCalloutScenarios,
+  ...generatedCalloutScenarios,
   ...us1SurfaceScenarios,
+  ...correctedLinkScenarios,
+  ...generatedLinkScenarios,
+  ...correctedMediaScenarios,
   ...us2SurfaceScenarios,
-  ...us2AliasScenarios,
+  ...us2ClosingScenarios,
   ...us3AccentScenarios,
   ...us4TechnicalScenarios,
   ...us4TitlelessCodeScenarios,
+  ...correctedBadgeScenarios,
   ...us5ReadingCueScenarios,
   ...us5GeneratedTaskScenarios,
+  ...generatedStatusHighlightScenarios,
+  ...correctedSequenceScenarios,
+  ...coherentCanonicalScenarios,
+  ...coherentGeneratedMediaScenarios,
+  ...coherentCompactScenarios,
 ])
 
 export const visualTolerance = Object.freeze({
@@ -417,6 +746,7 @@ export const createVisualBrowser = async () => {
 }
 
 export const captureVisualScenario = async (page, build, scenario) => {
+  if (scenario.viewport) await page.setViewportSize(scenario.viewport)
   await waitForSlide(
     page,
     build.baseUrl,

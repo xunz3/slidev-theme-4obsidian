@@ -1,260 +1,186 @@
 #!/usr/bin/env node
 
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
+import {
+  existsSync,
+  readFileSync,
+  readdirSync,
+  statSync,
+} from 'node:fs'
+import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const repositoryRoot = resolve(fileURLToPath(new URL('..', import.meta.url)))
-const presetNames = ['default', 'ucas', 'ict']
-const aggregatePath = resolve(repositoryRoot, 'styles/presets.css')
 const errors = []
+const presetNames = ['default', 'ucas', 'ict']
 
-const requiredLightTokens = [
+const filesWithin = (directory, pattern = /./) => {
+  const files = []
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name)
+    if (entry.isDirectory()) files.push(...filesWithin(path, pattern))
+    else if (entry.isFile() && pattern.test(entry.name)) files.push(path)
+  }
+  return files
+}
+
+const sourceAt = path => readFileSync(resolve(repositoryRoot, path), 'utf8')
+
+const aggregate = sourceAt('styles/presets.css')
+const expectedPresetImports = presetNames.map(
+  name => `@import "./presets/${name}.css";`,
+)
+const aggregateLines = aggregate
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .split('\n')
+  .map(line => line.trim())
+  .filter(Boolean)
+if (
+  aggregateLines.length !== expectedPresetImports.length
+  || aggregateLines.some((line, index) => line !== expectedPresetImports[index])
+) {
+  errors.push(
+    `styles/presets.css must import only ${expectedPresetImports.join(', ')} in order`,
+  )
+}
+
+const styleIndex = sourceAt('styles/index.ts')
+const expectedStyleImports = [
+  '@slidev/client/styles/layouts-base.css',
+  './tokens.css',
+  './base.css',
+  './layouts.css',
+  './obsidian.css',
+  './components.css',
+  './content-layouts.css',
+  './presets.css',
+  './presets/shared.css',
+]
+const actualStyleImports = [...styleIndex.matchAll(
+  /import\s+['"]([^'"]+\.css)['"]/g,
+)].map(match => match[1])
+if (
+  actualStyleImports.length !== expectedStyleImports.length
+  || actualStyleImports.some((value, index) => value !== expectedStyleImports[index])
+) {
+  errors.push('styles/index.ts must load each global theme stylesheet once in canonical order')
+}
+
+const requiredPresetTokens = [
   '--slidev-theme-primary',
   '--presentation-accent',
   '--presentation-bg',
-  '--presentation-bg-elevated',
-  '--presentation-bg-muted',
-  '--presentation-frame-bg',
   '--presentation-text',
   '--presentation-text-muted',
   '--presentation-border',
-  '--presentation-border-strong',
-  '--presentation-shadow',
-  '--presentation-scrollbar-thumb',
-  '--presentation-scrollbar-track',
   '--presentation-font-sans',
   '--presentation-font-serif',
-  '--presentation-font-body',
-  '--presentation-font-display',
-  '--presentation-font-quote',
-  '--presentation-font-label',
-  '--presentation-font-mono',
   '--presentation-slide-padding',
-  '--presentation-content-gap',
   '--presentation-body-size',
-  '--presentation-body-line-height',
-  '--presentation-list-spacing',
-  '--presentation-heading-scale',
-  '--presentation-heading-weight',
-  '--presentation-heading-letter-spacing',
-  '--presentation-heading-line-height',
-  '--presentation-table-header-bg',
-  '--presentation-table-row-alt-bg',
-  '--presentation-code-bg',
-  '--presentation-code-border',
-  '--presentation-inline-code-bg',
-  '--presentation-inline-code-border',
-  '--presentation-inline-code-shadow',
-  '--presentation-blockquote-bg',
-  '--presentation-blockquote-border',
-  '--presentation-blockquote-font-style',
-  '--presentation-callout-bg',
-  '--presentation-callout-border',
   '--presentation-callout-radius',
-  '--presentation-callout-shadow',
-  '--presentation-warning-bg',
-  '--presentation-warning-border',
-  '--presentation-warning-text',
-  '--presentation-caption-font-style',
-  '--presentation-caption-letter-spacing',
-  '--presentation-media-max-height',
   '--presentation-media-radius',
-  '--presentation-media-shadow',
-  '--presentation-statement-size',
-  '--presentation-quote-size',
-  '--presentation-quote-line-height',
-  '--presentation-reference-size',
 ]
-
-const requiredDarkTokens = [
-  '--slidev-theme-primary',
-  '--presentation-bg',
-  '--presentation-bg-elevated',
-  '--presentation-bg-muted',
-  '--presentation-frame-bg',
-  '--presentation-text',
-  '--presentation-text-muted',
-  '--presentation-border',
-  '--presentation-border-strong',
-  '--presentation-code-bg',
-  '--presentation-code-border',
-  '--presentation-inline-code-bg',
-  '--presentation-inline-code-border',
-  '--presentation-blockquote-bg',
-  '--presentation-blockquote-border',
-  '--presentation-callout-bg',
-  '--presentation-callout-border',
-  '--presentation-warning-bg',
-  '--presentation-warning-border',
-  '--presentation-warning-text',
-]
-
-const requiredVisualSurfaces = [
-  'h1',
-  'table',
-  'pre',
-  'blockquote',
-  '.obsidian-slidev-callout',
-  '.obsidian-slidev-warning',
-  '.obsidian-slidev-media__caption',
-  '.slide-frame__header',
-  '.slide-frame__footer',
-]
-
-const blocksForSelector = (css, selectorFragment) => {
-  const blocks = []
-  const blockPattern = /([^{}]+)\{([^{}]*)\}/g
-  for (const match of css.matchAll(blockPattern)) {
-    if (match[1].includes(selectorFragment)) blocks.push(match[2])
-  }
-  return blocks.join('\n')
-}
-
-const firstBlockForSelector = (css, selectorFragment) => {
-  const selectorOffset = css.indexOf(selectorFragment)
-  if (selectorOffset < 0) return ''
-  const openBrace = css.indexOf('{', selectorOffset)
-  const closeBrace = css.indexOf('}', openBrace + 1)
-  if (openBrace < 0 || closeBrace < 0) return ''
-  return css.slice(openBrace + 1, closeBrace)
-}
-
-if (!existsSync(aggregatePath)) {
-  errors.push('styles/presets.css is missing')
-} else {
-  const aggregate = readFileSync(aggregatePath, 'utf8')
-  const expectedImports = presetNames.map(name => `@import "./presets/${name}.css";`)
-  const actualImports = [...aggregate.matchAll(/@import\s+url\(["'](.+?)["']\);|@import\s+["'](.+?)["'];/g)]
-    .map(match => `@import "${match[1] ?? match[2]}";`)
-
-  if (actualImports.length !== expectedImports.length
-    || actualImports.some((value, index) => value !== expectedImports[index])) {
-    errors.push(`styles/presets.css must import only ${expectedImports.join(', ')} in that order`)
-  }
-
-  const withoutImports = aggregate
-    .replace(/@import\s+(?:url\()?["'][^"']+["']\)?\s*;/g, '')
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .trim()
-  if (withoutImports) {
-    errors.push('styles/presets.css must remain an import-only stable aggregate')
-  }
-}
 
 for (const preset of presetNames) {
-  const relativePath = `styles/presets/${preset}.css`
-  const absolutePath = resolve(repositoryRoot, relativePath)
-  if (!existsSync(absolutePath)) {
-    errors.push(`${relativePath} is missing`)
-    continue
-  }
-
-  const css = readFileSync(absolutePath, 'utf8')
+  const path = `styles/presets/${preset}.css`
+  const source = sourceAt(path)
   const anchor = `.slidev-layout[data-presentation-preset="${preset}"]`
-  if (!css.includes(anchor)) {
-    errors.push(`${relativePath} has no resolved local canvas anchor ${anchor}`)
+  if (!source.includes(anchor)) errors.push(`${path} is missing ${anchor}`)
+  for (const token of requiredPresetTokens) {
+    if (!source.includes(`${token}:`)) errors.push(`${path} is missing ${token}`)
   }
-
-  if (/(?:^|,|\})\s*(?::root|html)(?:\.dark)?\[data-presentation-preset=/m.test(css)) {
-    errors.push(`${relativePath} contains a root-authoritative preset selector`)
+  if (source.includes('!important')) errors.push(`${path} contains !important`)
+  if (/^\s*(?::root|body)\b[^{]*data-presentation-preset/m.test(source)) {
+    errors.push(`${path} contains root-authoritative preset state`)
   }
-  if (/(?:^|,|\})\s*body(?:\.[\w-]+)?\[data-presentation-preset=/m.test(css)
-    || /\[data-presentation-preset=(?:"[^"]+"|'[^']+')\]\s+\.slidev-layout/.test(css)) {
-    errors.push(`${relativePath} contains an ancestor-authoritative preset selector`)
+  if (/\.obsidian-slidev-callout__title::before/.test(source)) {
+    errors.push(`${path} overrides protected callout marker geometry`)
   }
-  if (/(?:^|,|\})\s*:root[^{]*\s+\.(?:slidev-layout|slide-frame)[^{]*\{/m.test(css)
-    && css.includes('data-presentation-preset')) {
-    errors.push(`${relativePath} contains a root-to-slide preset selector`)
+  if (/\.obsidian-slidev-callout__title[^{}]*\{[^{}]*text-transform\s*:/s.test(source)) {
+    errors.push(`${path} transforms authored callout titles`)
   }
-  if (css.includes('!important')) {
-    errors.push(`${relativePath} contains an !important isolation patch`)
-  }
-
-  const lightBlock = blocksForSelector(css, anchor)
-  const rootTokenBlock = firstBlockForSelector(css, anchor)
-  for (const token of requiredLightTokens) {
-    if (!lightBlock.includes(`${token}:`)) {
-      errors.push(`${relativePath} is missing normal/light token ${token}`)
-    }
-    const declarationCount = [
-      ...rootTokenBlock.matchAll(new RegExp(`${token.replaceAll('-', '\\-')}\\s*:`, 'g')),
-    ].length
-    if (declarationCount !== 1) {
-      errors.push(
-        `${relativePath} must declare ${token} exactly once in its root token set; found ${declarationCount}`,
-      )
-    }
-  }
-
-  const darkAnchor = `html.dark ${anchor}`
-  const darkBlock = blocksForSelector(css, darkAnchor)
-  for (const token of requiredDarkTokens) {
-    if (!darkBlock.includes(`${token}:`)) {
-      errors.push(`${relativePath} is missing dark token ${token}`)
-    }
-  }
-
-  for (const density of ['compact', 'relaxed']) {
-    const densityAnchor = `${anchor}[data-presentation-density="${density}"]`
-    const densityBlock = blocksForSelector(css, densityAnchor)
-    for (const token of [
-      '--presentation-slide-padding',
-      '--presentation-content-gap',
-      '--presentation-body-size',
-      '--presentation-list-spacing',
-      '--presentation-statement-size',
-      '--presentation-quote-size',
-      '--presentation-reference-size',
-    ]) {
-      if (!densityBlock.includes(`${token}:`)) {
-        errors.push(`${relativePath} is missing ${density} token ${token}`)
-      }
-    }
-  }
-
-  for (const surface of requiredVisualSurfaces) {
-    if (!css.includes(surface)) {
-      errors.push(`${relativePath} has no scoped visual rule for ${surface}`)
-    }
-  }
-
-  for (const match of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
+  for (const match of source.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
     const target = match[1]
     if (/^(?:data:|https?:|#)/.test(target)) continue
-    if (!existsSync(resolve(dirname(absolutePath), target))) {
-      errors.push(`${relativePath} references missing local asset ${target}`)
+    if (!existsSync(resolve(dirname(resolve(repositoryRoot, path)), target))) {
+      errors.push(`${path} references missing local asset ${target}`)
     }
   }
 }
 
-for (const file of readdirSync(resolve(repositoryRoot, 'styles'))) {
-  if (!file.endsWith('.css') || file === 'presets.css') continue
-  const relativePath = `styles/${file}`
-  const source = readFileSync(resolve(repositoryRoot, relativePath), 'utf8')
-  if (source.includes('data-presentation-preset')) {
-    errors.push(`${relativePath} contains preset rules outside styles/presets/`)
+const packageJson = JSON.parse(sourceAt('package.json'))
+const runtimeDependencies = Object.keys(packageJson.dependencies ?? {}).sort()
+if (runtimeDependencies.join(',') !== '@slidev/client') {
+  errors.push('package.json runtime dependencies must contain only @slidev/client')
+}
+if (!packageJson.files?.includes('public/obsidian-card.svg')) {
+  errors.push('package.json must ship public/obsidian-card.svg')
+}
+if (existsSync(resolve(repositoryRoot, '.npmignore'))) {
+  errors.push('package.json.files is authoritative; redundant .npmignore must be absent')
+}
+
+const packagedSourcePaths = [
+  ...['components', 'internals', 'layouts', 'setup', 'styles'].flatMap(
+    directory => filesWithin(
+      resolve(repositoryRoot, directory),
+      /\.(?:css|mjs|ts|vue)$/,
+    ),
+  ),
+]
+const fixtureOnlyPattern = /data-quality|\.presentation-[\w-]*(?:gallery|probe)\b/
+const converterDependencyPattern = /markdown-it|remark|rehype|unified|obsidian(?:-|_)parser/i
+for (const absolutePath of packagedSourcePaths) {
+  const path = relative(repositoryRoot, absolutePath)
+  const source = readFileSync(absolutePath, 'utf8')
+  if (fixtureOnlyPattern.test(source)) {
+    errors.push(`${path} contains fixture-only data-quality, gallery, or probe behavior`)
+  }
+  if (path.startsWith('setup/') && converterDependencyPattern.test(source)) {
+    errors.push(`${path} crosses the converter boundary`)
+  }
+  if (path.endsWith('.vue') && /<style\s+src=/.test(source)) {
+    errors.push(`${path} injects a global stylesheet instead of using styles/index.ts`)
   }
 }
 
-for (const directory of ['components', 'layouts']) {
-  const absoluteDirectory = resolve(repositoryRoot, directory)
-  for (const file of readdirSync(absoluteDirectory)) {
-    if (!file.endsWith('.vue')) continue
-    const lowerName = file.toLowerCase()
-    const presetSpecific = presetNames.some(preset => lowerName.includes(preset))
-    const frameOrLayout = lowerName.includes('frame')
-      || (directory === 'layouts' && lowerName !== 'default.vue')
-    if (presetSpecific && frameOrLayout) {
-      errors.push(`${directory}/${file} is a forbidden preset-specific frame/layout component`)
+const obsidianCss = sourceAt('styles/obsidian.css')
+if (/\.obsidian-slidev-callout--[\w-]+/.test(obsidianCss)) {
+  errors.push('styles/obsidian.css duplicates the TypeScript callout type-to-family registry')
+}
+for (const family of ['info', 'positive', 'caution', 'danger', 'question', 'quotation']) {
+  if (!obsidianCss.includes(`[data-callout-family="${family}"]`)) {
+    errors.push(`styles/obsidian.css is missing ${family} family state`)
+  }
+}
+
+const taskLists = sourceAt('setup/task-lists.ts')
+if (/\.slidev-layout\s+li\s*>\s*input\[type=["']checkbox["']\]/.test(taskLists)) {
+  errors.push('setup/task-lists.ts captures ordinary list checkboxes')
+}
+const frame = sourceAt('components/SlideFrame.vue')
+const presentationConfig = sourceAt('setup/presentation-config.ts')
+if (/data-presentation-brand-safe-zone/.test(frame) || /\bbrandSafeZone\b/.test(presentationConfig)) {
+  errors.push('brand safe-zone DOM state is dead; CSS token ownership is required')
+}
+
+const maximumShippedAssetBytes = 250 * 1024
+for (const directory of ['assets/ICT', 'assets/UCAS']) {
+  for (const path of filesWithin(resolve(repositoryRoot, directory))) {
+    const bytes = statSync(path).size
+    if (bytes > maximumShippedAssetBytes) {
+      errors.push(
+        `${relative(repositoryRoot, path)} is ${bytes} bytes; maximum is ${maximumShippedAssetBytes}`,
+      )
     }
   }
 }
 
 if (errors.length > 0) {
-  console.error(`Presentation CSS architecture check failed (${errors.length} issue${errors.length === 1 ? '' : 's'}):`)
+  console.error(
+    `Presentation source architecture check failed (${errors.length} issue${errors.length === 1 ? '' : 's'}):`,
+  )
   for (const error of errors) console.error(`- ${error}`)
   process.exitCode = 1
 } else {
-  console.log('Presentation CSS architecture check passed for default, UCAS, and ICT.')
+  console.log('Presentation source architecture check passed.')
 }

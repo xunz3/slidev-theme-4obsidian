@@ -13,7 +13,10 @@ import {
 } from './visual-baselines.mjs'
 import { qualityArtifactRoot, repositoryRoot } from './helpers.mjs'
 
-test('reviewed DPR-2 visual references remain within fixed tolerance', { timeout: 240_000 }, async (t) => {
+test('reviewed DPR-2 visual references remain within fixed tolerance', {
+  concurrency: 2,
+  timeout: 240_000,
+}, async (t) => {
   const manifest = JSON.parse(
     await readFile(visualBaselineManifestPath, 'utf8'),
   )
@@ -37,10 +40,11 @@ test('reviewed DPR-2 visual references remain within fixed tolerance', { timeout
   const { browser, context } = await createVisualBrowser()
   const differenceDirectory = resolve(qualityArtifactRoot, 'diffs/visual')
   await mkdir(differenceDirectory, { recursive: true })
+  const subtests = []
 
   try {
     for (const scenario of manifest.scenarios) {
-      await t.test(scenario.id, async () => {
+      subtests.push(t.test(scenario.id, async () => {
         const page = await context.newPage()
         try {
           const actual = await captureVisualScenario(
@@ -67,8 +71,18 @@ test('reviewed DPR-2 visual references remain within fixed tolerance', { timeout
               manifest.tolerance,
             )
           try {
-            assert.equal(comparison.width, manifest.viewport.rasterWidth)
-            assert.equal(comparison.height, manifest.viewport.rasterHeight)
+            const logicalWidth = scenario.viewport?.width
+              ?? manifest.viewport.logicalWidth
+            const logicalHeight = scenario.viewport?.height
+              ?? manifest.viewport.logicalHeight
+            assert.equal(
+              comparison.width,
+              logicalWidth * manifest.viewport.deviceScaleFactor,
+            )
+            assert.equal(
+              comparison.height,
+              logicalHeight * manifest.viewport.deviceScaleFactor,
+            )
             assert.ok(
               comparison.changedPixelRatio
                 <= manifest.tolerance.maximumChangedPixelRatio,
@@ -110,8 +124,9 @@ test('reviewed DPR-2 visual references remain within fixed tolerance', { timeout
         } finally {
           await page.close()
         }
-      })
+      }))
     }
+    await Promise.allSettled(subtests)
   } finally {
     await context.close()
     await browser.close()

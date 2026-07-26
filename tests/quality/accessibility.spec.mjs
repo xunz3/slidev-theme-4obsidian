@@ -228,8 +228,10 @@ const inspectScenario = async ({
   mode,
   preset,
   slide,
+  viewport,
 }) => {
   const page = await browserContext.newPage()
+  if (viewport) await page.setViewportSize(viewport)
   const runtimeErrors = []
   const ignoredRuntimeEvents = []
   page.on('console', (message) => {
@@ -303,7 +305,86 @@ const inspectScenario = async ({
   }
 }
 
-test('WCAG, layout, image, console, and interaction contract', { timeout: 240_000 }, async (t) => {
+const assertSequenceAccessibility = async ({
+  caseId,
+  itemCount,
+  kind,
+  page,
+  slide,
+}) => {
+  const selector = `.slidev-page-${slide} .presentation-${kind}`
+  const sequence = page.locator(selector)
+  assert.equal(await sequence.count(), 1, `${caseId}: sequence root`)
+  assert.equal(
+    await sequence.locator('[role], [tabindex]').count(),
+    0,
+    `${caseId}: decorative sequence controls`,
+  )
+  const state = await sequence.evaluate((root) => {
+    const list = root.querySelector(':scope > ol')
+    if (!list) return { itemCount: 0, list: null, items: [] }
+    const items = [...list.querySelectorAll(':scope > li')].map((item) => {
+      const style = getComputedStyle(item)
+      const rect = item.getBoundingClientRect()
+      return {
+        after: getComputedStyle(item, '::after').content,
+        before: getComputedStyle(item, '::before').content,
+        borderLeftWidth: style.borderLeftWidth,
+        clientWidth: item.clientWidth,
+        listStyleType: style.listStyleType,
+        rectWidth: rect.width,
+        scrollWidth: item.scrollWidth,
+      }
+    })
+    return {
+      itemCount: items.length,
+      items,
+      list: {
+        role: list.getAttribute('role'),
+        tagName: list.tagName.toLowerCase(),
+      },
+    }
+  })
+  assert.equal(state.itemCount, itemCount, `${caseId}: item count`)
+  if (itemCount === 0) {
+    assert.equal(state.list, null, `${caseId}: zero-item list`)
+    return
+  }
+  assert.deepEqual(
+    state.list,
+    { role: null, tagName: 'ol' },
+    `${caseId}: ordered-list semantics`,
+  )
+  assert.ok(state.items.every(item => (
+    item.listStyleType === 'none'
+    && item.before !== 'none'
+    && item.scrollWidth <= item.clientWidth + 1
+    && item.rectWidth > 0
+  )), `${caseId}: node semantics/overflow ${JSON.stringify(state)}`)
+  assert.equal(
+    state.items.filter(item => item.after !== 'none').length,
+    Math.max(0, itemCount - 1),
+    `${caseId}: adjacent connectors`,
+  )
+  assert.equal(
+    state.items.at(-1).after,
+    'none',
+    `${caseId}: orphan final connector`,
+  )
+  if (kind === 'timeline') {
+    assert.ok(
+      state.items.every(item => item.borderLeftWidth === '0px'),
+      `${caseId}: doubled Timeline rail ${JSON.stringify(state)}`,
+    )
+  }
+}
+
+test('WCAG, layout, image, console, and interaction contract', {
+  concurrency: 3,
+  timeout: 240_000,
+}, async (t) => {
+  const focus = process.env.PRESENTATION_ACCESSIBILITY_FOCUS?.trim() ?? ''
+  const isFocusedCase = caseId => !focus || caseId.includes(focus)
   const externalContext = readQualityBuildContext()
   const fallback = externalContext ? null : await createFallbackContext()
   const builds = externalContext ?? fallback.builds
@@ -344,6 +425,7 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
       })
     }
   })
+  const subtests = []
 
   try {
     for (const preset of presets) {
@@ -351,7 +433,8 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
       for (const mode of modes) {
         for (const [layout, definition] of Object.entries(layoutSlides)) {
           const caseId = `${preset}-${layout}-${mode}`
-          await t.test(caseId, async () => {
+          if (!isFocusedCase(caseId)) continue
+          subtests.push(t.test(caseId, async () => {
             const result = await inspectScenario({
               axeDirectory,
               baseUrl,
@@ -363,21 +446,67 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
               slide: definition.slide,
             })
             await result.page.close()
-          })
+          }))
         }
       }
     }
 
     const us1Scenarios = [
       {
+        family: 'info',
         marker: 'us1-callouts-info',
-        name: 'callouts',
+        name: 'callout-info',
         slide: 3,
+      },
+      {
+        family: 'positive',
+        marker: 'us1-callouts-positive',
+        name: 'callout-positive',
+        slide: 4,
+      },
+      {
+        family: 'caution',
+        marker: 'us1-callouts-caution',
+        name: 'callout-caution',
+        slide: 5,
+      },
+      {
+        family: 'danger',
+        marker: 'us1-callouts-danger',
+        name: 'callout-danger',
+        slide: 6,
+      },
+      {
+        family: 'question',
+        marker: 'us1-callouts-question',
+        name: 'callout-question',
+        slide: 7,
+      },
+      {
+        family: 'quotation',
+        marker: 'us1-callouts-quotation',
+        name: 'callout-quotation',
+        slide: 8,
       },
       {
         marker: 'us1-callout-fallbacks',
         name: 'callout-rich-long-bilingual',
         slide: 9,
+      },
+      {
+        marker: 'visual-callout-authored-compact',
+        name: 'callout-authored-compact',
+        slide: 52,
+      },
+      {
+        marker: 'visual-links-authors',
+        name: 'links-authors',
+        slide: 53,
+      },
+      {
+        marker: 'visual-badge-matrix',
+        name: 'badge-matrix',
+        slide: 54,
       },
       {
         marker: 'us1-figures-alternatives',
@@ -390,13 +519,18 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
         slide: 13,
       },
       {
+        marker: 'us2-end-minimal',
+        name: 'coherent-closing-minimal',
+        slide: 14,
+      },
+      {
         marker: 'us2-closing-metadata',
-        name: 'us2-closing-metadata',
+        name: 'coherent-closing-rich',
         slide: 16,
       },
       {
         marker: 'us2-closing-failed-logo',
-        name: 'us2-closing-failed-logo',
+        name: 'coherent-closing-failed',
         slide: 18,
       },
       {
@@ -413,6 +547,31 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
         marker: 'us2-image-bilingual',
         name: 'us2-image-bilingual',
         slide: 25,
+      },
+      {
+        marker: 'visual-media-figure-fits',
+        name: 'visual-media-figure-fits',
+        slide: 45,
+      },
+      {
+        marker: 'visual-image-left-contain',
+        name: 'visual-image-left-contain',
+        slide: 46,
+      },
+      {
+        marker: 'visual-image-right-contain',
+        name: 'visual-image-right-contain',
+        slide: 48,
+      },
+      {
+        marker: 'visual-closing-logo-wide',
+        name: 'visual-closing-logo-wide',
+        slide: 50,
+      },
+      {
+        marker: 'visual-closing-logo-tall',
+        name: 'visual-closing-logo-tall',
+        slide: 51,
       },
       {
         marker: 'us3-accent-local-a',
@@ -440,14 +599,53 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
         slide: 33,
       },
       {
+        itemCount: 0,
+        marker: 'us4-steps-zero',
+        name: 'sequence-steps-zero',
+        sequenceKind: 'steps',
+        slide: 34,
+      },
+      {
+        itemCount: 1,
+        marker: 'us4-steps-one',
+        name: 'sequence-steps-one',
+        sequenceKind: 'steps',
+        slide: 35,
+      },
+      {
+        itemCount: 4,
         marker: 'us4-steps-many',
-        name: 'us4-steps-many',
+        name: 'sequence-steps-many',
+        sequenceKind: 'steps',
         slide: 36,
       },
       {
+        itemCount: 0,
+        marker: 'us4-timeline-zero',
+        name: 'sequence-timeline-zero',
+        sequenceKind: 'timeline',
+        slide: 37,
+      },
+      {
+        itemCount: 1,
+        marker: 'us4-timeline-one',
+        name: 'sequence-timeline-one',
+        sequenceKind: 'timeline',
+        slide: 38,
+      },
+      {
+        itemCount: 4,
         marker: 'us4-timeline-many',
-        name: 'us4-timeline-many',
+        name: 'sequence-timeline-many',
+        sequenceKind: 'timeline',
         slide: 39,
+      },
+      {
+        itemCount: 6,
+        marker: 'visual-sequences-custom',
+        name: 'sequence-custom',
+        sequenceKind: 'combined',
+        slide: 55,
       },
       {
         marker: 'us4-status-labels',
@@ -474,13 +672,29 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
         name: 'us5-highlights',
         slide: 44,
       },
+      {
+        marker: 'visual-chrome-safe-zone',
+        name: 'coherent-chrome',
+        slide: 56,
+      },
+      {
+        marker: 'visual-bilingual-heading',
+        name: 'coherent-bilingual',
+        slide: 57,
+      },
+      {
+        marker: 'visual-brand-collision',
+        name: 'coherent-brand-collision',
+        slide: 58,
+      },
     ]
     for (const preset of presets) {
       const baseUrl = builds[`expanded-${preset}`].baseUrl
       for (const mode of modes) {
         for (const definition of us1Scenarios) {
           const caseId = `${preset}-us1-${definition.name}-${mode}`
-          await t.test(caseId, async () => {
+          if (!isFocusedCase(caseId)) continue
+          subtests.push(t.test(caseId, async () => {
             const result = await inspectScenario({
               axeDirectory,
               baseUrl,
@@ -491,22 +705,84 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
               preset,
               slide: definition.slide,
             })
-            if (definition.name === 'callouts') {
-              const cue = await result.page.locator(
-                '.obsidian-slidev-callout__title',
-              ).first().evaluate((element) => {
-                const callout = element.closest('.obsidian-slidev-callout')
-                const calloutStyle = getComputedStyle(callout)
-                const markerStyle = getComputedStyle(element, '::before')
-                return {
-                  borderLeftWidth: calloutStyle.borderLeftWidth,
-                  markerHeight: markerStyle.height,
-                  markerWidth: markerStyle.width,
-                }
-              })
-              assert.notEqual(cue.borderLeftWidth, '0px')
-              assert.notEqual(cue.markerHeight, '0px')
-              assert.notEqual(cue.markerWidth, '0px')
+            if (definition.name.startsWith('callout-')) {
+              const callouts = result.page.locator(
+                `.slidev-page-${definition.slide} .obsidian-slidev-callout`,
+              )
+              const cues = await callouts.evaluateAll(elements => elements.map(
+                (callout) => {
+                  const title = callout.querySelector(
+                    '.obsidian-slidev-callout__title',
+                  )
+                  const content = callout.querySelector(
+                    '.obsidian-slidev-callout__content',
+                  )
+                  const calloutStyle = getComputedStyle(callout)
+                  const titleStyle = getComputedStyle(title)
+                  const markerStyle = getComputedStyle(title, '::before')
+                  const markerWidth = Number.parseFloat(markerStyle.width)
+                  const markerHeight = Number.parseFloat(markerStyle.height)
+                  const markerBorder = Number.parseFloat(
+                    markerStyle.borderTopWidth,
+                  )
+                  const transparentMarker = markerStyle.backgroundColor
+                    === 'rgba(0, 0, 0, 0)'
+                  const markerShape = markerStyle.clipPath !== 'none'
+                    ? 'triangle'
+                    : markerBorder > 0 && transparentMarker
+                      ? 'ring'
+                      : markerWidth < markerHeight * 0.6
+                        ? 'bar'
+                        : markerStyle.transform !== 'none'
+                          ? 'diamond'
+                          : Number.parseFloat(markerStyle.borderRadius) <= 2
+                            ? 'square'
+                            : 'circle'
+                  return {
+                    labelled: callout.getAttribute('aria-labelledby')
+                      === title?.id,
+                    markerColor: callout.dataset.calloutFamily === 'question'
+                      ? markerStyle.borderTopColor
+                      : markerStyle.backgroundColor,
+                    markerHeight,
+                    markerShape,
+                    markerWidth,
+                    order: [
+                      ...callout.children,
+                    ].map(child => child.className),
+                    role: callout.getAttribute('role'),
+                    surfaceColor: calloutStyle.backgroundColor,
+                    titleColor: titleStyle.color,
+                    titleTransform: titleStyle.textTransform,
+                    contentAfterTitle: Boolean(
+                      title && content
+                      && (title.compareDocumentPosition(content)
+                        & Node.DOCUMENT_POSITION_FOLLOWING),
+                    ),
+                  }
+                },
+              ))
+              assert.ok(cues.length > 0)
+              assert.ok(cues.every(cue => cue.labelled && cue.role === 'note'))
+              assert.ok(cues.every(cue => cue.contentAfterTitle))
+              assert.ok(cues.every(cue => cue.titleTransform === 'none'))
+              assert.ok(cues.every(cue => (
+                cue.markerHeight > 0
+                && cue.markerWidth > 0
+                && cue.markerColor !== cue.surfaceColor
+                && cue.titleColor !== cue.surfaceColor
+              )))
+              if (definition.family) {
+                const expectedShape = {
+                  caution: 'triangle',
+                  danger: 'square',
+                  info: 'circle',
+                  positive: 'diamond',
+                  question: 'ring',
+                  quotation: 'bar',
+                }[definition.family]
+                assert.ok(cues.every(cue => cue.markerShape === expectedShape))
+              }
             }
             if (definition.name === 'figure-alternatives') {
               const alternatives = await result.page.locator(
@@ -548,7 +824,61 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
               assert.notEqual(focus.outlineStyle, 'none')
               assert.notEqual(focus.outlineWidth, '0px')
             }
-            if (definition.name === 'us2-closing-metadata') {
+            if (definition.name === 'links-authors') {
+              const links = result.page.locator(
+                `.slidev-page-${definition.slide} a[href]`,
+              )
+              assert.ok(await links.count() >= 6)
+              for (let index = 0; index < await links.count(); index += 1) {
+                const link = links.nth(index)
+                await link.focus()
+                const style = await link.evaluate((element) => {
+                  const computed = getComputedStyle(element)
+                  return {
+                    borderBottomWidth: computed.borderBottomWidth,
+                    outlineStyle: computed.outlineStyle,
+                    outlineWidth: computed.outlineWidth,
+                    textDecorationLine: computed.textDecorationLine,
+                  }
+                })
+                assert.equal(style.borderBottomWidth, '0px')
+                assert.match(style.textDecorationLine, /\bunderline\b/)
+                assert.notEqual(style.outlineStyle, 'none')
+                assert.notEqual(style.outlineWidth, '0px')
+              }
+              const cards = await result.page.locator(
+                `.slidev-page-${definition.slide} .presentation-author`,
+              ).evaluateAll(elements => elements.map((card) => {
+                const values = [...card.querySelectorAll(
+                  '.presentation-author__primary, .presentation-author__institution, .presentation-author__email',
+                )].map(element => element.textContent?.trim() ?? '')
+                return {
+                  mailtoCount: card.querySelectorAll('a[href^="mailto:"]').length,
+                  uniqueValues: new Set(values).size,
+                  values,
+                }
+              }))
+              assert.equal(cards.length, 9)
+              assert.ok(cards.every(card => (
+                card.values.length === card.uniqueValues
+                && card.mailtoCount <= 1
+              )))
+              assert.deepEqual(
+                cards.map(card => card.values[0]),
+                [
+                  'Ada Lovelace',
+                  'Grace Hopper',
+                  'Institute for Reproducible Research',
+                  'contributor@example.org',
+                  'not-an-email',
+                  'Equal Value',
+                  'Duplicate Fields',
+                  'Intentional Duplicate',
+                  'Intentional Duplicate',
+                ],
+              )
+            }
+            if (definition.name === 'coherent-closing-rich') {
               const contact = result.page.locator(
                 '.presentation-closing__contact[href^="mailto:"]',
               )
@@ -562,6 +892,61 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
               })
               assert.notEqual(style.outlineStyle, 'none')
               assert.notEqual(style.outlineWidth, '0px')
+            }
+            if (definition.name.startsWith('coherent-closing-')) {
+              const closing = result.page.locator(
+                `.slidev-page-${definition.slide} .presentation-closing`,
+              )
+              const expectedState = definition.name === 'coherent-closing-minimal'
+                ? 'minimal'
+                : 'rich'
+              assert.equal(
+                await closing.getAttribute('data-closing-state'),
+                expectedState,
+              )
+              assert.ok(
+                (await closing.getAttribute('class'))
+                  .includes(`presentation-closing--${expectedState}`),
+              )
+              if (definition.name === 'coherent-closing-minimal') {
+                assert.deepEqual(
+                  await closing.locator(':scope > *').evaluateAll(
+                    elements => elements.map(element => element.className),
+                  ),
+                  ['presentation-closing__message'],
+                )
+              } else {
+                assert.equal(
+                  await closing.locator(
+                    '.presentation-closing-logo:is(a, button), .presentation-closing-logo [tabindex]',
+                  ).count(),
+                  0,
+                )
+                const sourceOrder = await closing.locator(
+                  ':scope > *',
+                ).evaluateAll(elements => elements.map(
+                  element => element.className,
+                ))
+                assert.deepEqual(
+                  sourceOrder.map(className => (
+                    className.split(/\s+/).find(value => (
+                      value.startsWith('presentation-closing__')
+                    ))
+                  )),
+                  definition.name === 'coherent-closing-rich'
+                    ? [
+                        'presentation-closing__message',
+                        'presentation-closing__contact',
+                        'presentation-closing__authors',
+                        'presentation-closing__logo',
+                      ]
+                    : [
+                        'presentation-closing__message',
+                        'presentation-closing__contact',
+                        'presentation-closing__logo',
+                      ],
+                )
+              }
             }
             if (definition.name.startsWith('us2-image-')) {
               assert.deepEqual(
@@ -577,12 +962,55 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
                 ],
               )
             }
+            if (definition.name.startsWith('visual-image-')
+              || definition.name === 'visual-media-figure-fits') {
+              const figures = result.page.locator(
+                `.slidev-page-${definition.slide} .obsidian-slidev-media`,
+              )
+              assert.ok(await figures.count() > 0)
+              assert.ok(await figures.evaluateAll(elements => elements.every(
+                element => ['contain', 'cover'].includes(
+                  element.getAttribute('data-media-fit'),
+                ),
+              )))
+            }
+            if (definition.name.startsWith('visual-closing-logo-')) {
+              const logo = result.page.locator(
+                `.slidev-page-${definition.slide} .presentation-closing-logo`,
+              )
+              assert.equal(await logo.count(), 1)
+              assert.equal(await logo.locator('[role="img"] img').count(), 0)
+              assert.equal(
+                await result.page.locator(
+                  `.slidev-page-${definition.slide} .presentation-closing__logo.obsidian-slidev-media`,
+                ).count(),
+                0,
+              )
+            }
             if (definition.name === 'us4-status-labels') {
               const labels = result.page.locator(
                 `.slidev-page-${definition.slide} :is(.presentation-tag, .presentation-badge)`,
               )
               assert.equal(await labels.count(), 4)
               assert.equal(await labels.locator('[role], [tabindex]').count(), 0)
+            }
+            if (definition.name === 'badge-matrix') {
+              const badges = result.page.locator(
+                `.slidev-page-${definition.slide} .presentation-badge`,
+              )
+              assert.equal(await badges.count(), 16)
+              assert.equal(
+                await badges.locator('[role], [tabindex]').count(),
+                0,
+              )
+              const markers = badges.locator('.presentation-badge__marker')
+              assert.equal(await markers.count(), 4)
+              assert.ok(await markers.evaluateAll(elements => elements.every(
+                marker => marker.getAttribute('aria-hidden') === 'true',
+              )))
+              assert.ok(await badges.evaluateAll(elements => elements.every(
+                badge => badge.scrollWidth <= badge.clientWidth + 1,
+              )))
             }
             if (definition.name === 'us4-keyboard') {
               const keys = result.page.locator(
@@ -596,6 +1024,32 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
                 ).count(),
                 0,
               )
+            }
+            if (definition.name.startsWith('sequence-')) {
+              if (definition.sequenceKind === 'combined') {
+                await assertSequenceAccessibility({
+                  caseId,
+                  itemCount: 3,
+                  kind: 'steps',
+                  page: result.page,
+                  slide: definition.slide,
+                })
+                await assertSequenceAccessibility({
+                  caseId,
+                  itemCount: 3,
+                  kind: 'timeline',
+                  page: result.page,
+                  slide: definition.slide,
+                })
+              } else {
+                await assertSequenceAccessibility({
+                  caseId,
+                  itemCount: definition.itemCount,
+                  kind: definition.sequenceKind,
+                  page: result.page,
+                  slide: definition.slide,
+                })
+              }
             }
             if (definition.name.startsWith('us5-tasks-')) {
               const tasks = result.page.locator(
@@ -616,6 +1070,7 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
               const cues = await tasks.evaluateAll(inputs => inputs.map(
                 (input) => {
                   const item = input.closest('li')
+                  const itemStyle = getComputedStyle(item)
                   return {
                     checked: input.checked,
                     checkedCue: item
@@ -624,18 +1079,32 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
                     emptyCue: item
                       ? getComputedStyle(item, '::before').borderStyle
                       : 'none',
+                    fontWeight: Number.parseInt(itemStyle.fontWeight, 10),
                   }
                 },
               ))
               assert.ok(cues.every(cue => cue.emptyCue !== 'none'))
               assert.ok(cues.filter(cue => cue.checked)
                 .every(cue => cue.checkedCue !== 'none'))
+              assert.ok(cues.filter(cue => cue.checked)
+                .every(cue => cue.fontWeight <= 400))
+              assert.ok(cues.filter(cue => !cue.checked)
+                .every(cue => cue.fontWeight >= 600))
             }
             if (definition.name === 'us5-highlights') {
               const proseHighlights = result.page.locator(
                 `.slidev-page-${definition.slide} [data-highlight-case]`,
               )
               assert.equal(await proseHighlights.count(), 2)
+              assert.ok(await proseHighlights.evaluateAll(elements => (
+                elements.every((element) => {
+                  const style = getComputedStyle(element)
+                  return style.borderWidth === '0px'
+                    && style.borderRadius === '0px'
+                    && style.boxShadow === 'none'
+                    && element.tabIndex < 0
+                })
+              )))
               const codeHighlights = result.page.locator(
                 `.slidev-page-${definition.slide} [data-highlight-code-scope] :is(mark, .obsidian-slidev-highlight)`,
               )
@@ -643,12 +1112,214 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
                 elements.every((element) => {
                   const style = getComputedStyle(element)
                   return style.backgroundColor === 'rgba(0, 0, 0, 0)'
-                    && style.borderBottomWidth === '0px'
+                    && style.borderWidth === '0px'
+                    && style.borderRadius === '0px'
+                    && style.boxShadow === 'none'
+                    && style.padding === '0px'
                 })
               )))
             }
+            if (definition.name === 'coherent-bilingual') {
+              const separators = await result.page.locator(
+                `.slidev-page-${definition.slide} [data-quality-case="visual-bilingual-heading"] :is(h1, h2)`,
+              ).evaluateAll(headings => headings.flatMap((heading) => {
+                const walker = document.createTreeWalker(
+                  heading,
+                  NodeFilter.SHOW_TEXT,
+                )
+                const values = []
+                let node
+                while ((node = walker.nextNode())) {
+                  for (
+                    let index = node.data.indexOf('·');
+                    index >= 0;
+                    index = node.data.indexOf('·', index + 1)
+                  ) {
+                    values.push(node.data[index - 1])
+                  }
+                }
+                return values
+              }))
+              assert.ok(separators.length >= 2)
+              assert.ok(separators.every(value => value === '\u00a0'))
+            }
+            if (definition.name === 'coherent-brand-collision') {
+              const collisions = await result.page.locator(
+                `.slidev-page-${definition.slide} .slide-frame`,
+              ).evaluate((frame) => {
+                const visible = (element) => {
+                  if (!element) return false
+                  const style = getComputedStyle(element)
+                  const rect = element.getBoundingClientRect()
+                  return style.display !== 'none'
+                    && style.visibility !== 'hidden'
+                    && rect.width > 0
+                    && rect.height > 0
+                }
+                const rect = (element) => {
+                  const bounds = element.getBoundingClientRect()
+                  return {
+                    bottom: bounds.bottom,
+                    left: bounds.left,
+                    right: bounds.right,
+                    top: bounds.top,
+                  }
+                }
+                const overlaps = (left, right) => !(
+                  left.right <= right.left
+                  || left.left >= right.right
+                  || left.bottom <= right.top
+                  || left.top >= right.bottom
+                )
+                const mark = [...frame.querySelectorAll(
+                  '.slide-frame__ucas-wordmark, .slide-frame__ict-mark',
+                )].find(visible)
+                if (!mark) return []
+                const markRect = rect(mark)
+                return [...frame.querySelectorAll(
+                  '[data-quality-case="visual-brand-collision"] :is(h1, figure, figcaption, a, button)',
+                )]
+                  .filter(visible)
+                  .filter(element => overlaps(markRect, rect(element)))
+                  .map(element => element.tagName.toLowerCase())
+              })
+              assert.deepEqual(collisions, [])
+            }
             await result.page.close()
-          })
+          }))
+        }
+      }
+    }
+
+    for (const preset of presets) {
+      for (const mode of modes) {
+        for (const definition of [
+          {
+            marker: 'visual-media-figure-fits',
+            name: 'media',
+            slide: 45,
+          },
+          {
+            marker: 'visual-image-left-contain',
+            name: 'image-left',
+            slide: 46,
+          },
+          {
+            marker: 'visual-closing-logo-wide',
+            name: 'closing-wide',
+            slide: 50,
+          },
+          {
+            marker: 'us2-end-minimal',
+            name: 'coherent-closing-minimal',
+            slide: 14,
+          },
+          {
+            marker: 'us2-closing-metadata',
+            name: 'coherent-closing-rich',
+            slide: 16,
+          },
+          {
+            marker: 'visual-bilingual-heading',
+            name: 'coherent-bilingual',
+            slide: 57,
+          },
+          {
+            marker: 'visual-brand-collision',
+            name: 'coherent-brand-collision',
+            slide: 58,
+          },
+          {
+            itemCount: 4,
+            marker: 'us4-steps-many',
+            name: 'sequence-steps-many',
+            sequenceKind: 'steps',
+            slide: 36,
+          },
+          {
+            itemCount: 4,
+            marker: 'us4-timeline-many',
+            name: 'sequence-timeline-many',
+            sequenceKind: 'timeline',
+            slide: 39,
+          },
+        ]) {
+          const compactCaseId = `${preset}-compact-${definition.name}-${mode}`
+          if (!isFocusedCase(compactCaseId)) continue
+          subtests.push(t.test(compactCaseId, async () => {
+            const result = await inspectScenario({
+              axeDirectory,
+              baseUrl: builds[`expanded-${preset}`].baseUrl,
+              browserContext,
+              caseId: compactCaseId,
+              marker: definition.marker,
+              mode,
+              preset,
+              slide: definition.slide,
+              viewport: { height: 405, width: 720 },
+            })
+            if (definition.name.startsWith('sequence-')) {
+              await assertSequenceAccessibility({
+                caseId: compactCaseId,
+                itemCount: definition.itemCount,
+                kind: definition.sequenceKind,
+                page: result.page,
+                slide: definition.slide,
+              })
+            }
+            if (definition.name.startsWith('coherent-closing-')) {
+              const expectedState = definition.name.endsWith('-minimal')
+                ? 'minimal'
+                : 'rich'
+              assert.equal(
+                await result.page.locator(
+                  `.slidev-page-${definition.slide} .presentation-closing`,
+                ).getAttribute('data-closing-state'),
+                expectedState,
+              )
+            }
+            if (definition.name === 'coherent-bilingual') {
+              assert.ok(await result.page.locator(
+                `.slidev-page-${definition.slide} [data-quality-case="visual-bilingual-heading"] :is(h1, h2)`,
+              ).evaluateAll(headings => headings.every(
+                heading => heading.textContent.includes('\u00a0· '),
+              )))
+            }
+            if (definition.name === 'coherent-brand-collision') {
+              const collisionCount = await result.page.locator(
+                `.slidev-page-${definition.slide} .slide-frame`,
+              ).evaluate((frame) => {
+                const visible = (element) => {
+                  if (!element) return false
+                  const style = getComputedStyle(element)
+                  const rect = element.getBoundingClientRect()
+                  return style.display !== 'none'
+                    && style.visibility !== 'hidden'
+                    && rect.width > 0
+                    && rect.height > 0
+                }
+                const mark = [...frame.querySelectorAll(
+                  '.slide-frame__ucas-wordmark, .slide-frame__ict-mark',
+                )].find(visible)
+                if (!mark) return 0
+                const markRect = mark.getBoundingClientRect()
+                return [...frame.querySelectorAll(
+                  '[data-quality-case="visual-brand-collision"] :is(h1, figure, figcaption, a, button)',
+                )].filter((element) => {
+                  if (!visible(element)) return false
+                  const rect = element.getBoundingClientRect()
+                  return !(
+                    markRect.right <= rect.left
+                    || markRect.left >= rect.right
+                    || markRect.bottom <= rect.top
+                    || markRect.top >= rect.bottom
+                  )
+                }).length
+              })
+              assert.equal(collisionCount, 0)
+            }
+            await result.page.close()
+          }))
         }
       }
     }
@@ -657,8 +1328,59 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
       { caseId: 'protocol-callouts-light', marker: null, mode: 'light', slide: 5 },
       { caseId: 'protocol-callouts-dark', marker: null, mode: 'dark', slide: 5 },
       { caseId: 'protocol-warnings-light', marker: null, mode: 'light', slide: 8 },
+      {
+        caseId: 'protocol-link-forms-light',
+        marker: 'protocol-link-forms',
+        mode: 'light',
+        slide: 28,
+      },
+      {
+        caseId: 'protocol-link-forms-dark',
+        marker: 'protocol-link-forms',
+        mode: 'dark',
+        slide: 28,
+      },
+      {
+        caseId: 'protocol-coherent-generated-states-light',
+        marker: 'protocol-generated-image-states',
+        mode: 'light',
+        slide: 26,
+      },
+      {
+        caseId: 'protocol-coherent-generated-states-dark',
+        marker: 'protocol-generated-image-states',
+        mode: 'dark',
+        slide: 26,
+      },
+      {
+        caseId: 'protocol-coherent-generated-equivalence-light',
+        marker: 'protocol-image-equivalence',
+        mode: 'light',
+        slide: 27,
+      },
+      {
+        caseId: 'protocol-coherent-generated-equivalence-dark',
+        marker: 'protocol-image-equivalence',
+        mode: 'dark',
+        slide: 27,
+      },
+      {
+        caseId: 'protocol-coherent-generated-states-compact-light',
+        marker: 'protocol-generated-image-states',
+        mode: 'light',
+        slide: 26,
+        viewport: { height: 405, width: 720 },
+      },
+      {
+        caseId: 'protocol-coherent-generated-states-compact-dark',
+        marker: 'protocol-generated-image-states',
+        mode: 'dark',
+        slide: 26,
+        viewport: { height: 405, width: 720 },
+      },
     ]) {
-      await t.test(definition.caseId, async () => {
+      if (!isFocusedCase(definition.caseId)) continue
+      subtests.push(t.test(definition.caseId, async () => {
         const result = await inspectScenario({
           axeDirectory,
           baseUrl: builds.protocol.baseUrl,
@@ -671,17 +1393,77 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
             await result.page.locator('.obsidian-slidev-callout').count() >= 3,
             `${definition.caseId}: generated callouts`,
           )
-        } else {
+        } else if (definition.slide === 8) {
           assert.ok(
             await result.page.locator('.obsidian-slidev-warning').count() > 0,
             `${definition.caseId}: generated warning`,
           )
+        } else if (definition.slide === 26) {
+          const figures = result.page.locator(
+            '[data-quality-case="protocol-generated-image-states"] > figure',
+          )
+          assert.equal(await figures.count(), 4)
+          assert.deepEqual(
+            await figures.evaluateAll(elements => elements.map(
+              element => element.getAttribute('data-media-state'),
+            )),
+            ['ready', 'ready', 'ready', 'failed'],
+          )
+          assert.equal(
+            await figures.nth(2).locator(
+              '.obsidian-slidev-media__fallback',
+            ).count(),
+            0,
+          )
+          const failedFallback = figures.nth(3).locator(
+            '.obsidian-slidev-media__fallback[role="img"]',
+          )
+          assert.equal(await failedFallback.count(), 1)
+          assert.equal(
+            await failedFallback.getAttribute('aria-label'),
+            'Generated image unavailable',
+          )
+          assert.equal(await figures.locator('[tabindex]').count(), 0)
+        } else if (definition.slide === 27) {
+          const generated = result.page.locator(
+            '[data-quality-case="protocol-image-equivalence"] [data-generated-equivalent="image"]',
+          )
+          assert.equal(
+            await generated.getAttribute('data-media-state'),
+            'ready',
+          )
+          assert.equal(
+            await generated.getAttribute('data-media-fit'),
+            'contain',
+          )
+          assert.equal(await generated.locator('[tabindex]').count(), 0)
+        } else {
+          const links = result.page.locator(
+            '[data-quality-case="protocol-link-forms"] a',
+          )
+          assert.equal(await links.count(), 3)
+          assert.deepEqual(
+            await links.evaluateAll(elements => elements.map((link) => {
+              const style = getComputedStyle(link)
+              return {
+                borderBottomWidth: style.borderBottomWidth,
+                display: style.display,
+                underline: style.textDecorationLine.includes('underline'),
+              }
+            })),
+            [
+              { borderBottomWidth: '0px', display: 'inline', underline: true },
+              { borderBottomWidth: '0px', display: 'inline', underline: true },
+              { borderBottomWidth: '0px', display: 'block', underline: true },
+            ],
+          )
         }
         await result.page.close()
-      })
+      }))
     }
 
-    await t.test('ArrowRight, TOC keyboard, Enter, click, and focus outline', async () => {
+    const interactionCaseId = 'ArrowRight, TOC keyboard, Enter, click, and focus outline'
+    if (isFocusedCase(interactionCaseId)) subtests.push(t.test(interactionCaseId, async () => {
       const page = await browserContext.newPage()
       const baseUrl = builds['matrix-default'].baseUrl
       try {
@@ -740,7 +1522,8 @@ test('WCAG, layout, image, console, and interaction contract', { timeout: 240_00
       } finally {
         await page.close()
       }
-    })
+    }))
+    await Promise.allSettled(subtests)
   } finally {
     await browserContext.close()
     await browser.close()

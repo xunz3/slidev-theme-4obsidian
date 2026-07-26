@@ -47,7 +47,9 @@ maintained/generated decks, and finished with no failed, errored, timed-out, or 
 | Baseline integrity | 176 approved files unchanged by the normal run |
 
 The sorted output files, logical-bundle comparisons, thresholds, environment provenance, and all
-navigation raw samples are retained in `qa/expand-theme-content/performance-after.json`.
+The former raw navigation/output sample record was removed under the pre-1.0 repository policy
+because performance is no longer a project gate; this review remains historical visual
+evidence only.
 
 ## Evidence reviewed
 

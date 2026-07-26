@@ -3,30 +3,16 @@ import { resolve } from 'node:path'
 import { repositoryRoot } from '../tests/quality/helpers.mjs'
 
 const arguments_ = process.argv.slice(2)
-const updateBaselines = arguments_.includes('--update-baselines')
 const updateVisualBaselines = arguments_.includes('--update-visual-baselines')
-const updatePerformanceBaselines = arguments_.includes(
-  '--update-performance-baselines',
-)
 const valueAfter = (name) => {
   const index = arguments_.indexOf(name)
   return index >= 0 ? arguments_[index + 1] : undefined
 }
-const requestedUpdates = [
-  updateBaselines,
-  updateVisualBaselines,
-  updatePerformanceBaselines,
-].filter(Boolean).length
 
-if (requestedUpdates > 1) {
-  console.error(
-    'Choose exactly one baseline update mode: combined, visual, or performance.',
-  )
-  process.exitCode = 2
-} else if (requestedUpdates > 0
+if (updateVisualBaselines
   && (!valueAfter('--reviewer')?.trim() || !valueAfter('--rationale')?.trim())) {
   console.error(
-    'Reviewed baseline updates require --reviewer "<name>" and --rationale "<approved reason>".',
+    'Visual baseline updates require --reviewer "<name>" and --rationale "<approved reason>".',
   )
   process.exitCode = 2
 } else {

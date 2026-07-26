@@ -48,13 +48,6 @@ const assetDataUrl = async (path) => {
 test('recursive shipped-asset policy covers unlisted files under assets and public', async () => {
   assert.equal(themeOwnedAssetPolicy.maximumBytes, 256_000)
   assert.deepEqual(themeOwnedAssetPolicy.roots, ['assets', 'public'])
-  assert.ok(
-    themeOwnedAssetPolicy.authorFixtureExclusions.every(exclusion => (
-      exclusion.path.startsWith('public/')
-      && exclusion.owner
-      && exclusion.rationale
-    )),
-  )
 
   const discovered = await discoverThemeOwnedAssets()
   const paths = discovered.map(asset => asset.path)
@@ -245,7 +238,7 @@ test('source structure, dimensions, transparency, and normalized bytes match the
 })
 
 test('theme-owned image elements reserve their intrinsic geometry', async () => {
-  const componentPath = resolve(repositoryRoot, 'components/PresetBranding.vue')
+  const componentPath = resolve(repositoryRoot, 'internals/PresetBranding.vue')
   const component = await readFile(componentPath, 'utf8')
   const imports = new Map(
     [...component.matchAll(

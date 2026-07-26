@@ -29,24 +29,10 @@ export const requiredPairPaths = [
 export const themeOwnedAssetPolicy = Object.freeze({
   maximumBytes: 256_000,
   roots: Object.freeze(['assets', 'public']),
-  authorFixtureExclusions: Object.freeze([
-    Object.freeze({
-      path: 'public/author-fixtures/',
-      owner: 'quality-maintainers',
-      rationale: 'Author-supplied fixture media is not a shipped theme-owned asset.',
-    }),
-  ]),
   reviewedExceptions: Object.freeze([]),
 })
 
 const portablePath = path => path.split(sep).join('/')
-
-const isAuthorFixtureAsset = (path, policy) => (
-  policy.authorFixtureExclusions.some(exclusion => (
-    path === exclusion.path.replace(/\/$/, '')
-    || path.startsWith(exclusion.path)
-  ))
-)
 
 export const discoverThemeOwnedAssets = async ({
   policy = themeOwnedAssetPolicy,
@@ -62,7 +48,6 @@ export const discoverThemeOwnedAssets = async ({
       if (entry.isSymbolicLink()) {
         throw new Error(`${path}: symbolic links are not valid shipped assets`)
       }
-      if (isAuthorFixtureAsset(path, policy)) continue
       if (entry.isDirectory()) {
         await visit(absolutePath)
         continue

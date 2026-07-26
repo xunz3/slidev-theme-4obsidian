@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile, readdir, stat } from 'node:fs/promises'
 import { relative, resolve } from 'node:path'
 import test from 'node:test'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -29,12 +29,11 @@ const loadTypeScript = async () => {
 
 const ts = await loadTypeScript()
 
-const moduleUrl = new URL('../../setup/presentation-config.ts', import.meta.url)
-
-const loadConfigurationModule = async () => {
+const loadTypeScriptModule = async (path) => {
+  const moduleUrl = new URL(`../../${path}`, import.meta.url)
   const source = await readFile(moduleUrl, 'utf8')
   const transpiled = ts.transpileModule(source, {
-    fileName: 'presentation-config.ts',
+    fileName: path,
     compilerOptions: {
       module: ts.ModuleKind.ESNext,
       target: ts.ScriptTarget.ES2022,
@@ -47,7 +46,8 @@ const loadConfigurationModule = async () => {
   return import(`data:text/javascript;base64,${encoded}`)
 }
 
-const config = await loadConfigurationModule()
+const config = await loadTypeScriptModule('setup/presentation-config.ts')
+const callouts = await loadTypeScriptModule('setup/callouts.ts')
 
 test('option definitions are the immutable canonical public contract', () => {
   assert.deepEqual(config.PRESENTATION_PRESETS, ['default', 'ucas', 'ict'])
@@ -95,7 +95,7 @@ test('option definitions are the immutable canonical public contract', () => {
   assert.deepEqual(config.PRESENTATION_OPTIONS.header.slideKeys, ['presentationHeader', 'header'])
   assert.deepEqual(config.PRESENTATION_OPTIONS.pageNumber.slideKeys, ['pageNumber'])
   assert.deepEqual(config.PRESENTATION_OPTIONS.accent.slideKeys, ['accent'])
-  assert.equal(config.PRESENTATION_OPTIONS.accent.scope, 'deck-and-slide')
+  assert.equal('scope' in config.PRESENTATION_OPTIONS.accent, false)
 
   assert.ok(Object.isFrozen(config.PRESENTATION_PRESETS))
   assert.ok(Object.isFrozen(config.PRESENTATION_DENSITIES))
@@ -107,6 +107,44 @@ test('option definitions are the immutable canonical public contract', () => {
     assert.ok(Object.isFrozen(definition))
     assert.ok(Object.isFrozen(definition.slideKeys))
   }
+})
+
+test('the option registry drives resolution instead of duplicating field logic', async () => {
+  const source = await readFile(
+    resolve(repositoryRoot, 'setup/presentation-config.ts'),
+    'utf8',
+  )
+  assert.match(source, /PRESENTATION_OPTION_KEYS/)
+  assert.match(source, /resolveDeckOption/)
+  assert.match(source, /resolveSlideOption/)
+  assert.doesNotMatch(source, /normalizePreset\(raw\.preset\)/)
+  assert.doesNotMatch(source, /normalizeDensity\(raw\.density\)/)
+  assert.doesNotMatch(source, /normalizeBoolean\(raw\.(?:header|footerAuthors|pageNumber)\)/)
+})
+
+test('generated callout CSS consumes canonical family state without a type map', async () => {
+  const source = await readFile(
+    resolve(repositoryRoot, 'styles/obsidian.css'),
+    'utf8',
+  )
+  for (const family of callouts.SEMANTIC_FAMILIES.filter(
+    value => value !== 'neutral',
+  )) {
+    const declaration = (
+      `--presentation-callout-family: var(--presentation-family-${family});`
+    )
+    assert.match(
+      source,
+      new RegExp(
+        `\\[data-callout-family=["']${family}["']\\][^{}]*\\{[^{}]*`
+        + declaration.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+        's',
+      ),
+      `${family}: canonical family state`,
+    )
+  }
+  assert.doesNotMatch(source, /\.obsidian-slidev-callout--[\w-]+/)
+  assert.equal(typeof callouts.normalizeGeneratedCallouts, 'function')
 })
 
 test('normalizers accept only documented enum and boolean values', () => {
@@ -347,26 +385,29 @@ test('app setup remains deck-only while the shared frame owns local accent scope
 test('derived chrome and header behavior covers every frame variant', () => {
   for (const variant of config.FRAME_VARIANTS) {
     const auto = config.resolvePresentation({
-      deck: { chrome: 'auto', header: true },
+      deck: { preset: 'ucas', chrome: 'auto', header: true },
       variant,
     })
     const expectedChrome = !['cover', 'section', 'closing'].includes(variant)
     assert.equal(auto.showChrome, expectedChrome, variant)
     assert.equal(auto.showHeader, expectedChrome, variant)
+    assert.equal('brandSafeZone' in auto, false, variant)
 
     const forcedOn = config.resolvePresentation({
-      deck: { chrome: 'on', header: true },
+      deck: { preset: 'ucas', chrome: 'on', header: true },
       variant,
     })
     assert.equal(forcedOn.showChrome, true, variant)
     assert.equal(forcedOn.showHeader, true, variant)
+    assert.equal('brandSafeZone' in forcedOn, false, variant)
 
     const forcedOff = config.resolvePresentation({
-      deck: { chrome: 'off', header: true },
+      deck: { preset: 'ucas', chrome: 'off', header: true },
       variant,
     })
     assert.equal(forcedOff.showChrome, false, variant)
     assert.equal(forcedOff.showHeader, false, variant)
+    assert.equal('brandSafeZone' in forcedOff, false, variant)
   }
 
   assert.equal(config.normalizeFrameVariant('closing'), 'closing')
@@ -461,15 +502,6 @@ test('only the shared frame resolves presentation state and owns preset attribut
   for (const file of layoutFiles) {
     const source = await readFile(file, 'utf8')
     const name = relative(repositoryRoot, file)
-    if (name === 'layouts/thanks.vue') {
-      assert.match(source, /import\s+EndLayout\s+from\s+['"]\.\/end\.vue['"]/)
-      assert.match(source, /<EndLayout\b/)
-      assert.doesNotMatch(
-        source,
-        /defineProps|<SlideFrame|ClosingLayout|presentation-closing/,
-      )
-      continue
-    }
     const delegate = delegatedLayouts.get(name)
     if (delegate) {
       assert.match(
@@ -520,8 +552,11 @@ test('package metadata has no duplicate presentation defaults', async () => {
   assert.equal(packageJson.themeConfig, undefined)
   assert.deepEqual(
     Object.keys(packageJson.dependencies).sort(),
-    ['@slidev/client', '@slidev/types', 'slidev-pane'],
+    ['@slidev/client'],
   )
+  assert.equal(packageJson.devDependencies['@slidev/types'], '^52.15.2')
+  assert.equal(packageJson.devDependencies['slidev-pane'], '0.1.9')
+  assert.ok(packageJson.files.includes('public/obsidian-card.svg'))
 })
 
 test('README mirrors the canonical deck and slide configuration contract', async () => {
@@ -568,16 +603,346 @@ test('README mirrors the canonical deck and slide configuration contract', async
     '`false`',
     '`on`',
     '`off`',
-    'no migration',
+    'pre-1.0 migration',
     'pnpm run assets:optimize',
     'pnpm run assets:check',
     'pnpm run quality',
-    'pnpm run quality:update-baselines',
-    '300 seconds',
+    'pnpm run quality:update-visual-baselines',
   ]) {
     assert.ok(
       readme.toLowerCase().includes(phrase.toLowerCase()),
       `README is missing contract phrase: ${phrase}`,
     )
   }
+})
+
+test('US6 packaged sources are isolated, bounded, and converter-independent', async () => {
+  const packageJson = JSON.parse(
+    await readFile(resolve(repositoryRoot, 'package.json'), 'utf8'),
+  )
+  assert.ok(!packageJson.files.includes('fixtures'))
+  assert.ok(!packageJson.files.includes('tests'))
+
+  const packagedSources = []
+  for (const directory of ['components', 'internals', 'layouts', 'setup', 'styles']) {
+    const entries = await readdir(resolve(repositoryRoot, directory), {
+      recursive: true,
+      withFileTypes: true,
+    })
+    for (const entry of entries) {
+      if (!entry.isFile() || !/\.(?:css|mjs|ts|vue)$/.test(entry.name)) continue
+      packagedSources.push(resolve(entry.parentPath, entry.name))
+    }
+  }
+
+  const forbiddenFixtureSelector = [
+    /data-quality(?:-case)?/,
+    /\.presentation-[\w-]*(?:gallery|probe)\b/,
+  ]
+  for (const file of packagedSources.sort()) {
+    const source = await readFile(file, 'utf8')
+    for (const pattern of forbiddenFixtureSelector) {
+      assert.doesNotMatch(
+        source,
+        pattern,
+        `${relative(repositoryRoot, file)} contains fixture-only behavior`,
+      )
+    }
+    if (file.includes('/setup/')) {
+      assert.doesNotMatch(
+        source,
+        /markdown-it|remark|rehype|unified|obsidian(?:-|_)parser/i,
+        `${relative(repositoryRoot, file)} crosses the converter boundary`,
+      )
+    }
+  }
+
+  const styleFiles = (await readdir(resolve(repositoryRoot, 'styles'), {
+    recursive: true,
+    withFileTypes: true,
+  }))
+    .filter(entry => entry.isFile() && entry.name.endsWith('.css'))
+    .map(entry => resolve(entry.parentPath, entry.name))
+  for (const file of styleFiles) {
+    const source = await readFile(file, 'utf8')
+    if (file.includes('/presets/')) {
+      assert.doesNotMatch(
+        source,
+        /\.obsidian-slidev-callout__title::before/,
+        `${relative(repositoryRoot, file)} overrides protected marker geometry`,
+      )
+      const calloutTitleBlocks = [
+        ...source.matchAll(
+          /[^{}]*\.obsidian-slidev-callout__title[^{}]*\{([^{}]*)\}/g,
+        ),
+      ].map(match => match[1])
+      assert.ok(
+        calloutTitleBlocks.every(block => !/text-transform\s*:/.test(block)),
+        `${relative(repositoryRoot, file)} transforms authored callout titles`,
+      )
+    }
+    if (/--presentation-family-(?:neutral|info|positive|caution|danger|question|quotation)\s*:/.test(source)) {
+      assert.ok(
+        file.endsWith('/styles/tokens.css')
+          || file.endsWith('/styles/presets/shared.css'),
+        `${relative(repositoryRoot, file)} duplicates shared semantic families`,
+      )
+    }
+  }
+
+  const shippedAssets = []
+  for (const directory of ['assets/ICT', 'assets/UCAS']) {
+    const entries = await readdir(resolve(repositoryRoot, directory), {
+      recursive: true,
+      withFileTypes: true,
+    })
+    for (const entry of entries) {
+      if (!entry.isFile()) continue
+      const path = resolve(entry.parentPath, entry.name)
+      shippedAssets.push({
+        bytes: (await stat(path)).size,
+        path: relative(repositoryRoot, path),
+      })
+    }
+  }
+  assert.ok(shippedAssets.length > 0)
+  assert.ok(
+    shippedAssets.every(asset => asset.bytes <= 250 * 1024),
+    JSON.stringify(shippedAssets.filter(asset => asset.bytes > 250 * 1024)),
+  )
+
+  assert.deepEqual(
+    Object.keys(packageJson.dependencies).sort(),
+    ['@slidev/client'],
+  )
+  assert.equal(packageJson.devDependencies['@slidev/types'], '^52.15.2')
+  assert.equal(packageJson.devDependencies['slidev-pane'], '0.1.9')
+
+  const gateSource = await readFile(
+    resolve(repositoryRoot, 'scripts/check-presentation-css.mjs'),
+    'utf8',
+  )
+  for (const requiredGate of [
+    /data-quality/,
+    /gallery\|probe|gallery.*probe|probe.*gallery/s,
+    /250\s*\*\s*1024/,
+    /markdown-it|remark|unified/,
+    /package\.json/,
+  ]) {
+    assert.match(gateSource, requiredGate)
+  }
+})
+
+test('follow-up source hygiene removes dead runtime paths and remote font CSS', async () => {
+  const [
+    baseCss,
+    badge,
+    defaultPreset,
+    ictPreset,
+    kbd,
+    layouts,
+    main,
+    renderNormalization,
+    slideFrame,
+    taskLists,
+    toc,
+    tokens,
+  ] = await Promise.all([
+    readFile(resolve(repositoryRoot, 'styles/base.css'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'components/Badge.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'styles/presets/default.css'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'styles/presets/ict.css'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'components/Kbd.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'styles/layouts.css'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'setup/main.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'setup/render-normalization.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'components/SlideFrame.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'setup/task-lists.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'layouts/toc.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'styles/tokens.css'), 'utf8'),
+  ])
+
+  assert.doesNotMatch(baseCss, /@import\s+url\(["']?https?:/)
+  assert.match(badge, /normalizeBoolean/)
+  assert.doesNotMatch(main, /presentationPreset|presentationChrome|synchronizeFrameChrome/)
+  assert.doesNotMatch(slideFrame, /synchronizeFrameChrome/)
+  assert.doesNotMatch(slideFrame, /configs\.value\.info/)
+  await assert.rejects(
+    readFile(resolve(repositoryRoot, 'setup/frame-chrome.ts'), 'utf8'),
+    error => error?.code === 'ENOENT',
+  )
+  assert.doesNotMatch(taskLists, /observePresentationTaskLists|export\s*\{\s*TASK_INPUT_SELECTOR/)
+  assert.doesNotMatch(renderNormalization, /registerPresentationNormalizer/)
+  assert.doesNotMatch(layouts, /slide-frame__header-mark/)
+  assert.doesNotMatch(defaultPreset, /slide-frame__header-mark/)
+  assert.equal(
+    (defaultPreset.match(
+      /^\.slidev-layout\[data-presentation-preset="default"\],$/gm,
+    ) ?? []).length,
+    1,
+  )
+  assert.doesNotMatch(tokens, /#3f6f68|#77b5aa/)
+  assert.doesNotMatch(tokens, /:root\[data-presentation-density=/)
+  assert.match(
+    ictPreset,
+    /--presentation-font-serif:\s*"Source Serif 4"/,
+  )
+  assert.match(kbd, /Array\.isArray/)
+  assert.match(kbd, /typeof key === ['"]string['"]/)
+  assert.match(kbd, /join\(['"] plus ['"]\)/)
+  assert.match(toc, /from ['"]#slidev\/slides['"]/)
+  assert.doesNotMatch(toc, /\bas any\b|meta\?\.slide\?\.|slide\?\.slide\?\./)
+})
+
+test('every layout-owned chrome prop accepts canonical values and booleans', async () => {
+  const roots = [
+    resolve(repositoryRoot, 'layouts'),
+    resolve(repositoryRoot, 'internals'),
+  ]
+  const files = (
+    await Promise.all(roots.map(async root => (
+      (await readdir(root))
+        .filter(file => file.endsWith('.vue'))
+        .map(file => resolve(root, file))
+    )))
+  ).flat()
+  const checked = []
+
+  for (const file of files) {
+    const source = await readFile(file, 'utf8')
+    if (!source.includes('chrome?:')) continue
+    assert.match(
+      source,
+      /chrome\?: PresentationChrome \| boolean/,
+      `${relative(repositoryRoot, file)} uses the shared chrome input type`,
+    )
+    assert.match(
+      source,
+      /chrome:\s*undefined/,
+      `${relative(repositoryRoot, file)} preserves omitted chrome inheritance`,
+    )
+    checked.push(relative(repositoryRoot, file))
+  }
+
+  assert.ok(checked.length >= 13, 'all direct and internal layout wrappers were checked')
+})
+
+test('image-text media uses one authoritative reserved-height rule', async () => {
+  const source = await readFile(
+    resolve(repositoryRoot, 'styles/content-layouts.css'),
+    'utf8',
+  )
+  const rule = source.match(
+    /\.presentation-image-text__figure \.obsidian-slidev-media__viewport\s*\{[^}]+\}/,
+  )?.[0]
+  assert.ok(rule, 'image-text media viewport rule exists')
+  assert.match(rule, /\bheight:/)
+  assert.doesNotMatch(rule, /\baspect-ratio:/)
+})
+
+test('performance baselines are intentionally absent from the repository gate', async () => {
+  const [packageJson, readme, runner] = await Promise.all([
+    readFile(resolve(repositoryRoot, 'package.json'), 'utf8').then(JSON.parse),
+    readFile(resolve(repositoryRoot, 'README.md'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'tests/quality/run.mjs'), 'utf8'),
+  ])
+
+  assert.equal(packageJson.scripts['quality:update-baselines'], undefined)
+  assert.equal(packageJson.scripts['quality:update-performance-baselines'], undefined)
+  assert.equal(packageJson.scripts['quality:update-visual-baselines']?.length > 0, true)
+  assert.doesNotMatch(runner, /performance-baseline|navigation-performance|output-sizes/)
+  assert.match(readme, /raw\s+output\/navigation\s+sampling\s+baselines.*removed/is)
+
+  for (const path of [
+    'scripts/measure-build-output.mjs',
+    'tests/quality/navigation-performance.mjs',
+    'tests/quality/navigation-performance.spec.mjs',
+    'tests/quality/performance-baselines.spec.mjs',
+    'tests/quality/baselines/navigation-performance.json',
+    'tests/quality/baselines/output-sizes.json',
+  ]) {
+    await assert.rejects(
+      readFile(resolve(repositoryRoot, path), 'utf8'),
+      error => error?.code === 'ENOENT',
+      `${path} was removed`,
+    )
+  }
+})
+
+test('pre-1.0 source keeps one canonical implementation path', async () => {
+  const [
+    branding,
+    figure,
+    frame,
+    main,
+    obsidian,
+    presentationConfig,
+    quote,
+    renderNormalization,
+    styleIndex,
+    taskLists,
+  ] = await Promise.all([
+    readFile(resolve(repositoryRoot, 'internals/PresetBranding.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'components/Figure.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'components/SlideFrame.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'setup/main.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'styles/obsidian.css'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'setup/presentation-config.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'layouts/quote.vue'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'setup/render-normalization.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'styles/index.ts'), 'utf8'),
+    readFile(resolve(repositoryRoot, 'setup/task-lists.ts'), 'utf8'),
+  ])
+
+  assert.doesNotMatch(
+    taskLists,
+    /\.slidev-layout\s+li\s*>\s*input\[type=["']checkbox["']\]/,
+  )
+  assert.match(taskLists, /\.task-list-item/)
+  assert.match(taskLists, /\.contains-task-list/)
+  assert.match(taskLists, /\.obsidian-slidev-task-list/)
+
+  await assert.rejects(
+    readFile(resolve(repositoryRoot, 'layouts/thanks.vue'), 'utf8'),
+    error => error?.code === 'ENOENT',
+  )
+  assert.doesNotMatch(quote, /\bcite\??\s*:|\bauthor\s*\?\?\s*cite\b/)
+  assert.doesNotMatch(figure, /\bbackgroundSize\b|data-media-rendering/)
+
+  assert.match(styleIndex, /['"]\.\/components\.css['"]/)
+  assert.match(styleIndex, /['"]\.\/content-layouts\.css['"]/)
+  for (const directory of ['components', 'internals', 'layouts']) {
+    for (const file of await sourceFiles(directory)) {
+      assert.doesNotMatch(
+        await readFile(file, 'utf8'),
+        /<style\s+src=/,
+        relative(repositoryRoot, file),
+      )
+    }
+  }
+
+  assert.doesNotMatch(main, /presentationDensity|--presentation-accent/)
+  assert.doesNotMatch(presentationConfig, /\bbrandSafeZone\b/)
+  assert.doesNotMatch(frame, /data-presentation-brand-safe-zone/)
+  assert.match(frame, /:style=["']frameStyle["']/)
+
+  assert.match(renderNormalization, /normalizeGeneratedCallouts/)
+  assert.doesNotMatch(
+    obsidian,
+    /\.obsidian-slidev-callout--(?:note|info|todo|abstract|summary|tip|success|check|warning|caution|attention|danger|error|failure|question|help|faq|quote|cite)/,
+  )
+
+  assert.match(
+    branding,
+    /preset === 'ict' && \['section', 'statement'\]\.includes\(variant\)/,
+  )
+  assert.match(
+    branding,
+    /preset === 'ucas' && \['cover', 'section', 'statement', 'center'\]\.includes\(variant\)/,
+  )
+
+  await assert.rejects(
+    readFile(resolve(repositoryRoot, '.npmignore'), 'utf8'),
+    error => error?.code === 'ENOENT',
+  )
 })
