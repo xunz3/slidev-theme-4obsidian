@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720" role="img" aria-labelledby="title description">
+  <title id="title">Labeled portrait geometry fixture</title>
+  <desc id="description">A tall test image with labeled corners, edge bands, a center target, and a transparent-safe outline.</desc>
+  <rect width="360" height="720" fill="#10233f"/>
+  <rect x="12" y="12" width="336" height="696" rx="18" fill="#dff7f1" stroke="#0a6f64" stroke-width="12"/>
+  <path d="M180 18V702M18 360H342" stroke="#0a6f64" stroke-width="6" stroke-dasharray="18 12"/>
+  <circle cx="180" cy="360" r="54" fill="#f5b942" stroke="#7a3e00" stroke-width="8"/>
+  <rect x="18" y="18" width="104" height="58" rx="8" fill="#d3293f"/>
+  <rect x="238" y="18" width="104" height="58" rx="8" fill="#2855b8"/>
+  <rect x="18" y="644" width="104" height="58" rx="8" fill="#6b3faf"/>
+  <rect x="238" y="644" width="104" height="58" rx="8" fill="#067a46"/>
+  <g fill="#fff" font-family="system-ui, sans-serif" font-size="24" font-weight="700" text-anchor="middle">
+    <text x="70" y="56">TL</text>
+    <text x="290" y="56">TR</text>
+    <text x="70" y="682">BL</text>
+    <text x="290" y="682">BR</text>
+  </g>
+  <g fill="#10233f" font-family="system-ui, sans-serif" font-size="24" font-weight="700" text-anchor="middle">
+    <text x="180" y="128">TOP EDGE</text>
+    <text x="180" y="604">BOTTOM EDGE</text>
+    <text x="180" y="368">CENTER</text>
+  </g>
+</svg>

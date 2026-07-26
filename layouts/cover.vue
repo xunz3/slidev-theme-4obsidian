@@ -1,19 +1,15 @@
 <script setup lang="ts">
+import Authors from '../components/Authors.vue'
 import SlideFrame from '../components/SlideFrame.vue'
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import { formatAuthorDetails, resolveDeckAuthors } from '../setup/authors'
 import type { PresentationChrome } from '../setup/presentation-config'
 
-const props = defineProps({
-  background: {
-    type: String,
-    default: undefined,
-  },
-  chrome: {
-    type: String as () => PresentationChrome,
-    default: undefined,
-  },
+const props = withDefaults(defineProps<{
+  background?: string
+  chrome?: PresentationChrome | boolean
+}>(), {
+  chrome: undefined,
 })
 
 const { $slidev, $frontmatter } = useSlideContext()
@@ -21,7 +17,6 @@ const { $slidev, $frontmatter } = useSlideContext()
 const configs = computed(() => (($slidev.configs ?? {}) as Record<string, unknown>))
 // Slidev injects frontmatter as a reactive object, not a Ref.
 const frontmatter = computed(() => ($frontmatter as Record<string, unknown>))
-const authors = computed(() => resolveDeckAuthors(configs.value))
 const title = computed(() => {
   const value = frontmatter.value.title ?? configs.value.title
   return typeof value === 'string' ? value.trim() : ''
@@ -52,14 +47,7 @@ const style = computed(() => {
         </div>
       </div>
 
-      <div v-if="authors.length > 0" class="slide-cover__authors">
-        <div v-for="(author, index) in authors" :key="`${author.name}-${author.email ?? index}`" class="slide-cover__author">
-          <div class="slide-cover__author-name">{{ author.name }}</div>
-          <div v-if="formatAuthorDetails(author)" class="slide-cover__author-details">
-            {{ formatAuthorDetails(author) }}
-          </div>
-        </div>
-      </div>
+      <Authors variant="cover" />
     </div>
   </SlideFrame>
 </template>

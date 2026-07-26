@@ -7,20 +7,21 @@ const props = withDefaults(defineProps<{
   keys: () => [],
 })
 
-const normalizedKeys = computed(() => (
-  Array.isArray(props.keys)
-    ? props.keys
-        .filter(key => typeof key === 'string')
-        .map(key => key.trim())
-        .filter(Boolean)
-    : []
-))
+const normalizedKeys = computed(() => {
+  const keys: unknown = props.keys
+  if (!Array.isArray(keys)) return []
+
+  return keys
+    .filter((key): key is string => typeof key === 'string')
+    .map(key => key.trim())
+    .filter(Boolean)
+})
 
 const accessibleText = computed(() => normalizedKeys.value.join(' plus '))
 </script>
 
 <template>
-  <kbd
+  <span
     v-if="normalizedKeys.length > 0"
     class="presentation-kbd-sequence"
     :data-key-count="normalizedKeys.length"
@@ -34,10 +35,8 @@ const accessibleText = computed(() => normalizedKeys.value.join(' plus '))
       >+</span>
       <kbd class="presentation-kbd-key" aria-hidden="true">{{ key }}</kbd>
     </template>
-  </kbd>
+  </span>
   <kbd v-else class="presentation-kbd presentation-kbd--single">
     <slot />
   </kbd>
 </template>
-
-<style src="../styles/components.css"></style>

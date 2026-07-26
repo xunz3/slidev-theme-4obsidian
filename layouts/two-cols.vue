@@ -5,10 +5,11 @@ import type { PresentationChrome } from '../setup/presentation-config'
 withDefaults(defineProps<{
   title?: string
   subtitle?: string
-  chrome?: PresentationChrome
+  chrome?: PresentationChrome | boolean
   gap?: string
   reverse?: boolean
 }>(), {
+  chrome: undefined,
   gap: '2.5rem',
   reverse: false,
 })

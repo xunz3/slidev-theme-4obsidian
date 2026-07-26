@@ -18,6 +18,7 @@
 		"components",
 		"internals",
 		"layouts",
+		"public/obsidian-card.svg",
 		"setup",
 		"styles",
 		"README.md"
@@ -34,8 +35,6 @@
 		"dev:fixture": "slidev fixtures/obsidian-protocol.md --open",
 		"export": "slidev export example.md",
 		"quality": "node scripts/run-quality-gates.mjs",
-		"quality:update-baselines": "node scripts/run-quality-gates.mjs --update-baselines",
-		"quality:update-performance-baselines": "node scripts/run-quality-gates.mjs --update-performance-baselines",
 		"quality:update-visual-baselines": "node scripts/run-quality-gates.mjs --update-visual-baselines",
 		"screenshot": "slidev export example.md --format png",
 		"build:default": "slidev build fixtures/default-preset.md --out dist-default",
@@ -46,14 +45,16 @@
 		"screenshot:ict": "slidev export fixtures/ict-preset.md --format png --output dist-ict/ict-preset"
 	},
 	"dependencies": {
-		"@slidev/client": "^52.15.2",
-		"@slidev/types": "^52.15.2",
-		"slidev-pane": "latest"
+		"@slidev/client": "^52.15.2"
 	},
 	"devDependencies": {
 		"@slidev/cli": "^52.15.2",
+		"@slidev/types": "^52.15.2",
 		"axe-core": "4.12.1",
-		"playwright-chromium": "^1.61.1"
+		"playwright-chromium": "^1.61.1",
+		"slidev-pane": "0.1.9",
+		"typescript": "5.9.3",
+		"vite": "8.0.13"
 	},
 	"//": "Learn more: https://sli.dev/guide/write-theme.html",
 	"slidev": {

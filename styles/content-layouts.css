@@ -2,27 +2,32 @@
   display: grid;
   place-items: center;
   overflow: hidden auto;
+  scrollbar-gutter: auto;
 }
 
 .presentation-closing {
   display: grid;
+  align-items: center;
+  min-width: 0;
+  gap: var(--presentation-closing-gap) 1.5rem;
+}
+
+.presentation-closing--minimal {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "message";
+  width: min(100%, 44rem);
+  justify-items: center;
+  text-align: center;
+}
+
+.presentation-closing--rich {
   grid-template-columns: minmax(0, 1fr) minmax(7rem, auto);
   grid-template-areas:
     "message logo"
     "contact logo"
     "authors authors";
-  align-items: center;
   width: min(100%, 58rem);
-  min-width: 0;
-  gap: var(--presentation-closing-gap) 1.5rem;
-}
-
-.presentation-closing:not(:has(.presentation-closing__logo)) {
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas:
-    "message"
-    "contact"
-    "authors";
 }
 
 .presentation-closing__message {
@@ -62,8 +67,48 @@
   grid-area: logo;
   width: min(10rem, 22vw);
   min-width: 7rem;
+  height: 5rem;
   margin: 0;
-  --presentation-media-viewport-height: 5rem;
+}
+
+.presentation-closing-logo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.presentation-closing-logo__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  object-fit: contain;
+}
+
+.presentation-closing-logo__fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.65rem;
+  border: 1px dashed var(--presentation-media-fallback-border);
+  color: var(--presentation-media-fallback-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .presentation-image-text {
@@ -100,6 +145,11 @@
   --presentation-media-viewport-height: min(48vh, 17.5rem);
 }
 
+.presentation-image-text__figure .obsidian-slidev-media__viewport {
+  width: 100%;
+  height: min(48vh, 17.5rem);
+}
+
 .presentation-image-text--narrative-only {
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas: "narrative";
@@ -110,7 +160,8 @@
 }
 
 .presentation-code-layout,
-.presentation-code-layout > [data-quality-case] {
+.presentation-code-layout__content,
+.presentation-code-layout__content > :only-child {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -134,10 +185,10 @@
   font-size: 0.76rem;
 }
 
-.presentation-code-layout > .slidev-code-wrapper,
-.presentation-code-layout > pre,
-.presentation-code-layout > [data-quality-case] > .slidev-code-wrapper,
-.presentation-code-layout > [data-quality-case] > pre {
+.presentation-code-layout__content > .slidev-code-wrapper,
+.presentation-code-layout__content > pre,
+.presentation-code-layout__content > :only-child > .slidev-code-wrapper,
+.presentation-code-layout__content > :only-child > pre {
   flex: 1 1 auto;
   width: 100%;
   max-width: none;
@@ -176,27 +227,55 @@ html.dark .presentation-code-layout .slidev-code-wrapper > pre.shiki
   color: color-mix(in srgb, var(--shiki-dark) 72%, #ffffff);
 }
 
-.presentation-code-layout > pre,
-.presentation-code-layout > [data-quality-case] > pre {
+.presentation-code-layout__content > pre,
+.presentation-code-layout__content > :only-child > pre {
   white-space: pre;
 }
 
 @media (max-width: 720px) {
-  .presentation-closing {
-    grid-template-columns: minmax(0, 1fr);
+  .presentation-closing--rich {
+    grid-template-columns: minmax(0, 1fr) minmax(4.8rem, 6.5rem);
     grid-template-areas:
-      "message"
-      "contact"
-      "authors"
-      "logo";
+      "message logo"
+      "contact logo"
+      "authors authors";
+    gap: 0.38rem 0.72rem;
   }
 
-  .presentation-closing__authors .presentation-authors {
-    grid-template-columns: 1fr;
+  .presentation-closing--rich
+    .presentation-closing__authors
+    .presentation-authors {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.28rem;
   }
 
-  .presentation-closing__logo {
-    width: min(10rem, 45vw);
+  .presentation-closing--rich
+    .presentation-closing__authors
+    .presentation-author {
+    padding: 0.28rem 0.34rem;
+    font-size: 0.7em;
+  }
+
+  .presentation-closing--rich
+    .presentation-closing__authors
+    :is(.presentation-author__institution, .presentation-author__email) {
+    margin-top: 0.1rem;
+  }
+
+  .presentation-closing--rich .presentation-closing__message h1 {
+    margin-bottom: 0.24em;
+    font-size: calc(1.62rem * var(--presentation-heading-scale));
+  }
+
+  .presentation-closing--rich .presentation-closing__message p {
+    margin-bottom: 0.3em;
+    font-size: 0.88em;
+  }
+
+  .presentation-closing--rich .presentation-closing__logo {
+    width: min(6.5rem, 100%);
+    min-width: 0;
+    height: 3.2rem;
   }
 
   .presentation-image-text,
@@ -212,5 +291,9 @@ html.dark .presentation-code-layout .slidev-code-wrapper > pre.shiki
 
   .presentation-image-text__figure {
     --presentation-media-viewport-height: min(34vh, 12rem);
+  }
+
+  .presentation-image-text__figure .obsidian-slidev-media__viewport {
+    height: min(34vh, 12rem);
   }
 }

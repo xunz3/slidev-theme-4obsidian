@@ -50,6 +50,7 @@ title: Figure and authors
   src="./public/obsidian-card.svg"
   alt="A note card connected to a presentation canvas"
   caption="Figure 1. Media reserves space before it loads."
+  fit="contain"
 />
 
 ::right::
@@ -139,9 +140,11 @@ title: Process components
 
 <Steps>
 
-1. **Collect** observations.
-2. **Normalize** measurements.
-3. **Report** uncertainty.
+<ol start="2">
+  <li><strong>Collect</strong> observations.</li>
+  <li value="5"><strong>Normalize</strong> measurements.</li>
+  <li><strong>Report</strong> uncertainty.</li>
+</ol>
 
 </Steps>
 
@@ -152,7 +155,7 @@ title: Process components
 <Timeline>
 
 1. <time datetime="2026-06">June</time> — Dataset frozen.
-2. <time datetime="2026-07">July</time> — Results released.
+2. **July** — Results released.
 
 </Timeline>
 
@@ -160,13 +163,13 @@ title: Process components
 title: Status and keyboard
 ---
 
-# Compact Reading Cues
+# Compact Reading Cues · 紧凑阅读提示
 
 <Tag>Method</Tag>
 <Tag>双语标签</Tag>
 
-<Badge>Complete</Badge>
-<Badge>✓ Reviewed</Badge>
+<Badge tone="positive" marker>Complete</Badge>
+<Badge tone="info">Reviewed</Badge>
 
 Press <Kbd>Esc</Kbd> to leave the overview.
 
@@ -209,12 +212,6 @@ Generated <span class="obsidian-slidev-highlight">highlight markup</span> receiv
 ---
 layout: end
 title: Closing
-contact: deck@example.com
-showAuthors: true
-logo: ./public/obsidian-card.svg
-logoAlt: Slidev theme sample card
 ---
 
 # Thank You
-
-Use ordinary Markdown, opt into the public components, or keep compatible generated markup.

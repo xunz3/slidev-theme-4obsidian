@@ -117,6 +117,153 @@ source: Computer architecture as a research discipline
 > The most durable computing ideas connect an abstraction to the machine that makes it real.
 
 ---
+layout: section
+---
+
+# 02 · Evidence and reproducibility
+
+Connect benchmark results to an inspectable execution path
+
+---
+title: Benchmark status
+presentationDensity: compact
+accent: "#b45b2a"
+---
+
+# Make operational evidence visible
+
+<Callout type="success" title="System evidence captured">
+
+Record model quality, latency, memory, energy, and the exact execution environment together.
+
+</Callout>
+
+<div class="presentation-label-gallery">
+  <Tag>Systems</Tag>
+  <Tag>Co-design</Tag>
+  <Badge tone="positive" marker>Benchmarked</Badge>
+  <Badge tone="caution">环境已归档</Badge>
+</div>
+
+Press <Kbd>Esc</Kbd> to leave overview, or use
+<Kbd :keys="['Ctrl', 'Shift', 'P']" /> to open commands.
+
+---
+layout: two-cols
+title: Benchmark record and ownership
+presentationDensity: compact
+---
+
+# Accessible benchmark record
+
+<Figure
+  src="/theme/public/obsidian-card.svg"
+  alt="A compact card recording one model and system benchmark"
+  caption="Figure A. A bounded benchmark record with an authored alternative."
+  fit="contain"
+/>
+
+::right::
+
+# Study authors
+
+<Authors />
+
+The standalone component exposes the same ordered metadata used by the cover and closing slide.
+
+---
+layout: two-cols
+title: From profiling to release
+presentationDensity: compact
+---
+
+# Steps
+
+<Steps>
+
+<ol start="3">
+  <li><strong>Profile</strong> the workload.</li>
+  <li value="7"><strong>Co-design</strong> model and runtime.</li>
+  <li><strong>Audit</strong> quality and cost.</li>
+</ol>
+
+</Steps>
+
+::right::
+
+# Timeline
+
+<Timeline>
+
+1. <time datetime="2026-03">March</time> — Baseline frozen.
+2. <time datetime="2026-06">June</time> — Hardware audit completed.
+3. **July** — Artifacts released.
+
+</Timeline>
+
+---
+title: Replication status
+presentationDensity: compact
+---
+
+# Presentation-only review checklist
+
+- [x] Record compiler, driver, and accelerator versions.
+- [ ] Reproduce the energy measurement on a second host.
+- [x] Publish quality and latency from the same run.
+
+The <mark>co-designed execution path</mark> is highlighted as prose, while
+`==literal code syntax==` remains code.
+
+---
+layout: code
+title: Auditable benchmark code
+presentationDensity: compact
+---
+
+# Reproducible benchmark
+
+```ts
+const result = await benchmark({
+  model: 'sparse-transformer',
+  precision: 'bf16',
+  warmups: 20,
+  samples: 100,
+  report: ['quality', 'latency', 'energy'],
+})
+
+await result.writeArtifact()
+```
+
+---
+layout: image-left
+title: Benchmark evidence and narrative
+image: /theme/public/obsidian-card.svg
+imageAlt: Systems benchmark card placed to the left of the narrative
+caption: Figure B. The figure moves visually, not structurally.
+backgroundSize: contain
+---
+
+# Inspectable execution
+
+The left-hand presentation keeps the narrative first for assistive technology and export while
+placing the benchmark record beside it.
+
+---
+layout: image-right
+title: Alternative benchmark orientation
+image: /theme/public/obsidian-card.svg
+imageAlt: Systems benchmark card placed to the right of the narrative
+caption: Figure C. The mirrored layout preserves the same authoring contract.
+backgroundSize: contain
+---
+
+# One contract, two orientations
+
+Use the right orientation when the system diagram should follow the explanation. Caption,
+alternative text, containment, and failure behavior remain unchanged.
+
+---
 layout: statement
 ---
 
@@ -138,162 +285,12 @@ layout: references
 layout: center
 ---
 
-# 谢谢 · Thank you
+# Model quality and system cost belong in the same result.
 
-Questions, critique, and collaboration
-
----
-layout: section
----
-
-# Fixture appendix
-
-Complete public authoring examples · 完整创作示例
-
----
-title: Public components
-presentationDensity: compact
-accent: "#b45b2a"
----
-
-# Callouts, labels, and keyboard input
-
-<Callout type="success" title="System evidence captured">
-
-Record model quality, latency, memory, energy, and the exact execution environment together.
-
-</Callout>
-
-<div class="presentation-label-gallery">
-  <Tag>Systems</Tag>
-  <Tag>Co-design</Tag>
-  <Badge>Benchmarked</Badge>
-  <Badge>环境已归档</Badge>
-</div>
-
-Press <Kbd>Esc</Kbd> to leave overview, or use
-<Kbd :keys="['Ctrl', 'Shift', 'P']" /> to open commands.
-
----
-layout: two-cols
-title: Figure and author metadata
-presentationDensity: compact
----
-
-# Accessible figure
-
-<Figure
-  src="/obsidian-card.svg"
-  alt="A compact card recording one model and system benchmark"
-  caption="Figure A. A bounded benchmark record with an authored alternative."
-/>
-
-::right::
-
-# Root authors
-
-<Authors />
-
-The standalone component exposes the same ordered metadata used by the cover and closing slide.
-
----
-layout: two-cols
-title: Ordered research processes
-presentationDensity: compact
----
-
-# Steps
-
-<Steps>
-
-1. **Profile** the workload.
-2. **Co-design** model and runtime.
-3. **Audit** quality and cost.
-
-</Steps>
-
-::right::
-
-# Timeline
-
-<Timeline>
-
-1. <time datetime="2026-03">March</time> — Baseline frozen.
-2. <time datetime="2026-06">June</time> — Hardware audit completed.
-3. **July** — Artifacts released.
-
-</Timeline>
-
----
-title: Tasks and highlights
-presentationDensity: compact
----
-
-# Presentation-only review checklist
-
-- [x] Record compiler, driver, and accelerator versions.
-- [ ] Reproduce the energy measurement on a second host.
-- [x] Publish quality and latency from the same run.
-
-The <mark>co-designed execution path</mark> is highlighted as prose, while
-`==literal code syntax==` remains code.
-
----
-layout: code
-title: Full-width code example
-presentationDensity: compact
----
-
-# Reproducible benchmark
-
-```ts
-const result = await benchmark({
-  model: 'sparse-transformer',
-  precision: 'bf16',
-  warmups: 20,
-  samples: 100,
-  report: ['quality', 'latency', 'energy'],
-})
-
-await result.writeArtifact()
-```
-
----
-layout: image-left
-title: Image-left example
-image: /obsidian-card.svg
-imageAlt: Systems benchmark card placed to the left of the narrative
-caption: Figure B. The figure moves visually, not structurally.
-backgroundSize: contain
----
-
-# Inspectable execution
-
-The left-hand presentation keeps the narrative first for assistive technology and export while
-placing the benchmark record beside it.
-
----
-layout: image-right
-title: Image-right example
-image: /obsidian-card.svg
-imageAlt: Systems benchmark card placed to the right of the narrative
-caption: Figure C. The mirrored layout preserves the same authoring contract.
-backgroundSize: contain
----
-
-# One contract, two orientations
-
-Use the right orientation when the system diagram should follow the explanation. Caption,
-alternative text, containment, and failure behavior remain unchanged.
+The claim is complete only when it survives a second execution environment.
 
 ---
 layout: end
-contact: xun.zhang@ict.ac.cn
-showAuthors: true
-logo: /obsidian-card.svg
-logoAlt: Intelligent systems benchmark mark
 ---
 
-# Fixture complete
-
-Every public component and expanded layout has a maintained ICT-preset example.
+# Thank you · 谢谢

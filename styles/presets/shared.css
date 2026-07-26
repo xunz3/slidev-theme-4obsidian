@@ -1,16 +1,27 @@
-/*
- * Preset identity tokens stay locked, while common presentation roles inherit the accent from
- * the rendered canvas. This layer follows the preset token rules in the compiled stylesheet so a
- * local frame value cannot be shadowed by a deck default on a simultaneously mounted slide.
- */
+/* Shared derived roles resolve from each frame's preset or inline accent. */
 .slidev-layout[data-presentation-preset] .slide-frame {
-  --slidev-theme-primary: inherit;
-  --presentation-accent: inherit;
   --presentation-scrollbar-thumb: color-mix(
     in srgb,
     var(--presentation-accent) 34%,
     transparent
   );
+  --presentation-chrome-accent: color-mix(
+    in srgb,
+    var(--presentation-accent) 34%,
+    var(--presentation-border-strong)
+  );
+  --presentation-family-info: color-mix(
+    in srgb,
+    var(--presentation-accent) 84%,
+    var(--presentation-text)
+  );
+  --presentation-family-info-surface: color-mix(
+    in srgb,
+    var(--presentation-accent) 10%,
+    transparent
+  );
+  --presentation-sequence-node-bg: var(--presentation-accent);
+  --presentation-sequence-rail: var(--presentation-chrome-accent);
   --presentation-table-header-bg: color-mix(
     in srgb,
     var(--presentation-accent) 8%,
@@ -53,6 +64,14 @@
   );
 }
 
+.slidev-layout[data-presentation-preset] .slide-frame:is(
+  .slide-frame--cover,
+  .slide-frame--closing,
+  .slide-frame--header
+) {
+  --presentation-brand-safe-block-start: 0rem;
+}
+
 html.dark .slidev-layout[data-presentation-preset] .slide-frame {
   --presentation-table-header-bg: color-mix(
     in srgb,
@@ -73,19 +92,15 @@ html.dark .slidev-layout[data-presentation-preset] .slide-frame {
 
 .slidev-layout[data-presentation-preset] .slide-frame
   :is(.slide-frame__header, .slide-frame__footer) {
-  border-color: color-mix(
-    in srgb,
-    var(--presentation-accent) 34%,
-    var(--presentation-border-strong)
-  );
+  border-color: var(--presentation-chrome-accent);
 }
 
 .slidev-layout[data-presentation-preset] .slide-frame th {
-  border-bottom-color: color-mix(
-    in srgb,
-    var(--presentation-accent) 34%,
-    var(--presentation-border-strong)
-  );
+  border-bottom-color: var(--presentation-chrome-accent);
+}
+
+.slidev-layout[data-presentation-preset] .slide-frame li::marker {
+  color: var(--presentation-chrome-accent);
 }
 
 .slidev-layout[data-presentation-preset] .slide-frame

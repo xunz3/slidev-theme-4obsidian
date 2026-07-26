@@ -33,5 +33,3 @@ const classes = computed(() => [
     </div>
   </aside>
 </template>
-
-<style src="../styles/components.css"></style>

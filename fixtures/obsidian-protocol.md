@@ -376,3 +376,144 @@ title: Fixture Complete
 # Fixture Complete
 
 If this deck builds and previews, the current plugin/theme protocol is still coherent.
+
+<!-- FIX-THEME-VISUALS-PROTOCOL-START -->
+---
+title: Generated Semantic Families
+subtitle: Canonical class fallback and authored casing
+presentationDensity: compact
+---
+
+<div data-quality-case="protocol-callout-families" class="presentation-callout-gallery">
+
+<aside class="obsidian-slidev-callout obsidian-slidev-callout--note" data-callout="note">
+  <div class="obsidian-slidev-callout__title">API note</div>
+  <div class="obsidian-slidev-callout__content">Informational family.</div>
+</aside>
+<aside class="obsidian-slidev-callout obsidian-slidev-callout--success" data-callout="success">
+  <div class="obsidian-slidev-callout__title">mixedCase success</div>
+  <div class="obsidian-slidev-callout__content">Positive family.</div>
+</aside>
+<aside class="obsidian-slidev-callout obsidian-slidev-callout--warning" data-callout="warning">
+  <div class="obsidian-slidev-callout__title">Caution · 注意事项</div>
+  <div class="obsidian-slidev-callout__content">Caution family.</div>
+</aside>
+<aside class="obsidian-slidev-callout obsidian-slidev-callout--danger" data-callout="danger">
+  <div class="obsidian-slidev-callout__title">DO NOT recase</div>
+  <div class="obsidian-slidev-callout__content">Danger family.</div>
+</aside>
+<aside class="obsidian-slidev-callout obsidian-slidev-callout--question" data-callout="question">
+  <div class="obsidian-slidev-callout__title">Why this result?</div>
+  <div class="obsidian-slidev-callout__content">Question family.</div>
+</aside>
+<aside class="obsidian-slidev-callout obsidian-slidev-callout--quote" data-callout="quote">
+  <div class="obsidian-slidev-callout__title">Quoted evidence · 引用</div>
+  <div class="obsidian-slidev-callout__content">Quotation family.</div>
+</aside>
+<aside class="obsidian-slidev-callout" data-callout="unsupported">
+  <div class="obsidian-slidev-callout__title">Neutral fallback</div>
+  <div class="obsidian-slidev-callout__content">Unsupported type remains neutral.</div>
+</aside>
+
+</div>
+
+---
+title: Generated Image States
+subtitle: Ready, delayed, decorative, and failed
+presentationDensity: compact
+---
+
+<div data-quality-case="protocol-generated-image-states" class="presentation-figure-gallery">
+
+<figure class="obsidian-slidev-media obsidian-slidev-media--image" data-generated-state-case="ready">
+  <img class="obsidian-slidev-media__image obsidian-slidev-media__asset" :src="'/author-fixtures/media-landscape.svg'" alt="Ready generated landscape fixture" />
+  <figcaption class="obsidian-slidev-media__caption">Ready generated image.</figcaption>
+</figure>
+<figure class="obsidian-slidev-media obsidian-slidev-media--image" data-generated-state-case="delayed">
+  <img class="obsidian-slidev-media__image obsidian-slidev-media__asset" :src="'/author-fixtures/media-portrait.svg?delay=generated'" alt="Delayed generated portrait fixture" />
+  <figcaption class="obsidian-slidev-media__caption">Delayed generated image.</figcaption>
+</figure>
+<figure class="obsidian-slidev-media obsidian-slidev-media--image" data-generated-state-case="decorative">
+  <img class="obsidian-slidev-media__image obsidian-slidev-media__asset" :src="'/author-fixtures/media-landscape.svg?decorative=1'" alt="" />
+  <figcaption class="obsidian-slidev-media__caption">Decorative generated image.</figcaption>
+</figure>
+<figure class="obsidian-slidev-media obsidian-slidev-media--image" data-generated-state-case="failed">
+  <img class="obsidian-slidev-media__image obsidian-slidev-media__asset" src="data:image/svg+xml,not-an-image" alt="Generated image unavailable" />
+  <figcaption class="obsidian-slidev-media__caption">Failed generated image retains a description.</figcaption>
+</figure>
+
+</div>
+
+---
+title: Public and Generated Image Equivalence
+subtitle: Default contained presentation
+presentationDensity: compact
+---
+
+<div data-quality-case="protocol-image-equivalence" class="presentation-media-fit-gallery">
+
+<Figure
+  src="/theme/public/obsidian-card.svg"
+  alt="Equivalent Obsidian card fixture"
+  caption="Public Figure default"
+/>
+
+<figure class="obsidian-slidev-media obsidian-slidev-media--image" data-generated-equivalent="image">
+  <img class="obsidian-slidev-media__image obsidian-slidev-media__asset" src="../public/obsidian-card.svg" alt="Equivalent Obsidian card fixture" />
+  <figcaption class="obsidian-slidev-media__caption">Generated Figure default</figcaption>
+</figure>
+
+</div>
+
+---
+title: Generated Link Forms
+subtitle: Inline, wrapped, and block
+presentationDensity: compact
+---
+
+<div data-quality-case="protocol-link-forms" class="presentation-link-probe">
+
+An <a class="obsidian-slidev-link" data-link-form="inline" href="https://example.com/generated-inline">inline generated link</a>
+stays bounded beside punctuation.
+
+<p style="max-width: 15rem">
+  <a class="obsidian-slidev-link" data-link-form="wrapped" href="https://example.com/generated-wrapped">
+    A deliberately long generated bilingual link · 生成链接换行检查
+  </a>
+</p>
+
+<a class="obsidian-slidev-link" data-link-form="block" href="https://example.com/generated-block" style="display: block">
+  Block generated link treatment stays bounded to rendered text.
+</a>
+
+</div>
+
+---
+title: Generated Task and Highlight Scope
+subtitle: Nested states and code resets
+presentationDensity: compact
+---
+
+<div data-quality-case="protocol-task-highlight-scope">
+
+<ul class="obsidian-slidev-task-list contains-task-list">
+  <li class="obsidian-slidev-task-list-item task-list-item is-checked" data-task="x">
+    <input type="checkbox" checked />
+    Completed generated parent.
+    <ul class="obsidian-slidev-task-list contains-task-list">
+      <li class="obsidian-slidev-task-list-item task-list-item" data-task="">
+        <input type="checkbox" />
+        Unfinished generated child resets to primary emphasis.
+      </li>
+    </ul>
+  </li>
+</ul>
+
+Generated <span class="obsidian-slidev-highlight">flat prose highlight · 平面高亮</span> remains
+distinct from <a class="obsidian-slidev-link" href="https://example.com/generated-scope">a link</a>,
+`inline code`, and <Kbd>Esc</Kbd>.
+
+<pre><code><span class="obsidian-slidev-highlight">generated highlight class inside code</span></code></pre>
+
+</div>
+<!-- FIX-THEME-VISUALS-PROTOCOL-END -->

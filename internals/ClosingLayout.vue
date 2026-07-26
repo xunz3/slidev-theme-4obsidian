@@ -2,8 +2,8 @@
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 import Authors from '../components/Authors.vue'
-import Figure from '../components/Figure.vue'
 import SlideFrame from '../components/SlideFrame.vue'
+import ClosingLogo from './ClosingLogo.vue'
 import {
   isActionableEmail,
   resolveDeckAuthors,
@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
   subtitle?: string
   title?: string
 }>(), {
+  chrome: undefined,
   showAuthors: false,
 })
 
@@ -39,6 +40,11 @@ const logoAlt = computed(() => (
 const showAuthorCollection = computed(() => (
   props.showAuthors && resolveDeckAuthors(configs.value).length > 0
 ))
+const closingState = computed<'minimal' | 'rich'>(() => (
+  contact.value || showAuthorCollection.value || logo.value
+    ? 'rich'
+    : 'minimal'
+))
 </script>
 
 <template>
@@ -48,7 +54,11 @@ const showAuthorCollection = computed(() => (
     :title="props.title"
     variant="closing"
   >
-    <div class="presentation-closing">
+    <div
+      class="presentation-closing"
+      :class="`presentation-closing--${closingState}`"
+      :data-closing-state="closingState"
+    >
       <div class="presentation-closing__message">
         <slot />
       </div>
@@ -68,15 +78,12 @@ const showAuthorCollection = computed(() => (
       >
         <Authors />
       </div>
-      <Figure
+      <ClosingLogo
         v-if="logo"
         class="presentation-closing__logo"
         :src="logo"
         :alt="logoAlt"
-        fit="contain"
       />
     </div>
   </SlideFrame>
 </template>
-
-<style src="../styles/content-layouts.css"></style>

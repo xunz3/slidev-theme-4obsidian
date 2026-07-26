@@ -1,5 +1,9 @@
+export type AuthorPrimarySource = 'name' | 'email' | 'institution'
+
 export type ObsidianAuthor = {
-  name: string
+  primary: string
+  primarySource: AuthorPrimarySource
+  primaryHref?: string
   institution?: string
   email?: string
   emailHref?: string
@@ -19,8 +23,14 @@ export const normalizeAuthor = (
   sourceIndex = 0,
 ): ObsidianAuthor | null => {
   if (typeof value === 'string') {
-    const name = normalizeText(value)
-    return name ? { name, sourceIndex } : null
+    const primary = normalizeText(value)
+    return primary
+      ? {
+          primary,
+          primarySource: 'name',
+          sourceIndex,
+        }
+      : null
   }
 
   if (!value || typeof value !== 'object') return null
@@ -32,11 +42,31 @@ export const normalizeAuthor = (
 
   if (!name && !institution && !email) return null
 
+  const primarySource: AuthorPrimarySource = name
+    ? 'name'
+    : email
+      ? 'email'
+      : 'institution'
+  const primary = name || email || institution
+  const seen = new Set([primary])
+  const retainedInstitution = institution && !seen.has(institution)
+    ? institution
+    : undefined
+  if (retainedInstitution) seen.add(retainedInstitution)
+  const retainedEmail = email && !seen.has(email) ? email : undefined
+  const primaryHref = email === primary && isActionableEmail(email)
+    ? `mailto:${email}`
+    : undefined
+
   return {
-    name: name || email || institution,
-    institution: institution || undefined,
-    email: email || undefined,
-    emailHref: isActionableEmail(email) ? `mailto:${email}` : undefined,
+    primary,
+    primarySource,
+    primaryHref,
+    institution: retainedInstitution,
+    email: retainedEmail,
+    emailHref: retainedEmail && isActionableEmail(retainedEmail)
+      ? `mailto:${retainedEmail}`
+      : undefined,
     sourceIndex,
   }
 }
@@ -62,9 +92,5 @@ export const resolveDeckAuthors = (
 }
 
 export const formatAuthorNames = (authors: ObsidianAuthor[]): string => {
-  return authors.map((author) => author.name).filter(Boolean).join(', ')
-}
-
-export const formatAuthorDetails = (author: ObsidianAuthor): string => {
-  return [author.institution, author.email].filter(Boolean).join(' · ')
+  return authors.map(author => author.primary).filter(Boolean).join(', ')
 }

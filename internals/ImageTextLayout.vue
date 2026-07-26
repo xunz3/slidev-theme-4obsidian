@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
+import type { CSSProperties } from 'vue'
 import Figure from '../components/Figure.vue'
 import SlideFrame from '../components/SlideFrame.vue'
+import {
+  isMediaFit,
+  normalizeMediaBackgroundSize,
+  normalizeMediaFit,
+  normalizeMediaSource,
+} from '../setup/media'
 import type { PresentationChrome } from '../setup/presentation-config'
 
 defineOptions({ inheritAttrs: false })
@@ -17,15 +24,25 @@ const props = withDefaults(defineProps<{
   title?: string
 }>(), {
   backgroundSize: 'cover',
+  chrome: undefined,
 })
 
 const attrs = useAttrs()
-const image = computed(() => (
-  typeof props.image === 'string' ? props.image.trim() : ''
+const image = computed(() => normalizeMediaSource(props.image))
+const backgroundSize = computed(() => (
+  normalizeMediaBackgroundSize(props.backgroundSize, 'cover')
 ))
-const fit = computed(() => (
-  props.backgroundSize?.trim() === 'contain' ? 'contain' : 'cover'
+const fit = computed(() => normalizeMediaFit(backgroundSize.value, 'cover'))
+const customBackgroundSize = computed(() => (
+  isMediaFit(backgroundSize.value) ? undefined : backgroundSize.value
 ))
+const mediaStyle = computed<CSSProperties | undefined>(() => {
+  if (!customBackgroundSize.value || !image.value) return undefined
+  return {
+    '--presentation-media-background-image': `url(${JSON.stringify(image.value)})`,
+    '--presentation-media-background-size': customBackgroundSize.value,
+  }
+})
 </script>
 
 <template>
@@ -42,7 +59,7 @@ const fit = computed(() => (
         `presentation-image-text--${props.orientation}`,
         { 'presentation-image-text--narrative-only': !image },
       ]"
-      :data-background-size="props.backgroundSize"
+      :data-background-size="backgroundSize"
       :data-orientation="props.orientation"
     >
       <div class="presentation-image-text__narrative">
@@ -55,9 +72,9 @@ const fit = computed(() => (
         :alt="props.imageAlt"
         :caption="props.caption"
         :fit="fit"
+        :data-media-rendering="customBackgroundSize ? 'background' : 'image'"
+        :style="mediaStyle"
       />
     </div>
   </SlideFrame>
 </template>
-
-<style src="../styles/content-layouts.css"></style>

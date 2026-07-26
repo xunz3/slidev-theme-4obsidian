@@ -3,23 +3,13 @@ import SlideFrame from '../components/SlideFrame.vue'
 import { computed } from 'vue'
 import type { PresentationChrome } from '../setup/presentation-config'
 
-const props = defineProps({
-  background: {
-    type: String,
-    default: undefined,
-  },
-  title: {
-    type: String,
-    default: undefined,
-  },
-  subtitle: {
-    type: String,
-    default: undefined,
-  },
-  chrome: {
-    type: String as () => PresentationChrome,
-    default: undefined,
-  },
+const props = withDefaults(defineProps<{
+  background?: string
+  chrome?: PresentationChrome | boolean
+  subtitle?: string
+  title?: string
+}>(), {
+  chrome: undefined,
 })
 
 const style = computed(() => {

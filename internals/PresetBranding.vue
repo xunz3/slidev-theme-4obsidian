@@ -53,7 +53,7 @@ defineProps<{
     />
 
     <img
-      v-if="preset === 'ict'"
+      v-if="preset === 'ict' && ['section', 'statement'].includes(variant)"
       class="slide-frame__ict-watermark"
       :src="ictEmblem"
       alt=""
@@ -85,7 +85,7 @@ defineProps<{
     </template>
 
     <img
-      v-if="preset === 'ucas'"
+      v-if="preset === 'ucas' && ['cover', 'section', 'statement', 'center'].includes(variant)"
       class="slide-frame__ucas-watermark"
       :src="variant === 'section' ? ucasEmblemWhite : ucasEmblem"
       alt=""

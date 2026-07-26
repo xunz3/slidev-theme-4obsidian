@@ -11,6 +11,13 @@ authors:
     email: grace@example.org
   - institution: Institute for Reproducible Research
   - email: contributor@example.org
+  - email: not-an-email
+  - name: " Equal Value "
+    institution: Equal Value
+    email: equal@example.org
+  - name: Duplicate Fields
+    institution: Duplicate Fields
+    email: Duplicate Fields
   - name: Intentional Duplicate
   - name: Intentional Duplicate
   - ""
@@ -261,20 +268,16 @@ title: Minimal closing
 
 # Thank you · 谢谢
 
-Questions and discussion are welcome.
-
 </div>
 
 ---
-layout: thanks
-title: Minimal closing alias
+layout: end
+title: Minimal closing comparison
 ---
 
 <div data-quality-case="us2-thanks-minimal">
 
 # Thank you · 谢谢
-
-Questions and discussion are welcome.
 
 </div>
 
@@ -297,7 +300,7 @@ Thank you for reviewing the evidence and its operating boundaries.
 </div>
 
 ---
-layout: thanks
+layout: end
 title: Decorative closing logo
 logo: /theme/public/obsidian-card.svg
 logoAlt: ""
@@ -363,7 +366,7 @@ title: Image right
 image: /theme/public/obsidian-card.svg
 imageAlt: Obsidian card connected to a presentation canvas
 caption: Figure 2. The narrative remains first in source order.
-backgroundSize: contain
+backgroundSize: auto 72%
 ---
 
 <div data-quality-case="us2-image-right">
@@ -379,7 +382,7 @@ layout: image-left
 title: Legacy image inputs
 image: /theme/public/obsidian-card.svg
 caption: Caption fallback supplies the omitted image alternative.
-backgroundSize: cover
+backgroundSize: 80%
 class: legacy-image-layout
 ---
 
@@ -805,6 +808,10 @@ Use <Kbd :keys="['⌘', '', ' K ', '语言']" /> for a filtered symbolic bilingu
 
 <Kbd :keys="['', '  ']">Fallback key</Kbd>
 
+<span hidden data-quality-kbd-runtime-guard>
+  <Kbd :keys="['Ctrl', 5, null, ' P ']" />
+</span>
+
 </div>
 <!-- EXPANDED-US4-END -->
 
@@ -863,7 +870,7 @@ presentationDensity: compact
 
 <div data-quality-case="us5-highlights">
 
-# Highlighted evidence · 高亮证据
+# Highlighted evidence · 高亮证据
 
 Native <mark data-highlight-case="native">reviewed evidence · 已审核证据</mark> and generated
 <span class="obsidian-slidev-highlight" data-highlight-case="generated">reviewed evidence · 已审核证据</span>
@@ -881,3 +888,307 @@ The cue remains distinct beside [a link](https://example.com/evidence), *emphasi
 
 </div>
 <!-- EXPANDED-US5-END -->
+
+<!-- FIX-THEME-VISUALS-MATRIX-START -->
+---
+title: Same-source Figure fit matrix
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-media-figure-fits" class="presentation-media-fit-gallery">
+
+<Figure
+  src="/author-fixtures/media-portrait.svg"
+  alt="Labeled portrait geometry fixture contained"
+  caption="Portrait · contain"
+  fit="contain"
+/>
+<Figure
+  src="/author-fixtures/media-portrait.svg"
+  alt="Labeled portrait geometry fixture covered"
+  caption="Portrait · cover"
+  fit="cover"
+/>
+<Figure
+  src="/author-fixtures/media-landscape.svg"
+  alt="Labeled landscape geometry fixture contained"
+  caption="Landscape · contain"
+  fit="contain"
+/>
+<Figure
+  src="/author-fixtures/media-landscape.svg"
+  alt="Labeled landscape geometry fixture covered"
+  caption="Landscape · cover"
+  fit="cover"
+/>
+
+</div>
+
+---
+layout: image-left
+title: Image-left portrait containment
+image: /author-fixtures/media-portrait.svg
+imageAlt: Labeled portrait geometry fixture
+caption: The complete portrait remains visible.
+backgroundSize: contain
+---
+
+<div data-quality-case="visual-image-left-contain">
+
+# Image-left contain
+
+Narrative-first source order stays stable while all four labeled corners remain visible.
+
+</div>
+
+---
+layout: image-left
+title: Image-left portrait coverage
+image: /author-fixtures/media-portrait.svg
+imageAlt: Labeled portrait geometry fixture
+caption: The portrait fills the same media region.
+backgroundSize: cover
+---
+
+<div data-quality-case="visual-image-left-cover">
+
+# Image-left cover
+
+The same portrait source fills the viewport and crops only the necessary vertical overflow.
+
+</div>
+
+---
+layout: image-right
+title: Image-right landscape containment
+image: /author-fixtures/media-landscape.svg
+imageAlt: Labeled landscape geometry fixture
+caption: The complete landscape remains visible.
+backgroundSize: contain
+---
+
+<div data-quality-case="visual-image-right-contain">
+
+# Image-right contain
+
+Narrative-first source order stays stable while all four labeled corners remain visible.
+
+</div>
+
+---
+layout: image-right
+title: Image-right landscape coverage
+image: /author-fixtures/media-landscape.svg
+imageAlt: Labeled landscape geometry fixture
+caption: The landscape fills the same media region.
+backgroundSize: cover
+---
+
+<div data-quality-case="visual-image-right-cover">
+
+# Image-right cover
+
+The same landscape source fills the viewport and crops only the necessary horizontal overflow.
+
+</div>
+
+---
+layout: end
+title: Transparent wide closing logo
+contact: closing@example.org
+logo: /author-fixtures/transparent-logo-wide.svg
+logoAlt: Transparent wide research logo
+---
+
+<div data-quality-case="visual-closing-logo-wide">
+
+# Complete wide logo
+
+The transparent end caps remain visible without a Figure tray or decode shift.
+
+</div>
+
+---
+layout: end
+title: Transparent tall closing logo
+showAuthors: true
+logo: /author-fixtures/transparent-logo-tall.svg
+logoAlt: Transparent tall research logo
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-closing-logo-tall">
+
+# Complete tall logo
+
+Rich closing content remains balanced and preserves message, authors, then logo source order.
+
+</div>
+
+---
+title: Authored callout casing and compact risk
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-callout-authored-compact" class="presentation-callout-gallery presentation-callout-gallery--dense">
+
+<Callout type="note" title="API note">Authored acronym casing is unchanged.</Callout>
+<Callout type="success" title="mixedCase success">Positive geometry remains protected.</Callout>
+<Callout type="warning" title="Caution · 注意事项">Bilingual spacing remains authored.</Callout>
+<Callout type="danger" title="DO NOT recase">Danger remains stronger than neutral.</Callout>
+<Callout type="question" title="Why this result?">The question ring remains visible.</Callout>
+<Callout type="quote" title="Quoted evidence · 引用">The quotation bar remains visible.</Callout>
+<Callout type="unsupported" title="Neutral fallback">Invalid type remains neutral.</Callout>
+
+</div>
+
+---
+title: Link forms and author fallbacks
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-links-authors" class="presentation-link-probe">
+
+# Read every value once
+
+An [inline link](https://example.com/inline) stays glyph-bounded beside punctuation.
+
+<p style="max-width: 20rem">
+  A <a data-link-form="wrapped" href="https://example.com/wrapped">deliberately long wrapped
+  evidence link for bilingual review · 双语链接换行检查</a> retains one underline.
+</p>
+
+<a data-link-form="block" href="https://example.com/block">
+  Block-authored link treatment stays bounded to its rendered text.
+</a>
+
+<Authors />
+
+</div>
+
+---
+title: Seven Badge tones and marker states
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-badge-matrix" class="presentation-badge-gallery">
+
+<Badge>Neutral</Badge>
+<Badge tone="info">Info</Badge>
+<Badge tone="positive">Positive</Badge>
+<Badge tone="caution">Caution</Badge>
+<Badge tone="danger">Danger</Badge>
+<Badge tone="question">Question</Badge>
+<Badge tone="quotation">Quotation</Badge>
+<Badge tone=" POSITIVE " marker>Requested marker</Badge>
+<Badge tone="unsupported">Invalid → neutral</Badge>
+<Badge tone="danger">⚠ Authored icon only</Badge>
+<Badge tone="caution" marker>⚠ Marker plus authored icon</Badge>
+<Badge marker="false">Text false</Badge>
+<Badge marker="off">Text off</Badge>
+<Badge marker="true">Text true</Badge>
+<Badge marker="on">Text on</Badge>
+<Badge marker="invalid">Invalid marker</Badge>
+
+</div>
+
+---
+title: Authored sequence numbering
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-sequences-custom">
+
+# Procedure and chronology
+
+<Steps>
+
+<ol start="4">
+  <li><strong>Collect</strong> evidence from the maintained source.</li>
+  <li value="8"><strong>Validate</strong> the authored number and connector.</li>
+  <li><strong>Publish</strong> the reviewed result.</li>
+</ol>
+
+</Steps>
+
+<Timeline>
+
+1. <time datetime="2025-01">Jan 2025</time> — First dated event.
+2. **Undated · 未注明日期** — Equivalent label geometry.
+3. Plain readable event without an invented label.
+
+</Timeline>
+
+</div>
+
+---
+title: Frame chrome and brand safe-zone probe
+presentationHeader: true
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-chrome-safe-zone" class="presentation-safe-zone-probe">
+
+<div>
+
+# Safe heading · 安全标题
+
+[Focusable safe-zone link](https://example.com/safe-zone)
+
+1. Ordinary list marker
+
+| Chrome consumer | Expected role |
+| --- | --- |
+| Header / footer | Secondary |
+| Table / list | Secondary |
+
+</div>
+
+<Figure
+  src="/author-fixtures/media-landscape.svg"
+  alt="Top-right safe-zone geometry probe"
+  caption="Figure and caption avoid the preset mark."
+/>
+
+</div>
+
+---
+title: Bilingual separator wrapping
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-bilingual-heading">
+
+# Reproducible evidence workflow · 可复现证据工作流
+
+## A deliberately constrained bilingual heading · 受约束的双语标题
+
+The centered separator remains with the preceding phrase while the following phrase can wrap.
+
+</div>
+
+---
+title: Ordinary brand collision probe
+presentationDensity: compact
+---
+
+<div data-quality-case="visual-brand-collision" class="presentation-safe-zone-probe">
+
+<div>
+
+# Top-right evidence · 右上证据
+
+[Safe-zone link](https://example.com/brand-safe-zone)
+
+<button type="button" data-brand-safe-control>Review control</button>
+
+</div>
+
+<Figure
+  src="/author-fixtures/media-landscape.svg"
+  alt="Top-right Figure collision probe"
+  caption="Figure, caption, heading, link, and control remain outside the floating mark."
+/>
+
+</div>
+<!-- FIX-THEME-VISUALS-MATRIX-END -->

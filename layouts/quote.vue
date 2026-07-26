@@ -2,14 +2,15 @@
 import SlideFrame from '../components/SlideFrame.vue'
 import type { PresentationChrome } from '../setup/presentation-config'
 
-defineProps<{
+withDefaults(defineProps<{
   title?: string
   subtitle?: string
   author?: string
   source?: string
-  cite?: string
-  chrome?: PresentationChrome
-}>()
+  chrome?: PresentationChrome | boolean
+}>(), {
+  chrome: undefined,
+})
 </script>
 
 <template>
@@ -18,8 +19,8 @@ defineProps<{
       <div class="slide-layout-quote__content">
         <slot />
       </div>
-      <figcaption v-if="author || source || cite" class="slide-layout-quote__meta">
-        <cite v-if="author || cite" class="slide-layout-quote__author">{{ author ?? cite }}</cite>
+      <figcaption v-if="author || source" class="slide-layout-quote__meta">
+        <cite v-if="author" class="slide-layout-quote__author">{{ author }}</cite>
         <span v-if="source" class="slide-layout-quote__source">{{ source }}</span>
       </figcaption>
     </figure>

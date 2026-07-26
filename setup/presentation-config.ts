@@ -33,13 +33,6 @@ export const FRAME_VARIANTS = Object.freeze([
   'code',
 ] as const)
 
-const BOOLEAN_TEXT_VALUES = Object.freeze([
-  'true',
-  'on',
-  'false',
-  'off',
-] as const)
-
 type TupleValue<T extends readonly unknown[]> = T[number]
 
 export type PresentationPreset = TupleValue<typeof PRESENTATION_PRESETS>
@@ -64,16 +57,12 @@ export type ResolvedPresentationState = DeckPresentationState & Readonly<{
   showHeader: boolean
 }>
 
-type OptionScope = 'deck-and-slide' | 'deck-only'
-
 type PresentationOptionDefinition<T> = Readonly<{
-  key: string
   deckKey: string
+  inputKeys: readonly string[]
   slideKeys: readonly string[]
-  acceptedValues: readonly unknown[] | 'css-color'
   defaultValue: T
   normalize: (value: unknown, supportsColor?: CssColorSupport) => T | undefined
-  scope: OptionScope
 }>
 
 const normalizeEnum = <T extends string>(
@@ -147,96 +136,86 @@ export const normalizeFrameVariant = (value: unknown): FrameVariant | undefined 
 }
 
 const freezeDefinition = <T>(
-  definition: Omit<PresentationOptionDefinition<T>, 'slideKeys'> & { slideKeys: readonly string[] },
+  definition: Omit<
+    PresentationOptionDefinition<T>,
+    'inputKeys' | 'slideKeys'
+  > & {
+    inputKeys?: readonly string[]
+    slideKeys: readonly string[]
+  },
 ): PresentationOptionDefinition<T> => {
   return Object.freeze({
     ...definition,
+    inputKeys: Object.freeze([...(definition.inputKeys ?? [])]),
     slideKeys: Object.freeze([...definition.slideKeys]),
   })
 }
 
 export const PRESENTATION_OPTIONS = Object.freeze({
   preset: freezeDefinition<PresentationPreset>({
-    key: 'preset',
     deckKey: 'preset',
     slideKeys: ['presentationPreset'],
-    acceptedValues: PRESENTATION_PRESETS,
     defaultValue: 'default',
     normalize: normalizePreset,
-    scope: 'deck-and-slide',
   }),
   density: freezeDefinition<PresentationDensity>({
-    key: 'density',
     deckKey: 'density',
     slideKeys: ['presentationDensity'],
-    acceptedValues: PRESENTATION_DENSITIES,
     defaultValue: 'normal',
     normalize: normalizeDensity,
-    scope: 'deck-and-slide',
   }),
   chrome: freezeDefinition<PresentationChrome>({
-    key: 'chrome',
     deckKey: 'chrome',
+    inputKeys: ['chrome'],
     slideKeys: ['presentationChrome', 'chrome'],
-    acceptedValues: Object.freeze([
-      ...PRESENTATION_CHROME_VALUES,
-      ...BOOLEAN_TEXT_VALUES,
-      true,
-      false,
-    ]),
     defaultValue: 'auto',
     normalize: normalizeChrome,
-    scope: 'deck-and-slide',
   }),
   header: freezeDefinition<boolean>({
-    key: 'header',
     deckKey: 'header',
     slideKeys: ['presentationHeader', 'header'],
-    acceptedValues: Object.freeze([...BOOLEAN_TEXT_VALUES, true, false]),
     defaultValue: false,
     normalize: normalizeBoolean,
-    scope: 'deck-and-slide',
   }),
   footerAuthors: freezeDefinition<boolean>({
-    key: 'footerAuthors',
     deckKey: 'footerAuthors',
     slideKeys: ['footerAuthors'],
-    acceptedValues: Object.freeze([...BOOLEAN_TEXT_VALUES, true, false]),
     defaultValue: true,
     normalize: normalizeBoolean,
-    scope: 'deck-and-slide',
   }),
   pageNumber: freezeDefinition<boolean>({
-    key: 'pageNumber',
     deckKey: 'pageNumber',
     slideKeys: ['pageNumber'],
-    acceptedValues: Object.freeze([...BOOLEAN_TEXT_VALUES, true, false]),
     defaultValue: true,
     normalize: normalizeBoolean,
-    scope: 'deck-and-slide',
   }),
   accent: freezeDefinition<string | null>({
-    key: 'accent',
     deckKey: 'accent',
     slideKeys: ['accent'],
-    acceptedValues: 'css-color',
     defaultValue: null,
     normalize: normalizeAccent,
-    scope: 'deck-and-slide',
   }),
 } satisfies Record<string, PresentationOptionDefinition<unknown>>)
 
 export type PresentationOptionKey = keyof typeof PRESENTATION_OPTIONS
 
-export const PRESENTATION_DEFAULTS: DeckPresentationState = Object.freeze({
-  preset: PRESENTATION_OPTIONS.preset.defaultValue,
-  density: PRESENTATION_OPTIONS.density.defaultValue,
-  chrome: PRESENTATION_OPTIONS.chrome.defaultValue,
-  header: PRESENTATION_OPTIONS.header.defaultValue,
-  footerAuthors: PRESENTATION_OPTIONS.footerAuthors.defaultValue,
-  pageNumber: PRESENTATION_OPTIONS.pageNumber.defaultValue,
-  accent: PRESENTATION_OPTIONS.accent.defaultValue,
-})
+export const PRESENTATION_OPTION_KEYS = Object.freeze(
+  Object.keys(PRESENTATION_OPTIONS) as PresentationOptionKey[],
+)
+
+const optionDefinition = <K extends PresentationOptionKey>(
+  key: K,
+): PresentationOptionDefinition<DeckPresentationState[K]> => (
+  PRESENTATION_OPTIONS[key] as unknown as
+  PresentationOptionDefinition<DeckPresentationState[K]>
+)
+
+export const PRESENTATION_DEFAULTS = Object.freeze(
+  Object.fromEntries(PRESENTATION_OPTION_KEYS.map(key => [
+    key,
+    optionDefinition(key).defaultValue,
+  ])) as DeckPresentationState,
+)
 
 const asRecord = (value: unknown): Record<string, unknown> => {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) return {}
@@ -244,15 +223,53 @@ const asRecord = (value: unknown): Record<string, unknown> => {
 }
 
 const firstValid = <T>(
-  normalize: (value: unknown) => T | undefined,
+  normalize: (
+    value: unknown,
+    supportsColor?: CssColorSupport,
+  ) => T | undefined,
   candidates: readonly unknown[],
   fallback: T,
+  supportsColor?: CssColorSupport,
 ): T => {
   for (const candidate of candidates) {
-    const normalized = normalize(candidate)
+    const normalized = normalize(candidate, supportsColor)
     if (normalized !== undefined) return normalized
   }
   return fallback
+}
+
+export const resolveDeckOption = <K extends PresentationOptionKey>(
+  key: K,
+  raw: Readonly<Record<string, unknown>>,
+  supportsColor: CssColorSupport,
+): DeckPresentationState[K] => {
+  const definition = optionDefinition(key)
+  return firstValid(
+    definition.normalize,
+    [raw[definition.deckKey]],
+    definition.defaultValue,
+    supportsColor,
+  )
+}
+
+export const resolveSlideOption = <K extends PresentationOptionKey>(
+  key: K,
+  input: Readonly<Record<string, unknown>>,
+  slide: Readonly<Record<string, unknown>>,
+  deck: DeckPresentationState,
+  supportsColor: CssColorSupport,
+): DeckPresentationState[K] => {
+  const definition = optionDefinition(key)
+  return firstValid(
+    definition.normalize,
+    [
+      ...definition.inputKeys.map(inputKey => input[inputKey]),
+      ...definition.slideKeys.map(slideKey => slide[slideKey]),
+      deck[key],
+    ],
+    definition.defaultValue,
+    supportsColor,
+  )
 }
 
 export const resolveDeckPresentation = (
@@ -262,15 +279,12 @@ export const resolveDeckPresentation = (
   const raw = asRecord(rawPresentation)
   const supportsColor = options.supportsColor ?? supportsCssColor
 
-  return Object.freeze({
-    preset: normalizePreset(raw.preset) ?? PRESENTATION_DEFAULTS.preset,
-    density: normalizeDensity(raw.density) ?? PRESENTATION_DEFAULTS.density,
-    chrome: normalizeChrome(raw.chrome) ?? PRESENTATION_DEFAULTS.chrome,
-    header: normalizeBoolean(raw.header) ?? PRESENTATION_DEFAULTS.header,
-    footerAuthors: normalizeBoolean(raw.footerAuthors) ?? PRESENTATION_DEFAULTS.footerAuthors,
-    pageNumber: normalizeBoolean(raw.pageNumber) ?? PRESENTATION_DEFAULTS.pageNumber,
-    accent: normalizeAccent(raw.accent, supportsColor) ?? PRESENTATION_DEFAULTS.accent,
-  })
+  return Object.freeze(Object.fromEntries(
+    PRESENTATION_OPTION_KEYS.map(key => [
+      key,
+      resolveDeckOption(key, raw, supportsColor),
+    ]),
+  ) as unknown as DeckPresentationState)
 }
 
 export const deriveChromeVisibility = (
@@ -304,47 +318,25 @@ export const resolvePresentation = (
     supportsColor: input.supportsColor,
   })
   const slide = asRecord(input.slide)
+  const rawInput = asRecord(input)
+  const supportsColor = input.supportsColor ?? supportsCssColor
   const variant = normalizeFrameVariant(input.variant) ?? 'default'
 
-  const preset = firstValid(
-    normalizePreset,
-    [slide.presentationPreset, deck.preset],
-    PRESENTATION_DEFAULTS.preset,
-  )
-  const density = firstValid(
-    normalizeDensity,
-    [slide.presentationDensity, deck.density],
-    PRESENTATION_DEFAULTS.density,
-  )
-  const chrome = firstValid(
-    normalizeChrome,
-    [input.chrome, slide.presentationChrome, slide.chrome, deck.chrome],
-    PRESENTATION_DEFAULTS.chrome,
-  )
-  const header = firstValid(
-    normalizeBoolean,
-    [slide.presentationHeader, slide.header, deck.header],
-    PRESENTATION_DEFAULTS.header,
-  )
-  const footerAuthors = firstValid(
-    normalizeBoolean,
-    [slide.footerAuthors, deck.footerAuthors],
-    PRESENTATION_DEFAULTS.footerAuthors,
-  )
-  const pageNumber = firstValid(
-    normalizeBoolean,
-    [slide.pageNumber, deck.pageNumber],
-    PRESENTATION_DEFAULTS.pageNumber,
-  )
-  const accent = firstValid(
-    value => normalizeAccent(
-      value,
-      input.supportsColor ?? supportsCssColor,
-    ),
-    [slide.accent, deck.accent],
-    PRESENTATION_DEFAULTS.accent,
-  )
+  const resolved = Object.fromEntries(PRESENTATION_OPTION_KEYS.map(key => [
+    key,
+    resolveSlideOption(key, rawInput, slide, deck, supportsColor),
+  ])) as unknown as DeckPresentationState
+  const {
+    accent,
+    chrome,
+    density,
+    footerAuthors,
+    header,
+    pageNumber,
+    preset,
+  } = resolved
   const showChrome = deriveChromeVisibility(chrome, variant)
+  const showHeader = deriveHeaderVisibility(showChrome, header)
 
   return Object.freeze({
     preset,
@@ -356,6 +348,6 @@ export const resolvePresentation = (
     accent,
     variant,
     showChrome,
-    showHeader: deriveHeaderVisibility(showChrome, header),
+    showHeader,
   })
 }

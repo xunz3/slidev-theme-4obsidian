@@ -5,11 +5,13 @@ import type { PresentationChrome } from '../setup/presentation-config'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   chrome?: PresentationChrome | boolean
   subtitle?: string
   title?: string
-}>()
+}>(), {
+  chrome: undefined,
+})
 
 const attrs = useAttrs()
 </script>
@@ -23,9 +25,9 @@ const attrs = useAttrs()
     variant="code"
   >
     <div class="presentation-code-layout">
-      <slot />
+      <div class="presentation-code-layout__content">
+        <slot />
+      </div>
     </div>
   </SlideFrame>
 </template>
-
-<style src="../styles/content-layouts.css"></style>

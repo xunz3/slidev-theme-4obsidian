@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { slides } from '#slidev/slides'
 import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
+import type { SlideRoute } from '@slidev/types'
 import SlideFrame from '../components/SlideFrame.vue'
 import type { PresentationChrome } from '../setup/presentation-config'
 
@@ -11,27 +13,29 @@ const props = withDefaults(defineProps<{
   subtitle?: string
   sections?: TocSectionInput[]
   showNumbers?: boolean
-  chrome?: PresentationChrome
+  chrome?: PresentationChrome | boolean
 }>(), {
+  chrome: undefined,
   showNumbers: true,
 })
 
 const { $slidev, $frontmatter } = useSlideContext()
 
-const slides = computed(() => (($slidev.nav as any)?.slides ?? []) as any[])
-const frontmatter = computed(() => ($frontmatter as Record<string, any>))
+const frontmatter = computed(() => (
+  $frontmatter as Record<string, unknown>
+))
 
-const getFrontmatter = (slide: any): Record<string, any> => {
-  return slide?.meta?.slide?.frontmatter ?? slide?.slide?.frontmatter ?? slide?.frontmatter ?? {}
+const getFrontmatter = (slide: SlideRoute): Record<string, unknown> => {
+  return slide.meta.slide.frontmatter
 }
 
-const getContent = (slide: any): string => {
-  return slide?.meta?.slide?.content ?? slide?.slide?.content ?? slide?.content ?? ''
+const getContent = (slide: SlideRoute): string => {
+  return slide.meta.slide.content
 }
 
-const getTitle = (slide: any, fallback: string): string => {
+const getTitle = (slide: SlideRoute, fallback: string): string => {
   const frontmatter = getFrontmatter(slide)
-  const title = slide?.meta?.slide?.title ?? slide?.slide?.title ?? slide?.title ?? frontmatter.title
+  const title = slide.meta.slide.title ?? frontmatter.title
   if (typeof title === 'string' && title.trim()) return title.trim()
 
   const match = getContent(slide).match(/^#\s+(.+)$/m)

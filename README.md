@@ -132,9 +132,31 @@ Title rendering follows a fixed rule:
 
 Theme chrome means the non-content frame around each slide. By default it is footer-only: author names are used on the left footer, deck metadata is used in the centered footer, and `themeConfig.presentation.pageNumber` only controls the right footer page number. The header is intentionally opt-in because per-slide `title` and `subtitle` usually duplicate the visible Markdown heading.
 
-## Compatibility and migration
+## Pre-1.0 migration
 
-No migration is required for existing decks. Ordinary Slidev Markdown, the existing layout names and props, root deck metadata, `themeConfig.presentation`, documented per-slide overrides, and `.obsidian-slidev-*` semantic markup remain compatible. The new components are optional, `end`/`image-left`/`image-right` retain their built-in-compatible inputs, and the theme does not convert Obsidian syntax. Legacy `chrome` and `header` per-slide aliases remain accepted; the `presentationChrome` and `presentationHeader` names are preferred in new decks.
+This package has not reached 1.0, so it keeps one canonical route for each concept instead of
+carrying unused aliases:
+
+- use `layout: end` instead of `layout: thanks`;
+- use `author` instead of `cite` for quote-layout attribution;
+- use Figure's typed `fit="contain|cover"` instead of the undocumented duplicate
+  `backgroundSize` prop. The `image-left` and `image-right` layouts still use
+  `backgroundSize`;
+- move any centered-footer value from the undocumented root `info` field to root or per-slide
+  `footer`, or use the root `title` fallback.
+
+Ordinary Slidev Markdown, root deck metadata, `themeConfig.presentation`, documented per-slide
+overrides, canonical public components/layouts, and `.obsidian-slidev-*` semantic markup remain
+supported. The theme does not convert Obsidian syntax. Legacy `chrome` and `header` per-slide
+configuration aliases remain accepted because they are active documented inputs;
+`presentationChrome` and `presentationHeader` are preferred in new decks.
+
+The corrected visuals are intentional: images now honor explicit contain/cover geometry,
+generated and component-authored figures share stable states, links use one text-bounded
+underline, callout families keep their semantic markers, Badge markers are opt-in, completed
+tasks are quieter than unfinished tasks, highlights are flat prose washes, Steps and Timeline
+have distinct sequence cues, minimal closings are centered, and branded ordinary slides reserve
+a shallow safe zone.
 
 ## Public content components
 
@@ -144,11 +166,11 @@ These eight components auto-register for ordinary Slidev Markdown. They need no 
 | --- | --- | --- |
 | `Callout` | `type`, `title` | Neutral type; a type-specific title or `Callout`; default slot accepts Markdown/Vue |
 | `Figure` | `src`, `alt`, `caption`, `fit` | Missing-source state; resolved alt described below; no caption; `fit="contain"` |
-| `Authors` | none | Reads root `authors`, then legacy root `author`; renders nothing when no valid entry exists |
+| `Authors` | `variant` (`cards` or `cover`) | Reads root `authors`, then root `author`; `cards` is the normal presentation |
 | `Steps` | none | Default slot should contain one ordered Markdown list |
 | `Timeline` | none | Default slot should contain one ordered Markdown list; native `<time>` is optional |
 | `Tag` | none | Default slot is visible category text |
-| `Badge` | none | Default slot is visible status text |
+| `Badge` | `tone`, `marker` | `tone="neutral"`; `marker="false"`; default slot is visible status text |
 | `Kbd` | `keys` string array | Without `keys`, the default slot is one key; non-empty `keys` wins |
 
 ### Callout
@@ -163,7 +185,7 @@ Keep the **raw observations** and link to the [protocol](https://example.com).
 </Callout>
 ```
 
-The component emits the same core `.obsidian-slidev-callout` structure and preset treatment as generated callout markup. Type wording and shape accompany color, so meaning is not color-only.
+The component emits the same core `.obsidian-slidev-callout` structure and preset treatment as generated callout markup. Type wording and the invariant family shape accompany color, so meaning is not color-only: positive uses a diamond, caution a triangle, danger a square, question a ring, and quotation a bar. Presets may tune spacing and surface treatment, but do not flatten those markers, change the family title tone, or alter authored title casing.
 
 ### Figure
 
@@ -186,6 +208,20 @@ The component emits the same core `.obsidian-slidev-callout` structure and prese
 
 An empty `src` or failed request removes the broken image and retains meaningful fallback text. The bounded media viewport reserves space before decode. Empty captions add no `figcaption`; `fit` accepts `contain` or `cover`.
 
+`contain` is the default and preserves the complete source inside the bounded region; `cover`
+fills that region and may crop opposite edges when aspect ratios differ. Direct image figures
+generated by `obsidian-slidev` use the same default fit, region size, caption treatment, and
+pending/ready/failed vocabulary without being reparented. A failed meaningful generated image
+replaces the broken asset with an equally sized named fallback; an explicit decorative
+`alt=""` remains unnamed and never invents fallback text.
+
+### Links
+
+Ordinary Markdown links, generated `.obsidian-slidev-link` anchors, author email actions, and
+closing contacts use one underline bounded to rendered text. There is no persistent
+full-container border or second underline. Keyboard focus adds a visible outline without
+changing layout, and block links remain block-level only when the author requests that layout.
+
 ### Authors
 
 Declare authors in root frontmatter, then place `<Authors />` on any slide:
@@ -202,7 +238,7 @@ authors:
 <Authors />
 ```
 
-Strings become names. Objects accept `name`, `institution`, and `email`; empty fields and empty records disappear, while order and intentional duplicates remain. Root `authors` wins, with legacy root `author` used only when the plural value has no valid entry. An address matching `^[^\s@]+@[^\s@]+$` becomes a visible-focus `mailto:` link. Other non-empty email text remains visible but non-actionable.
+Strings become names. Objects accept `name`, `institution`, and `email`; empty fields and empty records disappear, while collection order and intentional duplicate records remain. Within one card, exact-after-trim duplicate values render once. If a name is absent, email becomes the primary label before institution, without being repeated as detail. Root `authors` wins, with legacy root `author` used only when the plural value has no valid entry. An address matching `^[^\s@]+@[^\s@]+$` becomes exactly one visible-focus `mailto:` link. Other non-empty email text remains visible but non-actionable.
 
 ### Steps and Timeline
 
@@ -225,19 +261,33 @@ Both components preserve the authored `<ol>` and source order. `Steps` adds numb
 </Timeline>
 ```
 
-Zero or one item creates no orphan connector. Non-list slot content remains readable without sequence decoration.
+`Steps` node labels follow authored ordered-list numbering, including `start` and item `value`.
+`Timeline` suppresses visual ordinals, uses unnumbered chronological nodes, and aligns authored
+`<time>` and leading `<strong>` labels in equivalent containers. Both use one center-to-center
+rail between adjacent nodes. Zero or one item creates no orphan connector, and non-list slot
+content remains readable without sequence decoration.
 
 ### Tag, Badge, and Kbd
 
 ```md
 <Tag>Method</Tag>
-<Badge>Complete</Badge>
+<Badge tone="positive" marker>Complete</Badge>
+<Badge tone="caution">Needs review</Badge>
 
 Press <Kbd>Esc</Kbd>, or open commands with
 <Kbd :keys="['Ctrl', 'Shift', 'P']" />.
 ```
 
-`Tag` is an outlined category cue; `Badge` is a filled status cue. Both remain visible text, non-focusable, and distinct without relying on hue. `Kbd` filters empty `keys` entries and renders a readable, non-focusable key sequence with visible `+` separators. It is never a button.
+`Tag` is an outlined category cue; `Badge` is a filled status cue. Badge `tone` accepts
+`neutral`, `info`, `positive`, `caution`, `danger`, `question`, or `quotation` after
+case-insensitive trimming; invalid values resolve to neutral. `marker` accepts a native boolean
+or the lowercase textual booleans `true`, `false`, `on`, and `off` after trimming, and defaults
+off so authored icons never gain an unintended duplicate dot. Invalid text also resolves off.
+When enabled, the marker uses the same non-color semantic
+shape as the tone. Tag and Badge remain visible text, non-focusable, and distinct without
+relying on hue. `Kbd` ignores non-string and empty runtime `keys` entries, gracefully falls back
+when `keys` is not an array, and renders a readable, non-focusable key sequence. Separators are
+visible as `+` and exposed to assistive technology as the word “plus”. It is never a button.
 
 ### Tasks and highlights
 
@@ -255,9 +305,31 @@ and `inline code`.
 
 Generated `.obsidian-slidev-highlight` markup receives the same prose treatment. The theme does not parse `==highlight==`, and highlight selectors are reset inside `pre` and `code`, so literal syntax and code samples remain code.
 
+Completed tasks use a visible check and muted regular-weight text; unfinished tasks retain the
+stronger primary emphasis. Prose highlights use a flat warm wash with no border, radius, inset
+edge, or keycap shadow, and the wash follows wrapped line fragments.
+
 ### Containment and authoring fallback
 
 Components wrap at the canonical 980 × 552 viewport. Inline labels/keycaps cannot create slide-level horizontal overflow; sequences and author cards stay contained; media reserves bounded space; and the shared frame provides last-resort scrolling for unusually long callouts or figures. For long image-and-text narratives or code, prefer compact density, shorten the content, or split the slide rather than shrinking text below a readable size.
+
+### Structural chrome, brand safe zones, and bilingual headings
+
+Each rendered frame resolves one local `--presentation-chrome-accent`. Header and footer
+dividers, table-header rules, ordinary list markers, sequence rails, and the ICT footer cap
+consume that same secondary role; semantic callout carriers remain independently stronger.
+Default slides reserve no brand strip. Ordinary UCAS and ICT slides reserve a measured shallow
+block-start strip while their wordmark/emblem floats at the top right; cover and header variants
+that place branding separately reset the reserve.
+
+The theme intentionally normalizes rendered bilingual heading text in the DOM. In `h1`–`h4`
+and frame title/subtitle text, canonical `English · 中文` spacing becomes `English · 中文`:
+only the breaking space immediately before U+00B7 is replaced with U+00A0. This keeps the
+separator with the preceding phrase while the following phrase can still wrap. The normalizer
+also observes later heading-text updates, is idempotent, and does not rewrite source Markdown.
+Because the rendered text node is changed, copying that heading from the presentation preserves
+the non-breaking space. Other punctuation, spaces, nested emphasis/links, casing, and generated
+body text are left unchanged.
 
 ## Slide-level accent
 
@@ -281,6 +353,8 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | --- | --- |
 | `--slidev-theme-primary` | Slidev-compatible primary color |
 | `--presentation-accent` | Theme accent used for links, chrome, callouts, and highlights |
+| `--presentation-chrome-accent` | Frame-local secondary color shared by structural chrome consumers |
+| `--presentation-brand-safe-block-start` | Shallow block-start reserve for an ordinary floating preset mark |
 | `--presentation-bg` | Slide background base color |
 | `--presentation-bg-elevated` | Elevated surface color |
 | `--presentation-bg-muted` | Muted code/table background color |
@@ -335,6 +409,8 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--presentation-caption-font-style` | Generated media caption font style |
 | `--presentation-caption-letter-spacing` | Generated media caption tracking |
 | `--presentation-media-max-height` | Maximum generated image/video height |
+| `--presentation-media-viewport-height` | Stable Figure and direct generated-image region height |
+| `--presentation-media-fit` | Resolved `contain` or `cover` fit inside the media region |
 | `--presentation-media-radius` | Generated image/video corner radius |
 | `--presentation-media-shadow` | Generated image/video shadow |
 | `--presentation-quote-size` | Quote layout text size |
@@ -370,9 +446,9 @@ All presets share the same three bilingual families, but map them to different r
 | `ucas` | Source Serif 4 / Noto Serif SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | Source Sans 3 / JetBrains Mono |
 | `ict` | Source Sans 3 / Noto Sans SC | Source Sans 3 / Noto Sans SC | Source Serif 4 / Noto Serif SC | JetBrains Mono |
 
-Slidev loads Source Sans 3, Source Serif 4, and JetBrains Mono as web fonts and exposes the same families through UnoCSS utilities such as `font-sans`, `font-serif`, and `font-mono`. The theme requests real roman and italic faces at weights 400, 500, 600, and 700; its CSS uses only those weights. Noto Sans SC and Noto Serif SC are loaded separately at upright weights so mixed Chinese/Latin headings keep a coherent sans or serif voice; Google Fonts serves them in unicode-range subsets, so a deck fetches only the ranges it uses. Decks marked with a Chinese `lang` keep CJK headings, captions, and quotations upright with neutral tracking.
+Slidev loads Source Sans 3, Source Serif 4, and JetBrains Mono through its configured web-font pipeline and exposes the same families through UnoCSS utilities such as `font-sans`, `font-serif`, and `font-mono`. The theme requests real roman and italic faces at weights 400, 500, 600, and 700; its CSS uses only those weights. Noto Sans SC and Noto Serif SC are declared as local fonts, so the theme never adds a second render-blocking Google Fonts import for them. When those local CJK fonts are unavailable, the documented system sans/serif fallbacks apply. Decks marked with a Chinese `lang` keep CJK headings, captions, and quotations upright with neutral tracking.
 
-For offline venues, preload or self-host the five web families, or override the `--presentation-font-*` variables with fonts installed on the presentation machine.
+For offline venues, install the two Noto SC families locally and configure Slidev to preload or self-host the three web families, or override the `--presentation-font-*` variables with fonts installed on the presentation machine.
 
 ## Layouts
 
@@ -388,26 +464,19 @@ This theme provides the following layouts:
 | `center` | Centered single-message slide |
 | `two-cols` | Two-column content layout using `::right::` |
 | `statement` | Large centered claim or takeaway |
-| `quote` | Pull quote with optional `author`, `source`, or `cite` frontmatter |
+| `quote` | Pull quote with optional `author` and `source` frontmatter |
 | `figure` | Centered media-first slide |
 | `references` | Smaller reference/bibliography slide |
 | `end` | Closing message with optional contact, authors, and logo |
-| `thanks` | Exact alias of `end` |
 | `image-left` | Narrative plus a visually left-hand figure |
 | `image-right` | Narrative plus a visually right-hand figure |
 | `code` | Title plus a full-width, contained code region |
 
-### Closing layouts: `end` and `thanks`
-
-The two names share one implementation and are identical in props, slots, defaults, DOM, styling, and fallbacks.
+### Closing layout: `end`
 
 ```md
 ---
 layout: end
-contact: research@example.org
-showAuthors: true
-logo: /lab-mark.svg
-logoAlt: Example Research Lab
 ---
 
 # Thank you
@@ -424,7 +493,17 @@ Questions and discussion
 | `logoAlt` | `Presentation logo` when omitted | Explicit `""` is decorative; non-empty text is meaningful |
 | `chrome` | `auto` | Hides closing chrome; explicit `on` still works |
 
-Omitted regions consume no grid space. Missing/failed logos retain meaningful fallback text and do not shift the message, contact, or authors.
+Omitted regions consume no grid space. A message-only closing resolves the `minimal` state and
+centers the message on both axes. Adding contact, authors, or logo resolves the `rich` state,
+while source order remains message, contact, authors, logo. The dedicated closing-logo region
+uses contain fit without a Figure tray border, tinted background, or shadow. Missing/failed
+logos retain meaningful fallback text and do not shift the message, contact, or authors.
+
+For most talks, keep the closing concise with only a message; this uses the centered `minimal`
+state shown above. Add `contact` or a meaningful project/institution `logo` only when it helps
+the audience take a next step. Use `<Authors />` on a dedicated team or ownership slide when
+full author details matter. Enable `showAuthors` only when the closing itself needs to repeat
+the root author collection.
 
 ### Image-and-text layouts: `image-left` and `image-right`
 
@@ -449,11 +528,16 @@ Both orientations keep narrative then figure in the DOM; CSS alone places the im
 | Default slot | Authored narrative | Heading and prose region |
 | `image` | Omitted | Existing Slidev key; omission collapses the figure region |
 | `class` | Omitted | Existing built-in-compatible class input |
-| `backgroundSize` | `cover` | Existing size/fit input; `cover` and `contain` are primary values |
+| `backgroundSize` | `cover` | Any safe, non-empty CSS `background-size`; `cover` and `contain` use native image fit |
 | `imageAlt` | Caption, then `Figure` | Same tri-state rules as `Figure`; explicit `""` is decorative |
 | `caption` | Omitted | Empty values create no `figcaption` |
 
-Both regions contain wrapping and overflow, while the media shell prevents image decode/failure from moving the narrative.
+Both regions contain wrapping and overflow, while the media shell prevents image decode/failure
+from moving the narrative. `cover` and `contain` render through the accessible image element.
+Other valid values such as `80%`, `auto 72%`, or `120px auto` render as a centered,
+non-repeating viewport background while the same source remains present as the accessible image
+and retains its pending/ready/failed state. Empty, unsafe, or excessively long values fall back
+to `cover` instead of being injected into an inline style.
 
 ### Code layout
 
@@ -474,17 +558,18 @@ The default slot is the authored content. Its first visible `h1` remains the tit
 
 ## Maintained preset fixtures
 
-The three maintained preset decks now end with a complete public-authoring appendix:
+The three maintained preset decks are complete, coherent research-talk examples:
 
 - `fixtures/default-preset.md` — academic calibration example using the default preset
 - `fixtures/ucas-preset.md` — geometric-learning example using the UCAS preset
 - `fixtures/ict-preset.md` — intelligent-systems example using the ICT preset
 
-Each appendix demonstrates `Callout`, `Figure`, `Authors`, `Steps`, `Timeline`, `Tag`, `Badge`,
-and `Kbd`; native task lists and prose highlights; slide-level accent override; the `code`,
-`image-left`, and `image-right` layouts; and a metadata-driven `end` or `thanks` closing slide.
-The examples use only ordinary Slidev authoring and the theme's bundled `/obsidian-card.svg`
-asset.
+Each deck follows a practical sequence—research question, method, evidence and reproducibility,
+conclusion, references, takeaway, and closing—while demonstrating `Callout`, `Figure`, `Authors`,
+`Steps`, `Timeline`, `Tag`, `Badge`, and `Kbd`; native task lists and prose highlights;
+slide-level accent override; the `code`, `image-left`, and `image-right` layouts; and a
+metadata-driven `end` closing slide. The examples use only ordinary Slidev
+authoring and the theme's bundled `/theme/public/obsidian-card.svg` asset.
 
 Build them independently with:
 
@@ -543,21 +628,31 @@ The aggregate release command is:
 pnpm run quality
 ```
 
-It builds the five maintained decks and three generated preset-matrix decks with at most two builds at once, then runs configuration, architecture, preset isolation, accessibility, interaction, visual, asset, and output-size gates. Runtime evidence and a phase summary are retained under `.artifacts/quality/`. The gate exits `0` on success, `1` for product or contract failures, and `2` for harness errors, unapproved skips, or the hard limit of 300 seconds.
+It builds the maintained and generated contract decks, then runs configuration, architecture,
+preset isolation, accessibility, interaction, visual, asset, and post-visibility layout-stability
+gates. A phase summary is retained under `.artifacts/quality/`. There is no aggregate build-time,
+output-growth, bundle-size, or navigation-latency acceptance threshold. The previous raw
+output/navigation sampling baselines and their update command were removed because they did not
+gate product correctness and were disproportionately large. Per-process timeouts detect a hung
+tool rather than enforce a performance budget. The blocking size rule is limited to shipped
+theme assets checked by `pnpm run assets:check`. The gate exits `0` on success, `1` for product
+or contract failures, and `2` for harness errors or unapproved skips.
 
-Approved visual and output baselines are immutable during normal checks. Update them only for an intentional reviewed change:
+Approved visual baselines are immutable during normal checks. Update them only for an
+intentional reviewed visual change:
 
 ```bash
-pnpm run quality:update-baselines -- --reviewer "Reviewer name" --rationale "Approved visual or output change"
-git diff -- tests/quality/baselines
+pnpm run quality:update-visual-baselines -- --reviewer "Reviewer name" --rationale "Approved visual change"
+git diff -- tests/quality/baselines/visual
 pnpm run quality
 ```
 
-Review the resulting PNG, manifest, byte-budget, and provenance diff. Never update a baseline merely to hide an unexplained failure.
+Review the resulting PNG, manifest, and provenance diff. Never update a baseline merely to hide
+an unexplained failure.
 
 ## Development
 
-The latest cross-preset visual review is recorded in [`qa/refactor-theme-architecture/visual-review.md`](qa/refactor-theme-architecture/visual-review.md).
+The latest cross-preset visual review is recorded in [`qa/fix-theme-visuals/visual-review.md`](qa/fix-theme-visuals/visual-review.md).
 
 - `pnpm install`
 - `pnpm run dev` to start theme preview of `example.md`

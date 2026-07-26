@@ -10,7 +10,7 @@ import type {
   FrameVariant,
   PresentationChrome,
 } from '../setup/presentation-config'
-import PresetBranding from './PresetBranding.vue'
+import PresetBranding from '../internals/PresetBranding.vue'
 
 const props = withDefaults(defineProps<{
   canvasStyle?: CSSProperties
@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
   title?: string
   variant?: FrameVariant
 }>(), {
+  chrome: undefined,
   variant: 'default',
 })
 
@@ -38,6 +39,11 @@ const resolved = computed(() => resolvePresentation({
 
 const outerStyle = computed<CSSProperties | undefined>(() => {
   const style: CSSProperties = { ...(props.canvasStyle ?? {}) }
+  return Object.keys(style).length > 0 ? style : undefined
+})
+
+const frameStyle = computed<CSSProperties | undefined>(() => {
+  const style: CSSProperties = {}
   if (resolved.value.accent) {
     style['--presentation-accent'] = resolved.value.accent
     style['--slidev-theme-primary'] = resolved.value.accent
@@ -65,9 +71,9 @@ const footerMiddle = computed(() => {
   return frontmatter.value.footer
     ?? configs.value.footer
     ?? configs.value.title
-    ?? configs.value.info
     ?? ''
 })
+
 </script>
 
 <template>
@@ -89,6 +95,7 @@ const footerMiddle = computed(() => {
       ]"
       :data-presentation-preset="resolved.preset"
       :data-presentation-density="resolved.density"
+      :style="frameStyle"
     >
       <PresetBranding
         :preset="resolved.preset"

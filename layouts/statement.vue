@@ -2,11 +2,13 @@
 import SlideFrame from '../components/SlideFrame.vue'
 import type { PresentationChrome } from '../setup/presentation-config'
 
-defineProps<{
+withDefaults(defineProps<{
   title?: string
   subtitle?: string
-  chrome?: PresentationChrome
-}>()
+  chrome?: PresentationChrome | boolean
+}>(), {
+  chrome: undefined,
+})
 </script>
 
 <template>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="720" viewBox="0 0 180 720" role="img" aria-labelledby="title description">
+  <title id="title">Transparent tall logo fixture</title>
+  <desc id="description">An unusually tall transparent logo with visible end caps that reveal cropping.</desc>
+  <path d="M90 34V686" fill="none" stroke="#6548a8" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="90" cy="40" r="32" fill="#ef8b2c" stroke="#4a2600" stroke-width="8"/>
+  <circle cx="90" cy="680" r="32" fill="#2a9d8f" stroke="#064f51" stroke-width="8"/>
+  <rect x="28" y="190" width="124" height="340" rx="42" fill="#f8f4ff" stroke="#6548a8" stroke-width="8"/>
+  <g fill="#382267" font-family="system-ui, sans-serif" font-size="34" font-weight="800" text-anchor="middle">
+    <text x="90" y="282">T</text>
+    <text x="90" y="328">A</text>
+    <text x="90" y="374">L</text>
+    <text x="90" y="420">L</text>
+    <text x="90" y="478">标志</text>
+  </g>
+</svg>
