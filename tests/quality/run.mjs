@@ -378,6 +378,15 @@ const executeQuality = async (options) => {
       return { root: relativePath(qualityArtifactRoot) }
     })
 
+    await runPhase(
+      'protocol-conformance',
+      () => runCommandPhase(
+        'protocol-conformance',
+        ['--test', 'tests/quality/protocol-conformance.spec.mjs'],
+        30_000,
+      ),
+    )
+
     let buildDefinitions
     await runPhase('prepare-builds', async () => {
       const [matrixDefinitions, expandedDefinitions] = await Promise.all([
@@ -393,6 +402,8 @@ const executeQuality = async (options) => {
         { id: 'ucas', source: 'fixtures/ucas-preset.md' },
         { id: 'ict', source: 'fixtures/ict-preset.md' },
         { id: 'protocol', source: 'fixtures/obsidian-protocol.md' },
+        { id: 'protocol-core', source: 'fixtures/protocol-core.md' },
+        { id: 'protocol-profile', source: 'fixtures/protocol-profile.md' },
       ].map(definition => ({
         ...definition,
         outDir: resolve(maintainedRoot, definition.id),
@@ -406,7 +417,7 @@ const executeQuality = async (options) => {
         })),
         ...expandedDefinitions,
       ]
-      assert.equal(new Set(buildDefinitions.map(build => build.id)).size, 11)
+      assert.equal(new Set(buildDefinitions.map(build => build.id)).size, 13)
       for (const build of buildDefinitions) {
         assert.ok(resolve(build.outDir) === build.outDir, `${build.id}: absolute output`)
       }

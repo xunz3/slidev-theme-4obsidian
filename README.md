@@ -53,6 +53,58 @@ Learn more about [how to use a theme](https://sli.dev/guide/theme-addon#use-them
 
 The theme does not parse Obsidian Markdown by itself. Keep conversion logic in `obsidian-slidev`; keep rendering and presentation in this theme.
 
+## Shared protocol compatibility
+
+Lilas declares consumer support for the independently versioned shared contracts:
+
+- `obsidian-slidev/core@1.0.0`
+- `obsidian-slidev/presentation@1.0.0`
+
+Both declarations use the conservative half-open range `[1.0.0, 1.1.0)` and pin publication
+`1.0.0` at SHA-256
+`3d780d44053fcdc7b23b4167285c275ab2c20cb326622811ce700ab838314b43`.
+The declaration lives at `package.json#/obsidianSlidev/support`. Package name and package
+version are provenance only; neither is a compatibility input.
+
+Generated decks carry `obsidian-slidev-protocol`, and may explicitly select
+`obsidian-slidev-profile`. During setup, Lilas parses those fields and its own support
+declaration, evaluates the exact coordinates, and updates the generated
+`.obsidian-slidev-compatibility` notice. In an embedded Obsidian preview it also echoes the
+opaque `obsidianSlidevToken` in an `obsidian-slidev/protocol-support` parent message. A
+compatible result hides the notice, missing support remains visibly `unverified`, and an
+explicit mismatch stays visible and stops setup with recovery guidance. The message is runtime
+advice only; it is never formal conformance evidence.
+
+In a source repository checkout, the verified publication snapshot is under
+`vendor/obsidian-slidev-protocol/1.0.0/`, with source revision, publication digest, and
+deterministic archive digest recorded in `protocol.lock.json`. These conformance artifacts are
+repository evidence and are not shipped in the runtime npm package. Do not edit those files by
+hand. To adopt a new exact publication from an explicit `obsidian-slidev` checkout:
+
+```bash
+node /path/to/obsidian-slidev/scripts/export-protocol-publication.mjs \
+  --protocol-root /path/to/obsidian-slidev/protocol \
+  --publication X.Y.Z \
+  --expected-publication-sha256 <publication-sha256> \
+  --output "$PWD/vendor/obsidian-slidev-protocol/X.Y.Z" \
+  --archive "$PWD/vendor/obsidian-slidev-protocol/X.Y.Z.tar"
+
+node /path/to/obsidian-slidev/scripts/verify-protocol-consumer-lock.mjs \
+  --protocol-root /path/to/obsidian-slidev/protocol \
+  --publication X.Y.Z \
+  --theme-root "$PWD" \
+  --expected-source-repository https://github.com/xunz3/obsidian-slidev.git
+```
+
+Record the exporter’s hashes and full source revision in `protocol.lock.json`, update the
+package ranges only after the canonical core/Profile fixtures pass, then run
+`node --test tests/quality/protocol-conformance.spec.mjs` and `pnpm run quality`. Export into
+an absent version path; a published version is immutable and must not be overwritten.
+
+`default`, `ucas`, and `ict`, their light/dark visuals, branding, tokens, and layout styling
+remain Lilas-only implementation features. They are deliberately absent from Profile facts and
+never influence protocol compatibility.
+
 ## Semantic Boundary
 
 The theme keeps generic presentation structure separate from integration-specific markup:
@@ -619,6 +671,7 @@ Focused diagnostics:
 
 ```bash
 node tests/quality/configuration.spec.mjs
+node --test tests/quality/protocol-conformance.spec.mjs
 node scripts/check-presentation-css.mjs
 node --test tests/quality/preset-isolation.spec.mjs
 node --test tests/quality/accessibility.spec.mjs
@@ -634,9 +687,11 @@ The aggregate release command is:
 pnpm run quality
 ```
 
-It builds the maintained and generated contract decks, then runs configuration, architecture,
-preset isolation, accessibility, interaction, visual, asset, and post-visibility layout-stability
-gates. A phase summary is retained under `.artifacts/quality/`. There is no aggregate build-time,
+It verifies the pinned publication before applying fixture overlays, builds the maintained and
+generated contract decks (including the canonical core and Profile adapters), then runs
+configuration, architecture, preset isolation, accessibility, interaction, visual, asset, and
+post-visibility layout-stability gates. A phase summary is retained under
+`.artifacts/quality/`. There is no aggregate build-time,
 output-growth, bundle-size, or navigation-latency acceptance threshold. The previous raw
 output/navigation sampling baselines and their update command were removed because they did not
 gate product correctness and were disproportionately large. Per-process timeouts detect a hung

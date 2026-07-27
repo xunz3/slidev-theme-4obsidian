@@ -4,6 +4,14 @@
 	"type": "module",
 	"description": "A standalone Slidev theme with reusable presets and optional Obsidian integration.",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/xunz3/slidev-theme-4obsidian.git"
+	},
+	"homepage": "https://github.com/xunz3/slidev-theme-4obsidian#readme",
+	"bugs": {
+		"url": "https://github.com/xunz3/slidev-theme-4obsidian/issues"
+	},
 	"keywords": [
 		"obsidian",
 		"obsidian-slidev",
@@ -77,6 +85,35 @@
 				"weights": "400,500,600,700",
 				"italic": true
 			}
+		}
+	},
+	"obsidianSlidev": {
+		"support": {
+			"schemaVersion": 1,
+			"publication": {
+				"version": "1.0.0",
+				"manifestSha256": "3d780d44053fcdc7b23b4167285c275ab2c20cb326622811ce700ab838314b43"
+			},
+			"core": {
+				"id": "obsidian-slidev/core",
+				"ranges": [
+					{
+						"minInclusive": "1.0.0",
+						"maxExclusive": "1.1.0"
+					}
+				]
+			},
+			"profiles": [
+				{
+					"id": "obsidian-slidev/presentation",
+					"ranges": [
+						{
+							"minInclusive": "1.0.0",
+							"maxExclusive": "1.1.0"
+						}
+					]
+				}
+			]
 		}
 	}
 }
