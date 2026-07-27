@@ -155,13 +155,32 @@ export const assertProtocolCompatibility = (
   )
 }
 
-const combineDeckDeclaration = (
+const PROTOCOL_DECLARATION_KEYS = new Set([
+  'id',
+  'publication',
+  'version',
+])
+
+export const normalizeRuntimeDeckDeclaration = (
   rawProtocol: unknown,
   rawProfile: unknown,
 ): unknown => {
   if (!isRecord(rawProtocol)) return rawProtocol
+
+  if (
+    Object.keys(rawProtocol).some(
+      key => !PROTOCOL_DECLARATION_KEYS.has(key),
+    )
+  ) {
+    return rawProtocol
+  }
+
   return {
-    ...rawProtocol,
+    core: {
+      id: rawProtocol.id,
+      version: rawProtocol.version,
+    },
+    publication: rawProtocol.publication,
     ...(rawProfile === undefined ? {} : { profile: rawProfile }),
   }
 }
@@ -178,7 +197,7 @@ export const installProtocolCompatibilityBridge = ({
 }: InstallBridgeInput): (() => void) => {
   if (rawProtocol === undefined || rawProtocol === null) return () => undefined
 
-  const deck = combineDeckDeclaration(rawProtocol, rawProfile)
+  const deck = normalizeRuntimeDeckDeclaration(rawProtocol, rawProfile)
   const assessment = assess(deck, rawSupport)
   const parsedDeck = deck as DeckDeclaration
   const support = rawSupport as ThemeSupportDeclaration

@@ -96,6 +96,12 @@ const compatibleDeck = {
   },
 }
 
+const runtimeProtocolDeclaration = {
+  id: compatibleDeck.core.id,
+  version: compatibleDeck.core.version,
+  publication: compatibleDeck.publication,
+}
+
 const declaredSupport = {
   schemaVersion: 1,
   publication: {
@@ -289,6 +295,54 @@ test('runtime bridge updates the in-deck notice, echoes the token, and fails act
     () => runtime.assertProtocolCompatibility(incompatible),
     /obsidian-slidev\/core@1\.0\.0|supporting theme/i,
   )
+})
+
+test('runtime bridge adapts the canonical generated frontmatter declaration', async () => {
+  const compatibility = await loadTypeScriptModule(
+    'setup/protocol-compatibility.ts',
+  )
+  const runtime = await loadTypeScriptModule('setup/protocol-runtime.ts')
+  const attributes = new Map()
+  const notice = {
+    hidden: false,
+    textContent: '',
+    setAttribute: (name, value) => attributes.set(name, value),
+    removeAttribute: name => attributes.delete(name),
+  }
+  const documentLike = {
+    querySelector: selector => (
+      selector === '.obsidian-slidev-compatibility' ? notice : null
+    ),
+    referrer: 'app://obsidian.md/workspace',
+  }
+  const posted = []
+  const self = {}
+  const stop = runtime.installProtocolCompatibilityBridge({
+    assess: compatibility.assessProtocolCompatibility,
+    document: documentLike,
+    location: {
+      href: 'http://127.0.0.1:3030/?obsidianSlidevToken=runtime-token',
+    },
+    parent: {
+      postMessage: (...args) => posted.push(args),
+    },
+    rawProtocol: runtimeProtocolDeclaration,
+    rawSupport: declaredSupport,
+    self,
+  })
+
+  assert.equal(notice.hidden, true)
+  assert.equal(attributes.get('data-obsidian-slidev-status'), 'compatible')
+  assert.equal(posted.length, 1)
+  assert.deepEqual(posted[0][0].deck, {
+    core: compatibleDeck.core,
+  })
+  assert.equal(posted[0][0].assessment.reasonCode, 'COMPATIBLE_CORE')
+  assert.equal(posted[0][0].token, 'runtime-token')
+
+  stop()
+  assert.equal(notice.hidden, false)
+  assert.equal(attributes.get('data-obsidian-slidev-status'), 'unverified')
 })
 
 test('main setup installs and disposes the compatibility bridge without polling', async () => {
