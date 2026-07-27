@@ -2,7 +2,7 @@
 
 ## Scope
 
-Selecting `obsidian-theme-lilas` makes these PascalCase components available in ordinary Slidev
+Selecting `slidev-theme-lilas` makes these PascalCase components available in ordinary Slidev
 Markdown without an addon or `obsidian-slidev`:
 
 ```text

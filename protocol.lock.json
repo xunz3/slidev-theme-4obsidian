@@ -6,7 +6,7 @@
   },
   "source": {
     "repository": "https://github.com/xunz3/obsidian-slidev.git",
-    "revision": "0b7e0378ab0f6bb1cbf4537587cba49434aab3d7"
+    "revision": "cf673113553b89f6555f5468d95541fedbfb16cc"
   },
   "snapshot": {
     "path": "vendor/obsidian-slidev-protocol/1.0.0"

@@ -140,7 +140,10 @@ test('vendored publication, archive, manifests, and canonical fixture hashes are
     lock.source.repository,
     'https://github.com/xunz3/obsidian-slidev.git',
   )
-  assert.match(lock.source.revision, /^[0-9a-f]{40}$/)
+  assert.equal(
+    lock.source.revision,
+    'cf673113553b89f6555f5468d95541fedbfb16cc',
+  )
   assert.equal(sha256(archive), lock.archive.sha256)
   await verifyManifest(coreRoot, coreManifest)
   await verifyManifest(profileRoot, profileManifest)
@@ -171,7 +174,7 @@ test('the pure Lilas evaluator passes every vendored canonical compatibility vec
 test('package support pins exact half-open core and Presentation Profile ranges', async () => {
   const packageJson = await readJson(resolve(repositoryRoot, 'package.json'))
   assert.deepEqual(packageJson.obsidianSlidev?.support, declaredSupport)
-  assert.equal(packageJson.name, 'obsidian-theme-lilas')
+  assert.equal(packageJson.name, 'slidev-theme-lilas')
   assert.equal('name' in packageJson.obsidianSlidev.support, false)
   assert.equal('package' in packageJson.obsidianSlidev.support, false)
 })
