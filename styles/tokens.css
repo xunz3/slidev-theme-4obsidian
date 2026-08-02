@@ -1,6 +1,6 @@
 :root {
   /* Slidev controls use the default preset's primary; slide palettes remain preset-owned. */
-  --slidev-theme-primary: #315f7d;
+  --slidev-theme-primary: #5c6f5e;
 }
 
 .slide-frame {
@@ -70,9 +70,9 @@
   --presentation-author-card-shadow: 0 8px 24px rgba(32, 37, 41, 0.05);
   --presentation-closing-gap: 0.8rem;
   --presentation-image-text-gap: 2rem;
-  --presentation-sequence-gap: 0.68rem;
-  --presentation-sequence-rail-width: 0.12rem;
-  --presentation-sequence-node-size: 1.72rem;
+  --presentation-sequence-gap: 0.54rem;
+  --presentation-sequence-rail-width: 1px;
+  --presentation-sequence-node-size: 1.28rem;
   --presentation-sequence-node-bg: var(--presentation-accent);
   --presentation-sequence-node-text: var(--presentation-bg-elevated);
   --presentation-sequence-rail: var(--presentation-chrome-accent);
@@ -90,7 +90,7 @@
 }
 
 html.dark {
-  --slidev-theme-primary: #91b9d6;
+  --slidev-theme-primary: #a8bd9f;
 }
 
 html.dark .slide-frame {

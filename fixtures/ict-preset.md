@@ -58,7 +58,7 @@ sections:
 layout: section
 ---
 
-# 01 · Co-design
+# Co-design
 
 Aligning algorithms with the machines that execute them
 
@@ -120,7 +120,7 @@ source: Computer architecture as a research discipline
 layout: section
 ---
 
-# 02 · Evidence and reproducibility
+# Evidence and reproducibility
 
 Connect benchmark results to an inspectable execution path
 

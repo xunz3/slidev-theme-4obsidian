@@ -228,6 +228,18 @@
   content: "";
 }
 
+/* Presets opt into the shared section folio and style it in their own visual language. */
+.slide-layout-section__kicker {
+  display: none;
+  margin-bottom: 1.05rem;
+  font-family: var(--presentation-font-label, var(--presentation-font-sans));
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .slide-layout-statement {
   max-width: 58rem;
   text-align: center;
@@ -466,6 +478,11 @@
 
 .slide-layout-two-cols__pane {
   min-width: 0;
+}
+
+/* Markdown may wrap an otherwise hidden anchor in a paragraph; it must not offset one pane. */
+.slide-layout-two-cols__pane > p:has(> [hidden]:only-child) {
+  display: none;
 }
 
 @media (max-width: 720px) {

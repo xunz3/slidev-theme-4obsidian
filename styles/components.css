@@ -75,8 +75,11 @@
 }
 
 .presentation-sequence {
+  --presentation-sequence-node-gutter: 0.72rem;
+  --presentation-sequence-node-top: 0.13rem;
   --presentation-sequence-node-offset: calc(
-    var(--presentation-sequence-node-size) + 0.72rem
+    var(--presentation-sequence-node-size)
+    + var(--presentation-sequence-node-gutter)
   );
   --presentation-sequence-node-center: calc(
     var(--presentation-sequence-node-size) / 2
@@ -102,8 +105,9 @@
   min-height: var(--presentation-sequence-node-size);
   min-width: 0;
   margin: 0;
-  padding-left: 0.48rem;
+  padding: 0 0 0.28rem;
   list-style: none;
+  line-height: var(--presentation-body-line-height);
   overflow-wrap: anywhere;
 }
 
@@ -114,7 +118,7 @@
 .presentation-sequence > ol > li::before {
   position: absolute;
   z-index: 1;
-  top: 0;
+  top: var(--presentation-sequence-node-top);
   left: calc(-1 * var(--presentation-sequence-node-offset));
   display: grid;
   box-sizing: border-box;
@@ -123,16 +127,20 @@
   place-items: center;
   border: 1px solid color-mix(
     in srgb,
-    var(--presentation-sequence-node-bg) 78%,
-    var(--presentation-border-strong)
+    var(--presentation-sequence-node-bg) 58%,
+    var(--presentation-border)
   );
   border-radius: 999px;
-  color: var(--presentation-sequence-node-text);
-  background: var(--presentation-sequence-node-bg);
+  color: color-mix(
+    in srgb,
+    var(--presentation-sequence-node-bg) 82%,
+    var(--presentation-text)
+  );
+  background: var(--presentation-bg);
   font-family: var(--presentation-font-label);
-  font-size: 0.72em;
+  font-size: 0.64em;
   font-variant-numeric: tabular-nums;
-  font-weight: 800;
+  font-weight: 650;
   line-height: 1;
   pointer-events: none;
 }
@@ -140,10 +148,14 @@
 .presentation-sequence > ol > li:not(:last-child)::after {
   position: absolute;
   z-index: 0;
-  top: var(--presentation-sequence-node-center);
+  top: calc(
+    var(--presentation-sequence-node-top)
+    + var(--presentation-sequence-node-center)
+  );
   bottom: calc(
     -1 * (
       var(--presentation-sequence-gap)
+      + var(--presentation-sequence-node-top)
       + var(--presentation-sequence-node-center)
     )
   );
@@ -153,8 +165,11 @@
     - var(--presentation-sequence-rail-width) / 2
   );
   width: var(--presentation-sequence-rail-width);
-  border-radius: 999px;
-  background: var(--presentation-sequence-rail);
+  background: color-mix(
+    in srgb,
+    var(--presentation-sequence-rail) 72%,
+    transparent
+  );
   content: "";
   pointer-events: none;
 }
@@ -164,32 +179,28 @@
 }
 
 .presentation-steps > ol > li {
-  padding: 0.34rem 0.48rem 0.4rem;
-  border-bottom: 1px solid color-mix(
-    in srgb,
-    var(--presentation-accent) 20%,
-    var(--presentation-border)
-  );
+  background: transparent;
 }
 
-.presentation-steps > ol > li:last-child {
-  border-bottom-color: transparent;
+.presentation-timeline {
+  --presentation-sequence-node-gutter: 0.92rem;
+  --presentation-sequence-node-size: 0.56rem;
+  --presentation-sequence-node-top: 0.49rem;
 }
 
 .presentation-timeline > ol > li {
-  padding: 0.42rem 0.58rem 0.48rem;
+  padding: 0 0 0.32rem;
   border-left: 0;
-  background: color-mix(
-    in srgb,
-    var(--presentation-accent) 6%,
-    transparent
-  );
+  background: transparent;
 }
 
 .presentation-timeline > ol > li::before {
-  border-width: 0.3rem;
-  border-color: var(--presentation-sequence-node-bg);
-  background: var(--presentation-bg-elevated);
+  border-color: color-mix(
+    in srgb,
+    var(--presentation-sequence-node-bg) 76%,
+    var(--presentation-border)
+  );
+  background: var(--presentation-bg);
   content: "";
 }
 
@@ -201,24 +212,22 @@
   > :is(time, strong):first-child {
   display: inline-flex;
   align-items: center;
-  min-width: 7.4em;
-  min-height: 1.58em;
-  padding: 0.04em 0.34em;
-  border: 1px solid color-mix(
-    in srgb,
-    var(--presentation-accent) 34%,
-    var(--presentation-border)
-  );
-  border-radius: 999px;
+  min-width: 7.1em;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
   color: color-mix(
     in srgb,
-    var(--presentation-accent) 76%,
+    var(--presentation-accent) 70%,
     var(--presentation-text)
   );
-  font-family: var(--presentation-font-mono);
-  font-size: 0.82em;
-  font-weight: 700;
-  line-height: 1.2;
+  background: transparent;
+  font-family: var(--presentation-font-label);
+  font-size: 0.8em;
+  font-weight: 650;
+  letter-spacing: 0.015em;
+  line-height: 1.35;
   vertical-align: baseline;
 }
 

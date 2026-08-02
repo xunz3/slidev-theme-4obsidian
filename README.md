@@ -486,11 +486,11 @@ Use `themeConfig.presentation.preset` to switch visual systems without changing 
 | `ucas` | UCAS-branded courses, seminars, project reviews, and research talks |
 | `ict` | ICT-branded systems, architecture, AI, and computing research talks |
 
-When no preset is specified, `default` is selected. It is a paper-inspired but projection-aware system: serif display type, a centered academic title page, booktabs-like tables, flat code and callout surfaces, italic captions, and an ink-blue section field create academic formality without reproducing the density of a printed article.
+When no preset is specified, `default` is selected. It is a paper-inspired but projection-aware system derived from the quiet editorial language of xunz.ink: warm paper and graphite surfaces, muted sage accents, serif display type, a centered title page, booktabs-like tables, flat code, hairline fieldset callouts, and restrained section dividers. The namesake lilas violet appears only as a quiet brand signature on ceremonial pages — the cover rules, the section kicker and hairline, and the statement rule — while content slides stay on the functional sage accent; override `--presentation-lilas` to retune it.
 
-`ucas` is an independent research-oriented direction based on the official UCAS blue and the bundled bilingual identity assets. Its cover uses a deep-blue-to-white gradient brand rail with the vertical UCAS lockup; ordinary slides return to a cold-white, rail-free canvas with restrained serif display titles, booktabs-like tables, and a compact horizontal wordmark. Emblem watermarks are reserved for cover, section, statement, and center layouts so research content remains primary. The preset supports the same layouts and generated Obsidian markup as the other presets, and it also works with ordinary Slidev Markdown.
+`ucas` is an academic editorial direction based on the official UCAS blue and bundled bilingual identity assets. A narrow cobalt spine anchors the cover; ordinary slides use a quiet blue-white paper canvas, compact wordmark, serif hierarchy, booktabs-like rules, margin-note callouts, and very faint emblem watermarks. Institutional identity stays visible without turning scientific content into a branded card system.
 
-`ict` is a separate computing-research visual system based on the official two-blue ICT orbital emblem and bilingual institute lockup. It combines a cool-white editorial canvas with muted navy brand fields, precise cyan accents, sans-serif display typography, restrained technical chrome, and mode-aware code surfaces. Strong branding is concentrated on cover, section, and statement layouts; ordinary content slides remain quiet and projection-friendly.
+`ict` is a precise systems-and-engineering direction based on the bundled bilingual lockup and orbital emblem. Its cool paper canvas combines sans-serif display type, compact mono labels, open technical rules, flat tables and code, bracket-like callouts, and measured emblem geometry. The result remains visibly technical without relying on heavy fills, rounded panels, or full-slide gradients.
 
 For `ucas` and `ict`, `themeConfig.presentation.accent` changes content accents such as links, callouts, and chrome while the official identity colors used by logos and signature layouts remain locked.
 
@@ -529,6 +529,23 @@ This theme provides the following layouts:
 | `image-left` | Narrative plus a visually left-hand figure |
 | `image-right` | Narrative plus a visually right-hand figure |
 | `code` | Title plus a full-width, contained code region |
+
+### Section layout: `section`
+
+Section dividers stay on the ordinary slide canvas so they read as a quiet beat rather than a hard break. Every preset uses the same auto-numbered kicker and title rhythm: `default` renders it as an editorial accent, `ucas` as a restrained academic folio, and `ict` as a compact technical label.
+
+| Input | Default | Behavior |
+| --- | --- | --- |
+| `kicker` | Auto-numbered `Section NN` | Counts `section` slides in deck order, matching `toc` numbering; a custom string replaces the label and `false` hides it |
+
+```md
+---
+layout: section
+kicker: 第一章
+---
+
+# Method / 方法
+```
 
 ### Closing layout: `end`
 

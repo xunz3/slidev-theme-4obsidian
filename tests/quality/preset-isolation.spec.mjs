@@ -410,6 +410,51 @@ test('3 × 3 × 2 public preset API is visually isolated', { timeout: 240_000 },
       }
     }
 
+    await t.test('two-column panes share one top alignment line', async () => {
+      for (const preset of presets) {
+        for (const mode of modes) {
+          const page = await context.newPage()
+          try {
+            await waitForSlide(
+              page,
+              serverByPreset[preset].baseUrl,
+              13,
+              mode,
+              'layout-two-cols',
+            )
+            const state = await page.locator(
+              '.slidev-page-13 .slide-layout-two-cols',
+            ).evaluate((root) => {
+              const panes = [...root.querySelectorAll(
+                '.slide-layout-two-cols__pane',
+              )]
+              return {
+                headingTops: panes.map(pane => pane.querySelector(
+                  'h1, h2, h3, h4',
+                )?.getBoundingClientRect().top ?? null),
+                hiddenOnlyParagraphDisplays: panes.flatMap(pane => (
+                  [...pane.querySelectorAll(':scope > p:has(> [hidden]:only-child)')]
+                    .map(element => getComputedStyle(element).display)
+                )),
+              }
+            })
+            assert.equal(state.headingTops.length, 2)
+            assert.ok(state.headingTops.every(top => top !== null))
+            assert.ok(
+              Math.abs(state.headingTops[0] - state.headingTops[1]) <= 1,
+              `${preset}/${mode}: ${JSON.stringify(state)}`,
+            )
+            assert.ok(
+              state.hiddenOnlyParagraphDisplays.every(display => display === 'none'),
+              `${preset}/${mode}: ${JSON.stringify(state)}`,
+            )
+          } finally {
+            await page.close()
+          }
+        }
+      }
+    })
+
     await t.test('keyboard navigation and TOC activation remain operable', async () => {
       const page = await context.newPage()
       const baseUrl = serverByPreset.default.baseUrl

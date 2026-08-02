@@ -58,7 +58,7 @@ sections:
 layout: section
 ---
 
-# 01 · Method / 方法
+# Method / 方法
 
 Separate model quality from confidence quality
 
@@ -124,7 +124,7 @@ source: Robustness in the Strategy of Scientific Model Building, 1979
 layout: section
 ---
 
-# 02 · Evidence and reproducibility / 证据与复现
+# Evidence and reproducibility / 证据与复现
 
 Connect decisions, artifacts, workflow, and ownership
 

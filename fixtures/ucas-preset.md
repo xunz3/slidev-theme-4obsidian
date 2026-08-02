@@ -40,7 +40,7 @@ Scientific presentations need to make the chain of reasoning visible before they
 layout: section
 ---
 
-# 01 · Foundations
+# Foundations
 
 From geometric priors to testable hypotheses
 
@@ -84,7 +84,7 @@ source: Geometric insight as a research practice
 layout: section
 ---
 
-# 02 · Evidence and reproducibility
+# Evidence and reproducibility
 
 From an equivariant hypothesis to an inspectable result
 
