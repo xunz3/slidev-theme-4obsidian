@@ -45,9 +45,19 @@
   max-width: var(--presentation-reading-width);
 }
 
-.slidev-layout .slide-frame__content > :is(table, pre, .slidev-code-wrapper, .obsidian-slidev-callout, .obsidian-slidev-warning) {
+.slidev-layout .slide-frame__content > :is(table, .obsidian-slidev-callout, .obsidian-slidev-warning) {
   width: 100%;
   max-width: var(--presentation-block-width);
+}
+
+.slidev-layout .slide-frame__content > table {
+  margin-inline: auto;
+}
+
+.slidev-layout .slide-frame__content > :is(pre, .slidev-code-wrapper) {
+  width: min(calc(100% - 2rem), calc(var(--presentation-block-width) + 12ch));
+  max-width: 100%;
+  margin-inline: auto;
 }
 
 .slidev-layout .slide-frame__content > .presentation-full-width {

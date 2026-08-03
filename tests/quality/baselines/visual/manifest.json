@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-08-02T15:11:18.177Z",
-  "gitCommit": "7b363e9e46db469ddaffb8b513f90bd5e93be89e",
+  "capturedAt": "2026-08-03T12:25:41.313Z",
+  "gitCommit": "1a7d99f6f3aa24d10bcdc42bf1e8024c5d5dc67c",
   "lockfileSha256": "76e2dde5c6d6cf1b760743fd3341d5de93c2744c645913bc5a3572dfa191abee",
-  "reviewer": "Codex",
-  "rationale": "Normalize hidden-only Markdown anchors so both two-cols panes share one top alignment line beneath preset branding",
+  "reviewer": "xunz",
+  "rationale": "UCAS/ICT ceremonial pages (section, statement) restored to flat brand-color fields with white typography and identity watermarks; content pages gain quiet signatures (UCAS blue table top rule, ICT square list markers and mono table headers)",
   "viewport": {
     "deviceScaleFactor": 2,
     "logicalHeight": 552,
@@ -67,7 +67,7 @@
       "bytes": 183719,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ucas-light.png",
-      "sha256": "88fffa6125533eb608d6b76575f5ce1e3156ec3406a221d6e2acaf0cd3f60669",
+      "sha256": "c6bab4c44da42cfaa49ed45a653563861875f0040b23a7209bd6b87566ceabbb",
       "width": 1960
     },
     {
@@ -84,7 +84,7 @@
       "bytes": 187880,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ucas-dark.png",
-      "sha256": "b45626edd9ea853dc77becf98d27f38ef168cf384b56f6955de895c86f10d4ba",
+      "sha256": "4fcc13e0f4b6285723e0b8930c1f35845f6ca2379d129c801f6a27619adb2584",
       "width": 1960
     },
     {
@@ -98,10 +98,10 @@
       "mode": "light",
       "preset": "ict",
       "slide": 2,
-      "bytes": 171718,
+      "bytes": 171607,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ict-light.png",
-      "sha256": "46bacd6f1fa42e3837a88eafc6a33f078468e83bd5a63c71af32879b0c51b1fe",
+      "sha256": "0354380786cf56e6cf5332be36ebabf56394b4a6863cf1b3abb42251dd0b1f64",
       "width": 1960
     },
     {
@@ -115,10 +115,10 @@
       "mode": "dark",
       "preset": "ict",
       "slide": 2,
-      "bytes": 172392,
+      "bytes": 172100,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/preset-ict-dark.png",
-      "sha256": "3e8fba05ec77117d1b9c98f5af8e2e978ddc14d5920877813f329767ad3e9ed6",
+      "sha256": "1d873f1767a69f9c386b680e24ea0737b7ae777ef30d466365e4ca6b96862034",
       "width": 1960
     },
     {
@@ -3735,7 +3735,7 @@
       "bytes": 116406,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ucas-light.png",
-      "sha256": "45c5b2c0ea76a6d6e94f11d99a69147a9e138a19f48cc4c16005dd8a93fc37aa",
+      "sha256": "bf9e415bc5b4da2e91f1b549a3254b34665e491b0c46f1536ae1ca72de40e701",
       "width": 1960
     },
     {
@@ -3751,10 +3751,10 @@
       "mode": "light",
       "preset": "ucas",
       "slide": 27,
-      "bytes": 117687,
+      "bytes": 117688,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ucas-light.png",
-      "sha256": "d06a1ec45e23e6da63965bfb1ceacd599b867f4e63441e3f6c2ef16c7a433586",
+      "sha256": "ec123d17dd364fd3d81ddcbe91a43c46a19d885fde3b20d1432f6444493b674d",
       "width": 1960
     },
     {
@@ -3810,7 +3810,7 @@
       "bytes": 120253,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ucas-dark.png",
-      "sha256": "ec001f9876f280e5d9691963fdd4f7be14fa9ed485cd546d096fc5bce0a33cbf",
+      "sha256": "e20bc863400b12ffd9d5ff4975d3b14ebcc1c59c56c970a69ae8d66bde423b61",
       "width": 1960
     },
     {
@@ -3826,10 +3826,10 @@
       "mode": "dark",
       "preset": "ucas",
       "slide": 27,
-      "bytes": 121641,
+      "bytes": 121642,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ucas-dark.png",
-      "sha256": "8d72b03055916cd80476b8d88a2e7410af6030017a881c02a1c34157dd2593a8",
+      "sha256": "a26045e85950830805c029ab4ed2248d47a0326b62497147c2cd1747185992df",
       "width": 1960
     },
     {
@@ -3882,10 +3882,10 @@
       "mode": "light",
       "preset": "ict",
       "slide": 26,
-      "bytes": 104290,
+      "bytes": 103289,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ict-light.png",
-      "sha256": "8e71db0d6a30469089a62cfa3db7f70bc96edb79ccfa6beb13245080e4f90dfb",
+      "sha256": "f34494224182f462d3e96d637b8faac4e4bb51248433501bfd9b1770f4a2c6bc",
       "width": 1960
     },
     {
@@ -3901,10 +3901,10 @@
       "mode": "light",
       "preset": "ict",
       "slide": 27,
-      "bytes": 104737,
+      "bytes": 104123,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ict-light.png",
-      "sha256": "0f79aaeb57cfdd731152a0b35be98c8c85361e1fd5203b6c05c3dfe73b90b266",
+      "sha256": "1de25060d9c40e217998c80c90ae312c8b28f34d095a80a37e29fa9ba372e1c2",
       "width": 1960
     },
     {
@@ -3957,10 +3957,10 @@
       "mode": "dark",
       "preset": "ict",
       "slide": 26,
-      "bytes": 104971,
+      "bytes": 103984,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-local-a-ict-dark.png",
-      "sha256": "99b78274a50a56a3c2df66d5530f5ec8b5d2f39bf94630d0eb47c36d00f6a2ea",
+      "sha256": "33b9e19dffd2182d9d2fb82c08a1783c263015f993399fac7d017c558855956d",
       "width": 1960
     },
     {
@@ -3976,10 +3976,10 @@
       "mode": "dark",
       "preset": "ict",
       "slide": 27,
-      "bytes": 105149,
+      "bytes": 104515,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/us3-accent-fallback-ict-dark.png",
-      "sha256": "c88e97e71da6f9e3555533afd634ce6ff525538fe445991d9d6550b80ff03955",
+      "sha256": "967188c41d18c1a2a6ff8c2be8eb8bdee9213c51e7d44760d73732faa74a564e",
       "width": 1960
     },
     {
@@ -6605,7 +6605,7 @@
       "bytes": 116283,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/visual-chrome-ucas-light.png",
-      "sha256": "d90737e19d054eeb7df7dff840c3af8cbc9ba91bc46cc168ff480e65e464d8ac",
+      "sha256": "6ff331d1883c7c74bf744019d473635970b74d44bdf47b957ab20e8d54596945",
       "width": 1960
     },
     {
@@ -6725,7 +6725,7 @@
       "bytes": 120151,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/visual-chrome-ucas-dark.png",
-      "sha256": "b28e08520566394af6a9054cc580064ec7cf6673bd94539f38ab86ad3e7e23a8",
+      "sha256": "25b2849fe1d49d8d4154ab20c54f1e7a95856f72ffca116284e8869961c6d5a0",
       "width": 1960
     },
     {
@@ -6842,10 +6842,10 @@
       "slide": 56,
       "mode": "light",
       "preset": "ict",
-      "bytes": 101075,
+      "bytes": 100612,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/visual-chrome-ict-light.png",
-      "sha256": "951b0c8fa1d411c8cae1b91f80422ad46e35ec0527991443b795ed332494e025",
+      "sha256": "2bbeb223d26ce9ce4b339b0fab8af63da0bea7f12c49fc65ea1b6e8f597ab925",
       "width": 1960
     },
     {
@@ -6962,10 +6962,10 @@
       "slide": 56,
       "mode": "dark",
       "preset": "ict",
-      "bytes": 101282,
+      "bytes": 100847,
       "height": 1104,
       "path": "tests/quality/baselines/visual/slides/visual-chrome-ict-dark.png",
-      "sha256": "017357743c61a4eefe9d18f92d910aac0207dd06b2b278c1ac0b2f15a4f0fc0a",
+      "sha256": "28a43bd0097cfb01f2785a1bc24a88286ba7204aa00117e292bfb42307eb913f",
       "width": 1960
     },
     {

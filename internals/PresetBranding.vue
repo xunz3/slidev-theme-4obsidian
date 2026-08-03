@@ -6,6 +6,7 @@ import type {
 import ictEmblem from '../assets/ICT/emblem.svg'
 import ictWordmark from '../assets/ICT/emblem-name-bilingual-stacked.svg'
 import ucasEmblem from '../assets/UCAS/emblem.svg'
+import ucasEmblemWhite from '../assets/UCAS/emblem-white.png'
 import ucasWordmark from '../assets/UCAS/emblem-name-bilingual-hz.svg'
 import ucasWordmarkWhite from '../assets/UCAS/emblem-name-bilingual-hz-white.png'
 import ucasVerticalWordmark from '../assets/UCAS/emblem-name-bilingual-vt-white.png'
@@ -86,7 +87,7 @@ defineProps<{
     <img
       v-if="preset === 'ucas' && ['cover', 'section', 'statement', 'center'].includes(variant)"
       class="slide-frame__ucas-watermark"
-      :src="ucasEmblem"
+      :src="['section', 'statement'].includes(variant) ? ucasEmblemWhite : ucasEmblem"
       alt=""
       aria-hidden="true"
       width="397"
