@@ -431,7 +431,7 @@ Advanced users can override theme tokens from custom CSS or a Slidev style entry
 | `--presentation-font-quote` | Quote layout italic font stack |
 | `--presentation-font-label` | Chrome, metadata, and numeric-label family |
 | `--presentation-font-mono` | Code font stack |
-| `--presentation-reading-width` | Maximum width for paragraphs, lists, and blockquotes |
+| `--presentation-reading-width` | Width of paragraphs, lists, blockquotes, and sequence components (defaults to the full content area) |
 | `--presentation-block-width` | Maximum width for tables, code blocks, callouts, and warnings |
 | `--presentation-slide-padding` | Frame padding |
 | `--presentation-two-cols-gap` | Gap between columns in the `two-cols` layout |

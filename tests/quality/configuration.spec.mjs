@@ -784,6 +784,11 @@ test('follow-up source hygiene removes dead runtime paths and remote font CSS', 
   assert.doesNotMatch(tokens, /#3f6f68|#77b5aa/)
   assert.doesNotMatch(tokens, /:root\[data-presentation-density=/)
   assert.match(
+    tokens,
+    /--presentation-reading-width:\s*100%/,
+    'ordinary prose should use the full slide content width by default',
+  )
+  assert.match(
     ictPreset,
     /--presentation-font-serif:\s*"Source Serif 4"/,
   )
